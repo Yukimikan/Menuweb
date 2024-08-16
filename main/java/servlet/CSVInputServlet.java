@@ -31,20 +31,23 @@ public class CSVInputServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// String date = (String) request.getParameter("date");
 		String csv_name = (String) request.getParameter("csv_name");
-		System.out.println("doPost" + csv_name);
-		//"./menu_result.jsp"
-
-		// service
-		CSVControlServiceImpl service = new CSVControlServiceImpl();
-		List<MenuCSV> retList = service.readCSV();
 		
-		// requestSetAttribute
-		request.setAttribute("retList" ,retList);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardScreenUrl);
-		dispatcher.forward(request, response);
+		try {
+			// service
+			CSVControlServiceImpl service = new CSVControlServiceImpl();
+			List<MenuCSV> retList = service.readCSV(csv_name);
+			// requestSetAttribute
+			request.setAttribute("retList" ,retList);
+			//forward
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardScreenUrl);
+			dispatcher.forward(request, response);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

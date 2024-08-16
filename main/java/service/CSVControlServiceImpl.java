@@ -31,10 +31,11 @@ public class CSVControlServiceImpl {
 	 * @param String csv_name
 	 * @return List<MenuCSV>
 	 */
-	public List<MenuCSV> readCSV() {
+	public List<MenuCSV> readCSV(String infilename) 
+			throws Exception{
 
 		BufferedReader buffReader = null;
-		String infile_path = CSV_PATH + csv_name;
+		String infile_path = CSV_PATH + infilename;
 		MenuCSV in_csv = new MenuCSV();
 		List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
@@ -72,8 +73,10 @@ public class CSVControlServiceImpl {
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("ファイル見つからない：" + infile_path);
+			throw e;
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			throw ex;
 		} finally {
 			//close処理
 			try {
@@ -88,10 +91,11 @@ public class CSVControlServiceImpl {
 	/* 
 	 * @param String csv_name
 	 */
-	public List<MenuCSV> writeCSV(MenuCSV rec) {
+	public List<MenuCSV> writeCSV(MenuCSV rec, String outfilename) 
+			throws Exception{
 
 		BufferedWriter buffWriter = null;
-		String outfile_path = CSV_PATH + "\\output\\" + csv_name;
+		String outfile_path = CSV_PATH + "\\output\\" + outfilename;
 		List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
 		try {
@@ -105,8 +109,10 @@ public class CSVControlServiceImpl {
 
 		} catch (FileNotFoundException e) {
 			System.out.println("ファイル見つからない：" + outfile_path);
+			throw e;
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			throw ex;
 		} finally {
 			//close処理
 			try {
@@ -116,7 +122,7 @@ public class CSVControlServiceImpl {
 			}
 		}
 		//再読み込み
-		retList = readCSV();
+		retList = readCSV(csv_name);
 		return retList;
 	}
 }

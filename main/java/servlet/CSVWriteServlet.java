@@ -31,9 +31,8 @@ public class CSVWriteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String csv_name = "menu.csv";
-		System.out.println("doPost" + csv_name);
-		//"./menu_result.jsp"
 
 		// データ移送
 		MenuCSV rec = new MenuCSV();
@@ -47,15 +46,19 @@ public class CSVWriteServlet extends HttpServlet {
 		rec.setTax((String) request.getParameter("tax"));
 		rec.setTotal((String) request.getParameter("total"));
 		
-		// service
-		CSVControlServiceImpl service = new CSVControlServiceImpl();
-		List<MenuCSV> retList = service.writeCSV(rec);
+		try {
+			// service
+			CSVControlServiceImpl service = new CSVControlServiceImpl();
+			List<MenuCSV> retList = service.writeCSV(rec, csv_name);		
+			// requestSetAttribute
+			request.setAttribute("retList" ,retList);
+			// forward
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardScreenUrl);
+			dispatcher.forward(request, response);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		// requestSetAttribute
-		request.setAttribute("retList" ,retList);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forwardScreenUrl);
-		dispatcher.forward(request, response);
 	}
 
 }
