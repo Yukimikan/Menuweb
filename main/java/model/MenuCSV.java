@@ -2,6 +2,7 @@ package model;
 
 public class MenuCSV {
 
+	public final static String csv_HEADER ="No,種類,店名,単品,メニュー,価格,税,金額";
 	//No,種類,店名,単品,メニュー,価格,税,金額
 	//1,和食,松屋,○,牛丼,500,なし,500
 	private String no;
