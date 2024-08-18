@@ -34,9 +34,8 @@
 					<th><input type="text" name="tax" value="なし"></th>
 					<th><input type="text" name="total" value="300"></th>
 				</tr>
-	                 <input type="submit" value="CSV書込">
 			</table>
-			
+            <input type="submit" value="CSV書込">
 	     </form>
 	</div>
 	<div id="footer">

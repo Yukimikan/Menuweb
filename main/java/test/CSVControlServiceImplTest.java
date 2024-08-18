@@ -240,159 +240,86 @@ public class CSVControlServiceImplTest {
 			fail("異常発生");
 		}		
 	}
+	
+
 	/*
-	 * 正常系
-	 * @param CSV名：未存在
-	 * @param：入力データ：あり
-	 * 入力ファイル新規作成
-	 * 正常終了
-	 * @return retList 1件
+	 * 正常系 No01-04
+	 * *
 	 */
 	@Test
-	public void Normal01_writeCSV() {
+	public void Normal_writeCSV() {
+		
+        // 現在日時を取得
+        LocalDateTime nowDate = LocalDateTime.now();
+		// 表示形式を指定
+        DateTimeFormatter dtf3 =
+            DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+                String formatNowDate = dtf3.format(nowDate);
+        String fname = "menu" + formatNowDate + ".csv";
+		// データ移送
+		MenuCSV rec = new MenuCSV();
 
-		System.out.println("Normal01_writeCSV");
+        rec.setNo("99");
+		rec.setType("和食");
+		rec.setRestaurant_name("松屋");
+		rec.setSinglemenu_flg("○");
+		rec.setMenu("チーズ牛丼");
+		rec.setPrice("550");
+		rec.setTax("なし");
+		rec.setTotal("550");
+
+		/*
+		 * @param CSV名：未存在
+		 * @param：入力データ：あり
+		 * 入力ファイル新規作成
+		 * @return retList 1件
+		 */
+		normal_writeCSVexec("Normal01_writeCSV",rec, fname, 1);
+		
+		/*
+		 * @param CSV名：存在
+		 * @param：入力データ：あり
+		 * 入力ファイル：追加書き(空ファイル)
+		 * @return retList 1件
+		 */
+		normal_writeCSVexec("Normal02_writeCSV",rec, "menu_outempty.csv", 1);
+		
+		/*
+		 * @param CSV名：存在
+		 * @param：入力データ：あり
+		 * 入力ファイル追加書き(ヘッダのみ)
+		 * @return retList 1件
+		 */
+		normal_writeCSVexec("Normal03_writeCSV",rec, "menu_out1.csv", 1);
+
+		/*
+		 * @param CSV名：存在
+		 * @param：入力データ：あり
+		 * 入力ファイル追加書き(ヘッダ＋１件)
+		 * @return retList 2件
+		 */
+		normal_writeCSVexec("Normal04_writeCSV",rec, "menu_out2.csv", 2);
+	}
+	
+	/*
+	 * 正常系
+	 */
+	private void normal_writeCSVexec(String caseid, MenuCSV rec, String filename,int expectedCnt) {
+
+		System.out.println(caseid);
 		List<MenuCSV> retList = null;
 		try {
 			//OK
-			// データ移送
-			MenuCSV rec = new MenuCSV();
-
 			// service
-			rec.setNo("99");
-			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
-			rec.setMenu("チーズ牛丼");
-			rec.setPrice("550");
-			rec.setTax("なし");
-			rec.setTotal("550");
 			CSVControlServiceImpl service = new CSVControlServiceImpl();
-	        // 現在日時を取得
-	        LocalDateTime nowDate = LocalDateTime.now();
-			// 表示形式を指定
-	        DateTimeFormatter dtf3 =
-	            DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-	                String formatNowDate = dtf3.format(nowDate);
-	        retList = service.writeCSV(rec,"menu" + formatNowDate + ".csv");
+	        retList = service.writeCSV(rec,filename);
 			//戻り値チェック
-	        assertEquals(1,retList.size());
+	        assertEquals(expectedCnt,retList.size());
 		} 	catch (Exception e) {
 			fail("異常発生");
 		}		
 	}
 	
-	/*
-	 * 正常系
-	 * @param CSV名：存在
-	 * @param：入力データ：あり
-	 * 入力ファイル：追加書き(空ファイル)
-	 * 正常終了
-	 * @return retList 1件
-	 */
-	@Test
-	public void Normal02_writeCSV() {
-
-		System.out.println("Normal02_writeCSV");
-		List<MenuCSV> retList = null;
-		try {
-			//OK
-			// データ移送
-			MenuCSV rec = new MenuCSV();
-
-			// service
-			rec.setNo("99");
-			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
-			rec.setMenu("チーズ牛丼");
-			rec.setPrice("550");
-			rec.setTax("なし");
-			rec.setTotal("550");
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-	        retList = service.writeCSV(rec,"menu_outempty.csv");
-			//戻り値チェック
-	        assertEquals(1,retList.size());
-		} 	catch (Exception e) {
-			fail("異常発生");
-		}		
-	}
-	/*
-	 * 正常系
-	 * @param CSV名：存在
-	 * @param：入力データ：あり
-	 * 入力ファイル追加書き(ヘッダのみ)
-	 * 正常終了
-	 * @return retList 1件
-	 */
-	@Test
-	public void Normal03_writeCSV() {
-
-		System.out.println("Normal03_writeCSV");
-		List<MenuCSV> retList = null;
-		try {
-			//OK
-			// データ移送
-			MenuCSV rec = new MenuCSV();
-
-			// service
-			rec.setNo("99");
-			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
-			rec.setMenu("チーズ牛丼");
-			rec.setPrice("550");
-			rec.setTax("なし");
-			rec.setTotal("550");
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-	        retList = service.writeCSV(rec,"menu_out1.csv");
-			//戻り値チェック
-	        assertEquals(1,retList.size());
-		} 	catch (Exception e) {
-			fail("異常発生");
-		}		
-	}
-	/*
-	 * 正常系
-	 * @param CSV名：存在
-	 * @param：入力データ：あり
-	 * 入力ファイル追加書き(ヘッダ＋１件)
-	 * 正常終了
-	 * @return retList 2件
-	 */
-	@Test
-	public void Normal04_writeCSV() {
-
-		System.out.println("Normal04_writeCSV");
-		List<MenuCSV> retList = null;
-		try {
-			//OK
-			// データ移送
-			MenuCSV rec = new MenuCSV();
-
-			// service
-			rec.setNo("99");
-			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
-			rec.setMenu("チーズ牛丼");
-			rec.setPrice("550");
-			rec.setTax("なし");
-			rec.setTotal("550");
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-	        // 現在日時を取得
-	        LocalDateTime nowDate = LocalDateTime.now();
-			// 表示形式を指定
-	        DateTimeFormatter dtf3 =
-	            DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-	                String formatNowDate = dtf3.format(nowDate);
-	        retList = service.writeCSV(rec,"menu_out2.csv");
-			//戻り値チェック
-	        assertEquals(2,retList.size());
-		} 	catch (Exception e) {
-			fail("異常発生");
-		}		
-	}
 
 	/*
 	 * 準正常系

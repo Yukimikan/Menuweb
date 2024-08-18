@@ -17,7 +17,8 @@ import service.CSVControlServiceImpl;
  */
 public class CSVInputServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String forwardScreenUrl = "./jsp/menu_csv_result.jsp";
+	private final String inputUrl = "./jsp/menu_csv_input.jsp";
+	private final String resultUrl = "./jsp/menu_csv_result.jsp";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -34,16 +35,25 @@ public class CSVInputServlet extends HttpServlet {
 		
 		// String date = (String) request.getParameter("date");
 		String csv_name = (String) request.getParameter("csv_name");
+		String err_message = "";
 		
 		try {
 			// service
 			CSVControlServiceImpl service = new CSVControlServiceImpl();
 			List<MenuCSV> retList = service.readCSV(csv_name);
-			// requestSetAttribute
-			request.setAttribute("retList" ,retList);
-			//forward
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardScreenUrl);
-			dispatcher.forward(request, response);
+			
+			// 終了条件を判定
+			if (retList != null) {
+				// requestSetAttribute
+				request.setAttribute("retList", retList);
+				//forward
+				RequestDispatcher dispatcher = request.getRequestDispatcher(resultUrl);
+				dispatcher.forward(request, response);
+			}else {
+				//forward
+				RequestDispatcher dispatcher = request.getRequestDispatcher(inputUrl);
+				dispatcher.forward(request, response);				
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

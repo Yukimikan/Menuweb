@@ -151,7 +151,6 @@ public class CSVControlServiceImpl {
 			}
 			//データ部書込
 			buffWriter.write(temp_rec);
-			buffWriter.newLine();
 		} catch (FileNotFoundException e) {
 			System.out.println(MSG_W_FILE_NOT_FOUND);
 			System.out.println("outfile_path：" + outfile_path);

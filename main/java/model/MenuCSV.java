@@ -44,14 +44,15 @@ public class MenuCSV {
 	 * @throw ArrayIndexOutOfBoundsException
 	 */
 	public String returnJoinedString(){
-		String[] arrayColumnData = new String[7];
-		arrayColumnData[0] = type;
-		arrayColumnData[1] = restaurant_name;
-		arrayColumnData[2] = singlemenu_flg;
-		arrayColumnData[3] = menu;
-		arrayColumnData[4] = price;
-		arrayColumnData[5] = tax;
-		arrayColumnData[6] = total;
+		String[] arrayColumnData = new String[8];
+		arrayColumnData[0] = no;
+		arrayColumnData[1] = type;
+		arrayColumnData[2] = restaurant_name;
+		arrayColumnData[3] = singlemenu_flg;
+		arrayColumnData[4] = menu;
+		arrayColumnData[5] = price;
+		arrayColumnData[6] = tax;
+		arrayColumnData[7] = total;
 		//Java8から
 		String sj = String.join(",", arrayColumnData);
 		return sj;		
