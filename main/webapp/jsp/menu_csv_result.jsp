@@ -16,10 +16,10 @@
 		・CSV検索結果
 	</div>
 	<div id="main">
-		<form action="<%= request.getContextPath() %>/CSVControlServlet"
+		<form action="<%= request.getContextPath() %>/CsvControlServlet"
 			method="post">
 			<%
-			ArrayList<MenuCSV> retList = (ArrayList<MenuCSV>)request.getAttribute("retList");		
+			ArrayList<MenuCSV> retList = (ArrayList<MenuCSV>)request.getAttribute("retList");
 			if (retList == null || retList.size() == 0){
 		%>
 			<br>
@@ -55,7 +55,7 @@
 		</form>
 	</div>
 	<div id="footer">
-		<a href="../index.html">トップに戻る</a> 
+		<a href="../index.html">トップに戻る</a>
 		<input type="button" onclick="history.back()" value="前に戻る">
 	</div>
 </body>

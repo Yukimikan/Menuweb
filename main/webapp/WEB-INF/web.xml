@@ -9,6 +9,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <!--
   <servlet>
     <description></description>
     <display-name>HelloServlet</display-name>
@@ -19,6 +20,7 @@
     <servlet-name>HelloServlet</servlet-name>
     <url-pattern>/HelloServlet</url-pattern>
   </servlet-mapping>
+   -->
   <servlet>
     <description></description>
     <display-name>SearchMenuServlet</display-name>
@@ -31,23 +33,23 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CSVInputServlet</display-name>
-    <servlet-name>CSVInputServlet</servlet-name>
-    <servlet-class>servlet.CSVInputServlet</servlet-class>
+    <display-name>CsvInputServlet</display-name>
+    <servlet-name>CsvInputServlet</servlet-name>
+    <servlet-class>servlet.CsvInputServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CSVInputServlet</servlet-name>
-    <url-pattern>/CSVInputServlet</url-pattern>
+    <servlet-name>CsvInputServlet</servlet-name>
+    <url-pattern>/CsvInputServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CSVWriteServlet</display-name>
-    <servlet-name>CSVWriteServlet</servlet-name>
-    <servlet-class>servlet.CSVWriteServlet</servlet-class>
+    <display-name>CsvWriteServlet</display-name>
+    <servlet-name>CsvWriteServlet</servlet-name>
+    <servlet-class>servlet.CsvWriteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CSVWriteServlet</servlet-name>
-    <url-pattern>/CSVWriteServlet</url-pattern>
+    <servlet-name>CsvWriteServlet</servlet-name>
+    <url-pattern>/CsvWriteServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

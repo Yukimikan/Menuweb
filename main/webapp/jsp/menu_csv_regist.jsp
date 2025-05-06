@@ -12,7 +12,7 @@
 		・CSV登録
 	</div>
 	<div id="main">
-	     <form action="<%= request.getContextPath() %>/CSVWriteServlet" method="post">
+	     <form action="<%= request.getContextPath() %>/CsvWriteServlet" method="post">
 			<table border="1">
 				<tr>
 					<td>No</td>

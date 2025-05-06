@@ -6,13 +6,13 @@ package model;
  */
 public class MenuCSV {
 
-  public final static String csv_HEADER = "No,種類,店名,単品,メニュー,価格,税,金額";
+  public static final String CSV_HEADER = "No,種類,店名,単品,メニュー,価格,税,金額";
   //No,種類,店名,単品,メニュー,価格,税,金額
   //1,和食,松屋,○,牛丼,500,なし,500
   private String no;
   private String type;
-  private String restaurant_name;
-  private String singlemenu_flg;
+  private String restaurantName;
+  private String singlemenuFlg;
   private String menu;
   private String price;
   private String tax;
@@ -53,8 +53,8 @@ public class MenuCSV {
     String[] arrayColumnData = new String[8];
     arrayColumnData[0] = no;
     arrayColumnData[1] = type;
-    arrayColumnData[2] = restaurant_name;
-    arrayColumnData[3] = singlemenu_flg;
+    arrayColumnData[2] = restaurantName;
+    arrayColumnData[3] = singlemenuFlg;
     arrayColumnData[4] = menu;
     arrayColumnData[5] = price;
     arrayColumnData[6] = tax;
@@ -84,19 +84,19 @@ public class MenuCSV {
   }
   
   public String getRestaurant_name() {
-    return restaurant_name;
+    return restaurantName;
   }
   
-  public void setRestaurant_name(String restaurant_name) {
-    this.restaurant_name = restaurant_name;
+  public void setRestaurant_name(String restaurantName) {
+    this.restaurantName = restaurantName;
   }
   
   public String getSinglemenu_flg() {
-    return singlemenu_flg;
+    return singlemenuFlg;
   }
   
-  public void setSinglemenu_flg(String singlemenu_flg) {
-    this.singlemenu_flg = singlemenu_flg;
+  public void setSinglemenu_flg(String singlemenuFlg) {
+    this.singlemenuFlg = singlemenuFlg;
   }
   
   public String getPrice() {

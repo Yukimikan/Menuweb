@@ -12,14 +12,14 @@
 		・CSV取込
 	</div>
 	<div id="main">
-	     <form action="<%= request.getContextPath() %>/CSVInputServlet" method="post">
+	     <form action="<%= request.getContextPath() %>/CsvInputServlet" method="post">
 	         日付：<input type="text" name="date">
 	         CSV名：<input type="text" name="csv_name" value="menu.csv">
 	                 <input type="submit" value="CSV読込">
 	     </form>
 	</div>
 	<div id="footer">
-		<a href="../index.html">トップに戻る</a> 
+		<a href="../index.html">トップに戻る</a>
 		<input type="button" onclick="history.back()" value="前に戻る">
 	</div>
 </body>
