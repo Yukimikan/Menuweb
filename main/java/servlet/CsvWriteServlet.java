@@ -25,7 +25,7 @@ public class CsvWriteServlet extends HttpServlet {
 
   /**
    *  ポスト処理.
-   * 
+   *
    *  @param HttpServletRequest request, HttpServletResponse response
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,8 +38,8 @@ public class CsvWriteServlet extends HttpServlet {
 
     // rec.setNo((String) request.getParameter("type"));
     rec.setType((String) request.getParameter("type"));
-    rec.setRestaurant_name((String) request.getParameter("restaurant_name"));
-    rec.setSinglemenu_flg((String) request.getParameter("singlemenu_flg"));
+    rec.setRestaurantName((String) request.getParameter("restaurant_name"));
+    rec.setSinglemenuFlg((String) request.getParameter("singlemenu_flg"));
     rec.setMenu((String) request.getParameter("menu"));
     rec.setPrice((String) request.getParameter("price"));
     rec.setTax((String) request.getParameter("tax"));

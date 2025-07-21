@@ -34,7 +34,7 @@ public class CsvUtilServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 
 	/*
@@ -55,7 +55,7 @@ public class CsvUtilServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 
 	/*
@@ -79,7 +79,7 @@ public class CsvUtilServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 
 	/*
@@ -100,21 +100,21 @@ public class CsvUtilServiceImplTest {
 		 * 引数：ファイル名
 		 * ①1件：ループ
 		 * @return 0件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal02","menu_test1.csv",0);
 
 		 /*
 		 * 引数：ファイル名
 		 * ①2件：ループ
 		 * @return 1件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal03","menu_test2.csv",1);
 
 		 /*
 		 * 引数：ファイル名
 		 * ①3件：ループ
 		 * @return 2件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal04","menu_test3.csv",2);
 
 		 /*
@@ -122,7 +122,7 @@ public class CsvUtilServiceImplTest {
 		 * ①100件：ループ
 		 * 正常終了:
 		 * @return 99件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal05","menu_testmax.csv",99);
 
 		 /*
@@ -130,7 +130,7 @@ public class CsvUtilServiceImplTest {
 		 * ①100件：ループ
 		 * 正常終了:
 		 * @return 99件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal06","menu_testmaxover.csv",99);
 	 }
 
@@ -148,9 +148,9 @@ public class CsvUtilServiceImplTest {
 			assertEquals(expectedCnt, retList.size());
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
-	
+
 	/*
 	 * 準正常系
 	 * @param CSV名：null
@@ -171,8 +171,8 @@ public class CsvUtilServiceImplTest {
 			// service
 			rec.setNo("99");
 			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
+			rec.setRestaurantName("松屋");
+			rec.setSinglemenuFlg("○");
 			rec.setMenu("チーズ牛丼");
 			rec.setPrice("550");
 			rec.setTax("なし");
@@ -183,7 +183,7 @@ public class CsvUtilServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 
 	/*
@@ -205,8 +205,8 @@ public class CsvUtilServiceImplTest {
 			// service
 			rec.setNo("99");
 			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
+			rec.setRestaurantName("松屋");
+			rec.setSinglemenuFlg("○");
 			rec.setMenu("チーズ牛丼");
 			rec.setPrice("550");
 			rec.setTax("なし");
@@ -217,7 +217,7 @@ public class CsvUtilServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 	/*
 	 * 異常系
@@ -238,9 +238,9 @@ public class CsvUtilServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
-	
+
 
 	/*
 	 * 正常系 No01-04
@@ -248,7 +248,7 @@ public class CsvUtilServiceImplTest {
 	 */
 	@Test
 	public void Normal_writeCSV() {
-		
+
         // 現在日時を取得
         LocalDateTime nowDate = LocalDateTime.now();
 		// 表示形式を指定
@@ -261,8 +261,8 @@ public class CsvUtilServiceImplTest {
 
         rec.setNo("99");
 		rec.setType("和食");
-		rec.setRestaurant_name("松屋");
-		rec.setSinglemenu_flg("○");
+		rec.setRestaurantName("松屋");
+		rec.setSinglemenuFlg("○");
 		rec.setMenu("チーズ牛丼");
 		rec.setPrice("550");
 		rec.setTax("なし");
@@ -275,7 +275,7 @@ public class CsvUtilServiceImplTest {
 		 * @return retList 1件
 		 */
 		normal_writeCSVexec("Normal01_writeCSV",rec, fname, 1);
-		
+
 		/*
 		 * @param CSV名：存在
 		 * @param：入力データ：あり
@@ -283,7 +283,7 @@ public class CsvUtilServiceImplTest {
 		 * @return retList 1件
 		 */
 		normal_writeCSVexec("Normal02_writeCSV",rec, "menu_outempty.csv", 1);
-		
+
 		/*
 		 * @param CSV名：存在
 		 * @param：入力データ：あり
@@ -300,7 +300,7 @@ public class CsvUtilServiceImplTest {
 		 */
 		normal_writeCSVexec("Normal04_writeCSV",rec, "menu_out2.csv", 2);
 	}
-	
+
 	/*
 	 * 正常系
 	 */
@@ -317,9 +317,9 @@ public class CsvUtilServiceImplTest {
 	        assertEquals(expectedCnt,retList.size());
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
-	
+
 
 	/*
 	 * 準正常系
@@ -340,8 +340,8 @@ public class CsvUtilServiceImplTest {
 			// service
 			rec.setNo("99");
 			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
+			rec.setRestaurantName("松屋");
+			rec.setSinglemenuFlg("○");
 			rec.setMenu("チーズ牛丼");
 			rec.setPrice("error");	//数値以外
 			rec.setTax("なし");
@@ -352,7 +352,7 @@ public class CsvUtilServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 
 	/*
@@ -374,8 +374,8 @@ public class CsvUtilServiceImplTest {
 			// service
 			rec.setNo("99");
 			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
+			rec.setRestaurantName("松屋");
+			rec.setSinglemenuFlg("○");
 			rec.setMenu("チーズ牛丼");
 			rec.setPrice("550");
 			rec.setTax("なし");
@@ -386,7 +386,7 @@ public class CsvUtilServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 
 }

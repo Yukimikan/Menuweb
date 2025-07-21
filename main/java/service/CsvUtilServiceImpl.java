@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.GlobalConst;
 import model.MenuCSV;
 
 /**
@@ -26,12 +27,6 @@ public class CsvUtilServiceImpl {
   public static final String CSV_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
   public static final String CSV_NAME = "menu.csv";
   public static final int MAX_COUNT = 100;
-  //メッセージ
-  public static final String MSG_W_FILENAME_ERROR = "ファイル名がありません";
-  public static final String MSG_W_FILE_NOT_FOUND = "ファイルが見つかりません";
-  public static final String MSG_W_FILE_MAXCOUNT_OVER = "最大件数超過、最大件数まで読み込みます";
-  public static final String MSG_W_INDATA_NOT_NUMERIC = "入力データに数値型以外が含まれます";
-  public static final String MSG_W_INDATA_ISNULL = "入力データがNULLです";
 
   //コンストラクタ
   public CsvUtilServiceImpl() {
@@ -39,7 +34,7 @@ public class CsvUtilServiceImpl {
 
   /**
    * 読取CSV.
-   * 
+   *
    * @param infilename
    * @return retList
    */
@@ -68,7 +63,7 @@ public class CsvUtilServiceImpl {
 
         // 最大件数超過
         if (row == MAX_COUNT) {
-          System.out.println(MSG_W_FILE_MAXCOUNT_OVER);
+          System.out.println(GlobalConst.MSG_W_FILE_MAXCOUNT_OVER);
           break;
         }
 
@@ -87,7 +82,7 @@ public class CsvUtilServiceImpl {
         row++;
       }
     } catch (FileNotFoundException e) {
-      System.out.println(MSG_W_FILE_NOT_FOUND);
+      System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
       System.out.println("infile_path：" + infilePath);
       throw e;
     } catch (Exception ex) {
@@ -98,7 +93,7 @@ public class CsvUtilServiceImpl {
       try {
         buffReader.close(); //※9
       } catch (Exception ex) {
-        ex.printStackTrace();          
+        ex.printStackTrace();
       }
     }
     return retList;
@@ -106,7 +101,7 @@ public class CsvUtilServiceImpl {
 
   /**
    * 書込み処理.
-   * 
+   *
    * @param rec
    * @return retList
    */
@@ -120,7 +115,7 @@ public class CsvUtilServiceImpl {
     List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
     //入力チェック
-    if (commonCheck(outfilename) == false 
+    if (commonCheck(outfilename) == false
         || formatCheck(rec) == false) {
       return null;
     }
@@ -159,7 +154,7 @@ public class CsvUtilServiceImpl {
       //データ部書込
       buffWriter.write(tempRec);
     } catch (FileNotFoundException e) {
-      System.out.println(MSG_W_FILE_NOT_FOUND);
+      System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
       System.out.println("outfile_path：" + outfilePath);
       throw e;
     } catch (Exception ex) {
@@ -180,13 +175,13 @@ public class CsvUtilServiceImpl {
 
   /**
    * 共通処理.
-   * 
+   *
    * @return boolean
    */
   public boolean commonCheck(String filename) {
     //チェック
     if (filename == null || filename.isEmpty()) {
-      System.out.println(MSG_W_FILENAME_ERROR);
+      System.out.println(GlobalConst.MSG_W_FILENAME_ERROR);
       System.out.println("filename:" + filename);
       return false;
     }
@@ -195,13 +190,13 @@ public class CsvUtilServiceImpl {
 
   /**
    * フォーマットチェック.
-   * 
+   *
    * @return boolean
    */
   public boolean formatCheck(MenuCSV rec) {
     //チェック
     if (rec == null) {
-      System.out.println(MSG_W_INDATA_ISNULL);
+      System.out.println(GlobalConst.MSG_W_INDATA_ISNULL);
       return false;
     }
     //チェック
@@ -209,12 +204,12 @@ public class CsvUtilServiceImpl {
       Integer.parseInt(rec.getPrice());
       Integer.parseInt(rec.getTotal());
     } catch (NumberFormatException e) {
-      System.out.println(MSG_W_INDATA_NOT_NUMERIC);
+      System.out.println(GlobalConst.MSG_W_INDATA_NOT_NUMERIC);
       System.out.println("price：" + rec.getPrice()
           + "total:" + rec.getTotal());
       return false;
     }
     return true;
   }
-  
+
 }

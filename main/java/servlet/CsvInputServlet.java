@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.apache.tomcat.jakartaee.commons.lang3.StringUtils;
 
+import model.GlobalConst;
 import model.MenuCSV;
 import service.CsvUtilServiceImpl;
 
@@ -20,8 +21,6 @@ import service.CsvUtilServiceImpl;
  */
 public class CsvInputServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  private static final String inputUrl = "./jsp/menu_csv_input.jsp";
-  private static final String resultUrl = "./jsp/menu_csv_result.jsp";
 
   public CsvInputServlet() {
     super();
@@ -41,14 +40,13 @@ public class CsvInputServlet extends HttpServlet {
     String errMessage = "";
 
     // 2. inputCheck
+    //中断
     if (StringUtils.isEmpty(date) || StringUtils.isBlank(date)) {
-      //中断
-      errMessage = "日付を指定して下さい";
-      return;
+      errMessage = GlobalConst.MSG_W_DATE_ERROR;
+      request.setAttribute("message", errMessage);
     } else if (StringUtils.isEmpty(csvName) || StringUtils.isBlank(csvName)) {
-      //中断
-      errMessage = "CSV名を指定して下さい";
-      return;
+      errMessage = GlobalConst.MSG_W_CSVNAME_ERROR;
+      request.setAttribute("message", errMessage);
     }
 
     try {
@@ -61,11 +59,11 @@ public class CsvInputServlet extends HttpServlet {
         // requestSetAttribute
         request.setAttribute("retList", retList);
         //4. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(resultUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
         dispatcher.forward(request, response);
       } else {
         //4. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(inputUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {

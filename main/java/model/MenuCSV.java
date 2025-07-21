@@ -1,9 +1,12 @@
 package model;
 
+import lombok.Data;
+
 /**
  * MenuCSV.
- * 
+ *
  */
+@Data
 public class MenuCSV {
 
   public static final String CSV_HEADER = "No,種類,店名,単品,メニュー,価格,税,金額";
@@ -26,7 +29,7 @@ public class MenuCSV {
   /**
    * 全列指定.
    * arrayColumnData 分割済みのデータ.
-   * 
+   *
    * @param  arrayColumnData
    * @throw ArrayIndexOutOfBoundsException
    */
@@ -35,8 +38,8 @@ public class MenuCSV {
     try {
       this.setNo(arrayColumnData[0]);
       this.setType(arrayColumnData[1]);
-      this.setRestaurant_name(arrayColumnData[2]);
-      this.setSinglemenu_flg(arrayColumnData[3]);
+      this.setRestaurantName(arrayColumnData[2]);
+      this.setSinglemenuFlg(arrayColumnData[3]);
       this.setMenu(arrayColumnData[4]);
       this.setPrice(arrayColumnData[5]);
       this.setTax(arrayColumnData[6]);
@@ -62,73 +65,6 @@ public class MenuCSV {
     //Java8から
     String sj = String.join(",", arrayColumnData);
     return sj;
-  }
-
-  /*
-   * アクセッサ-
-   * */
-  public String getNo() {
-    return no;
-  }
-  
-  public void setNo(String no) {
-    this.no = no;
-  }
-  
-  public String getType() {
-    return type;
-  }
-  
-  public void setType(String type) {
-    this.type = type;
-  }
-  
-  public String getRestaurant_name() {
-    return restaurantName;
-  }
-  
-  public void setRestaurant_name(String restaurantName) {
-    this.restaurantName = restaurantName;
-  }
-  
-  public String getSinglemenu_flg() {
-    return singlemenuFlg;
-  }
-  
-  public void setSinglemenu_flg(String singlemenuFlg) {
-    this.singlemenuFlg = singlemenuFlg;
-  }
-  
-  public String getPrice() {
-    return price;
-  }
-  
-  public void setPrice(String price) {
-    this.price = price;
-  }
-  
-  public String getTax() {
-    return tax;
-  }
-  
-  public void setTax(String tax) {
-    this.tax = tax;
-  }
-  
-  public String getTotal() {
-    return total;
-  }
-  
-  public void setTotal(String total) {
-    this.total = total;
-  }
-
-  public String getMenu() {
-    return menu;
-  }
-
-  public void setMenu(String menu) {
-    this.menu = menu;
   }
 
 }

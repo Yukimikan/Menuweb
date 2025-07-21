@@ -41,8 +41,8 @@
 				<tr>
 					<th><%= retList.get(i).getNo() %></th>
 					<th><%= retList.get(i).getType() %></th>
-					<th><%= retList.get(i).getRestaurant_name() %></th>
-					<th><%= retList.get(i).getSinglemenu_flg() %></th>
+					<th><%= retList.get(i).getRestaurantName() %></th>
+					<th><%= retList.get(i).getSinglemenuFlg() %></th>
 					<th><%= retList.get(i).getMenu() %></th>
 					<th><%= retList.get(i).getPrice() %></th>
 					<th><%= retList.get(i).getTax() %></th>

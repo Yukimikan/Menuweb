@@ -17,6 +17,7 @@
 	         CSV名：<input type="text" name="csv_name" value="menu.csv">
 	                 <input type="submit" value="CSV読込">
 	     </form>
+	     メッセージ：<input type="text" name="message" value="<%= request.getAttribute("message") %>" disabled />
 	</div>
 	<div id="footer">
 		<a href="../index.html">トップに戻る</a>
