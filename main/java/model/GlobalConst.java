@@ -18,10 +18,15 @@ public class GlobalConst {
   /*
    * CsvInputServlet
    */
-  public static final String MSG_W_DATE_ERROR = "日付を指定して下さい";
-  public static final String MSG_W_CSVNAME_ERROR = "CSV名を指定して下さい";
+  // フロント側でチェック
+  //  public static final String MSG_W_DATE_ERROR = "日付を指定して下さい";
+  //  public static final String MSG_W_CSVNAME_ERROR = "CSV名を指定して下さい";
 
   //URL
+  /*
+   * SearchMenuServlet
+   */
+  public static final String JspMenuResultUrl = "./jsp/menu_result.jsp";
   /*
    * CsvInputServlet
    */

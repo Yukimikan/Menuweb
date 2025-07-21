@@ -14,13 +14,14 @@
 	<div id="main">
 		<form action="<%= request.getContextPath() %>/SearchMenuServlet"
 			method="post">
-			日付：<input type="text" name="date"> 
-			金額（円）：<input type="text"	name="total">円 
+			日付：<input type="text" name="date">
+			金額（円）：<input type="text"	name="total">円
 			<input type="submit" value="送信">
+	     メッセージ：<input type="text" name="message" value="<%= request.getAttribute("message") %>" disabled />
 		</form>
 	</div>
 	<div id="footer">
-		<a href="../index.html">トップに戻る</a> 
+		<a href="../index.html">トップに戻る</a>
 		<input type="button" onclick="history.back()" value="前に戻る">
 	</div>
 </body>

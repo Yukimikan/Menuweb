@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import model.GlobalConst;
 import model.MenuCSV;
 import service.CsvUtilServiceImpl;
 
@@ -17,7 +18,6 @@ import service.CsvUtilServiceImpl;
  */
 public class CsvWriteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  private static final String forwardScreenUrl = "./jsp/menu_csv_result.jsp";
 
   public CsvWriteServlet() {
     super();
@@ -52,7 +52,7 @@ public class CsvWriteServlet extends HttpServlet {
       // requestSetAttribute
       request.setAttribute("retList", retList);
       // forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(forwardScreenUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
       dispatcher.forward(request, response);
     } catch (Exception e) {
       e.printStackTrace();

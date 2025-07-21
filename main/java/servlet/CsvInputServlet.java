@@ -9,8 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.tomcat.jakartaee.commons.lang3.StringUtils;
-
 import model.GlobalConst;
 import model.MenuCSV;
 import service.CsvUtilServiceImpl;
@@ -39,15 +37,8 @@ public class CsvInputServlet extends HttpServlet {
     String csvName = (String) request.getParameter("csv_name");
     String errMessage = "";
 
-    // 2. inputCheck
-    //中断
-    if (StringUtils.isEmpty(date) || StringUtils.isBlank(date)) {
-      errMessage = GlobalConst.MSG_W_DATE_ERROR;
-      request.setAttribute("message", errMessage);
-    } else if (StringUtils.isEmpty(csvName) || StringUtils.isBlank(csvName)) {
-      errMessage = GlobalConst.MSG_W_CSVNAME_ERROR;
-      request.setAttribute("message", errMessage);
-    }
+    // 2. inputCheck(フロントで実行)
+    /* nothing */
 
     try {
       // 3. service execute

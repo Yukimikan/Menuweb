@@ -8,12 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import model.GlobalConst;
+
 /**
  * Servlet implementation class HelloServlet.
  */
 public class SearchMenuServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  private static final String forwardScreenUrl = "./jsp/menu_result.jsp";
 
   public SearchMenuServlet() {
     super();
@@ -36,10 +37,7 @@ public class SearchMenuServlet extends HttpServlet {
             throws ServletException, IOException {
     String date = (String) request.getParameter("date");
     String total = (String) request.getParameter("total");
-    System.out.println(date);
-    System.out.println(total);
-    //"./menu_result.jsp"
-    RequestDispatcher dispatcher = request.getRequestDispatcher(forwardScreenUrl);
+    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuResultUrl);
     dispatcher.forward(request, response);
   }
 
