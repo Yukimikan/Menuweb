@@ -12,6 +12,7 @@
     //1. 入力チェック
     var indate = document.form1.date.value;
     var csvname = document.form1.csv_name.value;
+    document.form1,message = "";
 
     //1-1 必須
     if(indate.length === 0) {
@@ -41,7 +42,10 @@
 	         日付：<input type="text" name="date">
 	         CSV名：<input type="text" name="csv_name" value="menu.csv">
 	                 <input type="submit" value="CSV読込">
-	     メッセージ：<input type="text" name="message" value="<%= request.getAttribute("message") %>" disabled />
+	     メッセージ： <input type="text" name="message" disabled />
+	     <!--
+	     	     <input type="text" name="message" value="<%= request.getAttribute("message") %>" disabled />
+	      -->
 	     </form>
 	</div>
 	<div id="footer">

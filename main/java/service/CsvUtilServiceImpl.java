@@ -37,6 +37,7 @@ public class CsvUtilServiceImpl {
    *
    * @param infilename
    * @return retList
+   * @exception FileNotFoundException
    */
   public List<MenuCSV> read(String infilename)
             throws Exception {
@@ -45,8 +46,9 @@ public class CsvUtilServiceImpl {
     MenuCSV inCsv = new MenuCSV();
     List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
+
     // 入力チェック
-    if (commonCheck(infilename) == false) {
+    if (CsvInputServiceImpl.commonCheck(infilename) == false) {
       return null;
     }
 
@@ -115,8 +117,8 @@ public class CsvUtilServiceImpl {
     List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
     //入力チェック
-    if (commonCheck(outfilename) == false
-        || formatCheck(rec) == false) {
+    if (CsvWriteServiceImpl.commonCheck(outfilename) == false
+        || CsvWriteServiceImpl.formatCheck(rec) == false) {
       return null;
     }
 
@@ -171,45 +173,6 @@ public class CsvUtilServiceImpl {
     //再読み込み
     retList = read(outfilename);
     return retList;
-  }
-
-  /**
-   * 共通処理.
-   *
-   * @return boolean
-   */
-  public boolean commonCheck(String filename) {
-    //チェック
-    if (filename == null || filename.isEmpty()) {
-      System.out.println(GlobalConst.MSG_W_FILENAME_ERROR);
-      System.out.println("filename:" + filename);
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * フォーマットチェック.
-   *
-   * @return boolean
-   */
-  public boolean formatCheck(MenuCSV rec) {
-    //チェック
-    if (rec == null) {
-      System.out.println(GlobalConst.MSG_W_INDATA_ISNULL);
-      return false;
-    }
-    //チェック
-    try {
-      Integer.parseInt(rec.getPrice());
-      Integer.parseInt(rec.getTotal());
-    } catch (NumberFormatException e) {
-      System.out.println(GlobalConst.MSG_W_INDATA_NOT_NUMERIC);
-      System.out.println("price：" + rec.getPrice()
-          + "total:" + rec.getTotal());
-      return false;
-    }
-    return true;
   }
 
 }
