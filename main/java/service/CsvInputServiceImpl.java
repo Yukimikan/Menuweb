@@ -2,6 +2,9 @@ package service;
 
 import model.GlobalConst;
 
+/**
+ * ファイル読込用サービス.
+ * */
 public class CsvInputServiceImpl {
 
   /**

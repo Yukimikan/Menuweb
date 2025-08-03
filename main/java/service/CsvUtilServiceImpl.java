@@ -25,8 +25,8 @@ public class CsvUtilServiceImpl {
 
   //絶対パスで指定
   public static final String CSV_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
-  public static final String CSV_NAME = "menu.csv";
   public static final int MAX_COUNT = 100;
+  // public static final String CSV_NAME = "menu.csv";
 
   //コンストラクタ
   public CsvUtilServiceImpl() {
@@ -105,22 +105,18 @@ public class CsvUtilServiceImpl {
    * 書込み処理.
    *
    * @param rec
-   * @return retList
+   * @return
    */
-  public List<MenuCSV> write(MenuCSV rec, String outfilename)
+  public void write(MenuCSV rec, String outfilename)
             throws Exception {
 
     BufferedReader buffReader = null;
     BufferedWriter buffWriter = null;
     //String outfile_path = CSV_PATH + "\\output\\" + outfilename;
     String outfilePath = CSV_PATH + outfilename;
-    List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
-    //入力チェック
-    if (CsvWriteServiceImpl.commonCheck(outfilename) == false
-        || CsvWriteServiceImpl.formatCheck(rec) == false) {
-      return null;
-    }
+    //入力チェック(呼び元で実行)
+    /* nothing */
 
     try {
       File f = new File(outfilePath);
@@ -170,9 +166,5 @@ public class CsvUtilServiceImpl {
         ex.printStackTrace();
       }
     }
-    //再読み込み
-    retList = read(outfilename);
-    return retList;
   }
-
 }

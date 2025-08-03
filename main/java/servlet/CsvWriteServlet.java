@@ -12,6 +12,7 @@ import java.util.List;
 import model.GlobalConst;
 import model.MenuCSV;
 import service.CsvUtilServiceImpl;
+import service.CsvWriteServiceImpl;
 
 /**
  * Servlet implementation class HelloServlet.
@@ -31,11 +32,10 @@ public class CsvWriteServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    String csvName = "menu.csv";
-
     // データ移送
     MenuCSV rec = new MenuCSV();
 
+    // 1. parameter set
     // rec.setNo((String) request.getParameter("type"));
     rec.setType((String) request.getParameter("type"));
     rec.setRestaurantName((String) request.getParameter("restaurant_name"));
@@ -45,13 +45,22 @@ public class CsvWriteServlet extends HttpServlet {
     rec.setTax((String) request.getParameter("tax"));
     rec.setTotal((String) request.getParameter("total"));
 
+    // 2. inputCheck(フロントで実行)
+    CsvWriteServiceImpl cwService = new CsvWriteServiceImpl();
+    if (cwService.formatCheck(rec) == false) {
+      // 中断
+      return;
+    }
+
     try {
-      // service
-      CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-      List<MenuCSV> retList = service.write(rec, csvName);
+      // 3. service execute
+      CsvUtilServiceImpl cuService = new CsvUtilServiceImpl();
+      cuService.write(rec, GlobalConst.CsvName);
+      // 再読み込み
+      List<MenuCSV> retList = cuService.read(GlobalConst.CsvName);
       // requestSetAttribute
       request.setAttribute("retList", retList);
-      // forward
+      // 4. forward
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
       dispatcher.forward(request, response);
     } catch (Exception e) {

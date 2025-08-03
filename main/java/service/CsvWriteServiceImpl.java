@@ -2,30 +2,17 @@ package service;
 
 import model.GlobalConst;
 import model.MenuCSV;
-
+/**
+ * ファイル書込用サービス.
+ * */
 public class CsvWriteServiceImpl {
-
-  /**
-   * 共通処理.
-   *
-   * @return boolean
-   */
-  public static boolean commonCheck(String filename) {
-    //チェック
-    if (filename == null || filename.isEmpty()) {
-      System.out.println(GlobalConst.MSG_W_FILENAME_ERROR);
-      System.out.println("filename:" + filename);
-      return false;
-    }
-    return true;
-  }
 
   /**
    * フォーマットチェック.
    *
    * @return boolean
    */
-  public static boolean formatCheck(MenuCSV rec) {
+  public boolean formatCheck(MenuCSV rec) {
     //チェック
     if (rec == null) {
       System.out.println(GlobalConst.MSG_W_INDATA_ISNULL);

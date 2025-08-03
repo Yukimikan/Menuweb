@@ -21,6 +21,11 @@ public class GlobalConst {
   // フロント側でチェック
   //  public static final String MSG_W_DATE_ERROR = "日付を指定して下さい";
   //  public static final String MSG_W_CSVNAME_ERROR = "CSV名を指定して下さい";
+  /*
+   * CsvWriteServlet
+   */
+  public static final String CsvName = "menu.csv";
+
 
   //URL
   /*
