@@ -16,7 +16,7 @@ import model.MenuCSV;
 /**
  * ファイル操作用サービス.
  * */
-public class CsvUtilServiceImpl {
+public class CsvUtilServiceImpl implements CsvUtilService {
 
   /*
    * 参考サイト
@@ -46,11 +46,8 @@ public class CsvUtilServiceImpl {
     MenuCSV inCsv = new MenuCSV();
     List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
-
-    // 入力チェック
-    if (CsvInputServiceImpl.commonCheck(infilename) == false) {
-      return null;
-    }
+    //入力チェック(呼び元で実行)
+    /* nothing */
 
     try {
       // sample1.csvファイルを読み込みます

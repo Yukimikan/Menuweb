@@ -1,11 +1,38 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.GlobalConst;
 import model.MenuCSV;
+import servlet.CsvWriteServDto;
+
 /**
  * ファイル書込用サービス.
  * */
-public class CsvWriteServiceImpl {
+public class CsvWriteServiceImpl implements CsvWriteService {
+
+  CsvUtilService service = new CsvUtilServiceImpl();
+  List<MenuCSV> retList = new ArrayList<>();
+
+  /**
+   * execute.
+   */
+  public List<MenuCSV> execute(CsvWriteServDto input) {
+
+    // 入力チェック
+    if (this.formatCheck(input.getRec())) {
+      try {
+        service.write(input.getRec(), GlobalConst.CsvName);
+        retList = service.read(GlobalConst.CsvName);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      return retList;
+    }
+    return null;
+  }
+
 
   /**
    * フォーマットチェック.

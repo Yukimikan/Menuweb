@@ -11,14 +11,19 @@ import java.util.List;
 
 import model.GlobalConst;
 import model.MenuCSV;
-import service.CsvUtilServiceImpl;
+import service.CsvInputService;
+import service.CsvInputServiceImpl;
 
 
 /**
  * Servlet implementation class HelloServlet.
  */
 public class CsvInputServlet extends HttpServlet {
+
   private static final long serialVersionUID = 1L;
+
+  CsvInputService service = new CsvInputServiceImpl();
+  CsvInputServDto csvInputServDto;
 
   public CsvInputServlet() {
     super();
@@ -33,17 +38,17 @@ public class CsvInputServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    String date = (String) request.getParameter("date");
-    String csvName = (String) request.getParameter("csv_name");
-    String errMessage = "";
+    csvInputServDto = new CsvInputServDto(
+        (String) request.getParameter("date"),
+        (String) request.getParameter("csv_name"),
+        "");
 
     // 2. inputCheck(フロントで実行)
     /* nothing */
 
     try {
       // 3. service execute
-      CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-      List<MenuCSV> retList = service.read(csvName);
+      List<MenuCSV> retList = service.execute(csvInputServDto);
 
       // 終了条件を判定
       if (retList != null) {

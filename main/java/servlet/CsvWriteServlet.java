@@ -11,14 +11,18 @@ import java.util.List;
 
 import model.GlobalConst;
 import model.MenuCSV;
-import service.CsvUtilServiceImpl;
+import service.CsvWriteService;
 import service.CsvWriteServiceImpl;
 
 /**
  * Servlet implementation class HelloServlet.
  */
 public class CsvWriteServlet extends HttpServlet {
+
   private static final long serialVersionUID = 1L;
+
+  CsvWriteService service = new CsvWriteServiceImpl();
+  CsvWriteServDto csvWriteServDto;
 
   public CsvWriteServlet() {
     super();
@@ -32,37 +36,36 @@ public class CsvWriteServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    // データ移送
-    MenuCSV rec = new MenuCSV();
-
     // 1. parameter set
-    // rec.setNo((String) request.getParameter("type"));
-    rec.setType((String) request.getParameter("type"));
-    rec.setRestaurantName((String) request.getParameter("restaurant_name"));
-    rec.setSinglemenuFlg((String) request.getParameter("singlemenu_flg"));
-    rec.setMenu((String) request.getParameter("menu"));
-    rec.setPrice((String) request.getParameter("price"));
-    rec.setTax((String) request.getParameter("tax"));
-    rec.setTotal((String) request.getParameter("total"));
+    MenuCSV rec = new MenuCSV(
+        "", //setNo
+        (String) request.getParameter("type"),
+        (String) request.getParameter("restaurant_name"),
+        (String) request.getParameter("singlemenu_flg"),
+        (String) request.getParameter("menu"),
+        (String) request.getParameter("price"),
+        (String) request.getParameter("tax"),
+        (String) request.getParameter("total"));
+    csvWriteServDto = new CsvWriteServDto(rec);
 
     // 2. inputCheck(フロントで実行)
-    CsvWriteServiceImpl cwService = new CsvWriteServiceImpl();
-    if (cwService.formatCheck(rec) == false) {
-      // 中断
-      return;
-    }
+    /* nothing */
 
     try {
       // 3. service execute
-      CsvUtilServiceImpl cuService = new CsvUtilServiceImpl();
-      cuService.write(rec, GlobalConst.CsvName);
-      // 再読み込み
-      List<MenuCSV> retList = cuService.read(GlobalConst.CsvName);
-      // requestSetAttribute
-      request.setAttribute("retList", retList);
-      // 4. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
-      dispatcher.forward(request, response);
+      List<MenuCSV> retList = service.execute(csvWriteServDto);
+
+      // 終了条件を判定
+      if (retList != null) {
+        // requestSetAttribute
+        request.setAttribute("retList", retList);
+        // 4. forward
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+        dispatcher.forward(request, response);
+      } else {
+        // 中断
+        return;
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }

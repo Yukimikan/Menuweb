@@ -1,5 +1,6 @@
 package model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 public class MenuCSV {
 
   public static final String CSV_HEADER = "No,種類,店名,単品,メニュー,価格,税,金額";
