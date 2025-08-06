@@ -24,6 +24,7 @@ public class CsvInputServlet extends HttpServlet {
 
   CsvInputService service = new CsvInputServiceImpl();
   CsvInputServDto csvInputServDto;
+  CsvInputServOutDto csvInputServOutDto;
 
   public CsvInputServlet() {
     super();
