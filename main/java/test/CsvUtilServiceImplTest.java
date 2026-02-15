@@ -9,8 +9,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import common.CsvUtil;
 import model.MenuCSV;
-import service.CsvUtilServiceImpl;
 
 public class CsvUtilServiceImplTest {
 
@@ -28,8 +28,9 @@ public class CsvUtilServiceImplTest {
 		try {
 			//OK
 			// service
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-			List<MenuCSV> retList = service.read(null);
+			//CsvUtil service = new CsvUtil();
+			//List<MenuCSV> retList = service.read(null);
+			List<MenuCSV> retList = CsvUtil.read(null);
 			//戻り値チェック
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
@@ -49,8 +50,9 @@ public class CsvUtilServiceImplTest {
 		try {
 			//OK
 			// service
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-			List<MenuCSV> retList = service.read("");
+			//CsvUtil service = new CsvUtil();
+			//List<MenuCSV> retList = service.read("");
+			List<MenuCSV> retList = CsvUtil.read("");
 			//戻り値チェック
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
@@ -70,8 +72,9 @@ public class CsvUtilServiceImplTest {
 		List<MenuCSV> retList = null;
 		try {
 			// service
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-			retList = service.read("error.csv");
+			//CsvUtil service = new CsvUtil();
+			//retList = service.read("error.csv");
+			retList = CsvUtil.read("error.csv");
 			fail("異常確認失敗");
 		} 	catch (FileNotFoundException e) {
 			//OK
@@ -142,8 +145,7 @@ public class CsvUtilServiceImplTest {
 		System.out.println(caseid);
 		try {
 			// service
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-			List<MenuCSV> retList = service.read(filename);
+			List<MenuCSV> retList = CsvUtil.read(filename);
 			//戻り値チェック
 			assertEquals(expectedCnt, retList.size());
 		} 	catch (Exception e) {
@@ -177,8 +179,7 @@ public class CsvUtilServiceImplTest {
 			rec.setPrice("550");
 			rec.setTax("なし");
 			rec.setTotal("550");
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-			service.write(rec, null);
+			CsvUtil.write(rec, null);
 			// List<MenuCSV> retList = service.write(rec,null);
 			//戻り値チェック
 			// assertTrue(retList == null);
@@ -212,8 +213,7 @@ public class CsvUtilServiceImplTest {
 			rec.setPrice("550");
 			rec.setTax("なし");
 			rec.setTotal("550");
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-		    service.write(rec,"");
+			CsvUtil.write(rec,"");
 			// List<MenuCSV> retList = service.write(rec,"");
 			//戻り値チェック
 			// assertTrue(retList == null);
@@ -234,8 +234,7 @@ public class CsvUtilServiceImplTest {
 		System.out.println("AbNormal01_writeCSV");
 		try {
 			//OK
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-			service.write(null,"menu_test.csv");
+			CsvUtil.write(null,"menu_test.csv");
 			// List<MenuCSV> retList = service.write(null,"menu_test.csv");
 			//戻り値チェック
 			// assertTrue(retList == null);
@@ -314,8 +313,7 @@ public class CsvUtilServiceImplTest {
 		try {
 			//OK
 			// service
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-	        service.write(rec,filename);
+			CsvUtil.write(rec,filename);
 	        // retList = service.write(rec,filename);
 			//戻り値チェック
 	        // assertEquals(expectedCnt,retList.size());
@@ -350,8 +348,7 @@ public class CsvUtilServiceImplTest {
 			rec.setPrice("error");	//数値以外
 			rec.setTax("なし");
 			rec.setTotal("550");
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-			service.write(rec,"menu_test.csv");
+			CsvUtil.write(rec,"menu_test.csv");
 			// List<MenuCSV> retList = service.write(rec,"menu_test.csv");
 			//戻り値チェック
 			// assertTrue(retList == null);
@@ -385,8 +382,7 @@ public class CsvUtilServiceImplTest {
 			rec.setPrice("550");
 			rec.setTax("なし");
 			rec.setTotal("error");	//数値以外
-			CsvUtilServiceImpl service = new CsvUtilServiceImpl();
-			service.write(rec,"menu_test.csv");
+			CsvUtil.write(rec,"menu_test.csv");
 			//List<MenuCSV> retList = service.write(rec,"menu_test.csv");
 			//戻り値チェック
 			// assertTrue(retList == null);

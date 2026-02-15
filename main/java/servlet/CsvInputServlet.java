@@ -9,26 +9,24 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import form.MenuCsvInputForm;
 import model.GlobalConst;
 import model.MenuCSV;
 import service.CsvInputService;
 import service.CsvInputServiceImpl;
 
-
 /**
  * Servlet implementation class HelloServlet.
  */
 public class CsvInputServlet extends HttpServlet {
-
   private static final long serialVersionUID = 1L;
-
-  CsvInputService service = new CsvInputServiceImpl();
-  CsvInputServDto csvInputServDto;
-  CsvInputServOutDto csvInputServOutDto;
 
   public CsvInputServlet() {
     super();
   }
+
+  MenuCsvInputForm csvInputServForm;
+  //  CsvInputServOutDto csvInputServOutDto;
 
   /**
    *  ポスト処理.
@@ -39,17 +37,20 @@ public class CsvInputServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    csvInputServDto = new CsvInputServDto(
+    csvInputServForm = new MenuCsvInputForm(
         (String) request.getParameter("date"),
         (String) request.getParameter("csv_name"),
         "");
 
-    // 2. inputCheck(フロントで実行)
-    /* nothing */
-
     try {
+      // 2. inputCheck(フロントで実行)
+      // 入力チェック
+      if (!csvInputServForm.commonCheck(csvInputServForm.getCsvName())) {
+        throw new IOException();
+      }
       // 3. service execute
-      List<MenuCSV> retList = service.execute(csvInputServDto);
+      CsvInputService service = new CsvInputServiceImpl();
+      List<MenuCSV> retList = service.execute(csvInputServForm);
 
       // 終了条件を判定
       if (retList != null) {

@@ -3,6 +3,7 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.CsvUtil;
 import model.GlobalConst;
 import model.MenuCSV;
 import servlet.CsvWriteServDto;
@@ -12,7 +13,6 @@ import servlet.CsvWriteServDto;
  * */
 public class CsvWriteServiceImpl implements CsvWriteService {
 
-  CsvUtilService service = new CsvUtilServiceImpl();
   List<MenuCSV> retList = new ArrayList<>();
 
   /**
@@ -23,8 +23,8 @@ public class CsvWriteServiceImpl implements CsvWriteService {
     // 入力チェック
     if (this.formatCheck(input.getRec())) {
       try {
-        service.write(input.getRec(), GlobalConst.CsvName);
-        retList = service.read(GlobalConst.CsvName);
+        CsvUtil.write(input.getRec(), GlobalConst.CsvName);
+        retList = CsvUtil.read(GlobalConst.CsvName);
       } catch (Exception e) {
         e.printStackTrace();
       }

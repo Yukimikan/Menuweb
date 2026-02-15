@@ -18,15 +18,14 @@ import service.CsvWriteServiceImpl;
  * Servlet implementation class HelloServlet.
  */
 public class CsvWriteServlet extends HttpServlet {
-
   private static final long serialVersionUID = 1L;
-
-  CsvWriteService service = new CsvWriteServiceImpl();
-  CsvWriteServDto csvWriteServDto;
 
   public CsvWriteServlet() {
     super();
   }
+
+  CsvWriteServDto csvWriteServDto;
+
 
   /**
    *  ポスト処理.
@@ -53,6 +52,7 @@ public class CsvWriteServlet extends HttpServlet {
 
     try {
       // 3. service execute
+      CsvWriteService service = new CsvWriteServiceImpl();
       List<MenuCSV> retList = service.execute(csvWriteServDto);
 
       // 終了条件を判定
