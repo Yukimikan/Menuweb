@@ -7,6 +7,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,46 +46,36 @@ public final class CsvUtil {
    */
   public static List<MenuCSV> read(String infilename)
             throws Exception {
-    BufferedReader buffReader = null;
     String infilePath = CSV_PATH + infilename;
-    MenuCSV inCsv = new MenuCSV();
     List<MenuCSV> retList = new ArrayList<MenuCSV>();
-
-    //入力チェック(呼び元で実行)
+    // 入力チェック(呼び元で実行)
     /* nothing */
 
     try {
       // sample1.csvファイルを読み込みます
-      FileInputStream fileInput = new FileInputStream(infilePath); // ※1
-      // バイトストリームをテキスト形式に変換
-      InputStreamReader inputStream = new InputStreamReader(fileInput); // ※2
-      // テキスト形式のファイルを読み込む
-      buffReader = new BufferedReader(inputStream); // ※3
-      String currentContent;
+      // テキスト形式のファイルを読み込む ※3
       int row = 0;
-      while ((currentContent = buffReader.readLine()) != null
-        && row < MAX_COUNT) { // ※4
+      // Java7
+      Path filePath = Paths.get(infilePath); //引数1つ
+      List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
 
-        //初期化
-        inCsv = new MenuCSV();
+      if (lines.size() >= MAX_COUNT) {
+        // 最大件数超過(byte数判定がいい)
+        System.out.println(GlobalConst.MSG_W_FILE_MAXCOUNT_OVER);
+      }
 
+      // 拡張for文(lines)に書換 ※4
+      for (String currentContent : lines) {
         if (row == 0) {
             // ※5 header
         } else {
           // カラムを分割
           String[] arrayColumnData = currentContent.split(","); // ※6
           //戻り値を追加
-          inCsv.setAllColumns(arrayColumnData);
-          retList.add(inCsv);
+          retList.add(new MenuCSV(arrayColumnData));
         }
         row++;
       }
-
-      // 最大件数超過
-      if (row == MAX_COUNT) {
-        System.out.println(GlobalConst.MSG_W_FILE_MAXCOUNT_OVER);
-      }
-
     } catch (FileNotFoundException e) {
       System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
       System.out.println("infile_path：" + infilePath);
@@ -91,11 +85,13 @@ public final class CsvUtil {
       throw ex;
     } finally {
       //close処理
+      /*
       try {
         buffReader.close(); //※9
       } catch (Exception ex) {
         ex.printStackTrace();
       }
+      */
     }
     return retList;
   }
