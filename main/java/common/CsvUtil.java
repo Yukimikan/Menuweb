@@ -28,6 +28,7 @@ public final class CsvUtil {
    * 参考サイト
    * https://style.potepan.com/articles/18230.html
    * */
+  //Copilotで修正済み。
 
   //絶対パスで指定
   public static final String CSV_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
@@ -39,22 +40,6 @@ public final class CsvUtil {
   //コンストラクタ
   private CsvUtil() {
   }
-
-  // int row = 0;
-  /*
-  for (String currentContent : lines) {
-    if (row == 0) {
-        // ※5 header
-    } else {
-      // カラムを分割
-      String[] arrayColumnData = currentContent.split(","); // ※6
-      //戻り値を追加
-      retList.add(new MenuCSV(arrayColumnData));
-    }
-    row++;
-  }
-  */
-
 
   /**
    * 読取CSV.
@@ -117,13 +102,79 @@ public final class CsvUtil {
   public static void write(MenuCSV rec, String outfilename)
             throws Exception {
 
+    String outfilePath = CSV_PATH + outfilename;
+    boolean needHeader = false;
+
+    // 1. ヘッダー判定（読み込み側は try-with-resources）
+    File f = new File(outfilePath);
+    if (!f.exists()) {
+      needHeader = true;
+
+    } else {
+      try (
+          FileInputStream fileInput = new FileInputStream(outfilePath);
+          InputStreamReader inputStream = new InputStreamReader(fileInput, StandardCharsets.UTF_8);
+          BufferedReader buffReader = new BufferedReader(inputStream)
+      ) {
+        String topRec = buffReader.readLine();
+
+        if (topRec != null && topRec.startsWith("\uFEFF")) {
+          topRec = topRec.substring(1);
+        }
+
+        if (!MenuCSV.CSV_HEADER.equals(topRec)) {
+          needHeader = true;
+        }
+
+      } catch (FileNotFoundException e) {
+        System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
+        System.out.println("outfile_path：" + outfilePath);
+        throw e;
+
+      } catch (Exception ex) {
+        ex.printStackTrace();
+        throw ex;
+      }
+    }
+
+    // 2. 書き込みストリーム（追記モード）→ try-with-resources に変更
+    try (
+        FileWriter fw = new FileWriter(outfilePath, true);
+        BufferedWriter buffWriter = new BufferedWriter(fw)
+    ) {
+
+      if (needHeader) {
+        buffWriter.write(MenuCSV.CSV_HEADER);
+        buffWriter.newLine();
+      }
+
+      buffWriter.write(rec.returnJoinedString());
+
+    } catch (FileNotFoundException e) {
+      System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
+      System.out.println("outfile_path：" + outfilePath);
+      throw e;
+
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      throw ex;
+    }
+  }
+
+  /**
+   * 書込み処理.
+   *
+   * @param rec
+   * @return
+   */
+  /*
+  public static void write_old(MenuCSV rec, String outfilename)
+            throws Exception {
+
     BufferedReader buffReader = null;
     BufferedWriter buffWriter = null;
     //String outfile_path = CSV_PATH + "\\output\\" + outfilename;
     String outfilePath = CSV_PATH + outfilename;
-
-    //入力チェック(呼び元で実行)
-    /* nothing */
 
     try {
       File f = new File(outfilePath);
@@ -174,4 +225,5 @@ public final class CsvUtil {
       }
     }
   }
+  */
 }
