@@ -9,9 +9,11 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import model.GlobalConst;
@@ -30,12 +32,29 @@ public final class CsvUtil {
   //絶対パスで指定
   public static final String CSV_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
   public static final int MAX_COUNT = 100;
+  public static final long MAX_BYTES = 1_000_000; // 1MB
   // public static final String CSV_NAME = "menu.csv";
 
   /* callしない */
   //コンストラクタ
   private CsvUtil() {
   }
+
+  // int row = 0;
+  /*
+  for (String currentContent : lines) {
+    if (row == 0) {
+        // ※5 header
+    } else {
+      // カラムを分割
+      String[] arrayColumnData = currentContent.split(","); // ※6
+      //戻り値を追加
+      retList.add(new MenuCSV(arrayColumnData));
+    }
+    row++;
+  }
+  */
+
 
   /**
    * 読取CSV.
@@ -52,31 +71,31 @@ public final class CsvUtil {
     /* nothing */
 
     try {
-      // sample1.csvファイルを読み込みます
-      // テキスト形式のファイルを読み込む ※3
-      int row = 0;
-      // Java7
-      Path filePath = Paths.get(infilePath); //引数1つ
-      List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
-
-      if (lines.size() >= MAX_COUNT) {
-        // 最大件数超過(byte数判定がいい)
+      Path filePath = Paths.get(infilePath);
+      long fileSize = Files.size(filePath);
+      // 1. 読み込み前に byte 数チェック（例外発生源より前）
+      if (fileSize > MAX_BYTES) {
         System.out.println(GlobalConst.MSG_W_FILE_MAXCOUNT_OVER);
+        // ただし処理は続行
       }
-
-      // 拡張for文(lines)に書換 ※4
-      for (String currentContent : lines) {
-        if (row == 0) {
-            // ※5 header
-        } else {
-          // カラムを分割
-          String[] arrayColumnData = currentContent.split(","); // ※6
-          //戻り値を追加
-          retList.add(new MenuCSV(arrayColumnData));
+      // 2. readAllLines（例外発生源を try の先頭に寄せる）
+      Iterator<String> it = Files.readAllLines(filePath, StandardCharsets.UTF_8)
+                            .iterator();
+      // 3. ヘッダー行（BOM対応）
+      if (it.hasNext()) {
+        String header = it.next();
+        if (header.startsWith("\uFEFF")) {
+          header = header.substring(1);
         }
-        row++;
+        // ヘッダー内容は使わないので捨てる
       }
-    } catch (FileNotFoundException e) {
+      // 4. 本体行の処理（変数 it のみ）
+      while (it.hasNext()) {
+        String currentContent = it.next();
+        String[] arrayColumnData = currentContent.split(",");
+        retList.add(new MenuCSV(arrayColumnData));
+      }
+    } catch (NoSuchFileException e) {
       System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
       System.out.println("infile_path：" + infilePath);
       throw e;
@@ -84,14 +103,7 @@ public final class CsvUtil {
       ex.printStackTrace();
       throw ex;
     } finally {
-      //close処理
-      /*
-      try {
-        buffReader.close(); //※9
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
-      */
+      // finally は空でOK
     }
     return retList;
   }
