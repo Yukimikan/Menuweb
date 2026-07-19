@@ -1,8 +1,8 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import common.ConditionTotal;
 import common.CsvUtil;
 import form.MenuCsvInputForm;
 import model.MenuCSV;
@@ -12,35 +12,20 @@ import model.MenuCSV;
  * */
 public class CsvInputServiceImpl implements CsvInputService {
 
-  List<MenuCSV> retList = new ArrayList<>();
-
   /**
    * execute.
    */
   public List<MenuCSV> execute(MenuCsvInputForm input) {
-
     try {
-      retList = CsvUtil.read(input.getCsvName());
+      ConditionTotal cond = ConditionTotal.fromCode(input.getTotalcondition());
+      int total = input.getTotal();
+
+      return CsvUtil.read(input.getCsvName()).stream()
+        .filter(ret -> cond.match(ret.getPrice(), total))
+        .toList();
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
-    return retList;
   }
-//
-//  /**
-//   * 共通処理.
-//   *
-//   * @return boolean
-//   */
-//  public boolean commonCheck(String filename) {
-//
-//	//チェック
-//    if (filename == null || filename.isEmpty()) {
-//      System.out.println(GlobalConst.MSG_W_FILENAME_ERROR);
-//      System.out.println("filename:" + filename);
-//      return false;
-//    }
-//    return true;
-//  }
-
 }

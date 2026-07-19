@@ -47,8 +47,8 @@ public class CsvWriteServiceImpl implements CsvWriteService {
     }
     //チェック
     try {
-      Integer.parseInt(rec.getPrice());
-      Integer.parseInt(rec.getTotal());
+      rec.getPrice();
+      rec.getTotal();
     } catch (NumberFormatException e) {
       System.out.println(GlobalConst.MSG_W_INDATA_NOT_NUMERIC);
       System.out.println("price：" + rec.getPrice()

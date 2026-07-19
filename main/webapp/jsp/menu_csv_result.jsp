@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="model.MenuCSV"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -19,7 +19,7 @@
 		<form action="<%= request.getContextPath() %>/CsvControlServlet"
 			method="post">
 			<%
-			ArrayList<MenuCSV> retList = (ArrayList<MenuCSV>)request.getAttribute("retList");
+			List<MenuCSV> retList = (List<MenuCSV>)request.getAttribute("retList");
 			if (retList == null || retList.size() == 0){
 		%>
 			<br>

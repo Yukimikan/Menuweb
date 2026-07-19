@@ -11,6 +11,12 @@
 		<h4>1000円ランチシステム</h4>
 		・CSV登録
 	</div>
+  	<div id="contents">
+	<h2>＜メニュー登録＞</h2>
+		プルダウン機能でメニュー一覧を選択。<br>
+		各メニュー項目の新規書込みを行う。<br>
+		＜追加予定＞書込み先CSVファイルの設定。
+	</div>
 	<div id="main">
 	     <form action="<%= request.getContextPath() %>/CsvWriteServlet" method="post">
 			<table border="1">
@@ -39,7 +45,7 @@
 	     </form>
 	</div>
 	<div id="footer">
-		<a href="../index.html">トップに戻る</a> 
+		<a href="../index.html">トップに戻る</a>
 		<input type="button" onclick="history.back()" value="前に戻る">
 	</div>
 </body>

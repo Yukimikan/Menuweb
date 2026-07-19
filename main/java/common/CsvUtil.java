@@ -52,8 +52,6 @@ public final class CsvUtil {
             throws Exception {
     String infilePath = CSV_PATH + infilename;
     List<MenuCSV> retList = new ArrayList<MenuCSV>();
-    // 入力チェック(呼び元で実行)
-    /* nothing */
 
     try {
       Path filePath = Paths.get(infilePath);
@@ -63,23 +61,34 @@ public final class CsvUtil {
         System.out.println(GlobalConst.MSG_W_FILE_MAXCOUNT_OVER);
         // ただし処理は続行
       }
-      // 2. readAllLines（例外発生源を try の先頭に寄せる）
+      // 1. 全行読み込み
       Iterator<String> it = Files.readAllLines(filePath, StandardCharsets.UTF_8)
-                            .iterator();
-      // 3. ヘッダー行（BOM対応）
-      if (it.hasNext()) {
-        String header = it.next();
-        if (header.startsWith("\uFEFF")) {
-          header = header.substring(1);
-        }
-        // ヘッダー内容は使わないので捨てる
+                                 .iterator();
+
+      // 1. ヘッダー一致チェック
+      String header = CsvUtil.readHeader(infilePath);
+      if (!MenuCSV.CSV_HEADER.equals(header)) {
+        System.out.println("警告：ヘッダーが想定と異なります → " + header);
       }
-      // 4. 本体行の処理（変数 it のみ）
+
+      // 2. ヘッダー読み飛ばし（CsvUtilで読みつつ、iteratorも進める）
+      if (it.hasNext()) {
+        it.next(); // iterator の先頭を捨てる
+        // CsvUtil.readHeader(infilePath) は品質チェック用に使える
+        // 今はヘッダー内容を使わないので捨てるだけ
+      }
+      // 3. 本体行の処理
       while (it.hasNext()) {
         String currentContent = it.next();
         String[] arrayColumnData = currentContent.split(",");
-        retList.add(new MenuCSV(arrayColumnData));
-      }
+        try {
+            retList.add(new MenuCSV(arrayColumnData));
+          } catch (IllegalArgumentException e) {
+            System.out.println("警告：不正な行 → " + currentContent);
+            System.out.println("理由：" + e.getMessage());
+            // 続行
+          }
+        }
     } catch (NoSuchFileException e) {
       System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
       System.out.println("infile_path：" + infilePath);
@@ -109,31 +118,12 @@ public final class CsvUtil {
     File f = new File(outfilePath);
     if (!f.exists()) {
       needHeader = true;
-
     } else {
-      try (
-          FileInputStream fileInput = new FileInputStream(outfilePath);
-          InputStreamReader inputStream = new InputStreamReader(fileInput, StandardCharsets.UTF_8);
-          BufferedReader buffReader = new BufferedReader(inputStream)
-      ) {
-        String topRec = buffReader.readLine();
+      String header = CsvUtil.readHeader(outfilePath);
 
-        if (topRec != null && topRec.startsWith("\uFEFF")) {
-          topRec = topRec.substring(1);
-        }
-
-        if (!MenuCSV.CSV_HEADER.equals(topRec)) {
-          needHeader = true;
-        }
-
-      } catch (FileNotFoundException e) {
-        System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
-        System.out.println("outfile_path：" + outfilePath);
-        throw e;
-
-      } catch (Exception ex) {
-        ex.printStackTrace();
-        throw ex;
+      if (!MenuCSV.CSV_HEADER.equals(header)) {
+        System.out.println("警告：ヘッダーが想定と異なります → " + header);
+    	needHeader = true;
       }
     }
 
@@ -158,6 +148,31 @@ public final class CsvUtil {
     } catch (Exception ex) {
       ex.printStackTrace();
       throw ex;
+    }
+  }
+
+  /**
+   * CsvHeader読み込み.
+   *
+   * @param rec
+   * @return
+   */
+  // 先頭行（ヘッダー）を読み、BOM を除去して返す
+  public static String readHeader(String filePath) throws Exception {
+    try (
+        FileInputStream fileInput = new FileInputStream(filePath);
+        InputStreamReader inputStream = new InputStreamReader(fileInput, StandardCharsets.UTF_8);
+        BufferedReader buffReader = new BufferedReader(inputStream)
+    ) {
+      String header = buffReader.readLine();
+
+      if (header != null && header.startsWith("\uFEFF")) {
+        header = header.substring(1);
+      }
+      return header;
+
+    } catch (Exception e) {
+      throw e;
     }
   }
 

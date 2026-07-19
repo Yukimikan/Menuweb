@@ -36,15 +36,19 @@ public class CsvWriteServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-    MenuCSV rec = new MenuCSV(
-        "", //setNo
-        (String) request.getParameter("type"),
-        (String) request.getParameter("restaurant_name"),
-        (String) request.getParameter("singlemenu_flg"),
-        (String) request.getParameter("menu"),
-        (String) request.getParameter("price"),
-        (String) request.getParameter("tax"),
-        (String) request.getParameter("total"));
+    String[] cols = {
+      "", // No（新規登録なので空）
+      request.getParameter("type"),
+      request.getParameter("restaurant_name"),
+      request.getParameter("singlemenu_flg"),
+      request.getParameter("menu"),
+      request.getParameter("price"),
+      request.getParameter("tax"),
+      request.getParameter("total")
+    };
+
+    // 2. MenuCSV に渡す(初期化)
+    MenuCSV rec = new MenuCSV(cols);
     csvWriteServDto = new CsvWriteServDto(rec);
 
     // 2. inputCheck(フロントで実行)

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -19,54 +21,95 @@ public class MenuCSV {
   private String restaurantName;
   private String singlemenuFlg;
   private String menu;
-  private String price;
+  private int price;
   private String tax;
-  private String total;
+  private int total;
 
   /*
    * constructor
    */
   public MenuCSV() {}
 
-  /**
-   * 全列指定.
-   * arrayColumnData 分割済みのデータ.
-   *
-   * @param  arrayColumnData
-   * @throw ArrayIndexOutOfBoundsException
-   */
-  public void setAllColumns(String[] arrayColumnData) {
+  @Override
+  public String toString() {
+    return returnJoinedString();
+  }
 
+  /*
+   * constructor
+   * with param
+   */
+  public MenuCSV(String[] arrayColumnData) throws IllegalArgumentException {
+
+    // 1. カラム数チェック
+    if (arrayColumnData.length != 8) {
+      throw new IllegalArgumentException("CSVカラム数が不正です: " + Arrays.toString(arrayColumnData));
+    }
+
+    // 2. 必須項目チェック
+    if (isEmpty(arrayColumnData[0]) ||  // No
+        isEmpty(arrayColumnData[1]) ||  // 種類
+        isEmpty(arrayColumnData[2]) ||  // 店名
+        isEmpty(arrayColumnData[4]) ||  // メニュー
+        isEmpty(arrayColumnData[5]) ||  // 価格
+        isEmpty(arrayColumnData[7])) {  // 金額
+      throw new IllegalArgumentException("必須項目が未設定です: " + Arrays.toString(arrayColumnData));
+    }
+
+    // 3. 型チェック（価格・金額）
+    if (!isNumeric(arrayColumnData[5])) {
+      throw new IllegalArgumentException("価格が数値ではありません: " + arrayColumnData[5]);
+    }
+    if (!isNumeric(arrayColumnData[7])) {
+      throw new IllegalArgumentException("金額が数値ではありません: " + arrayColumnData[7]);
+    }
+
+    // 4. ビジネスルールチェック（単品フラグ）
+    String flg = arrayColumnData[3];
+    if ("○".equals(flg)) {
+      // 単品 → OK
+    } else {
+      // セット品 → 空欄であるべき
+      if (!isEmpty(flg)) {
+        throw new IllegalArgumentException("単品フラグが不正です（セット品は空欄）: " + flg);
+      }
+    }
+
+    // 5. 正常ならフィールドにセット
+    this.no = arrayColumnData[0];
+    this.type = arrayColumnData[1];
+    this.restaurantName = arrayColumnData[2];
+    this.singlemenuFlg = arrayColumnData[3];
+    this.menu = arrayColumnData[4];
+    this.price = Integer.parseInt(arrayColumnData[5]);
+    this.tax = arrayColumnData[6];
+    this.total = Integer.parseInt(arrayColumnData[7]);
+  }
+
+  private boolean isEmpty(String s) {
+    return s == null || s.isEmpty();
+  }
+
+  private boolean isNumeric(String s) {
     try {
-      this.setNo(arrayColumnData[0]);
-      this.setType(arrayColumnData[1]);
-      this.setRestaurantName(arrayColumnData[2]);
-      this.setSinglemenuFlg(arrayColumnData[3]);
-      this.setMenu(arrayColumnData[4]);
-      this.setPrice(arrayColumnData[5]);
-      this.setTax(arrayColumnData[6]);
-      this.setTotal(arrayColumnData[7]);
-    } catch (ArrayIndexOutOfBoundsException e) {
-      System.out.println("添字オーバー");
+      Integer.parseInt(s);
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
     }
   }
 
-  /**
-   * 関数.
-   */
   public String returnJoinedString() {
-    String[] arrayColumnData = new String[8];
-    arrayColumnData[0] = no;
-    arrayColumnData[1] = type;
-    arrayColumnData[2] = restaurantName;
-    arrayColumnData[3] = singlemenuFlg;
-    arrayColumnData[4] = menu;
-    arrayColumnData[5] = price;
-    arrayColumnData[6] = tax;
-    arrayColumnData[7] = total;
-    //Java8から
-    String sj = String.join(",", arrayColumnData);
-    return sj;
+    return String.join(
+       ",",
+       no,
+       type,
+       restaurantName,
+       singlemenuFlg,
+       menu,
+       String.valueOf(price),
+       tax,
+       String.valueOf(total)
+       );
   }
-
 }

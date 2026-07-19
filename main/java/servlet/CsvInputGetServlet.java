@@ -11,17 +11,16 @@ import java.util.List;
 
 import form.MenuCsvInputForm;
 import model.GlobalConst;
-import model.MenuCSV;
-import service.CsvInputService;
-import service.CsvInputServiceImpl;
+import service.CsvInputGetService;
+import service.CsvInputGetServiceImpl;
 
 /**
- * Servlet implementation class
+ * Servlet implementation class HelloServlet.
  */
-public class CsvInputServlet extends HttpServlet {
+public class CsvInputGetServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  public CsvInputServlet() {
+  public CsvInputGetServlet() {
     super();
   }
 
@@ -37,36 +36,27 @@ public class CsvInputServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    csvInputServForm = new MenuCsvInputForm(
-        (String) request.getParameter("date"),
-        (String) request.getParameter("csv_name"),
-        (String) request.getParameter("total"),
-        (String) request.getParameter("total_condition"),
-        ""
-        );
-
     try {
       // 2. inputCheck(フロントで実行)
       // 入力チェック
-      if (!csvInputServForm.commonCheck(csvInputServForm.getCsvName())) {
-        throw new IOException();
-      }
       // 3. service execute
-      CsvInputService service = new CsvInputServiceImpl();
-      List<MenuCSV> retList = service.execute(csvInputServForm);
+      CsvInputGetService service = new CsvInputGetServiceImpl();
+      List<String> csvList = service.execute(csvInputServForm);
 
       // 終了条件を判定
-      if (retList != null) {
+      if (csvList != null) {
         // requestSetAttribute
-        request.setAttribute("retList", retList);
+        request.setAttribute("csvList", csvList);
         //4. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
         dispatcher.forward(request, response);
       } else {
         //4. forward
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
         dispatcher.forward(request, response);
       }
+    } catch (IOException e) {
+
     } catch (Exception e) {
       e.printStackTrace();
     }

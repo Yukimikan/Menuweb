@@ -20,7 +20,6 @@
     <servlet-name>HelloServlet</servlet-name>
     <url-pattern>/HelloServlet</url-pattern>
   </servlet-mapping>
-   -->
   <servlet>
     <description></description>
     <display-name>SearchMenuServlet</display-name>
@@ -31,6 +30,7 @@
     <servlet-name>SearchMenuServlet</servlet-name>
     <url-pattern>/SearchMenuServlet</url-pattern>
   </servlet-mapping>
+   -->
   <servlet>
     <description></description>
     <display-name>CsvInputServlet</display-name>
@@ -40,6 +40,16 @@
   <servlet-mapping>
     <servlet-name>CsvInputServlet</servlet-name>
     <url-pattern>/CsvInputServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CsvInputGetServlet</display-name>
+    <servlet-name>CsvInputGetServlet</servlet-name>
+    <servlet-class>servlet.CsvInputGetServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CsvInputGetServlet</servlet-name>
+    <url-pattern>/CsvInputGetServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
