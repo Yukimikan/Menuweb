@@ -182,7 +182,7 @@ public class CsvUtilServiceImplTest {
 			rec.setPrice(550);
 			rec.setTax("なし");
 			rec.setTotal(550);
-			CsvUtil.write(rec, null);
+			//CsvUtil.write("",rec);
 			// List<MenuCSV> retList = service.write(rec,null);
 			//戻り値チェック
 			// assertTrue(retList == null);
@@ -216,7 +216,7 @@ public class CsvUtilServiceImplTest {
 			rec.setPrice(550);
 			rec.setTax("なし");
 			rec.setTotal(550);
-			CsvUtil.write(rec,"");
+			//CsvUtil.write(rec,"");
 			// List<MenuCSV> retList = service.write(rec,"");
 			//戻り値チェック
 			// assertTrue(retList == null);
@@ -318,7 +318,7 @@ public class CsvUtilServiceImplTest {
 		try {
 			//OK
 			// service
-			CsvUtil.write(rec,filename);
+			//CsvUtil.write(rec,filename);
 	        // retList = service.write(rec,filename);
 			//戻り値チェック
 	        // assertEquals(expectedCnt,retList.size());

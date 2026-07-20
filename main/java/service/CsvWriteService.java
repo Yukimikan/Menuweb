@@ -1,13 +1,14 @@
 package service;
 
+import java.io.IOException;
 import java.util.List;
 
+import form.MenuCsvRegistForm;
 import model.MenuCSV;
-import servlet.CsvWriteServDto;
 
 public interface CsvWriteService {
 
-  public List<MenuCSV> execute(CsvWriteServDto input);
+  public List<MenuCSV> execute(MenuCsvRegistForm input) throws IOException;
 
   public boolean formatCheck(MenuCSV rec);
 

@@ -12,6 +12,8 @@ import java.util.List;
 import form.MenuCsvInputForm;
 import model.GlobalConst;
 import model.MenuCSV;
+import service.CsvFileListService;
+import service.CsvFileListServiceImpl;
 import service.CsvInputService;
 import service.CsvInputServiceImpl;
 
@@ -25,8 +27,27 @@ public class CsvInputServlet extends HttpServlet {
     super();
   }
 
-  MenuCsvInputForm csvInputServForm;
+  MenuCsvInputForm menuCsvInputForm;
   //  CsvInputServOutDto csvInputServOutDto;
+
+  /**
+   * 初期表示（INDEX → menu_input.jsp）
+   */
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    // 初期化
+    request.setAttribute("message", "");
+    // 1. CSVリスト取得（SharedService）
+    CsvFileListService fileService = new CsvFileListServiceImpl();
+    List<String> csvFiles = fileService.execute();
+    request.setAttribute("csvFiles", csvFiles);
+
+    // 2. 初期表示へ forward
+    RequestDispatcher dispatcher =
+        request.getRequestDispatcher(GlobalConst.JspInputUrl);
+    dispatcher.forward(request, response);
+  }
 
   /**
    *  ポスト処理.
@@ -37,7 +58,7 @@ public class CsvInputServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    csvInputServForm = new MenuCsvInputForm(
+    menuCsvInputForm = new MenuCsvInputForm(
         (String) request.getParameter("date"),
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("total"),
@@ -47,30 +68,25 @@ public class CsvInputServlet extends HttpServlet {
 
     try {
       // 2. inputCheck(フロントで実行)
-      // 入力チェック
-      if (!csvInputServForm.commonCheck(csvInputServForm.getCsvName())) {
-        throw new IOException();
-      }
+      // 3. サーバー側でしか判定できないチェック
+
       // 3. service execute
       CsvInputService service = new CsvInputServiceImpl();
-      List<MenuCSV> retList = service.execute(csvInputServForm);
+      List<MenuCSV> retList = service.execute(menuCsvInputForm);
 
-      // 終了条件を判定
-      if (retList != null) {
-        // requestSetAttribute
-        request.setAttribute("retList", retList);
-        //4. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
-        dispatcher.forward(request, response);
-      } else {
-        //4. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
-        dispatcher.forward(request, response);
-      }
+      // 4. requestSetAttribute
+      request.setAttribute("resultList", retList);
+      request.setAttribute("message", "検索が完了しました");
+      // 5. forward
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+      dispatcher.forward(request, response);
     } catch (Exception e) {
-      e.printStackTrace();
-    }
+      // ★ 例外時は入力画面に戻す（ここが重要）
+      request.setAttribute("error", "入力値が不正です：" + e.getMessage());
 
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
+      dispatcher.forward(request, response);
+    }
   }
 
 }

@@ -2,10 +2,10 @@ package common;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -49,105 +49,71 @@ public final class CsvUtil {
    * @exception FileNotFoundException
    */
   public static List<MenuCSV> read(String infilename)
-            throws Exception {
+            throws IOException {
     String infilePath = CSV_PATH + infilename;
     List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
     try {
       Path filePath = Paths.get(infilePath);
+
+      // 1. byte 数チェック（品質チェック）
       long fileSize = Files.size(filePath);
-      // 1. 読み込み前に byte 数チェック（例外発生源より前）
       if (fileSize > MAX_BYTES) {
         System.out.println(GlobalConst.MSG_W_FILE_MAXCOUNT_OVER);
         // ただし処理は続行
       }
-      // 1. 全行読み込み
+      // 2. 全行読み込み
       Iterator<String> it = Files.readAllLines(filePath, StandardCharsets.UTF_8)
                                  .iterator();
 
-      // 1. ヘッダー一致チェック
+      // 3. ヘッダー一致チェック
       String header = CsvUtil.readHeader(infilePath);
       if (!MenuCSV.CSV_HEADER.equals(header)) {
         System.out.println("警告：ヘッダーが想定と異なります → " + header);
       }
 
-      // 2. ヘッダー読み飛ばし（CsvUtilで読みつつ、iteratorも進める）
+      // 4. ヘッダー読み飛ばし
       if (it.hasNext()) {
         it.next(); // iterator の先頭を捨てる
-        // CsvUtil.readHeader(infilePath) は品質チェック用に使える
         // 今はヘッダー内容を使わないので捨てるだけ
       }
       // 3. 本体行の処理
       while (it.hasNext()) {
         String currentContent = it.next();
-        String[] arrayColumnData = currentContent.split(",");
+        String[] arrayColumnData = currentContent.split(",", -1); /// 空欄保持
         try {
-            retList.add(new MenuCSV(arrayColumnData));
-          } catch (IllegalArgumentException e) {
-            System.out.println("警告：不正な行 → " + currentContent);
-            System.out.println("理由：" + e.getMessage());
-            // 続行
-          }
+          retList.add(new MenuCSV(arrayColumnData));  // ★ 読み込み用コンストラクタ
+        } catch (IllegalArgumentException e) {
+          System.out.println("警告：不正な行 → " + currentContent);
+          System.out.println("理由：" + e.getMessage());
+          // 続行
         }
+      }
     } catch (NoSuchFileException e) {
       System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
       System.out.println("infile_path：" + infilePath);
-      throw e;
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw ex;
-    } finally {
-      // finally は空でOK
+      throw new IOException("CSVファイルが存在しません: " + infilePath, e);
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new IOException("CSV読み込みに失敗しました: " + e.getMessage(), e);
     }
     return retList;
   }
 
   /**
-   * 書込み処理.
    *
+   * @param csvName
    * @param rec
-   * @return
+   * @throws IOException
    */
-  public static void write(MenuCSV rec, String outfilename)
-            throws Exception {
+  public static void append(String csvName, MenuCSV rec) throws IOException {
 
-    String outfilePath = CSV_PATH + outfilename;
-    boolean needHeader = false;
-
-    // 1. ヘッダー判定（読み込み側は try-with-resources）
-    File f = new File(outfilePath);
-    if (!f.exists()) {
-      needHeader = true;
-    } else {
-      String header = CsvUtil.readHeader(outfilePath);
-
-      if (!MenuCSV.CSV_HEADER.equals(header)) {
-        System.out.println("警告：ヘッダーが想定と異なります → " + header);
-    	needHeader = true;
-      }
-    }
-
-    // 2. 書き込みストリーム（追記モード）→ try-with-resources に変更
-    try (
-        FileWriter fw = new FileWriter(outfilePath, true);
-        BufferedWriter buffWriter = new BufferedWriter(fw)
-    ) {
-
-      if (needHeader) {
-        buffWriter.write(MenuCSV.CSV_HEADER);
-        buffWriter.newLine();
-      }
-
-      buffWriter.write(rec.returnJoinedString());
-
-    } catch (FileNotFoundException e) {
-      System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
-      System.out.println("outfile_path：" + outfilePath);
-      throw e;
-
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw ex;
+    try (BufferedWriter bw = new BufferedWriter(
+        new FileWriter(CSV_PATH + csvName, true))) { // ★ true = 追記モード
+      bw.write(rec.returnJoinedString());
+      bw.newLine();
+    } catch (Exception e) {
+      throw new IOException("CSV追記に失敗しました: " + e.getMessage(), e);
     }
   }
 
@@ -177,68 +143,26 @@ public final class CsvUtil {
   }
 
   /**
-   * 書込み処理.
-   *
-   * @param rec
-   * @return
+   * ★ 今は使わないが、将来の編集機能用に残す選択肢
+   * CSV 全書き込み（行削除・並び替えなどで使う）
    */
-  /*
-  public static void write_old(MenuCSV rec, String outfilename)
-            throws Exception {
+  public static void write(String csvName, List<MenuCSV> list) throws IOException {
 
-    BufferedReader buffReader = null;
-    BufferedWriter buffWriter = null;
-    //String outfile_path = CSV_PATH + "\\output\\" + outfilename;
-    String outfilePath = CSV_PATH + outfilename;
+    try (BufferedWriter bw = new BufferedWriter(
+          new FileWriter(CSV_PATH + csvName, false))) { // ★ false = 上書き
 
-    try {
-      File f = new File(outfilePath);
-      // 第二引数trueで、追加書き
-      FileWriter fw = new FileWriter(f, true);
-      buffWriter = new BufferedWriter(fw); // ※3
-      String tempRec = rec.returnJoinedString();
+      // ヘッダー書き込み
+      bw.write(MenuCSV.CSV_HEADER);
+      bw.newLine();
 
-      if (f.exists() == false) {
-        //ファイル未存在
-        //空ファイルなのでヘッダ書込
-        buffWriter.write(MenuCSV.CSV_HEADER);
-        buffWriter.newLine();
-      } else {
-        //ヘッダ読込
-        FileInputStream fileInput = new FileInputStream(outfilePath); // ※1
-        InputStreamReader inputStream = new InputStreamReader(fileInput); // ※2
-        buffReader = new BufferedReader(inputStream); // ※3
-
-        String topRec =  buffReader.readLine();
-        buffReader.close();
-
-        //読込一行がヘッダーと一致
-        if (MenuCSV.CSV_HEADER.equals(topRec)) {
-          //ヘッダ存在
-        } else {
-          //ヘッダ未存在
-          //空ファイルなのでヘッダ書込
-          buffWriter.write(MenuCSV.CSV_HEADER);
-          buffWriter.newLine();
-        }
+      // 全行書き込み
+      for (MenuCSV rec : list) {
+        bw.write(rec.returnJoinedString());
+        bw.newLine();
       }
-      //データ部書込
-      buffWriter.write(tempRec);
-    } catch (FileNotFoundException e) {
-      System.out.println(GlobalConst.MSG_W_FILE_NOT_FOUND);
-      System.out.println("outfile_path：" + outfilePath);
-      throw e;
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw ex;
-    } finally {
-      //close処理
-      try {
-        buffWriter.close(); //※9
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
+
+    } catch (Exception e) {
+      throw new IOException("CSV書き込みに失敗しました: " + e.getMessage(), e);
     }
   }
-  */
 }

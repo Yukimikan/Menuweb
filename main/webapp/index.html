@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<meta charset="UTF-8">
-	<title>1000円ランチシステム</title>
+<link rel="stylesheet" href="resource/css/style.css">
+<meta charset="UTF-8">
+<title>1000円ランチシステム</title>
 </head>
-
 <body>
-	<div id="header">
-		<h4>1000円ランチシステム</h4>
-	</div>
+	<header class="header-nav">
+	  <nav class="breadcrumb">
+	    <h4>1000円ランチシステム</h4>
+
+		<!-- メニュー -->
+		<a href="/Menuweb/CsvInputServlet">CSV検索</a>
+	    <a href="/Menuweb/CsvWriteServlet">手入力で登録</a>
+	  </nav>
+	</header>
 	<div id="contents">
 	<h2>＜トップ＞</h2>
 		1000円で食べられるランチの組み合わせ検索。（某グルメサイト）<br>
 		CSVファイルからの読み込み、追記機能を搭載。<br>
 		＜追加予定＞CSVアップロード、DB登録、管理画面など
 	</div>
-	<div id="footer">
+	<div id="main">
     	<ul>
 			<li>メニュー検索(menu_searchは廃止)</li>
-			<li><a href="./jsp/menu_csv_input.jsp">メニュー検索（CSVファイル）</a></li>
-			<li><a href="./jsp/menu_csv_regist.jsp">メニュー登録（CSVファイル）</a></li>
+			<li><a href="/Menuweb/CsvInputServlet">メニュー検索（CSVファイル）</a></li>
+			<li><a href="/Menuweb/CsvWriteServlet">手入力で登録（CSVファイル）</a></li>
 		</ul>
 	</div>
+	<footer class="footer-nav">
+		<a href="./index.html">		<img
+					class="btn-top"
+					src="resource/image/btn_top.png"></a>
+	</footer>
 </body>
 
 </html>

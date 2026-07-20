@@ -4,13 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="resource/css/style.css">
 <meta charset="UTF-8">
 <title>CSV検索</title>
 </head>
 <script>
-  function getCsvList(context) {
-    document.formcsv.action = "/Menuweb/CsvInputGetServlet";
-  }
   function checkText(context) {
 
     //1. 入力チェック
@@ -35,77 +33,114 @@
         document.form1.message.value = '金額を指定して下さい';
     	return false;
     }
-    //2. submit & actionメソッドに遷移先URL(Server)を代入する
-    document.form1.action = "/Menuweb/CsvInputServlet";
     return true;
   }
 </script>
 <body>
-	<div id="header">
-		<h4>1000円ランチシステム</h4>
-	</div>
-    <!--
-    <form action="<%= request.getContextPath() %>/CsvInputServlet" method="post">
-     -->
-  	<div id="contents">
+	<header class="header-nav">
+		<nav class="breadcrumb">
+			<h4>1000円ランチシステム</h4>
+			<!-- ここだけページごとに差し替える -->
+			<a href="<%=request.getContextPath()%>/index.html">TOP</a>
+			 <span>CSV検索</span>
+		</nav>
+	</header>
+	<div id="contents" class="contents">
 	<h2>＜メニュー取込＞</h2>
 		プルダウン機能でメニュー一覧を選択。<br>
 		1000円以上、店名といった条件で絞り込む。<br>
 		＜追加予定＞CSV日付は仮決め。追記機能,店名の登録有無など、
 	</div>
 	<div id="main">
-		<form name="formcsv" onsubmit="return getCsvList()" method="post">
-		  CSVリスト取得<input type="submit" value="取得">
+		<%
+		String message = (String) request.getAttribute("message");
+		%>
+		<%
+		if (message != null && !message.isEmpty()) {
+		%>
+		<div class="error-box"><%= message %></div>
+		<%
+		}
+		%>
+		<!-- ★ doGet で取得した CSVリストを受け取る -->
+		<%
+			List<String> csvList = (List<String>) request.getAttribute("csvFiles");
+			List<?> retList = (List<?>) request.getAttribute("retList");
+			String error = (String) request.getAttribute("error");
+		%>
+		<!-- ★ エラー表示（サーバー側例外時） -->
+		<%
+		if (error != null) {
+		%>
+		<div style="color: red;"><%=error%></div>
+		<%
+		}
+		%>
+		<form name="form1"
+			action="<%= request.getContextPath() %>/CsvInputServlet"
+			onsubmit="return checkText()" method="post">
+			<div>
+				CSV名：
+		        <select name="csv_name">
+					<%
+					if (csvList != null && !csvList.isEmpty()) {
+						for (String name : csvList) {
+					%>
+					<option value="<%= name %>"><%= name %></option>
+					<%
+					}
+					} else {
+					%>
+					<option value="menu.csv">menu.csv</option>
+					<%
+					}
+					%>
+				</select>
+			</div>
+			<div id="search-input">
+				<h3>・検索条件</h3>
+				<div class="row">
+					<div class="label">日付：</div>
+					<div class="input">
+						<input type="text" name="date" value="2025/01/01">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="label">金額（円）：</div>
+					<div class="input">
+						<input type="text" name="total">円 <select
+							name="total_condition">
+							<option value="1">以上</option>
+							<option value="2">以下</option>
+							<option value="3">ピッタリ</option>
+							<option value="4">未満</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="label">メニュー絞り込み：</div>
+					<div class="input">
+						<input type="submit" value="絞込" class="btn-submit">
+					</div>
+				</div>
+			</div>
 		</form>
-		<form name="form1" onsubmit="return checkText()" method="post">
-		  CSV名：
-		  <%
-		    List<String> csvList = (List<String>) request.getAttribute("csvList");
-		    if (csvList != null && !csvList.isEmpty()) {
-		  %>
-		    <select name="csv_name">
-		      <% for (int i = 0; i < csvList.size(); i++) { %>
-		        <option value="<%= csvList.get(i) %>"><%= csvList.get(i) %></option>
-		      <% } %>
-		    </select>
-		  <%
-		    } else {
-		  %>
-		    <select name="csv_name">
-		      <option value="menu.csv">menu.csv</option>
-		    </select>
-		  <%
-		    }
-		  %>
-			 <div id="search-input">
-		 	 ・検索条件
-			 	 <div id="date">
-				  日付：<input type="text" name="date" value="2025/01/01">
-			 	 </div>
-			 	 <div id="total">
-				  金額（円）：<input type="text" name="total">円
-				  <select name="total_condition">
-				   <option value="1">以上</option>
-				   <option value="2">以下</option>
-				   <option value="3">ピッタリ</option>
-				   <option value="4">未満</option>
-				   </select>
-			 	 </div>
-			 	 <div id="sb">
-			 	 メニュー絞り込み<input type="submit" value="絞込">
-			 	 </div>
-			 	 <div id="message">
-				  メッセージ： <input type="text" name="message" disabled />
-				  </div>
-  		     </div>
-		 </form>
-	     <!--
-	     	     <input type="text" name="message" value="<%= request.getAttribute("message") %>" disabled />
-	      -->
 	</div>
-	<div id="footer">
-		<a href="../index.html">トップに戻る</a>
-		<input type="button" onclick="history.back()" value="前に戻る">
-	</div>
+	<footer class="footer-nav">
+
+		<!-- 戻る（ここだけページごとに差し替える） -->
+		<a class="btn-arrow back" href="<%= request.getContextPath() %>/index.html">戻る</a>
+
+		<!-- TOP（画像ボタン） -->
+		<a href="<%=request.getContextPath()%>/index.html"> <img
+			class="btn-top"
+			src="<%=request.getContextPath()%>/resource/image/btn_top.png">
+		</a>
+
+		<!-- 進む（必要なページだけ差し替え or 非表示） -->
+		<a class="btn-arrow next" href="<%= request.getContextPath() %>/jsp/menu_result.jsp">進む</a>
+	</footer>
 </body>
 </html>

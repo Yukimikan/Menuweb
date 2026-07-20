@@ -11,8 +11,8 @@ import java.util.List;
 
 import form.MenuCsvInputForm;
 import model.GlobalConst;
-import service.CsvInputGetService;
-import service.CsvInputGetServiceImpl;
+import service.CsvFileListService;
+import service.CsvFileListServiceImpl;
 
 /**
  * Servlet implementation class HelloServlet.
@@ -40,16 +40,21 @@ public class CsvInputGetServlet extends HttpServlet {
       // 2. inputCheck(フロントで実行)
       // 入力チェック
       // 3. service execute
-      CsvInputGetService service = new CsvInputGetServiceImpl();
-      List<String> csvList = service.execute(csvInputServForm);
+      CsvFileListService service = new CsvFileListServiceImpl();
+      List<String> csvList = service.execute();
 
       // 終了条件を判定
       if (csvList != null) {
         // requestSetAttribute
         request.setAttribute("csvList", csvList);
         //4. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
-        dispatcher.forward(request, response);
+        if ("csv_input".equals(request.getParameter("screen_id"))) {
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
+          dispatcher.forward(request, response);
+        } else if ("csv_regist".equals(request.getParameter("screen_id"))) {
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspRegistUrl);
+          dispatcher.forward(request, response);
+        }
       } else {
         //4. forward
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);

@@ -14,6 +14,10 @@ import lombok.Data;
 public class MenuCSV {
 
   public static final String CSV_HEADER = "No,種類,店名,単品,メニュー,価格,税,金額";
+  public static final String CNST_セット_FLG0 = "0";
+  public static final String CNST_単品_FLG1 = "1";
+  public static final String CNST_単品マル = "○";
+
   //No,種類,店名,単品,メニュー,価格,税,金額
   //1,和食,松屋,○,牛丼,500,なし,500
   private String no;
@@ -35,9 +39,26 @@ public class MenuCSV {
     return returnJoinedString();
   }
 
-  /*
+  /**
+   * 書き込み時：0/1 → ○/空欄 に変換.
+   */
+  public static String convertSingleMenuFlg(String flg) {
+    if (!flg.equals(CNST_セット_FLG0) && !flg.equals(CNST_単品_FLG1)) {
+      throw new IllegalArgumentException("単品フラグが不正です: " + flg);
+    }
+    return flg.equals(CNST_単品_FLG1) ? CNST_単品マル : "";
+  }
+
+  /**
+   * 読み込み時：○/空欄 → 1/0 に変換.
+   */
+  public static String normalizeSingleMenuFlg(String flg) {
+    return CNST_単品マル.equals(flg) ? CNST_単品_FLG1 : CNST_セット_FLG0;
+  }
+
+  /**
    * constructor
-   * with param
+   * with param.
    */
   public MenuCSV(String[] arrayColumnData) throws IllegalArgumentException {
 
@@ -63,27 +84,44 @@ public class MenuCSV {
     if (!isNumeric(arrayColumnData[7])) {
       throw new IllegalArgumentException("金額が数値ではありません: " + arrayColumnData[7]);
     }
-
     // 4. ビジネスルールチェック（単品フラグ）
-    String flg = arrayColumnData[3];
-    if ("○".equals(flg)) {
-      // 単品 → OK
-    } else {
-      // セット品 → 空欄であるべき
-      if (!isEmpty(flg)) {
-        throw new IllegalArgumentException("単品フラグが不正です（セット品は空欄）: " + flg);
-      }
-    }
+    // ★ 読み込み時は normalizeSingleMenuFlg を使う
+    String normalizedFlg = normalizeSingleMenuFlg(arrayColumnData[3]);
+
+    // ★ 内部表現に変換（○ / 空欄）
+    this.singlemenuFlg = convertSingleMenuFlg(normalizedFlg);
 
     // 5. 正常ならフィールドにセット
     this.no = arrayColumnData[0];
     this.type = arrayColumnData[1];
     this.restaurantName = arrayColumnData[2];
-    this.singlemenuFlg = arrayColumnData[3];
+    // this.singlemenuFlg = arrayColumnData[3];
     this.menu = arrayColumnData[4];
     this.price = Integer.parseInt(arrayColumnData[5]);
     this.tax = arrayColumnData[6];
     this.total = Integer.parseInt(arrayColumnData[7]);
+  }
+
+  /**
+   * ★★★ 書き込み用コンストラクタ（Servlet → Model）
+   * normalizeSingleMenuFlg() は絶対に使わない.
+   */
+  public static MenuCSV fromInput(String[] cols) {
+
+    MenuCSV rec = new MenuCSV();
+    rec.no = cols[0];
+    rec.type = cols[1];
+    rec.restaurantName = cols[2];
+
+    // ★ 書き込み時は 0/1 → ○/空欄 に変換するだけ
+    rec.singlemenuFlg = convertSingleMenuFlg(cols[3]);
+
+    rec.menu = cols[4];
+    rec.price = Integer.parseInt(cols[5]);
+    rec.tax = cols[6];
+    rec.total = Integer.parseInt(cols[7]);
+
+    return rec;
   }
 
   private boolean isEmpty(String s) {
@@ -112,4 +150,5 @@ public class MenuCSV {
        String.valueOf(total)
        );
   }
+
 }
