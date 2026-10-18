@@ -10,13 +10,12 @@
 	<h2>＜ログイン＞</h2>
 	</div>
 	<div id="main">
-		<form>
-			ユーザ名；<input type="text" value="user" readonly/>
-			パスワード<input type="text" value="password" readonly/>
+		<form action="LoginServlet" method="post">
+			ユーザ名；<input type="text" name="user" value="user" />
+			パスワード<input type="text" name="password" value="" />
 	     	<button type="submit" value="login" >ログイン</button>
-			<a href="./index.html" >ログイン</a>
-			<a href="/Menuweb/LoginServlet" >ログイン</a>
 		</form>
+		<a href="./index.html" >ログイン（GET）</a>
 		<!--
 	    	<ul>
 				<li>メニュー検索(menu_searchは廃止)</li>

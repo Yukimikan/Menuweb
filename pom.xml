@@ -44,5 +44,16 @@
         <version>3.1.1</version>
         <scope>provided</scope>
     </dependency>
+    <dependency>
+	    <groupId>org.junit.jupiter</groupId>
+	    <artifactId>junit-jupiter</artifactId>
+	    <version>5.10.2</version> <!-- 適切なバージョンを指定 -->
+	    <scope>test</scope>
+    </dependency>
+    <dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>42.7.14</version>
+	</dependency>
   </dependencies>
 </project>

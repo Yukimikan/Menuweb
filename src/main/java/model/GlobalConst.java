@@ -29,6 +29,11 @@ public class GlobalConst {
 
   //URL
   /*
+   * Index
+   */
+  public static final String MenuIndexUrl = "./index.html";
+  public static final String MenuLoginUrl = "./login.html";
+  /*
    * SearchMenuServlet
    */
   public static final String JspMenuResultUrl = "./jsp/menu_result.jsp";
