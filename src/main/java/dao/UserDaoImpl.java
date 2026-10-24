@@ -19,7 +19,22 @@ public class UserDaoImpl implements UserDao{
 	 */
 	public String SelectSQLGetUser(String name, String password) {
 
-	try (
+		//test
+		try {
+			Class.forName("org.postgresql.Driver");
+
+			DriverManager.registerDriver(
+			    new org.postgresql.Driver());
+		    Class.forName("org.postgresql.Driver");
+		    System.out.println("Driver Load OK");
+		} catch (ClassNotFoundException e ) {
+		    e.printStackTrace();
+		} catch (SQLException e ) {
+		    e.printStackTrace();
+		}
+		//test end
+
+		try (
 	        Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 		    PreparedStatement ps = con.prepareStatement(SelectSQLGetUser);
 	        ResultSet result = executeQueryWithParam(ps, name, password);
@@ -34,52 +49,6 @@ public class UserDaoImpl implements UserDao{
 		//エラー
         return "";
 	}
-
-
-//	/**
-//	 * 全件取得
-//	 *
-//	 */
-//	public int selectCountAll() {
-//
-//		try (
-//	        Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
-//	        Statement state = con.createStatement();
-//			ResultSet result = state.executeQuery(SelectSQL);
-//	    ) {
-//	        // SQL結果取得(件数)
-//			if (result.next()) {
-//			    return result.getInt(1);
-//			}
-//	    } catch (SQLException e) {
-//	        e.printStackTrace();
-//	    }
-//		//エラー
-//        return -1;
-//	}
-//
-//
-//	/**
-//	 * 取得
-//	 * @param int p1
-//	 */
-//	public int selectCountByKey(int id) {
-//
-//		try (
-//	        Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
-//		    PreparedStatement ps = con.prepareStatement(SelectSQLBykey);
-//	        ResultSet result = executeQueryWithParam(ps, id);
-//	    ) {
-//	        // SQL結果取得(件数)
-//			if (result.next()) {
-//			    return result.getInt(1);
-//			}
-//	    } catch (SQLException e) {
-//	        e.printStackTrace();
-//	    }
-//		//エラー
-//        return -1;
-//	}
 
 	/**
 	 * 取得
@@ -109,7 +78,6 @@ public class UserDaoImpl implements UserDao{
 	    }
 	}
 
-
 	private ResultSet executeQueryWithParam(PreparedStatement ps, int id) throws SQLException {
 	    ps.setInt(1, id);
 	    return ps.executeQuery();
@@ -117,7 +85,7 @@ public class UserDaoImpl implements UserDao{
 
 	private ResultSet executeQueryWithParam(PreparedStatement ps, String name, String password) throws SQLException {
 	    ps.setString(1, name);
-	    ps.setString(1, password);
+	    ps.setString(2, password);
 	    return ps.executeQuery();
 	}
 
