@@ -36,23 +36,22 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String user = (String) request.getAttribute("user");
-		String password = (String) request.getAttribute("password");
+		String user = request.getParameter("user");
+		String password = request.getParameter("password");
 
 		System.out.println(user);
 		//	doGet(request, response);
 		try {
 		   UserDaoImpl daoImpl = new UserDaoImpl();
      	   String userName = daoImpl.SelectSQLGetUser(user, password);
-     	   if (userName.equals("")) {
+     	   if ("".equals(userName)) {
+         	   request.setAttribute("error", "入力値が不正です：");
+       	       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
+      	       dispatcher.forward(request, response);
+     	   }else {
 		       // 5. forward
 		       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuIndexUrl);
 		       dispatcher.forward(request, response);
-     	   }else {
-     		  //error
-     		  request.setAttribute("user","error");
-     	      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
-    	      dispatcher.forward(request, response);
      	   }
 
 	    } catch (Exception e) {
