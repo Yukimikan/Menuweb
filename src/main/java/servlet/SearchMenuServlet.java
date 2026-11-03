@@ -35,9 +35,9 @@ public class SearchMenuServlet extends HttpServlet {
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    String date = (String) request.getParameter("date");
-    String total = (String) request.getParameter("total");
-    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuResultUrl);
+    // String date = (String) request.getParameter("date");
+    // String total = (String) request.getParameter("total");
+    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
     dispatcher.forward(request, response);
   }
 
