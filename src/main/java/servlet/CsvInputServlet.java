@@ -57,36 +57,35 @@ public class CsvInputServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-      // 1. inputCheck
-      String total = request.getParameter("total");
+    // 1. inputCheck
+    String total = request.getParameter("total");
 
-      if( total == null || total.trim().isEmpty()) {
+    if (total == null || total.trim().isEmpty()) {
 
-    	request.setAttribute("message","金額を入力してください");
+      request.setAttribute("message", "金額を入力してください");
 
-    	RequestDispatcher dispatcher =
-    	        request.getRequestDispatcher(GlobalConst.JspInputUrl);
-    	dispatcher.forward(request, response);
-        return;
-      }else if(!total.matches("[0-9]+")) {
-    	// message
+      RequestDispatcher dispatcher =
+          request.getRequestDispatcher(GlobalConst.JspInputUrl);
+      dispatcher.forward(request, response);
+      return;
+    } else if (!total.matches("[0-9]+")) {
+      // message
+      request.setAttribute("message", "金額を数値で入力してください");
+      RequestDispatcher dispatcher =
+          request.getRequestDispatcher(GlobalConst.JspInputUrl);
+      dispatcher.forward(request, response);
+      return;
 
-    	request.setAttribute("message","金額を数値で入力してください");
-      	RequestDispatcher dispatcher =
-      	        request.getRequestDispatcher(GlobalConst.JspInputUrl);
-      	dispatcher.forward(request, response);
-        return;
+    }
 
-      }
-
-      // 1. parameter set
-	  menuCsvInputForm = new MenuCsvInputForm(
-        (String) request.getParameter("date"),
-        (String) request.getParameter("csv_name"),
-        (String) request.getParameter("total"),
-        (String) request.getParameter("total_condition"),
-        ""
-        );
+    // 1. parameter set
+    menuCsvInputForm = new MenuCsvInputForm(
+      (String) request.getParameter("date"),
+      (String) request.getParameter("csv_name"),
+      (String) request.getParameter("total"),
+      (String) request.getParameter("total_condition"),
+      ""
+      );
 
     try {
       // 3. サーバー側でしか判定できないチェック

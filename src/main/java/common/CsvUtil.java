@@ -120,8 +120,8 @@ public final class CsvUtil {
   /**
    * CsvHeader読み込み.
    *
-   * @param rec
-   * @return
+   * @param filePath
+   * @return String
    */
   // 先頭行（ヘッダー）を読み、BOM を除去して返す
   public static String readHeader(String filePath) throws Exception {

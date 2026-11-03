@@ -68,12 +68,12 @@ public class MenuCSV {
     }
 
     // 2. 必須項目チェック
-    if (isEmpty(arrayColumnData[0]) ||  // No
-        isEmpty(arrayColumnData[1]) ||  // 種類
-        isEmpty(arrayColumnData[2]) ||  // 店名
-        isEmpty(arrayColumnData[4]) ||  // メニュー
-        isEmpty(arrayColumnData[5]) ||  // 価格
-        isEmpty(arrayColumnData[7])) {  // 金額
+    if (isEmpty(arrayColumnData[0])   // No
+        || isEmpty(arrayColumnData[1])   // 種類
+        || isEmpty(arrayColumnData[2])   // 店名
+        || isEmpty(arrayColumnData[4])   // メニュー
+        || isEmpty(arrayColumnData[5])   // 価格
+        || isEmpty(arrayColumnData[7])) {  // 金額
       throw new IllegalArgumentException("必須項目が未設定です: " + Arrays.toString(arrayColumnData));
     }
 

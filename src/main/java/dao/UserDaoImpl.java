@@ -13,42 +13,41 @@ import model.TestEntity;
 
 public class UserDaoImpl implements UserDao{
 
-	/**
-	 * 取得
-	 * @param int p1
-	 */
-	public String SelectSQLGetUser(String name, String password) {
+  /**
+   * 取得
+   * @param int p1
+   */
+  public String SelectSQLGetUser(String name, String password) {
 
-		//test
-		try {
-			Class.forName("org.postgresql.Driver");
+    //test
+    try {
+      Class.forName("org.postgresql.Driver");
 
-			DriverManager.registerDriver(
-			    new org.postgresql.Driver());
-		    Class.forName("org.postgresql.Driver");
-		    System.out.println("Driver Load OK");
-		} catch (ClassNotFoundException e ) {
-		    e.printStackTrace();
-		} catch (SQLException e ) {
-		    e.printStackTrace();
-		}
-		//test end
+      DriverManager.registerDriver(
+        new org.postgresql.Driver());
+      Class.forName("org.postgresql.Driver");
+      System.out.println("Driver Load OK");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
-		try (
-	        Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
-		    PreparedStatement ps = con.prepareStatement(SelectSQLGetUser);
-	        ResultSet result = executeQueryWithParam(ps, name, password);
-	    ) {
-	        // SQL結果取得(件数)
-			if (result.next()) {
-			    return result.getString(1);
-			}
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-		//エラー
-        return "";
-	}
+    try (
+        Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+        PreparedStatement ps = con.prepareStatement(SelectSQLGetUser);
+        ResultSet result = executeQueryWithParam(ps, name, password);
+    ) {
+      // SQL結果取得(件数)
+      if (result.next()) {
+        return result.getString(1);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+	//エラー
+    return "";
+  }
 
 	/**
 	 * 取得
