@@ -12,18 +12,6 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <!--
-  <servlet>
-    <description></description>
-    <display-name>SearchMenuServlet</display-name>
-    <servlet-name>SearchMenuServlet</servlet-name>
-    <servlet-class>servlet.SearchMenuServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SearchMenuServlet</servlet-name>
-    <url-pattern>/SearchMenuServlet</url-pattern>
-  </servlet-mapping>
-   -->
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -43,16 +31,6 @@
   <servlet-mapping>
     <servlet-name>CsvInputServlet</servlet-name>
     <url-pattern>/CsvInputServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CsvInputGetServlet</display-name>
-    <servlet-name>CsvInputGetServlet</servlet-name>
-    <servlet-class>servlet.CsvInputGetServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CsvInputGetServlet</servlet-name>
-    <url-pattern>/CsvInputGetServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
