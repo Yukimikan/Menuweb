@@ -17,7 +17,7 @@
 			<h4>1000円ランチシステム</h4>
 			<!-- ここだけページごとに差し替える -->
 			<a href="<%=request.getContextPath()%>/index.html">TOP</a> <a
-				href="<%=request.getContextPath()%>/jsp/menu_regist.jsp">手入力</a>
+				href="<%=request.getContextPath()%>/jsp/menu_csv_regist.jsp">手入力</a>
 			<span>CSV検索結果</span>
 		</nav>
 	</header>
