@@ -15,16 +15,6 @@
   <!--
   <servlet>
     <description></description>
-    <display-name>HelloServlet</display-name>
-    <servlet-name>HelloServlet</servlet-name>
-    <servlet-class>servlet.HelloServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/HelloServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>SearchMenuServlet</display-name>
     <servlet-name>SearchMenuServlet</servlet-name>
     <servlet-class>servlet.SearchMenuServlet</servlet-class>
