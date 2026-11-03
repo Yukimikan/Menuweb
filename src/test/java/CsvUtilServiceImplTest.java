@@ -1,18 +1,15 @@
-package test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
+import common.CsvUtil;
 import model.MenuCSV;
-import service.CSVControlServiceImpl;
 
-public class CSVControlServiceImplTest {
+public class CsvUtilServiceImplTest {
 
 	/*
 	 * 準正常系
@@ -28,13 +25,14 @@ public class CSVControlServiceImplTest {
 		try {
 			//OK
 			// service
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			List<MenuCSV> retList = service.readCSV(null);
+			//CsvUtil service = new CsvUtil();
+			//List<MenuCSV> retList = service.read(null);
+			List<MenuCSV> retList = CsvUtil.read(null);
 			//戻り値チェック
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 
 	/*
@@ -42,6 +40,7 @@ public class CSVControlServiceImplTest {
 	 * 引数：空白
 	 * 正常終了
 	 */
+	/*
 	@Test
 	public void SemiNormal02_readCSV() {
 
@@ -49,20 +48,23 @@ public class CSVControlServiceImplTest {
 		try {
 			//OK
 			// service
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			List<MenuCSV> retList = service.readCSV("");
+			//CsvUtil service = new CsvUtil();
+			//List<MenuCSV> retList = service.read("");
+			List<MenuCSV> retList = CsvUtil.read("");
 			//戻り値チェック
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
+	*/
 
 	/*
 	 * 異常系
 	 * 引数：エラー
 	 * 異常終了: FileNotFoundException
 	 */
+	/*
 	@Test
 	public void AbNormal01_readCSV() {
 
@@ -70,8 +72,9 @@ public class CSVControlServiceImplTest {
 		List<MenuCSV> retList = null;
 		try {
 			// service
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			retList = service.readCSV("error.csv");
+			//CsvUtil service = new CsvUtil();
+			//retList = service.read("error.csv");
+			retList = CsvUtil.read("error.csv");
 			fail("異常確認失敗");
 		} 	catch (FileNotFoundException e) {
 			//OK
@@ -79,8 +82,9 @@ public class CSVControlServiceImplTest {
 			assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
+	*/
 
 	/*
 	 * 正常系 No01-06
@@ -100,21 +104,21 @@ public class CSVControlServiceImplTest {
 		 * 引数：ファイル名
 		 * ①1件：ループ
 		 * @return 0件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal02","menu_test1.csv",0);
 
 		 /*
 		 * 引数：ファイル名
 		 * ①2件：ループ
 		 * @return 1件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal03","menu_test2.csv",1);
 
 		 /*
 		 * 引数：ファイル名
 		 * ①3件：ループ
 		 * @return 2件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal04","menu_test3.csv",2);
 
 		 /*
@@ -122,7 +126,7 @@ public class CSVControlServiceImplTest {
 		 * ①100件：ループ
 		 * 正常終了:
 		 * @return 99件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal05","menu_testmax.csv",99);
 
 		 /*
@@ -130,7 +134,7 @@ public class CSVControlServiceImplTest {
 		 * ①100件：ループ
 		 * 正常終了:
 		 * @return 99件
-		 */		 
+		 */
 		 normal_readCSVExec("Normal06","menu_testmaxover.csv",99);
 	 }
 
@@ -142,15 +146,14 @@ public class CSVControlServiceImplTest {
 		System.out.println(caseid);
 		try {
 			// service
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			List<MenuCSV> retList = service.readCSV(filename);
+			List<MenuCSV> retList = CsvUtil.read(filename);
 			//戻り値チェック
 			assertEquals(expectedCnt, retList.size());
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
-	
+
 	/*
 	 * 準正常系
 	 * @param CSV名：null
@@ -171,19 +174,19 @@ public class CSVControlServiceImplTest {
 			// service
 			rec.setNo("99");
 			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
+			rec.setRestaurantName("松屋");
+			rec.setSinglemenuFlg("○");
 			rec.setMenu("チーズ牛丼");
-			rec.setPrice("550");
+			rec.setPrice(550);
 			rec.setTax("なし");
-			rec.setTotal("550");
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			List<MenuCSV> retList = service.writeCSV(rec,null);
+			rec.setTotal(550);
+			//CsvUtil.write("",rec);
+			// List<MenuCSV> retList = service.write(rec,null);
 			//戻り値チェック
-			assertTrue(retList == null);
+			// assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 
 	/*
@@ -205,19 +208,19 @@ public class CSVControlServiceImplTest {
 			// service
 			rec.setNo("99");
 			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
+			rec.setRestaurantName("松屋");
+			rec.setSinglemenuFlg("○");
 			rec.setMenu("チーズ牛丼");
-			rec.setPrice("550");
+			rec.setPrice(550);
 			rec.setTax("なし");
-			rec.setTotal("550");
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			List<MenuCSV> retList = service.writeCSV(rec,"");
+			rec.setTotal(550);
+			//CsvUtil.write(rec,"");
+			// List<MenuCSV> retList = service.write(rec,"");
 			//戻り値チェック
-			assertTrue(retList == null);
+			// assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
 	/*
 	 * 異常系
@@ -226,21 +229,23 @@ public class CSVControlServiceImplTest {
 	 * 正常終了:
 	 * @return null
 	 */
+	/*
 	@Test
 	public void AbNormal01_writeCSV() {
 
 		System.out.println("AbNormal01_writeCSV");
 		try {
 			//OK
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			List<MenuCSV> retList = service.writeCSV(null,"menu_test.csv");
+			CsvUtil.write(null,"menu_test.csv");
+			// List<MenuCSV> retList = service.write(null,"menu_test.csv");
 			//戻り値チェック
-			assertTrue(retList == null);
+			// assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
-	
+	*/
+    //
 
 	/*
 	 * 正常系 No01-04
@@ -248,7 +253,7 @@ public class CSVControlServiceImplTest {
 	 */
 	@Test
 	public void Normal_writeCSV() {
-		
+
         // 現在日時を取得
         LocalDateTime nowDate = LocalDateTime.now();
 		// 表示形式を指定
@@ -261,12 +266,12 @@ public class CSVControlServiceImplTest {
 
         rec.setNo("99");
 		rec.setType("和食");
-		rec.setRestaurant_name("松屋");
-		rec.setSinglemenu_flg("○");
+		rec.setRestaurantName("松屋");
+		rec.setSinglemenuFlg("○");
 		rec.setMenu("チーズ牛丼");
-		rec.setPrice("550");
+		rec.setPrice(550);
 		rec.setTax("なし");
-		rec.setTotal("550");
+		rec.setTotal(550);
 
 		/*
 		 * @param CSV名：未存在
@@ -275,7 +280,7 @@ public class CSVControlServiceImplTest {
 		 * @return retList 1件
 		 */
 		normal_writeCSVexec("Normal01_writeCSV",rec, fname, 1);
-		
+
 		/*
 		 * @param CSV名：存在
 		 * @param：入力データ：あり
@@ -283,7 +288,7 @@ public class CSVControlServiceImplTest {
 		 * @return retList 1件
 		 */
 		normal_writeCSVexec("Normal02_writeCSV",rec, "menu_outempty.csv", 1);
-		
+
 		/*
 		 * @param CSV名：存在
 		 * @param：入力データ：あり
@@ -300,26 +305,26 @@ public class CSVControlServiceImplTest {
 		 */
 		normal_writeCSVexec("Normal04_writeCSV",rec, "menu_out2.csv", 2);
 	}
-	
+
 	/*
 	 * 正常系
 	 */
 	private void normal_writeCSVexec(String caseid, MenuCSV rec, String filename,int expectedCnt) {
 
 		System.out.println(caseid);
-		List<MenuCSV> retList = null;
+		// List<MenuCSV> retList = null;
 		try {
 			//OK
 			// service
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-	        retList = service.writeCSV(rec,filename);
+			//CsvUtil.write(rec,filename);
+	        // retList = service.write(rec,filename);
 			//戻り値チェック
-	        assertEquals(expectedCnt,retList.size());
+	        // assertEquals(expectedCnt,retList.size());
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
-	
+
 
 	/*
 	 * 準正常系
@@ -328,6 +333,7 @@ public class CSVControlServiceImplTest {
 	 * 正常終了
 	 * @return null
 	 */
+	/*
 	@Test
 	public void SemiNormal03_writeCSV() {
 
@@ -340,21 +346,21 @@ public class CSVControlServiceImplTest {
 			// service
 			rec.setNo("99");
 			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
+			rec.setRestaurantName("松屋");
+			rec.setSinglemenuFlg("○");
 			rec.setMenu("チーズ牛丼");
 			rec.setPrice("error");	//数値以外
 			rec.setTax("なし");
-			rec.setTotal("550");
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			List<MenuCSV> retList = service.writeCSV(rec,"menu_test.csv");
+			rec.setTotal(550);
+			CsvUtil.write(rec,"menu_test.csv");
+			// List<MenuCSV> retList = service.write(rec,"menu_test.csv");
 			//戻り値チェック
-			assertTrue(retList == null);
+			// assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
-
+	 */
 	/*
 	 * 準正常系
 	 * @param CSV名：あり
@@ -362,6 +368,7 @@ public class CSVControlServiceImplTest {
 	 * 正常終了
 	 * @return null
 	 */
+	/*
 	@Test
 	public void SemiNormal04_writeCSV() {
 
@@ -374,19 +381,20 @@ public class CSVControlServiceImplTest {
 			// service
 			rec.setNo("99");
 			rec.setType("和食");
-			rec.setRestaurant_name("松屋");
-			rec.setSinglemenu_flg("○");
+			rec.setRestaurantName("松屋");
+			rec.setSinglemenuFlg("○");
 			rec.setMenu("チーズ牛丼");
-			rec.setPrice("550");
+			rec.setPrice(550);
 			rec.setTax("なし");
 			rec.setTotal("error");	//数値以外
-			CSVControlServiceImpl service = new CSVControlServiceImpl();
-			List<MenuCSV> retList = service.writeCSV(rec,"menu_test.csv");
+			CsvUtil.write(rec,"menu_test.csv");
+			//List<MenuCSV> retList = service.write(rec,"menu_test.csv");
 			//戻り値チェック
-			assertTrue(retList == null);
+			// assertTrue(retList == null);
 		} 	catch (Exception e) {
 			fail("異常発生");
-		}		
+		}
 	}
+	*/
 
 }

@@ -29,9 +29,10 @@ public class GlobalConst {
 
   //URL
   /*
-   * SearchMenuServlet
+   * Index
    */
-  public static final String JspMenuResultUrl = "./jsp/menu_result.jsp";
+  public static final String MenuIndexUrl = "./index.html";
+  public static final String MenuLoginUrl = "./login.html";
   /*
    * CsvInputServlet
    */
