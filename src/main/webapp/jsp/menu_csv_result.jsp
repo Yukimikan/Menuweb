@@ -84,7 +84,7 @@
 	<footer class="footer-nav">
 
 		<!-- 戻る（ここだけページごとに差し替える） -->
-		<a class="btn-arrow back" href="<%= request.getContextPath() %>/jsp/menu_regist.jsp">戻る</a>
+		<a class="btn-arrow back" href="<%= request.getContextPath() %>/index.html">戻る</a>
 
 		<!-- TOP（画像ボタン） -->
 		<a href="<%=request.getContextPath()%>/index.html"> <img
