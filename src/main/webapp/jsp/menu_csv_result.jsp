@@ -12,15 +12,9 @@
 <!-- https://anotools.com/java/1642/ -->
 </head>
 <body>
-	<header class="header-nav">
-		<nav class="breadcrumb">
-			<h4>1000円ランチシステム</h4>
-			<!-- ここだけページごとに差し替える -->
-			<a href="<%=request.getContextPath()%>/index.html">TOP</a> <a
-				href="<%=request.getContextPath()%>/jsp/menu_csv_regist.jsp">手入力</a>
-			<span>CSV検索結果</span>
-		</nav>
-	</header>
+	<div id="header" class="header">
+	<%@include file="./header.jsp"%>
+	</div>
 	<div id="contents">
 		<h2>＜検索結果＞</h2>
 		メニュー検索の結果を表示します。
@@ -81,21 +75,8 @@
        	<input type="submit" value="登録・編集">
         -->
 	</div>
-	<footer class="footer-nav">
-
-		<!-- 戻る（ここだけページごとに差し替える） -->
-		<a class="btn-arrow back" href="<%= request.getContextPath() %>/index.html">戻る</a>
-
-		<!-- TOP（画像ボタン） -->
-		<a href="<%=request.getContextPath()%>/index.html"> <img
-			class="btn-top"
-			src="<%=request.getContextPath()%>/resource/image/btn_top.png">
-		</a>
-		<!-- NEXT は不要なら削除 -->
-		<!-- 進む（必要なページだけ差し替え or 非表示） -->
-		<!--
-		 <a class="btn-arrow next" href="###NEXT###">進む</a>
-		-->
-	</footer>
+	<div id="footer" class="footer">
+	<%@include file="./footer.jsp"%>
+	</div>
 </body>
 </html>

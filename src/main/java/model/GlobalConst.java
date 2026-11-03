@@ -39,5 +39,6 @@ public class GlobalConst {
   public static final String JspInputUrl = "./jsp/menu_csv_input.jsp";
   public static final String JspResultUrl = "./jsp/menu_csv_result.jsp";
   public static final String JspRegistUrl = "./jsp/menu_csv_regist.jsp";
+  public static final String JspErrorUrl = "./jsp/error.jsp";
 
 }

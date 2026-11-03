@@ -17,7 +17,8 @@ public class UserDaoImpl implements UserDao{
    * 取得
    * @param int p1
    */
-  public String SelectSQLGetUser(String name, String password) {
+  public String SelectSQLGetUser(String name, String password)
+  		throws RuntimeException{
 
     //test
     try {
@@ -44,49 +45,50 @@ public class UserDaoImpl implements UserDao{
       }
     } catch (SQLException e) {
       e.printStackTrace();
+      throw new RuntimeException();
     }
-	//エラー
+    //エラー
     return "";
   }
 
-	/**
-	 * 取得
-	 * @param int p1
-	 */
-	public List<TestEntity> selectTableByKey(int id) {
+ /**
+  * 取得
+  * @param int p1
+  */
+  public List<TestEntity> selectTableByKey(int id) {
 
-	    List<TestEntity> list = new ArrayList<>();
+    List<TestEntity> list = new ArrayList<>();
 
-	    try (
-	        Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
-	        PreparedStatement ps = con.prepareStatement(SelectTableByKey);
-	        ResultSet result = executeQueryWithParam(ps, id);
-	    ) {
-	        while (result.next()) {
-	            TestEntity ent = new TestEntity();
-	            ent.setId(result.getInt(1));
-	            ent.setText(result.getString(2));
-	            list.add(ent);
-	        }
+    try (
+       Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
+       PreparedStatement ps = con.prepareStatement(SelectTableByKey);
+       ResultSet result = executeQueryWithParam(ps, id);
+    ) {
+       while (result.next()) {
+           TestEntity ent = new TestEntity();
+            ent.setId(result.getInt(1));
+            ent.setText(result.getString(2));
+            list.add(ent);
+   }
 
-	        return list;
+    return list;
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        return Collections.emptyList();   // 異常時は空リスト返却
-	    }
-	}
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return Collections.emptyList();   // 異常時は空リスト返却
+    }
+  }
 
-	private ResultSet executeQueryWithParam(PreparedStatement ps, int id) throws SQLException {
-	    ps.setInt(1, id);
-	    return ps.executeQuery();
-	}
+  private ResultSet executeQueryWithParam(PreparedStatement ps, int id) throws SQLException {
+    ps.setInt(1, id);
+    return ps.executeQuery();
+  }
 
-	private ResultSet executeQueryWithParam(PreparedStatement ps, String name, String password) throws SQLException {
-	    ps.setString(1, name);
-	    ps.setString(2, password);
-	    return ps.executeQuery();
-	}
+  private ResultSet executeQueryWithParam(PreparedStatement ps, String name, String password) throws SQLException {
+    ps.setString(1, name);
+    ps.setString(2, password);
+    return ps.executeQuery();
+}
 
 
 }

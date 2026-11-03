@@ -28,7 +28,6 @@ public class CsvInputServlet extends HttpServlet {
   }
 
   MenuCsvInputForm menuCsvInputForm;
-  //  CsvInputServOutDto csvInputServOutDto;
 
   /**
    * 初期表示（INDEX → menu_input.jsp）

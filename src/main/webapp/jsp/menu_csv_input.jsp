@@ -37,14 +37,9 @@
   }
 </script>
 <body>
-	<header class="header-nav">
-		<nav class="breadcrumb">
-			<h4>1000円ランチシステム</h4>
-			<!-- ここだけページごとに差し替える -->
-			<a href="<%=request.getContextPath()%>/index.html">TOP</a>
-			 <span>CSV検索</span>
-		</nav>
-	</header>
+	<div id="header" class="header">
+	<%@include file="./header.jsp"%>
+	</div>
 	<div id="contents" class="contents">
 	<h2>＜メニュー取込＞</h2>
 		プルダウン機能でメニュー一覧を選択。<br>
@@ -128,19 +123,8 @@
 			</div>
 		</form>
 	</div>
-	<footer class="footer-nav">
-
-		<!-- 戻る（ここだけページごとに差し替える） -->
-		<a class="btn-arrow back" href="<%= request.getContextPath() %>/index.html">戻る</a>
-
-		<!-- TOP（画像ボタン） -->
-		<a href="<%=request.getContextPath()%>/index.html"> <img
-			class="btn-top"
-			src="<%=request.getContextPath()%>/resource/image/btn_top.png">
-		</a>
-
-		<!-- 進む（必要なページだけ差し替え or 非表示） -->
-		<a class="btn-arrow next" href="<%= request.getContextPath() %>/jsp/menu_result.jsp">進む</a>
-	</footer>
+	<div id="footer" class="footer">
+	<%@include file="./footer.jsp"%>
+	</div>
 </body>
 </html>

@@ -48,10 +48,10 @@ public class LoginServlet extends HttpServlet {
      	   }
 
 	    } catch (Exception e) {
-	      // ★ 例外時は入力画面に戻す（ここが重要）
+	      // ★ 例外時はエラー画面に遷移（ここが重要）
 	      request.setAttribute("error", "入力値が不正です：" + e.getMessage());
 
-	      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
+	      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
 	      dispatcher.forward(request, response);
 	    }
 
