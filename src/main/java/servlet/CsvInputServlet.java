@@ -56,7 +56,7 @@ public class CsvInputServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // 1. inputCheck
+    // 2. inputCheck
     String total = request.getParameter("total");
 
     if (total == null || total.trim().isEmpty()) {

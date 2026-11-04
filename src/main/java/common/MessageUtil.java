@@ -7,35 +7,38 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
+/*
+ * Message用共通クラス.
+ */
 public class MessageUtil {
 
-//	@Autowired
-//	private MessageResource messageResource;
-    private static final Properties properties;
+//  @Autowired
+//  private MessageResource messageResource;
+  private static final Properties properties;
 
-    private MessageUtil() throws Exception {
-    }
+  private MessageUtil() throws Exception {
+  }
 
 //  try {
 //    properties.load(Files.newBufferedReader(Paths.get(INIT_FILE_PATH), StandardCharsets.UTF_8));
 //  } catch (IOException e) {
 //    System.out.println(String.format("ファイルの読み込みに失敗しました。ファイル名:%s", INIT_FILE_PATH));
 //  }
-    static {
-        properties = new Properties();
-        try (InputStream is =
-            MessageUtil.class.getClassLoader()
-                                 .getResourceAsStream("message.properties");
-             Reader reader =
-             new InputStreamReader(is, StandardCharsets.UTF_8)
-        	) {
-            properties.load(reader);
+  static {
+    properties = new Properties();
+    try (InputStream is =
+        MessageUtil.class.getClassLoader()
+        .getResourceAsStream("message.properties");
+        Reader reader =
+        new InputStreamReader(is, StandardCharsets.UTF_8)
+      ) {
+      properties.load(reader);
 
-        } catch (IOException e) {
-        	// ファイル読み込みに失敗
-            e.printStackTrace();
-        }
+    } catch (IOException e) {
+      // ファイル読み込みに失敗
+      e.printStackTrace();
     }
+  }
 
     /**
      * プロパティ値を取得する
@@ -43,9 +46,9 @@ public class MessageUtil {
      * @param key キー
      * @return 値
      */
-    public static String getProperty(final String key) {
-        return getProperty(key, "");
-    }
+  public static String getProperty(final String key) {
+    return getProperty(key, "");
+  }
 
     /**
      * プロパティ値を取得する
@@ -55,8 +58,8 @@ public class MessageUtil {
      * @return キーが存在しない場合、デフォルト値
      *          存在する場合、値
      */
-    public static String getProperty(final String key, final String defaultValue) {
-        return properties.getProperty(key, defaultValue);
-    }
+  public static String getProperty(final String key, final String defaultValue) {
+    return properties.getProperty(key, defaultValue);
+  }
 
 }
