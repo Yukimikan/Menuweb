@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import common.MessageUtil;
 import dao.UserDaoImpl;
 import model.GlobalConst;
 
@@ -36,10 +37,11 @@ public class LoginServlet extends HttpServlet {
 	//	doGet(request, response);
 		try {
 		   UserDaoImpl daoImpl = new UserDaoImpl();
-    // 	   String userName = daoImpl.SelectSQLGetUser(user, password);
      	   String userName = daoImpl.selectUserByKey(user, password);
            if (userName == null || userName.isEmpty()) {
-         	   request.setAttribute("error", "入力値が不正です：");
+        	   String errMessage = MessageUtil.getProperty("msg_w01_login");
+               System.out.print(errMessage);
+         	   //request.setAttribute("error", "入力値が不正です：");
        	       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
       	       dispatcher.forward(request, response);
      	   }else {
