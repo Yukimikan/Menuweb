@@ -15,7 +15,7 @@ public interface UserDao extends pdbConnect {
 //	public int selectCountAll() ;
 
 	public String SelectSQLGetUser(String name, String password) throws RuntimeException;
-
+	public String selectUserByKey(String name, String password) throws RuntimeException;
 //	public int selectCountByKey(int id) ;
 //
 //	public List<TestEntity> selectTableByKey(int id) ;

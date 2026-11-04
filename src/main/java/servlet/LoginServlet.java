@@ -36,8 +36,9 @@ public class LoginServlet extends HttpServlet {
 	//	doGet(request, response);
 		try {
 		   UserDaoImpl daoImpl = new UserDaoImpl();
-     	   String userName = daoImpl.SelectSQLGetUser(user, password);
-     	   if ("".equals(userName)) {
+    // 	   String userName = daoImpl.SelectSQLGetUser(user, password);
+     	   String userName = daoImpl.selectUserByKey(user, password);
+           if (userName == null || userName.isEmpty()) {
          	   request.setAttribute("error", "入力値が不正です：");
        	       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
       	       dispatcher.forward(request, response);
@@ -50,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 	    } catch (Exception e) {
 	      // ★ 例外時はエラー画面に遷移（ここが重要）
 	      request.setAttribute("error", "入力値が不正です：" + e.getMessage());
+	      System.out.print(e.getMessage());
 
 	      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
 	      dispatcher.forward(request, response);
