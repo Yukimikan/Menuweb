@@ -12,21 +12,26 @@ public class MenuCsvInputForm {
 
   private String date;
   private String csvName;
-  private int total;
+  private String total;
   private String totalcondition;
   private String message;
 
-  public MenuCsvInputForm(String date, String csvName, String total,
-      String totalcondition, String message) {
-    this.date = date;
-    this.csvName = csvName;
-    this.total = Integer.parseInt(total);   // ★ 例外発生源の近接化
-    this.totalcondition = totalcondition;
-    this.message = message;
+  public int getTotal() {
+	// ★ int で返す(NULLチェック後)
+    return Integer.parseInt(this.total);
   }
 
-  public int getTotal() {              // ★ int で返す
-    return total;
+  public boolean inputCheck() {
+    if (this.total == null
+      || this.total.trim().isEmpty()
+      || "".equals(this.total)) {
+    	// 未入力エラー
+      return false;
+    } else if (!total.matches("[0-9]+")) {
+        // 数値以外
+      return false;
+    }
+    return true;
   }
 
   /**

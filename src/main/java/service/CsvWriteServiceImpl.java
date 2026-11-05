@@ -18,8 +18,19 @@ public class CsvWriteServiceImpl implements CsvWriteService {
    */
   public List<MenuCSV> execute(MenuCsvRegistForm form) throws IOException{
 
-    String csvName = form.getCsv_name();
-    MenuCSV rec = form.getMenuCsv();
+    // MenuCSV に渡す(初期化)
+    String[] cols = {
+      "99", // No（新規登録なので空）
+      form.getType(),
+      form.getRestaurant_name(),
+      form.getSinglemenu_flg(),
+      form.getMenu(),
+      form.getPrice(),
+      form.getTax(),
+      form.getTotal()
+    };
+    MenuCSV rec = MenuCSV.fromInput(cols);
+	String csvName = form.getCsv_name();
     // 1. 新規行だけ書き込む（追記モード）
     try {
       CsvUtil.append(csvName, rec);

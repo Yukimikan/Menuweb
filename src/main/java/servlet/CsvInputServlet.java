@@ -56,27 +56,6 @@ public class CsvInputServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // 2. inputCheck
-    String total = request.getParameter("total");
-
-    if (total == null || total.trim().isEmpty()) {
-
-      request.setAttribute("message", "金額を入力してください");
-
-      RequestDispatcher dispatcher =
-          request.getRequestDispatcher(GlobalConst.JspInputUrl);
-      dispatcher.forward(request, response);
-      return;
-    } else if (!total.matches("[0-9]+")) {
-      // message
-      request.setAttribute("message", "金額を数値で入力してください");
-      RequestDispatcher dispatcher =
-          request.getRequestDispatcher(GlobalConst.JspInputUrl);
-      dispatcher.forward(request, response);
-      return;
-
-    }
-
     // 1. parameter set
     menuCsvInputForm = new MenuCsvInputForm(
       (String) request.getParameter("date"),
@@ -86,8 +65,16 @@ public class CsvInputServlet extends HttpServlet {
       ""
       );
 
+    // 2. inputCheck(フロントで実行)
+    if(!menuCsvInputForm.inputCheck()) {
+    	//reload
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
+        dispatcher.forward(request, response);
+        return;
+    };
+
     try {
-      // 3. サーバー側でしか判定できないチェック
+      // 3. サーバー側のチェック
 
       // 3. service execute
       CsvInputService service = new CsvInputServiceImpl();
@@ -95,15 +82,14 @@ public class CsvInputServlet extends HttpServlet {
 
       // 4. requestSetAttribute
       request.setAttribute("resultList", retList);
-      request.setAttribute("message", "検索が完了しました");
+    //  request.setAttribute("message", "検索が完了しました");
       // 5. forward
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
       dispatcher.forward(request, response);
     } catch (Exception e) {
-      // ★ 例外時は入力画面に戻す（ここが重要）
-      request.setAttribute("error", "入力値が不正です：" + e.getMessage());
-
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
+      // エラー画面に遷移
+      System.out.print(e.getMessage());
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
       dispatcher.forward(request, response);
     }
   }

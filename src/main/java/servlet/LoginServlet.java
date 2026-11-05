@@ -27,6 +27,8 @@ public class LoginServlet extends HttpServlet {
     super();
   }
 
+  LoginForm loginForm;
+
   /**
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
    */
@@ -34,18 +36,21 @@ public class LoginServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    String user = request.getParameter("user");
-    String password = request.getParameter("password");
-    LoginForm loginForm = new LoginForm(
-    	user,
-    	password);
+    loginForm = new LoginForm(
+    	(String) request.getParameter("user"),
+    	(String) request.getParameter("password")
+    	);
+
+    // 2. inputCheck(フロントで実行)
+    if(!loginForm.inputCheck()) {
+      //reload
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
+  	  dispatcher.forward(request, response);
+  	  return;
+    }
 
     try {
-      // 2. inputCheck(フロントで実行)
-      if(!loginForm.inputCheck()) {
-    	  return;
-      }
-      // 3. サーバー側でしか判定できないチェック
+      // 3. サーバー側のチェック
 
       // 3. service execute
       LoginService service = new LoginServiceImpl();
@@ -56,7 +61,6 @@ public class LoginServlet extends HttpServlet {
       if (userName == null || userName.isEmpty()) {
         String errMessage = MessageUtil.getProperty("msg_w01_login");
         System.out.print(errMessage);
-        //request.setAttribute("error", "入力値が不正です：");
    	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
   	    dispatcher.forward(request, response);
       } else {
@@ -66,10 +70,8 @@ public class LoginServlet extends HttpServlet {
       }
 
     } catch (Exception e) {
-      // ★ 例外時はエラー画面に遷移（ここが重要）
-      request.setAttribute("error", "入力値が不正です：" + e.getMessage());
+      // エラー画面に遷移
       System.out.print(e.getMessage());
-
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
       dispatcher.forward(request, response);
     }

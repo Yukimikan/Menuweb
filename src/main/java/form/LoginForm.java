@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginForm {
-	  private String name;
-	  private String password;
+  private String name;
+  private String password;
 
   public boolean inputCheck() {
-	if (this.name == null) {
-		return false;
-	} else if (this.password == null) {
-		return false;
-	}
+    if (this.name == null) {
+      return false;
+    } else if (this.password == null) {
+      return false;
+    }
     return true;
-  };
+  }
 }
