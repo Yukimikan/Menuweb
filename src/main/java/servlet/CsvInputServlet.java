@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.util.List;
 
 import form.MenuCsvInputForm;
-import form.MenuCsvInputResult;
 import model.GlobalConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
 import service.CsvInputService;
 import service.CsvInputServiceImpl;
+import service.CsvInputServiceResult;
 
 /**
  * Servlet.
@@ -23,11 +23,14 @@ import service.CsvInputServiceImpl;
 public class CsvInputServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  private CsvInputService service;
+  private CsvFileListService fileService;
+
   public CsvInputServlet() {
     super();
+    service = new CsvInputServiceImpl();
+    fileService = new CsvFileListServiceImpl();
   }
-
-  MenuCsvInputForm menuCsvInputForm;
 
   /**
    * 初期表示
@@ -38,7 +41,6 @@ public class CsvInputServlet extends HttpServlet {
     // 初期化
     request.setAttribute("message", "");
     // 1. CSVリスト取得（SharedService）
-    CsvFileListService fileService = new CsvFileListServiceImpl();
     List<String> csvFiles = fileService.execute();
     request.setAttribute("csvFiles", csvFiles);
 
@@ -57,7 +59,7 @@ public class CsvInputServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    menuCsvInputForm = new MenuCsvInputForm(
+	MenuCsvInputForm menuCsvInputForm = new MenuCsvInputForm(
       (String) request.getParameter("date"),
       (String) request.getParameter("csv_name"),
       (String) request.getParameter("total"),
@@ -78,8 +80,7 @@ public class CsvInputServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      CsvInputService service = new CsvInputServiceImpl();
-      MenuCsvInputResult result = service.execute(menuCsvInputForm);
+      CsvInputServiceResult result = service.execute(menuCsvInputForm);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());

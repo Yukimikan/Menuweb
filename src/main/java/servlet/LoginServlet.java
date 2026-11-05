@@ -10,10 +10,10 @@ import java.io.IOException;
 
 import common.MessageUtil;
 import form.LoginForm;
-import form.LoginResult;
 import model.GlobalConst;
 import service.LoginService;
 import service.LoginServiceImpl;
+import service.LoginServiceResult;
 
 /**
  * Servlet.
@@ -21,11 +21,13 @@ import service.LoginServiceImpl;
 public class LoginServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  private LoginService service;
+
   public LoginServlet() {
     super();
+    service = new LoginServiceImpl();
   }
 
-  LoginForm loginForm;
 
   /**
    * 初期表示
@@ -52,7 +54,7 @@ public class LoginServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    loginForm = new LoginForm(
+	LoginForm loginForm = new LoginForm(
     	(String) request.getParameter("user"),
     	(String) request.getParameter("password")
     	);
@@ -70,8 +72,7 @@ public class LoginServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      LoginService service = new LoginServiceImpl();
-	  LoginResult result = service.execute(loginForm);
+	  LoginServiceResult result = service.execute(loginForm);
 	  if (result.isSuccess()) {
 	    // 4. requestSetAttribute
 	    request.setAttribute("userName", result.getUserName());

@@ -67,17 +67,17 @@ public final class CsvUtil {
                                  .iterator();
 
       // 3. ヘッダー一致チェック
-      String header = CsvUtil.readHeader(infilePath);
-      if (!MenuCSV.CSV_HEADER.equals(header)) {
-        System.out.println("警告：ヘッダーが想定と異なります → " + header);
-      }
+      // String header = CsvUtil.readHeader(infilePath);
+      // if (!MenuCSV.CSV_HEADER.equals(header)) {
+      //  System.out.println("警告：ヘッダーが想定と異なります → " + header);
+      // }
 
-      // 4. ヘッダー読み飛ばし
+      // 3. ヘッダー読み飛ばし
       if (it.hasNext()) {
         it.next(); // iterator の先頭を捨てる
         // 今はヘッダー内容を使わないので捨てるだけ
       }
-      // 3. 本体行の処理
+      // 4. 本体行の処理
       while (it.hasNext()) {
         String currentContent = it.next();
         String[] arrayColumnData = currentContent.split(",", -1); /// 空欄保持

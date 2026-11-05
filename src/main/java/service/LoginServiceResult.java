@@ -1,17 +1,14 @@
-package form;
-
-import java.util.List;
+package service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.MenuCSV;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuCsvRegistResult {
+public class LoginServiceResult {
   private boolean success;
   private String message;
-  private List<MenuCSV> retList;
+  private String userName;
 }

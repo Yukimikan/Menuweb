@@ -1,11 +1,11 @@
 package service;
 
+import java.util.Collections;
 import java.util.List;
 
 import common.ConditionTotal;
 import common.CsvUtil;
 import form.MenuCsvInputForm;
-import form.MenuCsvInputResult;
 import model.MenuCSV;
 
 /**
@@ -13,23 +13,36 @@ import model.MenuCSV;
  * */
 public class CsvInputServiceImpl implements CsvInputService {
 
+  public static final String CSV_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
+
   /**
    * execute.
    */
-  public MenuCsvInputResult execute(MenuCsvInputForm input) {
+  public CsvInputServiceResult execute(MenuCsvInputForm input) {
     try {
       ConditionTotal cond = ConditionTotal.fromCode(input.getTotalcondition());
       int total = input.getTotal();
-      List<MenuCSV> list =
+
+      // ヘッダー一致チェック
+      if(MenuCSV.readHeader(CSV_PATH + input.getCsvName())) {
+        List<MenuCSV> list =
     		    CsvUtil.read(input.getCsvName()).stream()
     	        .filter(ret -> cond.match(ret.getPrice(), total))
     	        .toList();
 
-      return new MenuCsvInputResult(
-    		  true,
-    		  "",
-    		  list
-    		  );
+        return new CsvInputServiceResult(
+    	        true,
+    		    "",
+    		    list
+    		    );
+      } else {
+        return new CsvInputServiceResult(
+     	        false,
+      		    "error",
+      		    Collections.emptyList()
+      		    );
+
+      }
     } catch (Exception e) {
       e.printStackTrace();
       return null;

@@ -1,4 +1,4 @@
-package form;
+package service;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import model.MenuCSV;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuCsvInputResult {
+public class CsvInputServiceResult {
    private boolean success;
    private String message;
    private List<MenuCSV> retList;
