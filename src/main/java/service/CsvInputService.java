@@ -1,12 +1,9 @@
 package service;
 
-import java.util.List;
-
 import form.MenuCsvInputForm;
-import model.MenuCSV;
+import form.MenuCsvInputResult;
 
 public interface CsvInputService {
 
-  public List<MenuCSV> execute(MenuCsvInputForm input);
-
+  public MenuCsvInputResult execute(MenuCsvInputForm input);
 }
