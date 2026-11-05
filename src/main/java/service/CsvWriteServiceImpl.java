@@ -5,6 +5,7 @@ import java.util.List;
 
 import common.CsvUtil;
 import form.MenuCsvRegistForm;
+import form.MenuCsvRegistResult;
 import model.GlobalConst;
 import model.MenuCSV;
 
@@ -16,9 +17,8 @@ public class CsvWriteServiceImpl implements CsvWriteService {
   /**
    * execute.
    */
-  public List<MenuCSV> execute(MenuCsvRegistForm form) throws IOException{
-
-    // MenuCSV に渡す(初期化)
+  public MenuCsvRegistResult execute(MenuCsvRegistForm form) throws IOException{
+   // MenuCSV に渡す(初期化)
     String[] cols = {
       "99", // No（新規登録なので空）
       form.getType(),
@@ -44,9 +44,11 @@ public class CsvWriteServiceImpl implements CsvWriteService {
     } catch (Exception e) {
       throw new IOException("CSV読み込みに失敗しました: " + e.getMessage(), e);
     }
-    return list;
+    return new MenuCsvRegistResult(
+    		true
+    		,""
+    		,list);
   }
-
 
   /**
    * フォーマットチェック.

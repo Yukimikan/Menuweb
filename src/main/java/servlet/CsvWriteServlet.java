@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 import form.MenuCsvRegistForm;
+import form.MenuCsvRegistResult;
 import model.GlobalConst;
-import model.MenuCSV;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
 import service.CsvWriteService;
@@ -87,13 +87,21 @@ public class CsvWriteServlet extends HttpServlet {
 
       // 3. service execute
       CsvWriteService service = new CsvWriteServiceImpl();
-      List<MenuCSV> retList = service.execute(menuCsvRegistform);
+      MenuCsvRegistResult result = service.execute(menuCsvRegistform);
 
-      // 4. requestSetAttribute
-      request.setAttribute("resultList", retList);
-      // 5. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
-      dispatcher.forward(request, response);
+      if (result.isSuccess()) {
+        // 4. requestSetAttribute
+        request.setAttribute("resultList", result.getRetList());
+        // 5. forward
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+        dispatcher.forward(request, response);
+      } else {
+  	    // 5. forward
+        request.setAttribute("message","何らかのエラー発生");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspRegistUrl);
+        dispatcher.forward(request, response);
+      	return;
+      }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());

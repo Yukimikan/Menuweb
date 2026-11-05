@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
       // 3. service execute
       LoginService service = new LoginServiceImpl();
 	  LoginResult result = service.execute(loginForm);
-	  if(result.isSuccess()) {
+	  if (result.isSuccess()) {
 	    // 4. requestSetAttribute
 	    request.setAttribute("userName", result.getUserName());
         // 5. forward
