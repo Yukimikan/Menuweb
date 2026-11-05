@@ -18,7 +18,7 @@ import service.CsvWriteService;
 import service.CsvWriteServiceImpl;
 
 /**
- * Servlet implementation class HelloServlet.
+ * Servlet.
  */
 public class CsvWriteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -30,10 +30,11 @@ public class CsvWriteServlet extends HttpServlet {
   MenuCsvRegistForm menuCsvRegistform;
 
   /**
-   * 初期表示（INDEX → menu_input.jsp）
+   * 初期表示
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
     // 初期化
     request.setAttribute("message", "");
 
@@ -57,8 +58,7 @@ public class CsvWriteServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-    menuCsvRegistform =
-      new MenuCsvRegistForm(
+    menuCsvRegistform = new MenuCsvRegistForm(
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
@@ -71,7 +71,7 @@ public class CsvWriteServlet extends HttpServlet {
 
     // 2. inputCheck(フロントで実行)
     if (!menuCsvRegistform.inputCheck()) {
-      request.setAttribute("message", "CSV名が不正です：");
+      request.setAttribute("message", "未入力項目があります");
       // CSVリストを再取得（入力画面に戻るため）
       CsvFileListService fileService = new CsvFileListServiceImpl();
       List<String> csvFiles = fileService.execute();
@@ -81,6 +81,7 @@ public class CsvWriteServlet extends HttpServlet {
       dispatcher.forward(request, response);
       return;
     }
+
     try {
       // 3. サーバー側のチェック
 

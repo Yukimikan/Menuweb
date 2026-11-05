@@ -10,19 +10,17 @@ import java.io.IOException;
 
 import common.MessageUtil;
 import form.LoginForm;
+import form.LoginResult;
 import model.GlobalConst;
 import service.LoginService;
 import service.LoginServiceImpl;
 
 /**
- * Servlet implementation class HelloServlet.
+ * Servlet.
  */
 public class LoginServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  /**
-   * @see HttpServlet#HttpServlet()
-   */
   public LoginServlet() {
     super();
   }
@@ -30,7 +28,25 @@ public class LoginServlet extends HttpServlet {
   LoginForm loginForm;
 
   /**
-   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   * 初期表示
+   */
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    // 初期化
+    request.setAttribute("message", "");
+    // 1. 画面情報取得（なし）
+
+    // 2. 初期表示へ forward
+    RequestDispatcher dispatcher =
+        request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+    dispatcher.forward(request, response);
+  }
+
+  /**
+   *  ポスト処理.
+   *
+   *  @param HttpServletRequest request, HttpServletResponse response
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -44,7 +60,8 @@ public class LoginServlet extends HttpServlet {
     // 2. inputCheck(フロントで実行)
     if(!loginForm.inputCheck()) {
       //reload
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
+      request.setAttribute("message","未入力項目があります");
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
   	  dispatcher.forward(request, response);
   	  return;
     }
@@ -54,19 +71,18 @@ public class LoginServlet extends HttpServlet {
 
       // 3. service execute
       LoginService service = new LoginServiceImpl();
-	  String userName = service.execute(loginForm);
-      // 4. requestSetAttribute
-      request.setAttribute("userName", userName);
-	  // 5. forward
-      if (userName == null || userName.isEmpty()) {
-        String errMessage = MessageUtil.getProperty("msg_w01_login");
-        System.out.print(errMessage);
-   	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
-  	    dispatcher.forward(request, response);
-      } else {
+	  LoginResult result = service.execute(loginForm);
+	  if(result.isSuccess()) {
+	    // 4. requestSetAttribute
+	    request.setAttribute("userName", result.getUserName());
         // 5. forward
 	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuIndexUrl);
-        dispatcher.forward(request, response);
+	    dispatcher.forward(request, response);
+	  } else {
+	    // 5. forward
+        request.setAttribute("message",MessageUtil.getProperty("msg_w01_login"));
+   	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+  	    dispatcher.forward(request, response);
       }
 
     } catch (Exception e) {

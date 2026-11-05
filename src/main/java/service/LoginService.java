@@ -1,8 +1,9 @@
 package service;
 
 import form.LoginForm;
+import form.LoginResult;
 
 public interface LoginService {
 
-  public String execute(LoginForm form);
+  public LoginResult execute(LoginForm form);
 }

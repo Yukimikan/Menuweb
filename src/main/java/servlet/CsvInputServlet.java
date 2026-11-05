@@ -18,7 +18,7 @@ import service.CsvInputService;
 import service.CsvInputServiceImpl;
 
 /**
- * Servlet implementation class
+ * Servlet.
  */
 public class CsvInputServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -30,7 +30,7 @@ public class CsvInputServlet extends HttpServlet {
   MenuCsvInputForm menuCsvInputForm;
 
   /**
-   * 初期表示（INDEX → menu_input.jsp）
+   * 初期表示
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -68,6 +68,7 @@ public class CsvInputServlet extends HttpServlet {
     // 2. inputCheck(フロントで実行)
     if(!menuCsvInputForm.inputCheck()) {
     	//reload
+        request.setAttribute("message","未入力項目があります");
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
         dispatcher.forward(request, response);
         return;

@@ -12,9 +12,9 @@ public class LoginForm {
   private String password;
 
   public boolean inputCheck() {
-    if (this.name == null) {
+    if (this.name == null || this.name.isEmpty()) {
       return false;
-    } else if (this.password == null) {
+    } else if (this.password == null ||  this.password.isEmpty()) {
       return false;
     }
     return true;
