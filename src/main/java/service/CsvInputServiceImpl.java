@@ -20,7 +20,7 @@ public class CsvInputServiceImpl implements CsvInputService {
    */
   public CsvInputServiceResult execute(MenuCsvInputForm input) {
     try {
-      ConditionTotal cond = ConditionTotal.fromCode(input.getTotalcondition());
+      ConditionTotal cond = ConditionTotal.fromCode(input.getTotalCondition());
       int total = input.getTotal();
 
       // ヘッダー一致チェック

@@ -31,6 +31,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>CsvConfirmServlet</display-name>
+    <servlet-name>CsvConfirmServlet</servlet-name>
+    <servlet-class>servlet.CsvConfirmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CsvConfirmServlet</servlet-name>
+    <url-pattern>/CsvConfirmServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>CsvWriteServlet</display-name>
     <servlet-name>CsvWriteServlet</servlet-name>
     <servlet-class>servlet.CsvWriteServlet</servlet-class>

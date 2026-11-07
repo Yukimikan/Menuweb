@@ -63,6 +63,7 @@ public class CsvWriteServlet extends HttpServlet {
     // 1. parameter set
 	MenuCsvRegistForm menuCsvRegistform = new MenuCsvRegistForm(
         (String) request.getParameter("csv_name"),
+        (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("singlemenu_flg"),
@@ -71,7 +72,10 @@ public class CsvWriteServlet extends HttpServlet {
         (String) request.getParameter("tax"),
         (String) request.getParameter("total"),
         "");
-
+	// チェックボックスの選択された値を取得
+	// String[] confirm_flg = request.getParameterValues("confirm_flg");
+	String confirmFlg = request.getParameter("confirm_flg");
+	boolean checked = confirmFlg != null;
     // 2. inputCheck(フロントで実行)
     if (!menuCsvRegistform.inputCheck()) {
       request.setAttribute("message", "未入力項目があります");
@@ -85,32 +89,48 @@ public class CsvWriteServlet extends HttpServlet {
       return;
     }
 
-    try {
-      // 3. サーバー側のチェック
-
-      // 3. service execute
-      CsvWriteServiceResult result = service.execute(menuCsvRegistform);
-
-      if (result.isSuccess()) {
-        // 4. requestSetAttribute
-        request.setAttribute("resultList", result.getRetList());
+    // 入力チェック不要
+	try {
+  	  if (checked) {
+        // 3. サーバー側のチェック
+        // 3. service execute
+        CsvWriteServiceResult result2 = service.execute(menuCsvRegistform);
+	    if (result2.isSuccess()) {
+          // 4. requestSetAttribute
+          request.setAttribute("resultList", result2.getRetList());
+          // 5. forward
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+          dispatcher.forward(request, response);
+	    } else {
+          // 4. requestSetAttribute
+          request.setAttribute("resultList", result2.getRetList());
+          // 5. forward
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspRegistUrl);
+          dispatcher.forward(request, response);
+        }
+	  } else {
+        // 3. サーバー側のチェック
+        // 3. service execute
+  	    // CsvWriteServiceResult result = service.execute(menuCsvRegistform);
+  	    // 4. requestSetAttribute
+	    request.setAttribute("csv_name", menuCsvRegistform.getCsvName());
+	    request.setAttribute("confirm_flg", menuCsvRegistform.getConfirmFlg());
+	    request.setAttribute("type", menuCsvRegistform.getConfirmFlg());
+	    request.setAttribute("restaurant_name", menuCsvRegistform.getRestaurantName());
+	    request.setAttribute("singlemenu_flg", menuCsvRegistform.getSinglemenuFlg());
+	    request.setAttribute("menu", menuCsvRegistform.getMenu());
+	    request.setAttribute("price", menuCsvRegistform.getPrice());
+	    request.setAttribute("tax", menuCsvRegistform.getTax());
+	    request.setAttribute("total", menuCsvRegistform.getTotal());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspConfirmUrl);
         dispatcher.forward(request, response);
-      } else {
-  	    // 5. forward
-        request.setAttribute("message","何らかのエラー発生");
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspRegistUrl);
-        dispatcher.forward(request, response);
-      	return;
       }
-    } catch (Exception e) {
-      // エラー画面に遷移
-      System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
-      dispatcher.forward(request, response);
-    }
-
+  	} catch (Exception e) {
+        // エラー画面に遷移
+        System.out.print(e.getMessage());
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+        dispatcher.forward(request, response);
+      }
   }
-
 }

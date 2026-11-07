@@ -10,10 +10,11 @@ import model.GlobalConst;
 @AllArgsConstructor
 public class MenuCsvRegistForm {
 
-  private String csv_name;
+  private String csvName;
+  private String confirmFlg;
   private String type;
-  private String restaurant_name;
-  private String singlemenu_flg;
+  private String restaurantName;
+  private String singlemenuFlg;
   private String menu;
   private String price;
   private String tax;
@@ -29,7 +30,7 @@ public class MenuCsvRegistForm {
     //チェック
     if (this.type == null || this.type.isEmpty()) {
       return false;
-    } else if (this.restaurant_name == null || this.restaurant_name.isEmpty()) {
+    } else if (this.restaurantName == null || this.restaurantName.isEmpty()) {
       return false;
     } else if (this.menu == null || this.menu.isEmpty()) {
       return false;

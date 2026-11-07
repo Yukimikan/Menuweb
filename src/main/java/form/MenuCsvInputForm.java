@@ -13,7 +13,7 @@ public class MenuCsvInputForm {
   private String date;
   private String csvName;
   private String total;
-  private String totalcondition;
+  private String totalCondition;
   private String message;
 
   public int getTotal() {

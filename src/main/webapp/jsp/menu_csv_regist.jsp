@@ -117,6 +117,12 @@ function checkText() {
 			</div>
 
 			<div id="regist-input">
+				<div class="row">
+					<div class="label">確認画面を省略する</div>
+					<div class="input">
+						<input type="checkbox" name="confirm_flg" checked>
+					</div>
+				</div>
 
 				<div class="row">
 					<div class="label">種別：</div>
