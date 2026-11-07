@@ -114,8 +114,7 @@ public class CsvWriteServlet extends HttpServlet {
   	    // CsvWriteServiceResult result = service.execute(menuCsvRegistform);
   	    // 4. requestSetAttribute
 	    request.setAttribute("csv_name", menuCsvRegistform.getCsvName());
-	    request.setAttribute("confirm_flg", menuCsvRegistform.getConfirmFlg());
-	    request.setAttribute("type", menuCsvRegistform.getConfirmFlg());
+	    request.setAttribute("type", menuCsvRegistform.getType());
 	    request.setAttribute("restaurant_name", menuCsvRegistform.getRestaurantName());
 	    request.setAttribute("singlemenu_flg", menuCsvRegistform.getSinglemenuFlg());
 	    request.setAttribute("menu", menuCsvRegistform.getMenu());

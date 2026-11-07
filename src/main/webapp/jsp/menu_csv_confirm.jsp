@@ -64,26 +64,28 @@
 				</select>
 			</div>
 			<!-- ★ 登録内容表示 -->
+			<span>以下登録内容をご確認ください。</span><br>
 				<div class="row">
 					<div class="label">種別：</div>
 					<div class="input">
-						<input type="text" name="type" value=<%=request.getAttribute("type") %>>
+						<input type="text" name="type" readonly
+						   value=<%=request.getAttribute("type") %>>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="label">店名：</div>
 					<div class="input">
-						<input type="text" name="restaurant_name">
+						<input type="text" name="restaurant_name" readonly
+						　value=<%=request.getAttribute("restaurant_name") %>>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="label">単品フラグ：</div>
 					<div class="input">
-						<select name="singlemenu_flg">
-							<option value="0">セット</option>
-							<option value="1">単品</option>
+						<input type="text" name="singlemenu_flg" readonly
+ 					      value=<%=request.getAttribute("singlemenu_flg") %>>
 						</select>
 					</div>
 				</div>
@@ -91,28 +93,32 @@
 				<div class="row">
 					<div class="label">メニュー名：</div>
 					<div class="input">
-						<input type="text" name="menu">
+						<input type="text" name="menu" readonly
+						  value=<%=request.getAttribute("menu") %>>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="label">金額：</div>
 					<div class="input">
-						<input type="text" name="price">円
+						<input type="text" name="price" readonly
+						  value=<%=request.getAttribute("price") %>>円
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="label">税額：</div>
 					<div class="input">
-						<input type="text" name="tax">円
+						<input type="text" name="tax" readonly
+						  value=<%=request.getAttribute("tax") %>>円
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="label">合計：</div>
 					<div class="input">
-						<input type="text" name="total">円
+						<input type="text" name="total" readonly
+						  value=<%=request.getAttribute("total") %>>円
 					</div>
 				</div>
 
