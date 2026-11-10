@@ -80,7 +80,6 @@ public class CsvWriteServlet extends HttpServlet {
     if (!menuCsvRegistform.inputCheck()) {
       request.setAttribute("message", "未入力項目があります");
       // CSVリストを再取得（入力画面に戻るため）
-      CsvFileListService fileService = new CsvFileListServiceImpl();
       List<String> csvFiles = fileService.execute();
       request.setAttribute("csvFiles", csvFiles);
       // reload
@@ -94,16 +93,16 @@ public class CsvWriteServlet extends HttpServlet {
   	  if (checked) {
         // 3. サーバー側のチェック
         // 3. service execute
-        CsvWriteServiceResult result2 = service.execute(menuCsvRegistform);
-	    if (result2.isSuccess()) {
+        CsvWriteServiceResult result = service.execute(menuCsvRegistform);
+	    if (result.isSuccess()) {
           // 4. requestSetAttribute
-          request.setAttribute("resultList", result2.getRetList());
+          request.setAttribute("resultList", result.getRetList());
           // 5. forward
           RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
           dispatcher.forward(request, response);
 	    } else {
           // 4. requestSetAttribute
-          request.setAttribute("resultList", result2.getRetList());
+          request.setAttribute("resultList", result.getRetList());
           // 5. forward
           RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspRegistUrl);
           dispatcher.forward(request, response);

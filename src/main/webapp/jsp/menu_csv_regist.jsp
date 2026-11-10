@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>  <!-- jspのJSTL式追加用 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,119 +72,86 @@ function checkText() {
 		各メニュー項目の新規書込みを行う。
 	</div>
 	<div id="main">
-	<%
-	String message = (String) request.getAttribute("message");
-	%>
-	<%
-	if (message != null && !message.isEmpty()) {
-	%>
-	<div class="error-box"><%= message %></div>
-	<%
-	}
-	%>
-		<%
-      List<String> csvList = (List<String>) request.getAttribute("csvFiles");
-      String error = (String) request.getAttribute("error");
-    %>
-
-    <!-- ★ エラー表示（サーバー側例外時） -->
-    <%
-      if (error != null) {
-    %>
-      <div style="color:red;"><%= error %></div>
-    <%
-      }
-    %>
-		<form name="form1"
-			action="<%= request.getContextPath() %>/CsvWriteServlet"
-			onsubmit="return checkText()" method="post">
-
-			<div>
-				CSV名： <select name="csv_name">
-					<%
-            if (csvList != null && !csvList.isEmpty()) {
-              for (String name : csvList) {
-          %>
-					<option value="<%= name %>"><%= name %></option>
-					<%
-              }
-            } else {
-          %>
-					<option value="menu.csv">menu.csv</option>
-					<%
-            }
-          %>
-				</select>
-			</div>
-
-			<div id="regist-input">
-				<div class="row">
-					<div class="label">確認画面を省略する</div>
-					<div class="input">
-						<input type="checkbox" name="confirm_flg" checked>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="label">種別：</div>
-					<div class="input">
-						<input type="text" name="type">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="label">店名：</div>
-					<div class="input">
-						<input type="text" name="restaurant_name">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="label">単品フラグ：</div>
-					<div class="input">
-						<select name="singlemenu_flg">
-							<option value="0">セット</option>
-							<option value="1">単品</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="label">メニュー名：</div>
-					<div class="input">
-						<input type="text" name="menu">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="label">金額：</div>
-					<div class="input">
-						<input type="text" name="price">円
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="label">税額：</div>
-					<div class="input">
-						<input type="text" name="tax">円
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="label">合計：</div>
-					<div class="input">
-						<input type="text" name="total">円
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="label">メニュー登録：</div>
-					<div class="input">
-						<input type="submit" value="登録" class="btn-submit">
-					</div>
+	<!-- ★ エラーメッセージ表示 -->
+    <c:if test="${not empty message}">
+    	<div class="error-box">${message}</div>
+	</c:if>
+	<!-- ★ CSVリストを受け取る -->
+	<!-- List<String> csvList = (List<String>) request.getAttribute("csvFiles") -->
+	<form name="form1"
+		action="<%= request.getContextPath() %>/CsvWriteServlet"
+		onsubmit="return checkText()" method="post">
+		<div>
+			CSV名：
+	        <select name="csv_name">
+		      <c:if test="${empty csvFiles}">
+		        <option value="menu.csv">menu.csv</option>
+		      </c:if>
+	          <c:forEach var="name" items="${csvFiles}">
+	            <option value="${name}" />${name}</option>
+		      </c:forEach>
+		    </select>
+		</div>
+		<div id="regist-input">
+			<div class="row">
+				<div class="label">確認画面を省略する</div>
+				<div class="input">
+					<input type="checkbox" name="confirm_flg" checked>
 				</div>
 			</div>
-		</form>
+			<div class="row">
+				<div class="label">種別：</div>
+				<div class="input">
+					<input type="text" name="type">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">店名：</div>
+				<div class="input">
+					<input type="text" name="restaurant_name">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">単品フラグ：</div>
+				<div class="input">
+					<select name="singlemenu_flg">
+						<option value="0">セット</option>
+						<option value="1">単品</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">メニュー名：</div>
+				<div class="input">
+					<input type="text" name="menu">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">金額：</div>
+				<div class="input">
+					<input type="text" name="price">円
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">税額：</div>
+				<div class="input">
+					<input type="text" name="tax">円
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">合計：</div>
+				<div class="input">
+					<input type="text" name="total">円
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">メニュー登録：</div>
+				<div class="input">
+					<input type="submit" value="登録" class="btn-submit">
+				</div>
+			</div>
+		</div>
+	</form>
 	</div>
 	<div id="footer" class="footer">
 	<%@include file="./footer.jsp"%>

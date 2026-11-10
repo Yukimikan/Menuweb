@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="model.MenuCSV"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>  <!-- jspのJSTL式追加用 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,23 +21,16 @@
 		メニュー検索の結果を表示します。
 	</div>
 	<div id="main">
+	<!-- ★ エラーメッセージ表示 -->
+    <c:if test="${not empty message}">
+    	<div class="error-box">${message}</div>
+	</c:if>
 	<%
       List<MenuCSV> list = (List<MenuCSV>) request.getAttribute("resultList");
-      String error = (String) request.getAttribute("error");
     %>
-	<!-- ★ エラー表示 -->
-		<%
-		if (error != null) {
-		%>
-		<div style="color: red;"><%=error%></div>
-		<%
-		}
-		%>
 		<!-- ★ 結果表示 -->
-		<%
-		if (list != null && !list.isEmpty()) {
-		%>
-		<table border="1">
+        <c:if test="${not empty resultList}">
+  		<table border="1">
 			<tr>
 				<th>No</th>
 				<th>種類</th>
@@ -64,13 +58,10 @@
 			}
 			%>
 		</table>
-		<%
-		} else {
-		%>
-		<div>該当するメニューはありません。</div>
-		<%
-		}
-		%>
+		</c:if>
+        <c:if test="${empty resultList}">
+			<div>該当するメニューはありません。</div>
+		</c:if>
 		<!--
        	<input type="submit" value="登録・編集">
         -->
