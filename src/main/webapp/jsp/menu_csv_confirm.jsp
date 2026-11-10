@@ -45,7 +45,7 @@
       }
     %>
 		<form name="form1"
-			action="<%= request.getContextPath() %>/CsvWriteServlet" method="post">
+			action="<%= request.getContextPath() %>/CsvConfirmServlet" method="post">
 			<div>
 				CSV名： <select name="csv_name" readonly>
 					<%
@@ -69,7 +69,7 @@
 					<div class="label">種別：</div>
 					<div class="input">
 						<input type="text" name="type" readonly
-						   value=<%=request.getAttribute("type") %>>
+						   value="${type}">
 					</div>
 				</div>
 
@@ -77,7 +77,7 @@
 					<div class="label">店名：</div>
 					<div class="input">
 						<input type="text" name="restaurant_name" readonly
-						　value=<%=request.getAttribute("restaurant_name") %>>
+						value="${restaurant_name}">
 					</div>
 				</div>
 
@@ -85,8 +85,7 @@
 					<div class="label">単品フラグ：</div>
 					<div class="input">
 						<input type="text" name="singlemenu_flg" readonly
- 					      value=<%=request.getAttribute("singlemenu_flg") %>>
-						</select>
+ 					      value="${singlemenu_flg}">
 					</div>
 				</div>
 
@@ -94,7 +93,7 @@
 					<div class="label">メニュー名：</div>
 					<div class="input">
 						<input type="text" name="menu" readonly
-						  value=<%=request.getAttribute("menu") %>>
+						  value="${menu}">
 					</div>
 				</div>
 
@@ -102,7 +101,7 @@
 					<div class="label">金額：</div>
 					<div class="input">
 						<input type="text" name="price" readonly
-						  value=<%=request.getAttribute("price") %>>円
+						  value="${price}">円
 					</div>
 				</div>
 
@@ -110,7 +109,7 @@
 					<div class="label">税額：</div>
 					<div class="input">
 						<input type="text" name="tax" readonly
-						  value=<%=request.getAttribute("tax") %>>円
+						  value="${tax}">円
 					</div>
 				</div>
 
@@ -118,7 +117,7 @@
 					<div class="label">合計：</div>
 					<div class="input">
 						<input type="text" name="total" readonly
-						  value=<%=request.getAttribute("total") %>>円
+						  value="${total}">円
 					</div>
 				</div>
 
