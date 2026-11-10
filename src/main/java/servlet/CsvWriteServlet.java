@@ -40,9 +40,8 @@ public class CsvWriteServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 初期化
-    request.setAttribute("message", "");
 
-    // 1. CSVリスト取得（SharedService）
+	// 1. CSVリスト取得（SharedService）
     List<String> csvFiles = fileService.execute();
     request.setAttribute("csvFiles", csvFiles);
 
@@ -77,8 +76,9 @@ public class CsvWriteServlet extends HttpServlet {
 	String confirmFlg = request.getParameter("confirm_flg");
 	boolean checked = confirmFlg != null;
     // 2. inputCheck(フロントで実行)
-    if (!menuCsvRegistform.inputCheck()) {
-      request.setAttribute("message", "未入力項目があります");
+	String message = menuCsvRegistform.inputCheck();
+    if (!message.isEmpty()) {
+      request.setAttribute("message", message);
       // CSVリストを再取得（入力画面に戻るため）
       List<String> csvFiles = fileService.execute();
       request.setAttribute("csvFiles", csvFiles);

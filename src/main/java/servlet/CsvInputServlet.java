@@ -38,9 +38,9 @@ public class CsvInputServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // 初期化
-    request.setAttribute("message", "");
-    // 1. CSVリスト取得（SharedService）
+	// 1. 画面情報取得（なし）
+
+	// 1. CSVリスト取得（SharedService）
     List<String> csvFiles = fileService.execute();
     request.setAttribute("csvFiles", csvFiles);
 
@@ -68,9 +68,10 @@ public class CsvInputServlet extends HttpServlet {
       );
 
     // 2. inputCheck(フロントで実行)
-    if(!menuCsvInputForm.inputCheck()) {
+	String message = menuCsvInputForm.inputCheck();
+    if(!message.isEmpty()) {
     	//reload
-        request.setAttribute("message","未入力項目があります");
+        request.setAttribute("message", message);
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
         dispatcher.forward(request, response);
         return;

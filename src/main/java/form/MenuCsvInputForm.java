@@ -1,5 +1,6 @@
 package form;
 
+import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,17 +22,17 @@ public class MenuCsvInputForm {
     return Integer.parseInt(this.total);
   }
 
-  public boolean inputCheck() {
+  public String inputCheck() {
     if (this.total == null
       || this.total.trim().isEmpty()
       || "".equals(this.total)) {
     	// 未入力エラー
-      return false;
+      this.message = MessageUtil.getProperty("msg_w01_csv_input");
     } else if (!total.matches("[0-9]+")) {
         // 数値以外
-      return false;
+      this.message = MessageUtil.getProperty("msg_w02_csv_input");
     }
-    return true;
+    return message;
   }
 
   /**

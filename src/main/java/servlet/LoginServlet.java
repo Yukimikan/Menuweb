@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import common.MessageUtil;
 import form.LoginForm;
 import model.GlobalConst;
 import service.LoginService;
@@ -35,8 +34,6 @@ public class LoginServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // 初期化
-    request.setAttribute("message", "");
     // 1. 画面情報取得（なし）
 
     // 2. 初期表示へ forward
@@ -56,13 +53,15 @@ public class LoginServlet extends HttpServlet {
     // 1. parameter set
 	LoginForm loginForm = new LoginForm(
     	(String) request.getParameter("user"),
-    	(String) request.getParameter("password")
+    	(String) request.getParameter("password"),
+    	""
     	);
 
     // 2. inputCheck(フロントで実行)
-    if(!loginForm.inputCheck()) {
+	String message = loginForm.inputCheck();
+    if(!message.isEmpty()) {
       //reload
-      request.setAttribute("message","未入力項目があります");
+      request.setAttribute("message", message);
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
   	  dispatcher.forward(request, response);
   	  return;
@@ -81,7 +80,7 @@ public class LoginServlet extends HttpServlet {
 	    dispatcher.forward(request, response);
 	  } else {
 	    // 5. forward
-        request.setAttribute("message",MessageUtil.getProperty("msg_w01_login"));
+        request.setAttribute("message",result.getMessage());
    	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
   	    dispatcher.forward(request, response);
       }

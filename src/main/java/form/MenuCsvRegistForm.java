@@ -1,5 +1,6 @@
 package form;
 
+import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,23 +26,23 @@ public class MenuCsvRegistForm {
    *
    * @return boolean
    */
-  public boolean inputCheck() {
+  public String inputCheck() {
 
     //チェック
     if (this.type == null || this.type.isEmpty()) {
-      return false;
+      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else if (this.restaurantName == null || this.restaurantName.isEmpty()) {
-      return false;
+      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else if (this.menu == null || this.menu.isEmpty()) {
-      return false;
+      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else if (this.price == null || this.price.isEmpty()) {
-      return false;
+      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else if (this.tax == null || this.tax.isEmpty()) {
-      return false;
+      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else if (this.total == null || this.total.isEmpty()) {
-      return false;
+      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     }
-    return true;
+    return message;
   }
 
   /**
