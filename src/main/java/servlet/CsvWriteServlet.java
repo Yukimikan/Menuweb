@@ -89,29 +89,30 @@ public class CsvWriteServlet extends HttpServlet {
     }
 
     // 入力チェック不要
-	try {
-  	  if (checked) {
-        // 3. サーバー側のチェック
+	if (checked) {
+      // 3. サーバー側のチェック
+      try {
         // 3. service execute
         CsvWriteServiceResult result = service.execute(menuCsvRegistform);
-	    if (result.isSuccess()) {
+        if (result.isSuccess()) {
           // 4. requestSetAttribute
           request.setAttribute("resultList", result.getRetList());
           // 5. forward
           RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
           dispatcher.forward(request, response);
-	    } else {
-          // 4. requestSetAttribute
-          request.setAttribute("resultList", result.getRetList());
-          // 5. forward
-          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspRegistUrl);
-          dispatcher.forward(request, response);
         }
-	  } else {
+	  } catch (Exception e) {
+        // エラー画面に遷移
+        System.out.print(e.getMessage());
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+        dispatcher.forward(request, response);
+	    }
+      } else {
         // 3. サーバー側のチェック
+
         // 3. service execute
-  	    // CsvWriteServiceResult result = service.execute(menuCsvRegistform);
-  	    // 4. requestSetAttribute
+
+    	// 4. requestSetAttribute
 	    request.setAttribute("csv_name", menuCsvRegistform.getCsvName());
 	    request.setAttribute("type", menuCsvRegistform.getType());
 	    request.setAttribute("restaurant_name", menuCsvRegistform.getRestaurantName());
@@ -123,12 +124,6 @@ public class CsvWriteServlet extends HttpServlet {
         // 5. forward
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspConfirmUrl);
         dispatcher.forward(request, response);
-      }
-  	} catch (Exception e) {
-        // エラー画面に遷移
-        System.out.print(e.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
-        dispatcher.forward(request, response);
-      }
+    }
   }
 }

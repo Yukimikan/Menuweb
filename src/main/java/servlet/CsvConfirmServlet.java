@@ -10,8 +10,6 @@ import java.io.IOException;
 
 import form.MenuCsvConfirmForm;
 import model.GlobalConst;
-import service.CsvFileListService;
-import service.CsvFileListServiceImpl;
 import service.CsvWriteService;
 import service.CsvWriteServiceImpl;
 import service.CsvWriteServiceResult;
@@ -23,12 +21,10 @@ public class CsvConfirmServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   private CsvWriteService service;
-  private CsvFileListService fileService;
 
   public CsvConfirmServlet() {
     super();
     service = new CsvWriteServiceImpl();
-    fileService = new CsvFileListServiceImpl();
   }
 
 
@@ -61,34 +57,18 @@ public class CsvConfirmServlet extends HttpServlet {
         "");
 
     // 2. inputCheck(フロントで実行)
-    if (!menuCsvConfirmform.inputCheck()) {
-      // error deadlogic
-      request.setAttribute("message", "入力エラー");
-      // error
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
-      dispatcher.forward(request, response);
-      throw new RuntimeException();
-    }
 
     try {
       // 3. サーバー側のチェック
 
       // 3. service execute
       CsvWriteServiceResult result = service.execute(menuCsvConfirmform);
-
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());
         // 5. forward
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
         dispatcher.forward(request, response);
-      } else {
-  	    // 5. forward
-    	// error
-        request.setAttribute("message","何らかのエラー発生");
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
-        dispatcher.forward(request, response);
-      	return;
       }
     } catch (Exception e) {
       // エラー画面に遷移

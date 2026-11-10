@@ -38,7 +38,7 @@ public class CsvInputServiceImpl implements CsvInputService {
       } else {
         return new CsvInputServiceResult(
      	        false,
-      		    "error",
+      		    "エラー：CSVヘッダーが一致しません",
       		    Collections.emptyList()
       		    );
 

@@ -90,7 +90,7 @@ public class CsvInputServlet extends HttpServlet {
         dispatcher.forward(request, response);
       } else {
   	    // 5. forward
-        request.setAttribute("message","何らかのエラー発生");
+        request.setAttribute("message", result.getMessage());
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
         dispatcher.forward(request, response);
     	return;

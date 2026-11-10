@@ -35,14 +35,16 @@ public class CsvWriteServiceImpl implements CsvWriteService {
     try {
       CsvUtil.append(csvName, rec);
     } catch (Exception e) {
-      throw new IOException("CSV書き込みに失敗しました: " + e.getMessage(), e);
+      // CSV書き込みに失敗
+      throw new IOException(e.getMessage(), e);
     }
     // 2. 書き込み後の確認用に READ（画面表示用）
     List<MenuCSV> list;
     try {
       list = CsvUtil.read(csvName);
     } catch (Exception e) {
-      throw new IOException("CSV読み込みに失敗しました: " + e.getMessage(), e);
+      // CSV読み込みに失敗
+      throw new IOException(e.getMessage(), e);
     }
     return new CsvWriteServiceResult(
     		true
@@ -71,14 +73,16 @@ public class CsvWriteServiceImpl implements CsvWriteService {
     try {
       CsvUtil.append(csvName, rec);
     } catch (Exception e) {
-      throw new IOException("CSV書き込みに失敗しました: " + e.getMessage(), e);
+      // CSV書き込みに失敗
+      throw new IOException(e.getMessage(), e);
     }
     // 2. 書き込み後の確認用に READ（画面表示用）
     List<MenuCSV> list;
     try {
       list = CsvUtil.read(csvName);
     } catch (Exception e) {
-      throw new IOException("CSV読み込みに失敗しました: " + e.getMessage(), e);
+      // CSV読み込みに失敗
+      throw new IOException(e.getMessage(), e);
     }
     return new CsvWriteServiceResult(
     		true
