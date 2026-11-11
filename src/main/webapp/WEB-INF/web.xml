@@ -49,5 +49,15 @@
     <servlet-name>CsvWriteServlet</servlet-name>
     <url-pattern>/CsvWriteServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MenuRegistServlet</display-name>
+    <servlet-name>MenuRegistServlet</servlet-name>
+    <servlet-class>servlet.MenuRegistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuRegistServlet</servlet-name>
+    <url-pattern>/MenuRegistServlet</url-pattern>
+  </servlet-mapping>
 
 </web-app>
