@@ -12,6 +12,8 @@ public class MenuCsvInputForm {
 
   private String date;
   private String csvName;
+  private String type;
+  private String restaurantName;
   private String total;
   private String totalCondition;
   private String message;
@@ -22,12 +24,7 @@ public class MenuCsvInputForm {
   }
 
   public String inputCheck() {
-    if (this.total == null
-      || this.total.trim().isEmpty()
-      || "".equals(this.total)) {
-    	// 未入力エラー
-      this.message = MessageUtil.getProperty("msg_w01_csv_input");
-    } else if (!total.matches("[0-9]+")) {
+    if (!total.matches("[0-9]+")) {
         // 数値以外
       this.message = MessageUtil.getProperty("msg_w02_csv_input");
     }

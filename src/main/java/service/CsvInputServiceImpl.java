@@ -33,7 +33,11 @@ public class CsvInputServiceImpl implements CsvInputService {
        	result.setMessage(MessageUtil.getProperty("msg_e01_csv_header"));
       } else {
         list = CsvUtil.read(form.getCsvName()).stream()
-    	      .filter(ret -> cond.match(ret.getPrice(), total))
+    	      .filter(ret ->
+    	              cond.match(ret.getPrice(), total)
+    	              && isMatch(form.getType(), ret.getType())
+    	              && isMatch(form.getRestaurantName(), ret.getRestaurantName())
+    	              )
       	      .toList();
         result.setSuccess(true);
       }
@@ -48,5 +52,11 @@ public class CsvInputServiceImpl implements CsvInputService {
     // return
     return result;
   }
+
+  private boolean isMatch(String condition, String value) {
+	    return condition == null
+	            || condition.isEmpty()
+	            || condition.equals(value);
+	}
 
 }

@@ -14,7 +14,6 @@
     //1. 入力チェック
     var indate = document.form1.date.value;
     var csvname = document.form1.csv_name.value;
-    var total = document.form1.total.value;
     document.form1.message.value = "";
 
     //1-1 必須
@@ -27,11 +26,6 @@
         alert('CSV名を指定して下さい');
         document.form1.message.value ='CSV名を指定して下さい';
         return false;
-    }
-    if (total.length === 0) {
-    	alert('金額を指定して下さい');
-        document.form1.message.value = '金額を指定して下さい';
-    	return false;
     }
     return true;
   }
@@ -74,6 +68,18 @@
 				<div class="label">日付：</div>
 				<div class="input">
 					<input type="text" name="date" value="2025/01/01">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">種類：</div>
+				<div class="input">
+					<input type="text" name="type" value="">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">店名：</div>
+				<div class="input">
+					<input type="text" name="restaurant_name" value="">
 				</div>
 			</div>
 			<div class="row">

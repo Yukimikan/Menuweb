@@ -62,6 +62,8 @@ public class CsvInputServlet extends HttpServlet {
 	MenuCsvInputForm menuCsvInputForm = new MenuCsvInputForm(
       (String) request.getParameter("date"),
       (String) request.getParameter("csv_name"),
+      (String) request.getParameter("type"),
+      (String) request.getParameter("restaurant_name"),
       (String) request.getParameter("total"),
       (String) request.getParameter("total_condition"),
       ""
