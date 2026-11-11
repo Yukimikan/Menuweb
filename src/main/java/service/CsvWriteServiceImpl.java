@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import common.CsvUtil;
+import common.FileControl;
 import form.MenuCsvConfirmForm;
 import form.MenuCsvRegistForm;
 import model.GlobalConst;
@@ -18,6 +19,8 @@ public class CsvWriteServiceImpl implements CsvWriteService {
    * execute.
    */
   public CsvWriteServiceResult execute(MenuCsvRegistForm form) throws IOException{
+
+	CsvWriteServiceResult result = new CsvWriteServiceResult();
    // MenuCSV に渡す(初期化)
     String[] cols = {
       "99", // No（新規登録なので空）
@@ -33,7 +36,8 @@ public class CsvWriteServiceImpl implements CsvWriteService {
 	String csvName = form.getCsvName();
     // 1. 新規行だけ書き込む（追記モード）
     try {
-      CsvUtil.append(csvName, rec);
+      FileControl.append(GlobalConst.CSV_FOLDER_PATH + csvName, rec.returnJoinedString());
+      //CsvUtil.append(csvName, rec);
     } catch (Exception e) {
       // CSV書き込みに失敗
       throw new IOException(e.getMessage(), e);
@@ -71,7 +75,8 @@ public class CsvWriteServiceImpl implements CsvWriteService {
 	String csvName = form.getCsvName();
     // 1. 新規行だけ書き込む（追記モード）
     try {
-      CsvUtil.append(csvName, rec);
+        FileControl.append(GlobalConst.CSV_FOLDER_PATH + csvName, rec.returnJoinedString());
+        //CsvUtil.append(csvName, rec);
     } catch (Exception e) {
       // CSV書き込みに失敗
       throw new IOException(e.getMessage(), e);
@@ -95,6 +100,7 @@ public class CsvWriteServiceImpl implements CsvWriteService {
    *
    * @return boolean
    */
+  /*
   public boolean formatCheck(MenuCSV rec) {
     //チェック
     if (rec == null) {
@@ -113,5 +119,6 @@ public class CsvWriteServiceImpl implements CsvWriteService {
     }
     return true;
   }
+  */
 
 }

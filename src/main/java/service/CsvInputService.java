@@ -4,5 +4,5 @@ import form.MenuCsvInputForm;
 
 public interface CsvInputService {
 
-  public CsvInputServiceResult execute(MenuCsvInputForm input);
+  public CsvInputServiceResult execute(MenuCsvInputForm form);
 }

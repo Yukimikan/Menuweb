@@ -1,5 +1,7 @@
 package common;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,4 +29,21 @@ public class FileControl {
       .toList();
     }
   }
+
+  /**
+  *
+  * @param filePath
+  * @param rec
+  * @throws IOException
+  */
+ public static void append(String filePath, String rec) throws IOException {
+
+   try (BufferedWriter bw = new BufferedWriter(
+       new FileWriter(filePath, true))) { // ★ true = 追記モード
+     bw.write(rec);
+     bw.newLine();
+   } catch (Exception e) {
+     throw new IOException("error: " + e.getMessage(), e);
+   }
+ }
 }

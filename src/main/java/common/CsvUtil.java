@@ -1,12 +1,9 @@
 package common;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -31,11 +28,9 @@ public final class CsvUtil {
   //Copilotで修正済み。
 
   //絶対パスで指定
-  public static final String CSV_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
+  public static final String CSV_FOLDER_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
   public static final int MAX_COUNT = 100;
   public static final long MAX_BYTES = 1_000_000; // 1MB
-  // public static final String CSV_NAME = "menu.csv";
-
   /* callしない */
   //コンストラクタ
   private CsvUtil() {
@@ -50,7 +45,7 @@ public final class CsvUtil {
    */
   public static List<MenuCSV> read(String infilename)
             throws IOException {
-    String infilePath = CSV_PATH + infilename;
+    String infilePath = CSV_FOLDER_PATH + infilename;
     List<MenuCSV> retList = new ArrayList<MenuCSV>();
 
     try {
@@ -67,10 +62,7 @@ public final class CsvUtil {
                                  .iterator();
 
       // 3. ヘッダー一致チェック
-      // String header = CsvUtil.readHeader(infilePath);
-      // if (!MenuCSV.CSV_HEADER.equals(header)) {
-      //  System.out.println("警告：ヘッダーが想定と異なります → " + header);
-      // }
+
 
       // 3. ヘッダー読み飛ばし
       if (it.hasNext()) {
@@ -101,55 +93,13 @@ public final class CsvUtil {
   }
 
   /**
-   *
-   * @param csvName
-   * @param rec
-   * @throws IOException
-   */
-  public static void append(String csvName, MenuCSV rec) throws IOException {
-
-    try (BufferedWriter bw = new BufferedWriter(
-        new FileWriter(CSV_PATH + csvName, true))) { // ★ true = 追記モード
-      bw.write(rec.returnJoinedString());
-      bw.newLine();
-    } catch (Exception e) {
-      throw new IOException("CSV追記に失敗しました: " + e.getMessage(), e);
-    }
-  }
-
-  /**
-   * CsvHeader読み込み.
-   *
-   * @param filePath
-   * @return String
-   */
-  // 先頭行（ヘッダー）を読み、BOM を除去して返す
-  public static String readHeader(String filePath) throws Exception {
-    try (
-        FileInputStream fileInput = new FileInputStream(filePath);
-        InputStreamReader inputStream = new InputStreamReader(fileInput, StandardCharsets.UTF_8);
-        BufferedReader buffReader = new BufferedReader(inputStream)
-    ) {
-      String header = buffReader.readLine();
-
-      if (header != null && header.startsWith("\uFEFF")) {
-        header = header.substring(1);
-      }
-      return header;
-
-    } catch (Exception e) {
-      throw e;
-    }
-  }
-
-  /**
    * ★ 今は使わないが、将来の編集機能用に残す選択肢
    * CSV 全書き込み（行削除・並び替えなどで使う）
    */
   public static void write(String csvName, List<MenuCSV> list) throws IOException {
 
     try (BufferedWriter bw = new BufferedWriter(
-          new FileWriter(CSV_PATH + csvName, false))) { // ★ false = 上書き
+          new FileWriter(CSV_FOLDER_PATH + csvName, false))) { // ★ false = 上書き
 
       // ヘッダー書き込み
       bw.write(MenuCSV.CSV_HEADER);
@@ -165,4 +115,5 @@ public final class CsvUtil {
       throw new IOException("CSV書き込みに失敗しました: " + e.getMessage(), e);
     }
   }
+
 }

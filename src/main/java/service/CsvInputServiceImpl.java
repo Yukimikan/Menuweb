@@ -5,7 +5,9 @@ import java.util.List;
 
 import common.ConditionTotal;
 import common.CsvUtil;
+import common.MessageUtil;
 import form.MenuCsvInputForm;
+import model.GlobalConst;
 import model.MenuCSV;
 
 /**
@@ -13,40 +15,38 @@ import model.MenuCSV;
  * */
 public class CsvInputServiceImpl implements CsvInputService {
 
-  public static final String CSV_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
-
   /**
    * execute.
    */
-  public CsvInputServiceResult execute(MenuCsvInputForm input) {
+  public CsvInputServiceResult execute(MenuCsvInputForm form) {
+
+	CsvInputServiceResult result = new CsvInputServiceResult();
+
     try {
-      ConditionTotal cond = ConditionTotal.fromCode(input.getTotalCondition());
-      int total = input.getTotal();
+      ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
+      int total = form.getTotal();
+      List<MenuCSV> list = Collections.emptyList();
 
       // ヘッダー一致チェック
-      if(MenuCSV.readHeader(CSV_PATH + input.getCsvName())) {
-        List<MenuCSV> list =
-    		    CsvUtil.read(input.getCsvName()).stream()
-    	        .filter(ret -> cond.match(ret.getPrice(), total))
-    	        .toList();
-
-        return new CsvInputServiceResult(
-    	        true,
-    		    "",
-    		    list
-    		    );
+      if(!MenuCSV.readHeader(GlobalConst.CSV_FOLDER_PATH + form.getCsvName())) {
+  	   	result.setSuccess(false);
+       	result.setMessage(MessageUtil.getProperty("msg_e01_csv_header"));
       } else {
-        return new CsvInputServiceResult(
-     	        false,
-      		    "エラー：CSVヘッダーが一致しません",
-      		    Collections.emptyList()
-      		    );
-
+        list = CsvUtil.read(form.getCsvName()).stream()
+    	      .filter(ret -> cond.match(ret.getPrice(), total))
+      	      .toList();
+        result.setSuccess(true);
       }
+  	  // result
+  	  if (result.isSuccess()) {
+        result.setRetList(list);
+        return result;
+  	  }
     } catch (Exception e) {
       e.printStackTrace();
-      return null;
     }
+    // return
+    return result;
   }
 
 }
