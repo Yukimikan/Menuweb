@@ -34,7 +34,7 @@
 			CSV名：
 			<div class="input">
 				<input type="text" name="csv_name" readonly
-				   value="${csv_name}">
+				   value="${form.csvName}">
 			</div>
 		</div>
 		<!-- ★ 登録内容表示 -->
@@ -43,49 +43,49 @@
 			<div class="label">種別：</div>
 			<div class="input">
 				<input type="text" name="type" readonly
-				   value="${type}">
+				   value="${form.type}">
 			</div>
 		</div>
 		<div class="row">
 			<div class="label">店名：</div>
 			<div class="input">
 				<input type="text" name="restaurant_name" readonly
-				value="${restaurant_name}">
+				value="${form.restaurantName}">
 			</div>
 		</div>
 		<div class="row">
 			<div class="label">単品フラグ：</div>
 			<div class="input">
 				<input type="text" name="singlemenu_flg" readonly
-				      value="${singlemenu_flg}">
+				      value="${form.singlemenuFlg}">
 			</div>
 		</div>
 		<div class="row">
 			<div class="label">メニュー名：</div>
 			<div class="input">
 				<input type="text" name="menu" readonly
-				  value="${menu}">
+				  value="${form.menu}">
 			</div>
 		</div>
 		<div class="row">
 			<div class="label">金額：</div>
 			<div class="input">
 				<input type="text" name="price" readonly
-				  value="${price}">円
+				  value="${form.price}">円
 			</div>
 		</div>
 		<div class="row">
 			<div class="label">税額：</div>
 			<div class="input">
 				<input type="text" name="tax" readonly
-				  value="${tax}">円
+				  value="${form.tax}">円
 			</div>
 		</div>
 		<div class="row">
 			<div class="label">合計：</div>
 			<div class="input">
 				<input type="text" name="total" readonly
-				  value="${total}">円
+				  value="${form.total}">円
 			</div>
 		</div>
 		<div class="row">

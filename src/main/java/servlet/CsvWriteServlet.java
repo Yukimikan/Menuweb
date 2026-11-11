@@ -113,14 +113,7 @@ public class CsvWriteServlet extends HttpServlet {
         // 3. service execute
 
     	// 4. requestSetAttribute
-	    request.setAttribute("csv_name", menuCsvRegistform.getCsvName());
-	    request.setAttribute("type", menuCsvRegistform.getType());
-	    request.setAttribute("restaurant_name", menuCsvRegistform.getRestaurantName());
-	    request.setAttribute("singlemenu_flg", menuCsvRegistform.getSinglemenuFlg());
-	    request.setAttribute("menu", menuCsvRegistform.getMenu());
-	    request.setAttribute("price", menuCsvRegistform.getPrice());
-	    request.setAttribute("tax", menuCsvRegistform.getTax());
-	    request.setAttribute("total", menuCsvRegistform.getTotal());
+    	request.setAttribute("form", menuCsvRegistform);
         // 5. forward
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspConfirmUrl);
         dispatcher.forward(request, response);
