@@ -58,7 +58,7 @@
 			<div class="input">
 
 				<input type="text" name="singlemenu_flg" readonly
-				      value="${form.singleMenuFlg}">○</c:if>">
+				      value="${form.singleMenuFlg}">
 			</div>
 		</div>
 		<div class="row">
