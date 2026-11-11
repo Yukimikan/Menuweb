@@ -20,13 +20,19 @@ public class MenuCsvInputForm {
 
   public int getTotal() {
 	// ★ int で返す(NULLチェック後)
-    return Integer.parseInt(this.total);
+	  if (this.total.isBlank()) {
+		  return 0;
+	  } else {
+		  return Integer.parseInt(this.total);
+	  }
   }
 
   public String inputCheck() {
-    if (!total.matches("[0-9]+")) {
+    if ((total.matches("[0-9]+"))) {
         // 数値以外
-      this.message = MessageUtil.getProperty("msg_w02_csv_input");
+      if(!(total == null || total.isEmpty())) {
+        this.message = MessageUtil.getProperty("msg_w02_csv_input");
+      }
     }
     return message;
   }

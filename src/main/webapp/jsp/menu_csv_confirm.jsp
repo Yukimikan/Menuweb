@@ -56,8 +56,9 @@
 		<div class="row">
 			<div class="label">単品フラグ：</div>
 			<div class="input">
+
 				<input type="text" name="singlemenu_flg" readonly
-				      value="${form.singlemenuFlg}">
+				      value="${form.singleMenuFlg}">○</c:if>">
 			</div>
 		</div>
 		<div class="row">

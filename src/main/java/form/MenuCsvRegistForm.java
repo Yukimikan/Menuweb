@@ -14,7 +14,7 @@ public class MenuCsvRegistForm {
   private String confirmFlg;
   private String type;
   private String restaurantName;
-  private String singlemenuFlg;
+  private String singleMenuFlg;
   private String menu;
   private String price;
   private String tax;

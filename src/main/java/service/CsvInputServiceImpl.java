@@ -21,10 +21,10 @@ public class CsvInputServiceImpl implements CsvInputService {
   public CsvInputServiceResult execute(MenuCsvInputForm form) {
 
 	CsvInputServiceResult result = new CsvInputServiceResult();
-
     try {
       ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
       int total = form.getTotal();
+
       List<MenuCSV> list = Collections.emptyList();
 
       // ヘッダー一致チェック
