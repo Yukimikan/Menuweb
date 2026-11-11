@@ -1,32 +1,45 @@
 package service;
 
 import common.MessageUtil;
+import dao.UserDao;
 import dao.UserDaoImpl;
 import form.LoginForm;
 
+/*
+ * service.
+ */
 public class LoginServiceImpl implements LoginService{
 
+  private UserDao userDao;
+
+  public LoginServiceImpl(){
+    userDao = new UserDaoImpl();
+  }
+
   public LoginServiceResult execute(LoginForm form) {
+
+	LoginServiceResult result = new LoginServiceResult();
+
 	try {
-	  UserDaoImpl daoImpl = new UserDaoImpl();
-  	  String userName = daoImpl.selectUserByKey(form.getName(), form.getPassword());
+  	  String userName = userDao.selectUserByKey(form.getName(), form.getPassword());
   	  if (userName == null || userName.isEmpty()) {
   	  	// 認証エラー
-        System.out.print(MessageUtil.getProperty("msg_w01_login"));
-        return new LoginServiceResult
-        		(false,
-        		MessageUtil.getProperty("msg_w01_login"),
-        		"");
+        result.setSuccess(false);
+        result.setMessage(MessageUtil.getProperty("msg_w01_login"));
+        System.out.print(result.getMessage());
       } else {
-  	    return new LoginServiceResult
-  	    		(true,
-  	    		"",
-  	    		userName);
+        result.setSuccess(true);
+  	  }
+  	  // result
+  	  if (result.isSuccess()) {
+        result.setUserName(userName);
+        return result;
   	  }
     } catch (Exception e) {
 	  System.out.print(e.getMessage());
     }
-	return null;
+    // return
+    return result;
   }
 
 }
