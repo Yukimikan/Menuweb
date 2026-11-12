@@ -20,13 +20,13 @@ import service.CsvInputServiceResult;
 /**
  * Servlet.
  */
-public class CsvInputServlet extends HttpServlet {
+public class CsvSearchServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   private CsvInputService service;
   private CsvFileListService fileService;
 
-  public CsvInputServlet() {
+  public CsvSearchServlet() {
     super();
     service = new CsvInputServiceImpl();
     fileService = new CsvFileListServiceImpl();
@@ -46,7 +46,7 @@ public class CsvInputServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.JspInputUrl);
+        request.getRequestDispatcher(GlobalConst.JspSearchUrl);
     dispatcher.forward(request, response);
   }
 
@@ -74,7 +74,7 @@ public class CsvInputServlet extends HttpServlet {
     if(!message.isEmpty()) {
     	//reload
         request.setAttribute("message", message);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
         dispatcher.forward(request, response);
         return;
     };
@@ -94,7 +94,7 @@ public class CsvInputServlet extends HttpServlet {
       } else {
   	    // 5. forward
         request.setAttribute("message", result.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspInputUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
         dispatcher.forward(request, response);
     	return;
       }

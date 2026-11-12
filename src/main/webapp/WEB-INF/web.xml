@@ -21,12 +21,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CsvInputServlet</display-name>
-    <servlet-name>CsvInputServlet</servlet-name>
-    <servlet-class>servlet.CsvInputServlet</servlet-class>
+    <display-name>CsvSearchServlet</display-name>
+    <servlet-name>CsvSearchServlet</servlet-name>
+    <servlet-class>servlet.CsvSearchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CsvInputServlet</servlet-name>
+    <servlet-name>CsvSearchServlet</servlet-name>
     <url-pattern>/csv_search</url-pattern>
   </servlet-mapping>
   <servlet>
