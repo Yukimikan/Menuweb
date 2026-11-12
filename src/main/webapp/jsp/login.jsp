@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>  <!-- jspのJSTL式追加用 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,16 +38,10 @@
 	<h2>＜ログイン＞</h2>
 	</div>
 	<div id="main">
-		<%
-		String message = (String) request.getAttribute("message");
-		%>
-		<%
-		if (message != null && !message.isEmpty()) {
-		%>
-		<div class="error-box"><%= message %></div>
-		<%
-		}
-		%>
+		<!-- ★ エラーメッセージ表示 -->
+	    <c:if test="${not empty message}">
+	    	<div class="error-box">${message}</div>
+		</c:if>
 		<form action="LoginServlet" method="post"
    	          onsubmit="return checkText()">
 			ユーザ名；<input type="text" name="user" value="user" />

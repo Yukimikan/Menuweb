@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -45,6 +46,8 @@ public class MenuConfirmServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
+	HttpSession session = request.getSession();
+	String userName = (String) session.getAttribute("userName");
 	MenuConfirmForm menuConfirmform = new MenuConfirmForm(
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
@@ -53,7 +56,6 @@ public class MenuConfirmServlet extends HttpServlet {
         (String) request.getParameter("price"),
         (String) request.getParameter("tax"),
         (String) request.getParameter("total"),
-        (String) request.getParameter("user_name"),
         "");
 
     // 2. inputCheck(フロントで実行)
@@ -62,7 +64,7 @@ public class MenuConfirmServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      MenuRegistServiceResult result = service.execute(menuConfirmform);
+      MenuRegistServiceResult result = service.execute(menuConfirmform, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
 

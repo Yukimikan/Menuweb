@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -74,8 +75,10 @@ public class LoginServlet extends HttpServlet {
 	  LoginServiceResult result = service.execute(loginForm);
 	  if (result.isSuccess()) {
 	    // 4. requestSetAttribute
-	    request.setAttribute("userName", result.getUserName());
-        // 5. forward
+	    // request.setAttribute("userName", result.getUserName());
+	    HttpSession session = request.getSession();
+	    session.setAttribute("userName",result.getUserName());
+	    // 5. forward
 	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuIndexUrl);
 	    dispatcher.forward(request, response);
 	  } else {

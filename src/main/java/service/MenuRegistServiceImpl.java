@@ -38,26 +38,10 @@ public class MenuRegistServiceImpl implements MenuRegistService {
           Integer.parseInt(form.getTotal()),
           userName);
 
-// MenuCSV に渡す(初期化)
-//    String[] cols = {
-//      "99", // No（新規登録なので空）
-//      form.getType(),
-//      form.getRestaurantName(),
-//      form.getSingleMenuFlg(),
-//      form.getMenu(),
-//      form.getPrice(),
-//      form.getTax(),
-//      form.getTotal()
-//    };
-//    MenuCSV rec = MenuCSV.fromInput(cols);
-//	String csvName = form.getCsvName();
-
     // 1. 新規行だけ書き込む（追記モード）
     try {
       int flg = menuDao.insert(entity);
       result.setSuccess(true);
-//      FileControl.append(GlobalConst.CSV_FOLDER_PATH + csvName, rec.returnJoinedString());
-      //CsvUtil.append(csvName, rec);
     } catch (Exception e) {
       // CSV書き込みに失敗
       result.setMessage("登録エラー");
@@ -69,7 +53,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
   /**
    * execute.
    */
-  public MenuRegistServiceResult execute(MenuConfirmForm form) throws IOException{
+  public MenuRegistServiceResult execute(MenuConfirmForm form, String userName) throws IOException{
 
 	// 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
@@ -82,14 +66,12 @@ public class MenuRegistServiceImpl implements MenuRegistService {
           Integer.parseInt(form.getPrice()),
           Integer.parseInt(form.getTax()),
           Integer.parseInt(form.getTotal()),
-          form.getUserName());
+          userName);
 
     // 1. 新規行だけ書き込む（追記モード）
     try {
       int flg = menuDao.insert(entity);
       result.setSuccess(true);
-//	      FileControl.append(GlobalConst.CSV_FOLDER_PATH + csvName, rec.returnJoinedString());
-      //CsvUtil.append(csvName, rec);
     } catch (Exception e) {
       // CSV書き込みに失敗
       result.setMessage("登録エラー");

@@ -7,5 +7,13 @@
 		<a href="/Menuweb/CsvInputServlet">CSV検索</a>
 	    <a href="/Menuweb/CsvWriteServlet">手入力で登録</a>
 	    <a href="/Menuweb/LoginServlet">ログイン</a>
+		<span>ユーザ名：</span>
+		    <c:if test="${not empty sessionScope.userName}">
+		        <span>${sessionScope.userName}</span>
+		    </c:if>
+		    <!--  非ログイン時（ログイン機能実装後の動確用） -->
+		    <c:if test="${empty sessionScope.userName}">
+		        <span>guestユーザ</span>
+		    </c:if>
 	</nav>
 </header>

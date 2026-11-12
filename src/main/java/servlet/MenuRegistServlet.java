@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -51,9 +52,9 @@ public class MenuRegistServlet extends HttpServlet {
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-
     // 1. parameter set
-	String userName = (String) request.getParameter("user_name");
+	HttpSession session = request.getSession();
+	String userName = (String) session.getAttribute("userName");
 	MenuRegistForm menuRegistform = new MenuRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("type"),
@@ -63,7 +64,6 @@ public class MenuRegistServlet extends HttpServlet {
         (String) request.getParameter("price"),
         (String) request.getParameter("tax"),
         (String) request.getParameter("total"),
-        userName,
         "");
 	// チェックボックスの選択された値を取得
 	// String[] confirm_flg = request.getParameterValues("confirm_flg");

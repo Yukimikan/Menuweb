@@ -74,11 +74,13 @@ function checkText() {
 		onsubmit="return checkText()" method="post">
 		<div>
 			ユーザ名：
-		    <c:if test="${not empty userName}">
-		        <input type="text" name="user_name" value="${userName}">
+		    <c:if test="${not empty sessionScope.userName}">
+		        <input type="text" name="user_name" value="${sessionScope.userName}">
 		    </c:if>
-		    <!--  ログイン機能実装後の動確用 -->
-            <input type="text" name="user_name" value="guest">
+		    <!--  非ログイン時（ログイン機能実装後の動確用） -->
+		    <c:if test="${empty sessionScope.userName}">
+                <input type="text" name="user_name" value="guest">
+		    </c:if>
 		</div>
 		<div id="regist-input">
 			<div class="row">
