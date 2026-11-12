@@ -1,9 +1,9 @@
 package form;
 
+import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.GlobalConst;
 
 @Data
 @NoArgsConstructor
@@ -12,36 +12,29 @@ public class MenuCsvInputForm {
 
   private String date;
   private String csvName;
-  private int total;
-  private String totalcondition;
+  private String type;
+  private String restaurantName;
+  private String total;
+  private String totalCondition;
   private String message;
 
-  public MenuCsvInputForm(String date, String csvName, String total,
-      String totalcondition, String message) {
-    this.date = date;
-    this.csvName = csvName;
-    this.total = Integer.parseInt(total);   // ★ 例外発生源の近接化
-    this.totalcondition = totalcondition;
-    this.message = message;
+  public int getTotal() {
+	// ★ int で返す(NULLチェック後)
+	  if (this.total.isBlank()) {
+		  return 0;
+	  } else {
+		  return Integer.parseInt(this.total);
+	  }
   }
 
-  public int getTotal() {              // ★ int で返す
-    return total;
-  }
-
-  /**
-   * 共通処理.
-   *
-   * @return boolean
-   */
-  public boolean commonCheck(String filename) {
-
-    //チェック
-    if (filename == null || filename.isEmpty()) {
-      System.out.println(GlobalConst.MSG_W_FILENAME_ERROR);
-      System.out.println("filename:" + filename);
-      return false;
+  public String inputCheck() {
+    if ((total.matches("[0-9]+"))) {
+        // 数値以外
+      if(!(total == null || total.isEmpty())) {
+        this.message = MessageUtil.getProperty("msg_w02_csv_input");
+      }
     }
-    return true;
+    return message;
   }
+
 }

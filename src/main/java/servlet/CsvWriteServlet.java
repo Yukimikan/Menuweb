@@ -11,34 +11,37 @@ import java.util.List;
 
 import form.MenuCsvRegistForm;
 import model.GlobalConst;
-import model.MenuCSV;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
 import service.CsvWriteService;
 import service.CsvWriteServiceImpl;
+import service.CsvWriteServiceResult;
 
 /**
- * Servlet implementation class HelloServlet.
+ * Servlet.
  */
 public class CsvWriteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  private CsvWriteService service;
+  private CsvFileListService fileService;
+
   public CsvWriteServlet() {
     super();
+    service = new CsvWriteServiceImpl();
+    fileService = new CsvFileListServiceImpl();
   }
 
-  MenuCsvRegistForm menuCsvRegistform;
 
   /**
-   * 初期表示（INDEX → menu_input.jsp）
+   * 初期表示
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // 初期化
-    request.setAttribute("message", "");
 
-    // 1. CSVリスト取得（SharedService）
-    CsvFileListService fileService = new CsvFileListServiceImpl();
+    // 初期化
+
+	// 1. CSVリスト取得（SharedService）
     List<String> csvFiles = fileService.execute();
     request.setAttribute("csvFiles", csvFiles);
 
@@ -57,48 +60,63 @@ public class CsvWriteServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-    String csvName = (String) request.getParameter("csv_name");
-    String[] cols = {
-      "99", // No（新規登録なので空）
-      request.getParameter("type"),
-      request.getParameter("restaurant_name"),
-      request.getParameter("singlemenu_flg"),
-      request.getParameter("menu"),
-      request.getParameter("price"),
-      request.getParameter("tax"),
-      request.getParameter("total")
-    };
-
-    // MenuCSV に渡す(初期化)
-    MenuCSV rec = MenuCSV.fromInput(cols);
-    menuCsvRegistform = new MenuCsvRegistForm(csvName, rec, "");
-
-    try {
-      // 2. inputCheck(フロントで実行)
-      // サーバー側チェック（必要最小限）
-      if (!menuCsvRegistform.commonCheck(menuCsvRegistform.getCsv_name())) {
-        throw new IOException("CSV名が不正です");
-      }
-      // 3. service execute
-      CsvWriteService service = new CsvWriteServiceImpl();
-      List<MenuCSV> retList = service.execute(menuCsvRegistform);
-
-      // 4. requestSetAttribute
-      request.setAttribute("resultList", retList);
-      // 5. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
-      dispatcher.forward(request, response);
-    } catch (Exception e) {
-      // ★ 例外系 → 入力画面へ戻す
-      request.setAttribute("error", "入力値が不正です：" + e.getMessage());
+	MenuCsvRegistForm menuCsvRegistform = new MenuCsvRegistForm(
+        (String) request.getParameter("csv_name"),
+        (String) request.getParameter("confirm_flg"),
+        (String) request.getParameter("type"),
+        (String) request.getParameter("restaurant_name"),
+        (String) request.getParameter("singlemenu_flg"),
+        (String) request.getParameter("menu"),
+        (String) request.getParameter("price"),
+        (String) request.getParameter("tax"),
+        (String) request.getParameter("total"),
+        "");
+	// チェックボックスの選択された値を取得
+	// String[] confirm_flg = request.getParameterValues("confirm_flg");
+	String confirmFlg = request.getParameter("confirm_flg");
+	boolean checked = confirmFlg != null;
+    // 2. inputCheck(フロントで実行)
+	String message = menuCsvRegistform.inputCheck();
+    if (!message.isEmpty()) {
+      request.setAttribute("message", message);
       // CSVリストを再取得（入力画面に戻るため）
-      CsvFileListService fileService = new CsvFileListServiceImpl();
       List<String> csvFiles = fileService.execute();
       request.setAttribute("csvFiles", csvFiles);
+      // reload
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspRegistUrl);
       dispatcher.forward(request, response);
+      return;
     }
 
-  }
+    // 入力チェック不要
+	if (checked) {
+      // 3. サーバー側のチェック
+      try {
+        // 3. service execute
+        CsvWriteServiceResult result = service.execute(menuCsvRegistform);
+        if (result.isSuccess()) {
+          // 4. requestSetAttribute
+          request.setAttribute("resultList", result.getRetList());
+          // 5. forward
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+          dispatcher.forward(request, response);
+        }
+	  } catch (Exception e) {
+        // エラー画面に遷移
+        System.out.print(e.getMessage());
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+        dispatcher.forward(request, response);
+	    }
+      } else {
+        // 3. サーバー側のチェック
 
+        // 3. service execute
+
+    	// 4. requestSetAttribute
+    	request.setAttribute("form", menuCsvRegistform);
+        // 5. forward
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspConfirmUrl);
+        dispatcher.forward(request, response);
+    }
+  }
 }

@@ -5,56 +5,96 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import dao.UserDaoImpl;
+import form.LoginForm;
 import model.GlobalConst;
+import service.LoginService;
+import service.LoginServiceImpl;
+import service.LoginServiceResult;
 
 /**
- * Servlet implementation class HelloServlet.
+ * Servlet.
  */
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+  private LoginService service;
+
   public LoginServlet() {
     super();
+    service = new LoginServiceImpl();
   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	String user = request.getParameter("user");
-	String password = request.getParameter("password");
 
-	System.out.println(user);
-	//	doGet(request, response);
-		try {
-		   UserDaoImpl daoImpl = new UserDaoImpl();
-     	   String userName = daoImpl.SelectSQLGetUser(user, password);
-     	   if ("".equals(userName)) {
-         	   request.setAttribute("error", "入力値が不正です：");
-       	       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
-      	       dispatcher.forward(request, response);
-     	   }else {
-		       // 5. forward
-		       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuIndexUrl);
-		       dispatcher.forward(request, response);
-     	   }
+  /**
+   * 初期表示
+   */
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-	    } catch (Exception e) {
-	      // ★ 例外時は入力画面に戻す（ここが重要）
-	      request.setAttribute("error", "入力値が不正です：" + e.getMessage());
+    // 1. 画面情報取得（なし）
 
-	      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuLoginUrl);
-	      dispatcher.forward(request, response);
-	    }
+    // 2. 初期表示へ forward
+    RequestDispatcher dispatcher =
+        request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+    dispatcher.forward(request, response);
+  }
 
-	}
+  /**
+   *  ポスト処理.
+   *
+   *  @param HttpServletRequest request, HttpServletResponse response
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+    // 1. parameter set
+	LoginForm loginForm = new LoginForm(
+    	(String) request.getParameter("user"),
+    	(String) request.getParameter("password"),
+    	""
+    	);
+
+    // 2. inputCheck(フロントで実行)
+	String message = loginForm.inputCheck();
+    if(!message.isEmpty()) {
+      //reload
+      request.setAttribute("message", message);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+  	  dispatcher.forward(request, response);
+  	  return;
+    }
+
+    try {
+      // 3. サーバー側のチェック
+
+      // 3. service execute
+	  LoginServiceResult result = service.execute(loginForm);
+	  if (result.isSuccess()) {
+	    // 4. requestSetAttribute
+	    // request.setAttribute("userName", result.getUserName());
+	    HttpSession session = request.getSession();
+	    session.setAttribute("userName",result.getUserName());
+	    // 5. forward
+	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuIndexUrl);
+	    dispatcher.forward(request, response);
+	  } else {
+	    // 5. forward
+        request.setAttribute("message",result.getMessage());
+   	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+  	    dispatcher.forward(request, response);
+      }
+
+    } catch (Exception e) {
+      // エラー画面に遷移
+      System.out.print(e.getMessage());
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+      dispatcher.forward(request, response);
+    }
+
+  }
 
 }

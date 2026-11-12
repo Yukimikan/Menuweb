@@ -2,16 +2,14 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>Menuweb</display-name>
   <welcome-file-list>
-  <!--
   <welcome-file>index.html</welcome-file>
-   -->
-    <welcome-file>login.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
+  <!--
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
+   -->
   </welcome-file-list>
+  <!-- 共通 -->
   <servlet>
     <description></description>
     <display-name>LoginServlet</display-name>
@@ -20,17 +18,38 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CsvInputServlet</display-name>
-    <servlet-name>CsvInputServlet</servlet-name>
-    <servlet-class>servlet.CsvInputServlet</servlet-class>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>servlet.LogoutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CsvInputServlet</servlet-name>
-    <url-pattern>/CsvInputServlet</url-pattern>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <!-- CSV操作 -->
+  <servlet>
+    <description></description>
+    <display-name>CsvSearchServlet</display-name>
+    <servlet-name>CsvSearchServlet</servlet-name>
+    <servlet-class>servlet.CsvSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CsvSearchServlet</servlet-name>
+    <url-pattern>/csv_search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CsvConfirmServlet</display-name>
+    <servlet-name>CsvConfirmServlet</servlet-name>
+    <servlet-class>servlet.CsvConfirmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CsvConfirmServlet</servlet-name>
+    <url-pattern>/csv_confirm</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -40,7 +59,28 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CsvWriteServlet</servlet-name>
-    <url-pattern>/CsvWriteServlet</url-pattern>
+    <url-pattern>/csv_write</url-pattern>
+  </servlet-mapping>
+  <!-- テーブル操作 -->
+  <servlet>
+    <description></description>
+    <display-name>MenuRegistServlet</display-name>
+    <servlet-name>MenuRegistServlet</servlet-name>
+    <servlet-class>servlet.MenuRegistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuRegistServlet</servlet-name>
+    <url-pattern>/menu_regist</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MenuConfirmServlet</display-name>
+    <servlet-name>MenuConfirmServlet</servlet-name>
+    <servlet-class>servlet.MenuConfirmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuConfirmServlet</servlet-name>
+    <url-pattern>/menu_confirm</url-pattern>
   </servlet-mapping>
 
 </web-app>

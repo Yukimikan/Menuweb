@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="model.MenuCSV"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>  <!-- jspのJSTL式追加用 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,37 +13,21 @@
 <!-- https://anotools.com/java/1642/ -->
 </head>
 <body>
-	<header class="header-nav">
-		<nav class="breadcrumb">
-			<h4>1000円ランチシステム</h4>
-			<!-- ここだけページごとに差し替える -->
-			<a href="<%=request.getContextPath()%>/index.html">TOP</a> <a
-				href="<%=request.getContextPath()%>/jsp/menu_csv_regist.jsp">手入力</a>
-			<span>CSV検索結果</span>
-		</nav>
-	</header>
+	<div id="header" class="header">
+	<%@include file="./header.jsp"%>
+	</div>
 	<div id="contents">
 		<h2>＜検索結果＞</h2>
 		メニュー検索の結果を表示します。
 	</div>
 	<div id="main">
-	<%
-      List<MenuCSV> list = (List<MenuCSV>) request.getAttribute("resultList");
-      String error = (String) request.getAttribute("error");
-    %>
-	<!-- ★ エラー表示 -->
-		<%
-		if (error != null) {
-		%>
-		<div style="color: red;"><%=error%></div>
-		<%
-		}
-		%>
+		<!-- ★ エラーメッセージ表示 -->
+	    <c:if test="${not empty message}">
+	    	<div class="error-box">${message}</div>
+		</c:if>
 		<!-- ★ 結果表示 -->
-		<%
-		if (list != null && !list.isEmpty()) {
-		%>
-		<table border="1">
+        <c:if test="${not empty resultList}">
+  		<table border="1">
 			<tr>
 				<th>No</th>
 				<th>種類</th>
@@ -53,49 +38,29 @@
 				<th>税</th>
 				<th>金額</th>
 			</tr>
-			<%
-			for (MenuCSV rec : list) {
-			%>
+            <c:forEach var="rec" items="${resultList}">
 			<tr>
-				<td><%=rec.getNo()%></td>
-				<td><%=rec.getType()%></td>
-				<td><%=rec.getRestaurantName()%></td>
-				<td><%=rec.getSinglemenuFlg()%></td>
-				<td><%=rec.getMenu()%></td>
-				<td><%=rec.getPrice()%></td>
-				<td><%=rec.getTax()%></td>
-				<td><%=rec.getTotal()%></td>
+				<td><c:out value="${rec.no}" /></td>
+				<td><c:out value="${rec.type}" /></td>
+				<td><c:out value="${rec.restaurantName}" /></td>
+				<td><c:out value="${rec.singlemenuFlg}" /></td>
+				<td><c:out value="${rec.menu}" /></td>
+				<td><c:out value="${rec.price}" /></td>
+				<td><c:out value="${rec.tax}" /></td>
+				<td><c:out value="${rec.total}" /></td>
 			</tr>
-			<%
-			}
-			%>
+			</c:forEach>
 		</table>
-		<%
-		} else {
-		%>
-		<div>該当するメニューはありません。</div>
-		<%
-		}
-		%>
+		</c:if>
+        <c:if test="${empty resultList}">
+			<div>該当するメニューはありません。</div>
+		</c:if>
 		<!--
        	<input type="submit" value="登録・編集">
         -->
 	</div>
-	<footer class="footer-nav">
-
-		<!-- 戻る（ここだけページごとに差し替える） -->
-		<a class="btn-arrow back" href="<%= request.getContextPath() %>/index.html">戻る</a>
-
-		<!-- TOP（画像ボタン） -->
-		<a href="<%=request.getContextPath()%>/index.html"> <img
-			class="btn-top"
-			src="<%=request.getContextPath()%>/resource/image/btn_top.png">
-		</a>
-		<!-- NEXT は不要なら削除 -->
-		<!-- 進む（必要なページだけ差し替え or 非表示） -->
-		<!--
-		 <a class="btn-arrow next" href="###NEXT###">進む</a>
-		-->
-	</footer>
+	<div id="footer" class="footer">
+	<%@include file="./footer.jsp"%>
+	</div>
 </body>
 </html>

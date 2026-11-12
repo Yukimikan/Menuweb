@@ -38,6 +38,7 @@
         <scope>provided</scope>
     </dependency>
 
+
     <dependency>
         <groupId>jakarta.servlet.jsp</groupId>
         <artifactId>jakarta.servlet.jsp-api</artifactId>
@@ -68,5 +69,21 @@
 	    <artifactId>postgresql</artifactId>
 	    <version>42.7.14</version>
 	</dependency>
+    <dependency>
+	  <groupId>org.mybatis</groupId>
+	  <artifactId>mybatis</artifactId>
+	  <version>3.6.0</version>
+    </dependency>
+    <!-- jspのJSTL式追加用 -->
+    <dependency>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      <version>3.0.1</version>
+    </dependency>
   </dependencies>
 </project>

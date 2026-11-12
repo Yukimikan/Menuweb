@@ -1,5 +1,9 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import lombok.AllArgsConstructor;
@@ -151,4 +155,33 @@ public class MenuCSV {
        );
   }
 
+  /**
+   * CsvHeader読み込み.
+   *
+   * @param filePath
+   * @return String
+   */
+  // 先頭行（ヘッダー）を読み、ヘッダと一致するかチェックする
+  public static boolean readHeader(String filePath) throws Exception {
+    try (
+        FileInputStream fileInput = new FileInputStream(filePath);
+        InputStreamReader inputStream = new InputStreamReader(fileInput, StandardCharsets.UTF_8);
+        BufferedReader buffReader = new BufferedReader(inputStream)
+    ) {
+      String header = buffReader.readLine();
+
+      if (header != null && header.startsWith("\uFEFF")) {
+        header = header.substring(1);
+      }
+      // ヘッダチェック
+      if (!MenuCSV.CSV_HEADER.equals(header)) {
+        System.out.println("警告：ヘッダーが想定と異なります → " + header);
+        return false;
+      }
+      return true;
+
+    } catch (Exception e) {
+      throw e;
+    }
+  }
 }
