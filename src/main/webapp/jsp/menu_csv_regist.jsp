@@ -78,7 +78,7 @@ function checkText() {
 	<!-- ★ CSVリストを受け取る -->
 	<!-- List<String> csvList = (List<String>) request.getAttribute("csvFiles") -->
 	<form name="form1"
-		action="<%= request.getContextPath() %>/CsvWriteServlet"
+		action="${pageContext.request.contextPath}/csv_write"
 		onsubmit="return checkText()" method="post">
 		<div>
 			CSV名：

@@ -70,7 +70,7 @@ function checkText() {
     	<div class="error-box">${message}</div>
 	</c:if>
 	<form name="form1"
-		action="<%= request.getContextPath() %>/MenuRegistServlet"
+		action="${pageContext.request.contextPath}/menu_regist"
 		onsubmit="return checkText()" method="post">
 		<div>
 			ユーザ名：

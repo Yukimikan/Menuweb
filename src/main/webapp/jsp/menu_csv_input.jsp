@@ -49,7 +49,7 @@
 	<!-- ★ CSVリストを受け取る -->
 	<!-- List<String> csvList = (List<String>) request.getAttribute("csvFiles") -->
 	<form name="form1"
-		action="<%= request.getContextPath() %>/CsvInputServlet"
+		action="${pageContext.request.contextPath}/csv_search"
 		onsubmit="return checkText()" method="post">
 		<div>
 			CSV名：

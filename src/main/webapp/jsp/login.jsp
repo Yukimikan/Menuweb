@@ -42,7 +42,7 @@
 	    <c:if test="${not empty message}">
 	    	<div class="error-box">${message}</div>
 		</c:if>
-		<form action="LoginServlet" method="post"
+		<form action="${pageContext.request.contextPath}/login" method="post"
    	          onsubmit="return checkText()">
 			ユーザ名；<input type="text" name="user" value="user" />
 			パスワード<input type="text" name="password" value="" />

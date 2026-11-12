@@ -17,7 +17,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -27,7 +27,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CsvInputServlet</servlet-name>
-    <url-pattern>/CsvInputServlet</url-pattern>
+    <url-pattern>/csv_search</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -37,7 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CsvConfirmServlet</servlet-name>
-    <url-pattern>/CsvConfirmServlet</url-pattern>
+    <url-pattern>/csv_confirm</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -47,7 +47,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CsvWriteServlet</servlet-name>
-    <url-pattern>/CsvWriteServlet</url-pattern>
+    <url-pattern>/csv_write</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -57,7 +57,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MenuRegistServlet</servlet-name>
-    <url-pattern>/MenuRegistServlet</url-pattern>
+    <url-pattern>/menu_regist</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -67,7 +67,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MenuConfirmServlet</servlet-name>
-    <url-pattern>/MenuConfirmServlet</url-pattern>
+    <url-pattern>/menu_confirm</url-pattern>
   </servlet-mapping>
 
 </web-app>

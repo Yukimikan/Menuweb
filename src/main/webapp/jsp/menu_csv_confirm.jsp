@@ -29,7 +29,7 @@
 	<!-- ★ CSVリストを受け取る -->
 	<!-- List<String> csvList = (List<String>) request.getAttribute("csvFiles") -->
 	<form name="form1"
-		action="<%= request.getContextPath() %>/CsvConfirmServlet" method="post">
+		action="${pageContext.request.contextPath}/csv_confirm" method="post">
 		<div>
 			CSV名：
 			<div class="input">
@@ -97,7 +97,7 @@
 		</div>
 		<div class="row">
 			<div align="left">
-		 	<a class="btn-arrow back" href="/Menuweb/CsvWriteServlet">戻る</a>
+		 	<a class="btn-arrow back" href="/Menuweb/csv_search">戻る</a>
 			</div>
 		</div>
 	</form>

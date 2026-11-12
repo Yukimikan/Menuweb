@@ -27,7 +27,7 @@
     	<div class="error-box">${message}</div>
 	</c:if>
 	<form name="form1"
-		action="<%= request.getContextPath() %>/MenuConfirmServlet" method="post">
+		action="${pageContext.request.contextPath}/menu_confirm" method="post">
 		<div>
 			ユーザ名：
 			<div class="input">
@@ -101,7 +101,7 @@
 		</div>
 		<div class="row">
 			<div align="left">
-		 	<a class="btn-arrow back" href="/Menuweb/MenuRegistServlet">戻る</a>
+		 	<a class="btn-arrow back" href="/Menuweb/menu_regist">戻る</a>
 			</div>
 		</div>
 	</form>
