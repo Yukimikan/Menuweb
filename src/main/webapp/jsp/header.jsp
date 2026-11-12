@@ -15,5 +15,6 @@
 		    <c:if test="${empty sessionScope.userName}">
 		        <span>guestユーザ</span>
 		    </c:if>
+	    <a href="/Menuweb/logout">ログアウト</a>
 	</nav>
 </header>
