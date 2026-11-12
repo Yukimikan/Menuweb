@@ -18,6 +18,7 @@ public class MenuRegistForm {
   private String price;
   private String tax;
   private String total;
+  private String userName;
   private String message;
   /**
    * 共通処理.

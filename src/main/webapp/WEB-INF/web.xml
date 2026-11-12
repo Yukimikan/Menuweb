@@ -59,5 +59,15 @@
     <servlet-name>MenuRegistServlet</servlet-name>
     <url-pattern>/MenuRegistServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MenuConfirmServlet</display-name>
+    <servlet-name>MenuConfirmServlet</servlet-name>
+    <servlet-class>servlet.MenuConfirmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuConfirmServlet</servlet-name>
+    <url-pattern>/MenuConfirmServlet</url-pattern>
+  </servlet-mapping>
 
 </web-app>

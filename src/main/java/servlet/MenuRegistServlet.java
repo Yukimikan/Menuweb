@@ -53,6 +53,7 @@ public class MenuRegistServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
+	String userName = (String) request.getParameter("user_name");
 	MenuRegistForm menuRegistform = new MenuRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("type"),
@@ -62,8 +63,8 @@ public class MenuRegistServlet extends HttpServlet {
         (String) request.getParameter("price"),
         (String) request.getParameter("tax"),
         (String) request.getParameter("total"),
+        userName,
         "");
-	String userName = (String) request.getParameter("user_name");
 	// チェックボックスの選択された値を取得
 	// String[] confirm_flg = request.getParameterValues("confirm_flg");
 	String confirmFlg = request.getParameter("confirm_flg");
@@ -105,9 +106,10 @@ public class MenuRegistServlet extends HttpServlet {
         // 3. service execute
 
     	// 4. requestSetAttribute
+    	request.setAttribute("user_name", userName);
     	request.setAttribute("form", menuRegistform);
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspConfirmUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuConfirmUrl);
         dispatcher.forward(request, response);
     }
   }

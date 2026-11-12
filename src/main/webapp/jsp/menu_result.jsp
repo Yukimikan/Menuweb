@@ -14,10 +14,12 @@
 	<div id="header" class="header">
 	<%@include file="./header.jsp"%>
 	</div>
+	<div id="main">
     <span>登録を完了しました。</span>
     <c:if test="${not empty message}">
     	<div class="error-box">${message}</div>
 	</c:if>
+	</div>
 	<div id="footer" class="footer">
 	<%@include file="./footer.jsp"%>
 	</div>

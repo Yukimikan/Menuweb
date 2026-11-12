@@ -29,6 +29,7 @@ public class GlobalConst {
   public static final String JspConfirmUrl = "./jsp/menu_csv_confirm.jsp";
   public static final String JspRegistUrl = "./jsp/menu_csv_regist.jsp";
   public static final String JspMenuRegistUrl = "./jsp/menu_regist.jsp";
+  public static final String JspMenuConfirmUrl = "./jsp/menu_confirm.jsp";
   public static final String JspMenuResultUrl = "./jsp/menu_result.jsp";
   public static final String JspErrorUrl = "./jsp/error.jsp";
 
