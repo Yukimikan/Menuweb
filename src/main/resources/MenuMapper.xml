@@ -3,15 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.MenuMapper">
-  <select id="insert">
-    insert into "MENU(no, type, restaurant_name, singlemenu_flg, menu, price, tax ,total)"
-    values(#{no},
-           #{type},
-           #{restaurant_name},
-           #{singlemenu_flg},
-           #{menu},
-           #{price},
-           #{tax},
-           #{total})
-  </select>
+  <insert id="insertMenu">
+    insert into "MENU"
+    (
+    	no,
+    	type,
+    	restaurant_name,
+    	singlemenu_flg,
+    	menu, price,
+    	tax ,
+    	total,
+    	update_user,
+    	update_date
+    )
+    values(
+    	#{entity.no},
+        #{entity.type},
+        #{entity.restaurantName},
+        #{entity.singleMenuFlg},
+        #{entity.menu},
+        #{entity.price},
+        #{entity.tax},
+        #{entity.total},
+        #{entity.updateUser},
+        CURRENT_TIMESTAMP)
+  </insert>
 </mapper>

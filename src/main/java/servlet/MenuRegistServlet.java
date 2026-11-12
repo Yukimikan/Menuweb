@@ -21,12 +21,10 @@ public class MenuRegistServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   private MenuRegistService service;
-  private MenuRegistService fileService;
 
   public MenuRegistServlet() {
     super();
     service = new MenuRegistServiceImpl();
-    // fileService = new CsvFileListServiceImpl();
   }
 
 
@@ -39,8 +37,6 @@ public class MenuRegistServlet extends HttpServlet {
     // 初期化
 
 	// 1. CSVリスト取得（SharedService）
-	//    List<String> csvFiles = fileService.execute();
-	//    request.setAttribute("csvFiles", csvFiles);
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
@@ -57,7 +53,7 @@ public class MenuRegistServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-	  MenuRegistForm menuRegistform = new MenuRegistForm(
+	MenuRegistForm menuRegistform = new MenuRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
@@ -67,6 +63,7 @@ public class MenuRegistServlet extends HttpServlet {
         (String) request.getParameter("tax"),
         (String) request.getParameter("total"),
         "");
+	String userName = (String) request.getParameter("user_name");
 	// チェックボックスの選択された値を取得
 	// String[] confirm_flg = request.getParameterValues("confirm_flg");
 	String confirmFlg = request.getParameter("confirm_flg");
@@ -76,8 +73,7 @@ public class MenuRegistServlet extends HttpServlet {
     if (!message.isEmpty()) {
       request.setAttribute("message", message);
       // CSVリストを再取得（入力画面に戻るため）
-      //      List<String> csvFiles = fileService.execute();
-      //      request.setAttribute("csvFiles", csvFiles);
+
       // reload
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuRegistUrl);
       dispatcher.forward(request, response);
@@ -89,12 +85,12 @@ public class MenuRegistServlet extends HttpServlet {
       // 3. サーバー側のチェック
       try {
         // 3. service execute
-    	MenuRegistServiceResult result = service.execute(menuRegistform);
+    	MenuRegistServiceResult result = service.execute(menuRegistform, userName);
         if (result.isSuccess()) {
           // 4. requestSetAttribute
-          request.setAttribute("resultList", result.getRetList());
+
           // 5. forward
-          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuResultUrl);
           dispatcher.forward(request, response);
         }
 	  } catch (Exception e) {

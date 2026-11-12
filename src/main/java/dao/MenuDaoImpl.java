@@ -28,8 +28,9 @@ public class MenuDaoImpl implements MenuDao {
 	        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	        SqlSession session = sqlSessionFactory.openSession();
 	        MenuMapper mapper = session.getMapper(MenuMapper.class);
-	        int result = mapper.insert(entity);
-	  	  return result;
+	        int result = mapper.insertMenu(entity);
+	        session.commit(); // ここでコミット
+	        return result;
 
 	  	}  catch(IOException e) {
 	  	  System.out.println(e.getStackTrace());

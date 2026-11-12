@@ -15,6 +15,7 @@ public class GlobalConst {
   public static final String CsvName = "menu.csv";
   public static final String CSV_FOLDER_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";  //絶対パスで指定
   public static final String EXTENSION_CSV = ".csv";
+  public static final int NUM_CSV新規登録 = 99;
 
   //URL
   /*
@@ -28,6 +29,7 @@ public class GlobalConst {
   public static final String JspConfirmUrl = "./jsp/menu_csv_confirm.jsp";
   public static final String JspRegistUrl = "./jsp/menu_csv_regist.jsp";
   public static final String JspMenuRegistUrl = "./jsp/menu_regist.jsp";
+  public static final String JspMenuResultUrl = "./jsp/menu_result.jsp";
   public static final String JspErrorUrl = "./jsp/error.jsp";
 
 }

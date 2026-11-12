@@ -7,13 +7,15 @@ import lombok.Data;
 @AllArgsConstructor
 public class MenuEntity {
 
-  private String no;
+  private int no;
   private String type;
-  private String restaurant_name;
-  private String singlemenu_flg;
+  private String restaurantName;
+  private String singleMenuFlg;
   private String menu;
   private int price;
-  private String tax;
+  private int tax;
   private int total;
+  private String updateUser;
+  // private Date update_date // SQLで発行
 
 }

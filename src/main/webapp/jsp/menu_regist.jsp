@@ -70,16 +70,15 @@ function checkText() {
     	<div class="error-box">${message}</div>
 	</c:if>
 	<form name="form1"
-		action="<%= request.getContextPath() %>/CsvWriteServlet"
+		action="<%= request.getContextPath() %>/MenuRegistServlet"
 		onsubmit="return checkText()" method="post">
 		<div>
 			ユーザ名：
 		    <c:if test="${not empty userName}">
-		        <input text="user_name" value="${userName}">
+		        <input type="text" name="user_name" value="${userName}">
 		    </c:if>
-		    <c:if test="${empty userName}">
-		        <input text="user_name" value="guest">
-		    </c:if>
+		    <!--  ログイン機能実装後の動確用 -->
+            <input type="text" name="user_name" value="guest">
 		</div>
 		<div id="regist-input">
 			<div class="row">

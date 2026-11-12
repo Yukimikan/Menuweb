@@ -7,7 +7,7 @@ import form.MenuRegistForm;
 
 public interface MenuRegistService {
 
-  public MenuRegistServiceResult execute(MenuRegistForm form) throws IOException;
+  public MenuRegistServiceResult execute(MenuRegistForm form, String userName) throws IOException;
 
   public CsvWriteServiceResult execute(MenuCsvConfirmForm input) throws IOException;
 
