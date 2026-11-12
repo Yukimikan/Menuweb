@@ -46,8 +46,6 @@
     <c:if test="${not empty message}">
     	<div class="error-box">${message}</div>
 	</c:if>
-	<!-- ★ CSVリストを受け取る -->
-	<!-- List<String> csvList = (List<String>) request.getAttribute("csvFiles") -->
 	<form name="form1"
 		action="${pageContext.request.contextPath}/csv_search"
 		onsubmit="return checkText()" method="post">

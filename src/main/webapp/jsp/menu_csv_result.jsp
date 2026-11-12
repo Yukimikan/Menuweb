@@ -21,13 +21,10 @@
 		メニュー検索の結果を表示します。
 	</div>
 	<div id="main">
-	<!-- ★ エラーメッセージ表示 -->
-    <c:if test="${not empty message}">
-    	<div class="error-box">${message}</div>
-	</c:if>
-	<%
-      List<MenuCSV> list = (List<MenuCSV>) request.getAttribute("resultList");
-    %>
+		<!-- ★ エラーメッセージ表示 -->
+	    <c:if test="${not empty message}">
+	    	<div class="error-box">${message}</div>
+		</c:if>
 		<!-- ★ 結果表示 -->
         <c:if test="${not empty resultList}">
   		<table border="1">
@@ -41,22 +38,18 @@
 				<th>税</th>
 				<th>金額</th>
 			</tr>
-			<%
-			for (MenuCSV rec : list) {
-			%>
+            <c:forEach var="rec" items="${resultList}">
 			<tr>
-				<td><%=rec.getNo()%></td>
-				<td><%=rec.getType()%></td>
-				<td><%=rec.getRestaurantName()%></td>
-				<td><%=rec.getSinglemenuFlg()%></td>
-				<td><%=rec.getMenu()%></td>
-				<td><%=rec.getPrice()%></td>
-				<td><%=rec.getTax()%></td>
-				<td><%=rec.getTotal()%></td>
+				<td><c:out value="${rec.no}" /></td>
+				<td><c:out value="${rec.type}" /></td>
+				<td><c:out value="${rec.restaurantName}" /></td>
+				<td><c:out value="${rec.singlemenuFlg}" /></td>
+				<td><c:out value="${rec.menu}" /></td>
+				<td><c:out value="${rec.price}" /></td>
+				<td><c:out value="${rec.tax}" /></td>
+				<td><c:out value="${rec.total}" /></td>
 			</tr>
-			<%
-			}
-			%>
+			</c:forEach>
 		</table>
 		</c:if>
         <c:if test="${empty resultList}">
