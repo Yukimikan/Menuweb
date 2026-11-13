@@ -17,9 +17,9 @@ public class FileControl {
    * @param folderPath
    * @param extension // 拡張子
    */
-  public static List<String> getFileNames(String folderPath,String extension) throws IOException {
-	// ファイルパスからファイル名を取得
-	// (csvファイル)
+  public static List<String> getFileNames(String folderPath, String extension) throws IOException {
+    // ファイルパスからファイル名を取得
+    // (csvファイル)
 
     try (Stream<Path> s = Files.list(Paths.get(folderPath))) {
       return s
@@ -38,12 +38,13 @@ public class FileControl {
   */
  public static void append(String filePath, String rec) throws IOException {
 
-   try (BufferedWriter bw = new BufferedWriter(
-       new FileWriter(filePath, true))) { // ★ true = 追記モード
-     bw.write(rec);
-     bw.newLine();
-   } catch (Exception e) {
-     throw new IOException("error: " + e.getMessage(), e);
-   }
- }
+    try (BufferedWriter bw = new BufferedWriter(
+        new FileWriter(filePath, true))
+      ) { // ★ true = 追記モード
+      bw.write(rec);
+      bw.newLine();
+    } catch (Exception e) {
+      throw new IOException("error: " + e.getMessage(), e);
+    }
+  }
 }

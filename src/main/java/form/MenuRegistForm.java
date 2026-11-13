@@ -19,6 +19,7 @@ public class MenuRegistForm {
   private String tax;
   private String total;
   private String message;
+
   /**
    * 共通処理.
    *

@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao{
    * @param int p1
    */
   public String selectUserByKey(String name, String password)
-  		throws RuntimeException{
+  	throws RuntimeException{
 
     try {
       String resource = "mybatis-config.xml";
@@ -26,14 +26,14 @@ public class UserDaoImpl implements UserDao{
       SqlSession session = sqlSessionFactory.openSession();
       UserMapper mapper = session.getMapper(UserMapper.class);
       String userName = mapper.selectUserByKey(name, password);
-	  return userName;
+      return userName;
 
-	}  catch(IOException e) {
-	  System.out.println(e.getStackTrace());
+    } catch (IOException e) {
+      System.out.println(e.getStackTrace());
       throw new RuntimeException();
-	}
+    }
 
-  };
+  }
 
 //  UserDao
 //	static final String SelectSQL = "select count(*) from USER";
