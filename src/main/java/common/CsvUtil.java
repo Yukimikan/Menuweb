@@ -94,7 +94,7 @@ public final class CsvUtil {
 
   /**
    * ★ 今は使わないが、将来の編集機能用に残す選択肢
-   * CSV 全書き込み（行削除・並び替えなどで使う）
+   * CSV 全書き込み（行削除・並び替えなどで使う）.
    */
   public static void write(String csvName, List<MenuCSV> list) throws IOException {
 

@@ -3,7 +3,8 @@ package dao;
 import model.MenuEntity;
 
 /**
-*
+* MenuDao
+* メニューテーブル操作.
 */
 public interface MenuDao {
 

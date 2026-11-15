@@ -7,11 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import model.MenuCSV;
 
+/**
+ * CsvWriteServiceResult.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CsvWriteServiceResult {
+
   private boolean success;
   private String message;
   private List<MenuCSV> retList;
+
 }

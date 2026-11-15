@@ -18,7 +18,7 @@ public class CsvWriteServiceImpl implements CsvWriteService {
   /**
    * execute.
    */
-  public CsvWriteServiceResult execute(MenuCsvRegistForm form) throws IOException{
+  public CsvWriteServiceResult execute(MenuCsvRegistForm form) throws IOException {
 
     CsvWriteServiceResult result = new CsvWriteServiceResult();
     // MenuCSV に渡す(初期化)
@@ -59,7 +59,7 @@ public class CsvWriteServiceImpl implements CsvWriteService {
   /**
    * execute.
    */
-  public CsvWriteServiceResult execute(MenuCsvConfirmForm form) throws IOException{
+  public CsvWriteServiceResult execute(MenuCsvConfirmForm form) throws IOException {
 
     CsvWriteServiceResult result = new CsvWriteServiceResult();
     // MenuCSV に渡す(初期化)
