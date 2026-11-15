@@ -22,7 +22,6 @@ public class MenuSearchServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   private MenuSearchService service;
-//  private CsvFileListService fileService;
 
   /**
    * コンストラクタ.

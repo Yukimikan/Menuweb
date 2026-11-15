@@ -44,9 +44,9 @@ public class CsvSearchForm {
    * @return メッセージ
    */
   public String inputCheck() {
-    if ((total.matches("[0-9]+"))) {
-      // 数値以外
-      if (!(total == null || total.isEmpty())) {
+    // 数値以外
+    if (!(total == null || total.isEmpty())) {
+      if (total.matches("[0-9]+")) {
         this.message = MessageUtil.getProperty("msg_w02_csv_input");
       }
     }

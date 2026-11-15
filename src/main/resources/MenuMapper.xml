@@ -40,7 +40,9 @@
      tax ,
      total,
      update_user
-    from "MENU" where total = #{entity.total}
+    from "MENU"
+    <!-- 検索条件の入力チェックが破損した  -->
+    <!-- where total = #{entity.total}  -->
   </select>
 
 </mapper>

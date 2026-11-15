@@ -40,8 +40,6 @@ public class MenuSearchServiceImpl implements MenuSearchService {
 
     try {
       List<MenuEntity> retList = menuDao.select(entity, userName);
-//    ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
-//    int total = form.getTotal();
 
       if (retList.size() == 0) {
         // 結果0件
