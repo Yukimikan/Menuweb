@@ -6,7 +6,7 @@ import java.util.List;
 import common.ConditionTotal;
 import common.CsvUtil;
 import common.MessageUtil;
-import form.MenuCsvInputForm;
+import form.CsvSearchForm;
 import model.GlobalConst;
 import model.MenuCSV;
 
@@ -18,7 +18,7 @@ public class CsvSearchServiceImpl implements CsvSearchService {
   /**
    * execute.
    */
-  public CsvSearchServiceResult execute(MenuCsvInputForm form) {
+  public CsvSearchServiceResult execute(CsvSearchForm form) {
 
     CsvSearchServiceResult result = new CsvSearchServiceResult();
     try {

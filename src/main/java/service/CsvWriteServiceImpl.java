@@ -5,8 +5,8 @@ import java.util.List;
 
 import common.CsvUtil;
 import common.FileControl;
-import form.MenuCsvConfirmForm;
-import form.MenuCsvRegistForm;
+import form.CsvConfirmForm;
+import form.CsvWriteForm;
 import model.GlobalConst;
 import model.MenuCSV;
 
@@ -18,7 +18,7 @@ public class CsvWriteServiceImpl implements CsvWriteService {
   /**
    * execute.
    */
-  public CsvWriteServiceResult execute(MenuCsvRegistForm form) throws IOException {
+  public CsvWriteServiceResult execute(CsvWriteForm form) throws IOException {
 
     CsvWriteServiceResult result = new CsvWriteServiceResult();
     // MenuCSV に渡す(初期化)
@@ -59,7 +59,7 @@ public class CsvWriteServiceImpl implements CsvWriteService {
   /**
    * execute.
    */
-  public CsvWriteServiceResult execute(MenuCsvConfirmForm form) throws IOException {
+  public CsvWriteServiceResult execute(CsvConfirmForm form) throws IOException {
 
     CsvWriteServiceResult result = new CsvWriteServiceResult();
     // MenuCSV に渡す(初期化)

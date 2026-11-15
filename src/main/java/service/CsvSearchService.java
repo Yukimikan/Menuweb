@@ -1,6 +1,6 @@
 package service;
 
-import form.MenuCsvInputForm;
+import form.CsvSearchForm;
 
 /**
  * CsvInputService
@@ -8,5 +8,5 @@ import form.MenuCsvInputForm;
  */
 public interface CsvSearchService {
 
-  public CsvSearchServiceResult execute(MenuCsvInputForm form);
+  public CsvSearchServiceResult execute(CsvSearchForm form);
 }

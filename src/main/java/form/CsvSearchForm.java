@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuCsvInputForm {
+public class CsvSearchForm {
 
   private String date;
   private String csvName;

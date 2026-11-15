@@ -52,14 +52,14 @@ public class LoginServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    LoginForm loginForm = new LoginForm(
+    LoginForm form = new LoginForm(
         (String) request.getParameter("user"),
         (String) request.getParameter("password"),
         ""
         );
 
     // 2. inputCheck(フロントで実行)
-    String message = loginForm.inputCheck();
+    String message = form.inputCheck();
     if (!message.isEmpty()) {
       //reload
       request.setAttribute("message", message);
@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      LoginServiceResult result = service.execute(loginForm);
+      LoginServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         // request.setAttribute("userName", result.getUserName());

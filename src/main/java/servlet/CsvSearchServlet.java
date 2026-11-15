@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import form.MenuCsvInputForm;
+import form.CsvSearchForm;
 import model.GlobalConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
@@ -62,7 +62,7 @@ public class CsvSearchServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    MenuCsvInputForm menuCsvInputForm = new MenuCsvInputForm(
+    CsvSearchForm form = new CsvSearchForm(
         (String) request.getParameter("date"),
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("type"),
@@ -73,7 +73,7 @@ public class CsvSearchServlet extends HttpServlet {
         );
 
     // 2. inputCheck(フロントで実行)
-    String message = menuCsvInputForm.inputCheck();
+    String message = form.inputCheck();
     if (!message.isEmpty()) {
       //reload
       request.setAttribute("message", message);
@@ -86,7 +86,7 @@ public class CsvSearchServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      CsvSearchServiceResult result = service.execute(menuCsvInputForm);
+      CsvSearchServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());

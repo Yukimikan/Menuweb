@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" href="resource/css/style.css">
 <meta charset="UTF-8">
-<title>CSV検索</title>
+<title>メニュー検索（テーブル検索）</title>
 <script>
   function checkText(context) {
 
@@ -39,7 +39,6 @@
 	<h2>＜メニュー取込＞</h2>
 		プルダウン機能でメニュー一覧を選択。<br>
 		1000円以上、店名といった条件で絞り込む。<br>
-		＜追加予定＞CSV日付は仮決め
 	</div>
 	<div id="main">
 	<!-- ★ エラーメッセージ表示 -->
@@ -47,18 +46,17 @@
     	<div class="error-box">${message}</div>
 	</c:if>
 	<form name="form1"
-		action="${pageContext.request.contextPath}/csv_search"
+		action="${pageContext.request.contextPath}/menu_search"
 		onsubmit="return checkText()" method="post">
 		<div>
-			CSV名：
-	        <select name="csv_name">
-		      <c:if test="${empty csvFiles}">
-		        <option value="menu.csv">menu.csv</option>
-		      </c:if>
-	          <c:forEach var="name" items="${csvFiles}">
-	            <option value="${name}" />${name}</option>
-		      </c:forEach>
-		    </select>
+			ユーザ名：
+		    <c:if test="${not empty sessionScope.userName}">
+		        <input type="text" name="user_name" value="${sessionScope.userName}">
+		    </c:if>
+		    <!--  非ログイン時（ログイン機能実装後の動確用） -->
+		    <c:if test="${empty sessionScope.userName}">
+                <input type="text" name="user_name" value="guest">
+		    </c:if>
 		</div>
 		<div id="search-input">
 			<h3>・検索条件</h3>

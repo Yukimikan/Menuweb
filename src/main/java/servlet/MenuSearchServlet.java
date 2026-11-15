@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import form.MenuCsvInputForm;
+import form.CsvSearchForm;
 import model.GlobalConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
@@ -62,7 +62,7 @@ public class MenuSearchServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    MenuCsvInputForm menuCsvInputForm = new MenuCsvInputForm(
+    CsvSearchForm menuCsvInputForm = new CsvSearchForm(
         (String) request.getParameter("date"),
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("type"),

@@ -50,7 +50,7 @@ public class MenuConfirmServlet extends HttpServlet {
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
-    MenuConfirmForm menuConfirmform = new MenuConfirmForm(
+    MenuConfirmForm form = new MenuConfirmForm(
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("singlemenu_flg"),
@@ -66,7 +66,7 @@ public class MenuConfirmServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      MenuRegistServiceResult result = service.execute(menuConfirmform, userName);
+      MenuRegistServiceResult result = service.execute(form, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
 

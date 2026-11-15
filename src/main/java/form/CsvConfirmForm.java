@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuCsvConfirmForm {
+public class CsvConfirmForm {
 
   private String csvName;
   private String type;

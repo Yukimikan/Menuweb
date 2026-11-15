@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import form.MenuCsvConfirmForm;
+import form.CsvConfirmForm;
 import model.GlobalConst;
 import service.CsvWriteService;
 import service.CsvWriteServiceImpl;
@@ -47,7 +47,7 @@ public class CsvConfirmServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-    MenuCsvConfirmForm menuCsvConfirmform = new MenuCsvConfirmForm(
+    CsvConfirmForm form = new CsvConfirmForm(
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
@@ -64,7 +64,7 @@ public class CsvConfirmServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      CsvWriteServiceResult result = service.execute(menuCsvConfirmform);
+      CsvWriteServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
 

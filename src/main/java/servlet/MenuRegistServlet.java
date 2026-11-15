@@ -58,7 +58,7 @@ public class MenuRegistServlet extends HttpServlet {
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
-    MenuRegistForm menuRegistform = new MenuRegistForm(
+    MenuRegistForm form = new MenuRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
@@ -75,7 +75,7 @@ public class MenuRegistServlet extends HttpServlet {
     boolean checked = confirmFlg != null;
 
     // 2. inputCheck(フロントで実行)
-    String message = menuRegistform.inputCheck();
+    String message = form.inputCheck();
     if (!message.isEmpty()) {
       request.setAttribute("message", message);
       // CSVリストを再取得（入力画面に戻るため）
@@ -91,7 +91,7 @@ public class MenuRegistServlet extends HttpServlet {
       // 3. サーバー側のチェック
       try {
         // 3. service execute
-        MenuRegistServiceResult result = service.execute(menuRegistform, userName);
+        MenuRegistServiceResult result = service.execute(form, userName);
         if (result.isSuccess()) {
           // 4. requestSetAttribute
 
@@ -112,7 +112,7 @@ public class MenuRegistServlet extends HttpServlet {
 
       // 4. requestSetAttribute
       request.setAttribute("user_name", userName);
-      request.setAttribute("form", menuRegistform);
+      request.setAttribute("form", form);
       // 5. forward
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuConfirm);
       dispatcher.forward(request, response);

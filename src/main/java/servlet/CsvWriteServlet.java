@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import form.MenuCsvRegistForm;
+import form.CsvWriteForm;
 import model.GlobalConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
@@ -63,7 +63,7 @@ public class CsvWriteServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-    MenuCsvRegistForm menuCsvRegistform = new MenuCsvRegistForm(
+    CsvWriteForm form = new CsvWriteForm(
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("type"),
@@ -80,7 +80,7 @@ public class CsvWriteServlet extends HttpServlet {
     String confirmFlg = request.getParameter("confirm_flg");
     boolean checked = confirmFlg != null;
     // 2. inputCheck(フロントで実行)
-    String message = menuCsvRegistform.inputCheck();
+    String message = form.inputCheck();
     if (!message.isEmpty()) {
       request.setAttribute("message", message);
       // CSVリストを再取得（入力画面に戻るため）
@@ -97,7 +97,7 @@ public class CsvWriteServlet extends HttpServlet {
       // 3. サーバー側のチェック
       try {
         // 3. service execute
-        CsvWriteServiceResult result = service.execute(menuCsvRegistform);
+        CsvWriteServiceResult result = service.execute(form);
         if (result.isSuccess()) {
           // 4. requestSetAttribute
           request.setAttribute("resultList", result.getRetList());
@@ -117,7 +117,7 @@ public class CsvWriteServlet extends HttpServlet {
       // 3. service execute
 
       // 4. requestSetAttribute
-      request.setAttribute("form", menuCsvRegistform);
+      request.setAttribute("form", form);
       // 5. forward
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvConfirm);
       dispatcher.forward(request, response);
