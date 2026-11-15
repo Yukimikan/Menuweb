@@ -16,6 +16,7 @@ public class GlobalConst {
   public static final String CSV_FOLDER_PATH =
       "C:\\pleiades\\workspace\\Menuweb\\resource\\";  //絶対パスで指定
   public static final String EXTENSION_CSV = ".csv";
+  public static final int NUM_CSV検索 = 99;
   public static final int NUM_CSV新規登録 = 99;
 
   //URL

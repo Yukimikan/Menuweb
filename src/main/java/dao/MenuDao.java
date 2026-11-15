@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import model.MenuEntity;
 
 /**
@@ -8,7 +10,7 @@ import model.MenuEntity;
 */
 public interface MenuDao {
 
-  public String select(String name, String password) throws RuntimeException;
+  public List<MenuEntity> select(MenuEntity entity, String userName) throws RuntimeException;
 
   public int insert(MenuEntity entity) throws RuntimeException;
 

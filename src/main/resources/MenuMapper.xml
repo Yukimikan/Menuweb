@@ -28,4 +28,19 @@
         #{entity.updateUser},
         CURRENT_TIMESTAMP)
   </insert>
+
+  <select id="select" resultType="model.MenuEntity">
+    select
+     no,
+     type,
+     restaurant_name,
+     singlemenu_flg,
+     menu,
+     price,
+     tax ,
+     total,
+     update_user
+    from "MENU" where total = #{entity.total}
+  </select>
+
 </mapper>

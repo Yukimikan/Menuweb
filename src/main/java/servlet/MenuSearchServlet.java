@@ -5,17 +5,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.List;
 
-import form.CsvSearchForm;
+import form.MenuSearchForm;
 import model.GlobalConst;
-import service.CsvFileListService;
-import service.CsvFileListServiceImpl;
-import service.CsvSearchService;
-import service.CsvSearchServiceImpl;
-import service.CsvSearchServiceResult;
+import service.MenuSearchService;
+import service.MenuSearchServiceImpl;
+import service.MenuSearchServiceResult;
 
 /**
  * Servlet.
@@ -23,16 +21,15 @@ import service.CsvSearchServiceResult;
 public class MenuSearchServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  private CsvSearchService service;
-  private CsvFileListService fileService;
+  private MenuSearchService service;
+//  private CsvFileListService fileService;
 
   /**
    * コンストラクタ.
    */
   public MenuSearchServlet() {
     super();
-    service = new CsvSearchServiceImpl();
-    fileService = new CsvFileListServiceImpl();
+    service = new MenuSearchServiceImpl();
   }
 
   /**
@@ -42,10 +39,6 @@ public class MenuSearchServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. 画面情報取得（なし）
-
-    // 1. CSVリスト取得（SharedService）
-    List<String> csvFiles = fileService.execute();
-    request.setAttribute("csvFiles", csvFiles);
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
@@ -62,18 +55,23 @@ public class MenuSearchServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-    CsvSearchForm menuCsvInputForm = new CsvSearchForm(
+    HttpSession session = request.getSession();
+    String userName = (String) session.getAttribute("userName");
+    MenuSearchForm form = new MenuSearchForm(
         (String) request.getParameter("date"),
-        (String) request.getParameter("csv_name"),
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
+        "0",
+        "",
+        "0",
+        "0",
         (String) request.getParameter("total"),
         (String) request.getParameter("total_condition"),
         ""
         );
 
     // 2. inputCheck(フロントで実行)
-    String message = menuCsvInputForm.inputCheck();
+    String message = form.inputCheck();
     if (!message.isEmpty()) {
       //reload
       request.setAttribute("message", message);
@@ -86,7 +84,7 @@ public class MenuSearchServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      CsvSearchServiceResult result = service.execute(menuCsvInputForm);
+      MenuSearchServiceResult result = service.execute(form, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());

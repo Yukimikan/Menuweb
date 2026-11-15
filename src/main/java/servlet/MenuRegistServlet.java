@@ -55,6 +55,7 @@ public class MenuRegistServlet extends HttpServlet {
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
