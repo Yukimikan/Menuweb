@@ -44,7 +44,7 @@ public class MenuRegistServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.JspMenuRegistUrl);
+        request.getRequestDispatcher(GlobalConst.MenuRegist);
     dispatcher.forward(request, response);
   }
 
@@ -81,7 +81,7 @@ public class MenuRegistServlet extends HttpServlet {
       // CSVリストを再取得（入力画面に戻るため）
 
       // reload
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuRegistUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegist);
       dispatcher.forward(request, response);
       return;
     }
@@ -96,13 +96,13 @@ public class MenuRegistServlet extends HttpServlet {
           // 4. requestSetAttribute
 
           // 5. forward
-          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuResultUrl);
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuFinish);
           dispatcher.forward(request, response);
         }
       } catch (Exception e) {
         // エラー画面に遷移
         System.out.print(e.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
         dispatcher.forward(request, response);
       }
     } else {
@@ -114,7 +114,7 @@ public class MenuRegistServlet extends HttpServlet {
       request.setAttribute("user_name", userName);
       request.setAttribute("form", menuRegistform);
       // 5. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuConfirmUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuConfirm);
       dispatcher.forward(request, response);
     }
   }

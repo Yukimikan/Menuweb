@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+        request.getRequestDispatcher(GlobalConst.Login);
     dispatcher.forward(request, response);
   }
 
@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
     if (!message.isEmpty()) {
       //reload
       request.setAttribute("message", message);
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Login);
       dispatcher.forward(request, response);
       return;
     }
@@ -84,14 +84,14 @@ public class LoginServlet extends HttpServlet {
       } else {
         // 5. forward
         request.setAttribute("message", result.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Login);
         dispatcher.forward(request, response);
       }
 
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
       dispatcher.forward(request, response);
     }
 

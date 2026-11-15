@@ -49,7 +49,7 @@ public class CsvSearchServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.JspSearchUrl);
+        request.getRequestDispatcher(GlobalConst.CsvSearch);
     dispatcher.forward(request, response);
   }
 
@@ -77,7 +77,7 @@ public class CsvSearchServlet extends HttpServlet {
     if (!message.isEmpty()) {
       //reload
       request.setAttribute("message", message);
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
       dispatcher.forward(request, response);
       return;
     }
@@ -92,19 +92,19 @@ public class CsvSearchServlet extends HttpServlet {
         request.setAttribute("resultList", result.getRetList());
         //  request.setAttribute("message", "検索が完了しました");
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvResult);
         dispatcher.forward(request, response);
       } else {
         // 5. forward
         request.setAttribute("message", result.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
         dispatcher.forward(request, response);
         return;
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
       dispatcher.forward(request, response);
     }
   }

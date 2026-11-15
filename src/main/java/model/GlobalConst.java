@@ -24,14 +24,16 @@ public class GlobalConst {
    */
   public static final String MenuIndexUrl = "./index.html";
   // JSP
-  public static final String JspLoginUrl = "./jsp/login.jsp";
-  public static final String JspSearchUrl = "./jsp/menu_csv_search.jsp";
-  public static final String JspResultUrl = "./jsp/menu_csv_result.jsp";
-  public static final String JspConfirmUrl = "./jsp/menu_csv_confirm.jsp";
-  public static final String JspRegistUrl = "./jsp/menu_csv_write.jsp";
-  public static final String JspMenuRegistUrl = "./jsp/menu_regist.jsp";
-  public static final String JspMenuConfirmUrl = "./jsp/menu_confirm.jsp";
-  public static final String JspMenuResultUrl = "./jsp/menu_result.jsp";
-  public static final String JspErrorUrl = "./jsp/error.jsp";
+  public static final String Login = "./jsp/login.jsp";
+  public static final String CsvSearch = "./jsp/csv_search.jsp";
+  public static final String CsvWrite = "./jsp/csv_write.jsp";
+  public static final String CsvResult = "./jsp/csv_result.jsp";
+  public static final String CsvConfirm = "./jsp/csv_confirm.jsp";
+  public static final String MenuSearch = "./jsp/menu_search.jsp";
+  public static final String MenuRegist = "./jsp/menu_regist.jsp";
+  public static final String MenuResult = "./jsp/menu_result.jsp";
+  public static final String MenuConfirm = "./jsp/menu_confirm.jsp";
+  public static final String MenuFinish = "./jsp/menu_finish.jsp";
+  public static final String Error = "./jsp/error.jsp";
 
 }

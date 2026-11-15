@@ -67,13 +67,13 @@ public class CsvConfirmServlet extends HttpServlet {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvResult);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
       dispatcher.forward(request, response);
     }
 

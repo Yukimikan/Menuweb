@@ -50,7 +50,7 @@ public class CsvWriteServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.JspRegistUrl);
+        request.getRequestDispatcher(GlobalConst.CsvWrite);
     dispatcher.forward(request, response);
   }
 
@@ -87,7 +87,7 @@ public class CsvWriteServlet extends HttpServlet {
       List<String> csvFiles = fileService.execute();
       request.setAttribute("csvFiles", csvFiles);
       // reload
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspRegistUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvWrite);
       dispatcher.forward(request, response);
       return;
     }
@@ -102,13 +102,13 @@ public class CsvWriteServlet extends HttpServlet {
           // 4. requestSetAttribute
           request.setAttribute("resultList", result.getRetList());
           // 5. forward
-          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvResult);
           dispatcher.forward(request, response);
         }
       } catch (Exception e) {
         // エラー画面に遷移
         System.out.print(e.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
         dispatcher.forward(request, response);
       }
     } else {
@@ -119,7 +119,7 @@ public class CsvWriteServlet extends HttpServlet {
       // 4. requestSetAttribute
       request.setAttribute("form", menuCsvRegistform);
       // 5. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspConfirmUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvConfirm);
       dispatcher.forward(request, response);
     }
   }

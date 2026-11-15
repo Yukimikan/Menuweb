@@ -71,13 +71,13 @@ public class MenuConfirmServlet extends HttpServlet {
         // 4. requestSetAttribute
 
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuResultUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
       dispatcher.forward(request, response);
     }
 

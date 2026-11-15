@@ -64,6 +64,16 @@
   <!-- テーブル操作 -->
   <servlet>
     <description></description>
+    <display-name>MenuSearchServlet</display-name>
+    <servlet-name>MenuSearchServlet</servlet-name>
+    <servlet-class>servlet.MenuSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuSearchServlet</servlet-name>
+    <url-pattern>/menu_search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>MenuRegistServlet</display-name>
     <servlet-name>MenuRegistServlet</servlet-name>
     <servlet-class>servlet.MenuRegistServlet</servlet-class>
