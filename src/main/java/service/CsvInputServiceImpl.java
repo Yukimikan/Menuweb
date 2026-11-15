@@ -20,7 +20,7 @@ public class CsvInputServiceImpl implements CsvInputService {
    */
   public CsvInputServiceResult execute(MenuCsvInputForm form) {
 
-	CsvInputServiceResult result = new CsvInputServiceResult();
+    CsvInputServiceResult result = new CsvInputServiceResult();
     try {
       ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
       int total = form.getTotal();
@@ -28,24 +28,24 @@ public class CsvInputServiceImpl implements CsvInputService {
       List<MenuCSV> list = Collections.emptyList();
 
       // ヘッダー一致チェック
-      if(!MenuCSV.readHeader(GlobalConst.CSV_FOLDER_PATH + form.getCsvName())) {
-  	   	result.setSuccess(false);
+      if (!MenuCSV.readHeader(GlobalConst.CSV_FOLDER_PATH + form.getCsvName())) {
+        result.setSuccess(false);
        	result.setMessage(MessageUtil.getProperty("msg_e01_csv_header"));
       } else {
         list = CsvUtil.read(form.getCsvName()).stream()
-    	      .filter(ret ->
-    	              cond.match(ret.getPrice(), total)
-    	              && isMatch(form.getType(), ret.getType())
-    	              && isMatch(form.getRestaurantName(), ret.getRestaurantName())
-    	              )
-      	      .toList();
+          .filter(ret ->
+                  cond.match(ret.getPrice(), total)
+                  && isMatch(form.getType(), ret.getType())
+                  && isMatch(form.getRestaurantName(), ret.getRestaurantName())
+                  )
+              .toList();
         result.setSuccess(true);
       }
-  	  // result
-  	  if (result.isSuccess()) {
+      // result
+      if (result.isSuccess()) {
         result.setRetList(list);
         return result;
-  	  }
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -54,9 +54,9 @@ public class CsvInputServiceImpl implements CsvInputService {
   }
 
   private boolean isMatch(String condition, String value) {
-	    return condition == null
-	            || condition.isEmpty()
-	            || condition.equals(value);
-	}
+    return condition == null
+            || condition.isEmpty()
+            || condition.equals(value);
+  }
 
 }

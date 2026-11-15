@@ -26,6 +26,9 @@ public class CsvSearchServlet extends HttpServlet {
   private CsvInputService service;
   private CsvFileListService fileService;
 
+  /**
+   * コンストラクタ.
+   */
   public CsvSearchServlet() {
     super();
     service = new CsvInputServiceImpl();
@@ -33,14 +36,14 @@ public class CsvSearchServlet extends HttpServlet {
   }
 
   /**
-   * 初期表示
+   * 初期表示.
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-	// 1. 画面情報取得（なし）
+    // 1. 画面情報取得（なし）
 
-	// 1. CSVリスト取得（SharedService）
+    // 1. CSVリスト取得（SharedService）
     List<String> csvFiles = fileService.execute();
     request.setAttribute("csvFiles", csvFiles);
 
@@ -59,25 +62,25 @@ public class CsvSearchServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-	MenuCsvInputForm menuCsvInputForm = new MenuCsvInputForm(
-      (String) request.getParameter("date"),
-      (String) request.getParameter("csv_name"),
-      (String) request.getParameter("type"),
-      (String) request.getParameter("restaurant_name"),
-      (String) request.getParameter("total"),
-      (String) request.getParameter("total_condition"),
-      ""
-      );
+    MenuCsvInputForm menuCsvInputForm = new MenuCsvInputForm(
+        (String) request.getParameter("date"),
+        (String) request.getParameter("csv_name"),
+        (String) request.getParameter("type"),
+        (String) request.getParameter("restaurant_name"),
+        (String) request.getParameter("total"),
+        (String) request.getParameter("total_condition"),
+        ""
+        );
 
     // 2. inputCheck(フロントで実行)
-	String message = menuCsvInputForm.inputCheck();
-    if(!message.isEmpty()) {
-    	//reload
-        request.setAttribute("message", message);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
-        dispatcher.forward(request, response);
-        return;
-    };
+    String message = menuCsvInputForm.inputCheck();
+    if (!message.isEmpty()) {
+      //reload
+      request.setAttribute("message", message);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
+      dispatcher.forward(request, response);
+      return;
+    }
 
     try {
       // 3. サーバー側のチェック
@@ -92,11 +95,11 @@ public class CsvSearchServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
         dispatcher.forward(request, response);
       } else {
-  	    // 5. forward
+        // 5. forward
         request.setAttribute("message", result.getMessage());
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
         dispatcher.forward(request, response);
-    	return;
+        return;
       }
     } catch (Exception e) {
       // エラー画面に遷移

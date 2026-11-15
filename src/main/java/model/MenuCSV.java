@@ -109,6 +109,8 @@ public class MenuCSV {
   /**
    * ★★★ 書き込み用コンストラクタ（Servlet → Model）
    * normalizeSingleMenuFlg() は絶対に使わない.
+   *
+   * @param cols //CSV項目を格納した配列
    */
   public static MenuCSV fromInput(String[] cols) {
 
@@ -141,6 +143,11 @@ public class MenuCSV {
     }
   }
 
+  /**
+   * CSVの一行を文字列型を返す.
+   *
+   * @return //String
+   */
   public String returnJoinedString() {
     return String.join(
        ",",
@@ -158,8 +165,9 @@ public class MenuCSV {
   /**
    * CsvHeader読み込み.
    *
-   * @param filePath
+   * @param filePath //CSVファイルのパス
    * @return String
+   * @exception Exception // 例外
    */
   // 先頭行（ヘッダー）を読み、ヘッダと一致するかチェックする
   public static boolean readHeader(String filePath) throws Exception {

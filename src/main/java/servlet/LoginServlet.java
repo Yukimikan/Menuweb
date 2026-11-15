@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 
 
   /**
-   * 初期表示
+   * 初期表示.
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -52,40 +52,40 @@ public class LoginServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-	LoginForm loginForm = new LoginForm(
-    	(String) request.getParameter("user"),
-    	(String) request.getParameter("password"),
-    	""
-    	);
+    LoginForm loginForm = new LoginForm(
+        (String) request.getParameter("user"),
+        (String) request.getParameter("password"),
+        ""
+        );
 
     // 2. inputCheck(フロントで実行)
-	String message = loginForm.inputCheck();
-    if(!message.isEmpty()) {
+    String message = loginForm.inputCheck();
+    if (!message.isEmpty()) {
       //reload
       request.setAttribute("message", message);
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
-  	  dispatcher.forward(request, response);
-  	  return;
+      dispatcher.forward(request, response);
+      return;
     }
 
     try {
       // 3. サーバー側のチェック
 
       // 3. service execute
-	  LoginServiceResult result = service.execute(loginForm);
-	  if (result.isSuccess()) {
-	    // 4. requestSetAttribute
-	    // request.setAttribute("userName", result.getUserName());
-	    HttpSession session = request.getSession();
-	    session.setAttribute("userName",result.getUserName());
-	    // 5. forward
-	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuIndexUrl);
-	    dispatcher.forward(request, response);
-	  } else {
-	    // 5. forward
-        request.setAttribute("message",result.getMessage());
-   	    RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
-  	    dispatcher.forward(request, response);
+      LoginServiceResult result = service.execute(loginForm);
+      if (result.isSuccess()) {
+        // 4. requestSetAttribute
+        // request.setAttribute("userName", result.getUserName());
+        HttpSession session = request.getSession();
+        session.setAttribute("userName", result.getUserName());
+        // 5. forward
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuIndexUrl);
+        dispatcher.forward(request, response);
+      } else {
+        // 5. forward
+        request.setAttribute("message", result.getMessage());
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspLoginUrl);
+        dispatcher.forward(request, response);
       }
 
     } catch (Exception e) {

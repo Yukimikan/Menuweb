@@ -12,7 +12,7 @@ import model.MenuCSV;
 
 /**
  * ファイル書込用サービス.
- * */
+ */
 public class CsvWriteServiceImpl implements CsvWriteService {
 
   /**
@@ -51,9 +51,9 @@ public class CsvWriteServiceImpl implements CsvWriteService {
       throw new IOException(e.getMessage(), e);
     }
     return new CsvWriteServiceResult(
-    		true,
-    		"",
-    		list);
+        true,
+        "",
+        list);
   }
 
   /**
@@ -74,7 +74,7 @@ public class CsvWriteServiceImpl implements CsvWriteService {
       form.getTotal()
     };
     MenuCSV rec = MenuCSV.fromInput(cols);
-	String csvName = form.getCsvName();
+    String csvName = form.getCsvName();
     // 1. 新規行だけ書き込む（追記モード）
     try {
       FileControl.append(GlobalConst.CSV_FOLDER_PATH + csvName, rec.returnJoinedString());

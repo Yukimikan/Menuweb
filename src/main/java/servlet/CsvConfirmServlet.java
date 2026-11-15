@@ -29,7 +29,7 @@ public class CsvConfirmServlet extends HttpServlet {
 
 
   /**
-   * 初期表示
+   * 初期表示.
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -45,7 +45,7 @@ public class CsvConfirmServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-	MenuCsvConfirmForm menuCsvConfirmform = new MenuCsvConfirmForm(
+    MenuCsvConfirmForm menuCsvConfirmform = new MenuCsvConfirmForm(
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),

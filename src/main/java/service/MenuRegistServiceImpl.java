@@ -25,7 +25,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
    */
   public MenuRegistServiceResult execute(MenuRegistForm form, String userName) throws IOException {
 
-	// 初期化
+    // 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
     MenuEntity entity = new MenuEntity(
           GlobalConst.NUM_CSV新規登録, // 新規登録
@@ -55,7 +55,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
    */
   public MenuRegistServiceResult execute(MenuConfirmForm form, String userName) throws IOException {
 
-	// 初期化
+    // 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
     MenuEntity entity = new MenuEntity(
           GlobalConst.NUM_CSV新規登録, // 新規登録
