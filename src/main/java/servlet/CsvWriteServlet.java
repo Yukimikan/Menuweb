@@ -26,6 +26,9 @@ public class CsvWriteServlet extends HttpServlet {
   private CsvWriteService service;
   private CsvFileListService fileService;
 
+  /**
+   * コンストラクタ.
+   */
   public CsvWriteServlet() {
     super();
     service = new CsvWriteServiceImpl();
@@ -34,14 +37,14 @@ public class CsvWriteServlet extends HttpServlet {
 
 
   /**
-   * 初期表示
+   * 初期表示.
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     // 初期化
 
-	// 1. CSVリスト取得（SharedService）
+    // 1. CSVリスト取得（SharedService）
     List<String> csvFiles = fileService.execute();
     request.setAttribute("csvFiles", csvFiles);
 
@@ -60,7 +63,7 @@ public class CsvWriteServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-	MenuCsvRegistForm menuCsvRegistform = new MenuCsvRegistForm(
+    MenuCsvRegistForm menuCsvRegistform = new MenuCsvRegistForm(
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("type"),
@@ -71,12 +74,13 @@ public class CsvWriteServlet extends HttpServlet {
         (String) request.getParameter("tax"),
         (String) request.getParameter("total"),
         "");
-	// チェックボックスの選択された値を取得
-	// String[] confirm_flg = request.getParameterValues("confirm_flg");
-	String confirmFlg = request.getParameter("confirm_flg");
-	boolean checked = confirmFlg != null;
+
+    // チェックボックスの選択された値を取得
+    // String[] confirm_flg = request.getParameterValues("confirm_flg");
+    String confirmFlg = request.getParameter("confirm_flg");
+    boolean checked = confirmFlg != null;
     // 2. inputCheck(フロントで実行)
-	String message = menuCsvRegistform.inputCheck();
+    String message = menuCsvRegistform.inputCheck();
     if (!message.isEmpty()) {
       request.setAttribute("message", message);
       // CSVリストを再取得（入力画面に戻るため）
@@ -89,7 +93,7 @@ public class CsvWriteServlet extends HttpServlet {
     }
 
     // 入力チェック不要
-	if (checked) {
+    if (checked) {
       // 3. サーバー側のチェック
       try {
         // 3. service execute
@@ -101,22 +105,22 @@ public class CsvWriteServlet extends HttpServlet {
           RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
           dispatcher.forward(request, response);
         }
-	  } catch (Exception e) {
+      } catch (Exception e) {
         // エラー画面に遷移
         System.out.print(e.getMessage());
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
         dispatcher.forward(request, response);
-	    }
-      } else {
-        // 3. サーバー側のチェック
+      }
+    } else {
+      // 3. サーバー側のチェック
 
-        // 3. service execute
+      // 3. service execute
 
-    	// 4. requestSetAttribute
-    	request.setAttribute("form", menuCsvRegistform);
-        // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspConfirmUrl);
-        dispatcher.forward(request, response);
+      // 4. requestSetAttribute
+      request.setAttribute("form", menuCsvRegistform);
+      // 5. forward
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspConfirmUrl);
+      dispatcher.forward(request, response);
     }
   }
 }

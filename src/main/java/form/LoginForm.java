@@ -5,6 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * ログイン画面.
+ * ユーザ名
+ * パスワード
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

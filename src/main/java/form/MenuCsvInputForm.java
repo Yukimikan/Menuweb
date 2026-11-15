@@ -5,6 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * メニューCSV入力画面.
+ * 日付,CSV名,種類,店名,単品,メニュー,価格,税,金額,金額(条件)
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +23,11 @@ public class MenuCsvInputForm {
   private String totalCondition;
   private String message;
 
+  /**
+   * 合計金額を返す.
+   *
+   * @return total 合計金額 or 0
+   */
   public int getTotal() {
     // ★ int で返す(NULLチェック後)
     if (this.total.isBlank()) {
@@ -27,6 +37,12 @@ public class MenuCsvInputForm {
     }
   }
 
+  /**
+   * 入力チェック.
+   * 合計金額
+   *
+   * @return メッセージ
+   */
   public String inputCheck() {
     if ((total.matches("[0-9]+"))) {
       // 数値以外

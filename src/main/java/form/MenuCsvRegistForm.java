@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * メニューCSV登録画面.
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

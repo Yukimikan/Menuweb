@@ -11,6 +11,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import mappers.MenuMapper;
 import model.MenuEntity;
 
+/**
+* MenuDao
+* メニューテーブル操作.
+*/
 public class MenuDaoImpl implements MenuDao {
 
   @Override
