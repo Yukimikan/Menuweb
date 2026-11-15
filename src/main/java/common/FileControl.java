@@ -9,17 +9,21 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * FileControl
+ * ファイル操作（共通化）.
+ */
 public class FileControl {
 
-  /*
+  /**
+   * getFileNames
+   * ファイルパスからファイル名を取得
+   * (csvファイル).
    *
-   * getFileNames.
-   * @param folderPath
+   * @param folderPath // フォルダパス
    * @param extension // 拡張子
    */
   public static List<String> getFileNames(String folderPath, String extension) throws IOException {
-    // ファイルパスからファイル名を取得
-    // (csvファイル)
 
     try (Stream<Path> s = Files.list(Paths.get(folderPath))) {
       return s
@@ -31,12 +35,13 @@ public class FileControl {
   }
 
   /**
-  *
-  * @param filePath
-  * @param rec
-  * @throws IOException
-  */
- public static void append(String filePath, String rec) throws IOException {
+   * ファイル操作（追加書き）.
+   *
+   * @param filePath //ファイルパス
+   * @param rec      //追加行
+   * @throws IOException // ファイル書き込みエラー
+   */
+  public static void append(String filePath, String rec) throws IOException {
 
     try (BufferedWriter bw = new BufferedWriter(
         new FileWriter(filePath, true))

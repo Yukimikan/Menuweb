@@ -8,11 +8,11 @@ import form.LoginForm;
 /*
  * service.
  */
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
 
   private UserDao userDao;
 
-  public LoginServiceImpl(){
+  public LoginServiceImpl() {
     userDao = new UserDaoImpl();
   }
 

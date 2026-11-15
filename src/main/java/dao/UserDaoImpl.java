@@ -10,14 +10,16 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import mappers.UserMapper;
 
-public class UserDaoImpl implements UserDao{
+/**
+ * ユーザ取得.
+ */
+public class UserDaoImpl implements UserDao {
 
   /**
-   * 取得
-   * @param int p1
+   * ユーザ取得.
    */
   public String selectUserByKey(String name, String password)
-  	throws RuntimeException{
+      throws RuntimeException {
 
     try {
       String resource = "mybatis-config.xml";
@@ -36,19 +38,15 @@ public class UserDaoImpl implements UserDao{
   }
 
 //  UserDao
-//	static final String SelectSQL = "select count(*) from USER";
-//	static final String SelectSQLBykey = "select count(*) from USER where id = ?";
-//	static final String SelectSQLGetUser = "select name from \"USER\" where name = ? and password = ?";
-//	static final String SelectTableByKey = "select * from \"USER\" where name = ?";
+//  static final String SelectSQL = "select count(*) from USER";
+//  static final String SelectSQLBykey = "select count(*) from USER where id = ?";
+//  static final String SelectSQLGetUser = "select name from \"USER\" where name = ? and password = ?";
+//  static final String SelectTableByKey = "select * from \"USER\" where name = ?";
 
-//	public int selectCountAll() ;
+//  public int selectCountAll() ;
 
-//	public String SelectSQLGetUser(String name, String password) throws RuntimeException;
+//  public String SelectSQLGetUser(String name, String password) throws RuntimeException;
 
-  /**
-   * 取得
-   * @param int p1
-   */
 //  public String SelectSQLGetUser(String name, String password)
 //  		throws RuntimeException{
 //
@@ -83,7 +81,8 @@ public class UserDaoImpl implements UserDao{
 //    return "";
 //  }
 
-//  private ResultSet executeQueryWithParam(PreparedStatement ps, String name, String password) throws SQLException {
+//  private ResultSet executeQueryWithParam(PreparedStatement ps, String name, String password)
+//  throws SQLException {
 //  ps.setString(1, name);
 //  ps.setString(2, password);
 //  return ps.executeQuery();

@@ -5,6 +5,10 @@ import java.io.IOException;
 import form.MenuCsvConfirmForm;
 import form.MenuCsvRegistForm;
 
+/**
+ * CsvWriteService
+ * CSVの書込み.
+ */
 public interface CsvWriteService {
 
   public CsvWriteServiceResult execute(MenuCsvRegistForm input) throws IOException;

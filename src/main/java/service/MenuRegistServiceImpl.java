@@ -23,7 +23,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
   /**
    * execute.
    */
-  public MenuRegistServiceResult execute(MenuRegistForm form, String userName) throws IOException{
+  public MenuRegistServiceResult execute(MenuRegistForm form, String userName) throws IOException {
 
 	// 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
@@ -53,7 +53,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
   /**
    * execute.
    */
-  public MenuRegistServiceResult execute(MenuConfirmForm form, String userName) throws IOException{
+  public MenuRegistServiceResult execute(MenuConfirmForm form, String userName) throws IOException {
 
 	// 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
