@@ -28,13 +28,13 @@ public class GlobalConst {
   public static final String CsvSearch = "./jsp/csv_search.jsp";
   public static final String CsvSearchResult = "./jsp/csv_search_result.jsp";
   public static final String CsvWrite = "./jsp/csv_write.jsp";
-  public static final String CsvWriteFinish = "./jsp/csv_write_finish.jsp";
   public static final String CsvConfirm = "./jsp/csv_confirm.jsp";
+  public static final String CsvWriteFinish = "./jsp/csv_write_finish.jsp";
   public static final String MenuSearch = "./jsp/menu_search.jsp";
+  public static final String MenuSearchResult = "./jsp/menu_search_result.jsp";
   public static final String MenuRegist = "./jsp/menu_regist.jsp";
-  public static final String MenuRegistResult = "./jsp/menu_result.jsp";
   public static final String MenuConfirm = "./jsp/menu_confirm.jsp";
-  public static final String MenuFinish = "./jsp/menu_regist_finish.jsp";
+  public static final String MenuRegistFinish = "./jsp/menu_regist_finish.jsp";
   public static final String Error = "./jsp/error.jsp";
 
 }

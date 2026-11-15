@@ -22,11 +22,13 @@ public class CsvConfirmServlet extends HttpServlet {
 
   private CsvWriteService service;
 
+  /**
+   * コンストラクタ.
+   */
   public CsvConfirmServlet() {
     super();
     service = new CsvWriteServiceImpl();
   }
-
 
   /**
    * 初期表示.
@@ -65,7 +67,7 @@ public class CsvConfirmServlet extends HttpServlet {
       CsvWriteServiceResult result = service.execute(menuCsvConfirmform);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
-        request.setAttribute("resultList", result.getRetList());
+
         // 5. forward
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvWriteFinish);
         dispatcher.forward(request, response);

@@ -6,7 +6,7 @@ import form.MenuCsvInputForm;
  * CsvInputService
  * CSVの検索条件入力.
  */
-public interface CsvInputService {
+public interface CsvSearchService {
 
-  public CsvInputServiceResult execute(MenuCsvInputForm form);
+  public CsvSearchServiceResult execute(MenuCsvInputForm form);
 }

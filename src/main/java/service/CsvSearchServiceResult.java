@@ -13,7 +13,7 @@ import model.MenuCSV;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CsvInputServiceResult {
+public class CsvSearchServiceResult {
 
   private boolean success;
   private String message;

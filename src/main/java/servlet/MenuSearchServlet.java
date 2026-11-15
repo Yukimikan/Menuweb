@@ -13,9 +13,9 @@ import form.MenuCsvInputForm;
 import model.GlobalConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
-import service.CsvInputService;
-import service.CsvInputServiceImpl;
-import service.CsvInputServiceResult;
+import service.CsvSearchService;
+import service.CsvSearchServiceImpl;
+import service.CsvSearchServiceResult;
 
 /**
  * Servlet.
@@ -23,7 +23,7 @@ import service.CsvInputServiceResult;
 public class MenuSearchServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  private CsvInputService service;
+  private CsvSearchService service;
   private CsvFileListService fileService;
 
   /**
@@ -31,7 +31,7 @@ public class MenuSearchServlet extends HttpServlet {
    */
   public MenuSearchServlet() {
     super();
-    service = new CsvInputServiceImpl();
+    service = new CsvSearchServiceImpl();
     fileService = new CsvFileListServiceImpl();
   }
 
@@ -86,13 +86,13 @@ public class MenuSearchServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      CsvInputServiceResult result = service.execute(menuCsvInputForm);
+      CsvSearchServiceResult result = service.execute(menuCsvInputForm);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());
         //  request.setAttribute("message", "検索が完了しました");
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegistResult);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearchResult);
         dispatcher.forward(request, response);
       } else {
         // 5. forward

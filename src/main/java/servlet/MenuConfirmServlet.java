@@ -71,7 +71,7 @@ public class MenuConfirmServlet extends HttpServlet {
         // 4. requestSetAttribute
 
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuFinish);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegistFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {

@@ -13,14 +13,14 @@ import model.MenuCSV;
 /**
  * ファイル読込用サービス.
  * */
-public class CsvInputServiceImpl implements CsvInputService {
+public class CsvSearchServiceImpl implements CsvSearchService {
 
   /**
    * execute.
    */
-  public CsvInputServiceResult execute(MenuCsvInputForm form) {
+  public CsvSearchServiceResult execute(MenuCsvInputForm form) {
 
-    CsvInputServiceResult result = new CsvInputServiceResult();
+    CsvSearchServiceResult result = new CsvSearchServiceResult();
     try {
       ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
       int total = form.getTotal();
