@@ -67,7 +67,7 @@ public class CsvConfirmServlet extends HttpServlet {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvResult);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvWriteFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {

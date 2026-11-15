@@ -92,7 +92,7 @@ public class CsvSearchServlet extends HttpServlet {
         request.setAttribute("resultList", result.getRetList());
         //  request.setAttribute("message", "検索が完了しました");
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvResult);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearchResult);
         dispatcher.forward(request, response);
       } else {
         // 5. forward
