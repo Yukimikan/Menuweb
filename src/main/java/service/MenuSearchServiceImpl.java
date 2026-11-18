@@ -3,6 +3,7 @@ package service;
 import java.util.Collections;
 import java.util.List;
 
+import common.ConditionTotal;
 import dao.MenuDao;
 import dao.MenuDaoImpl;
 import form.MenuSearchForm;
@@ -37,17 +38,26 @@ public class MenuSearchServiceImpl implements MenuSearchService {
             Integer.parseInt(form.getTax()),
             form.getTotal(),
             userName);
+    ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
 
     try {
-      List<MenuEntity> retList = menuDao.select(entity, userName);
+      List<MenuEntity> tmpList = menuDao.select(entity, userName);
 
-      if (retList.size() == 0) {
+      if (tmpList.size() == 0) {
         // 結果0件
         result.setSuccess(true);
         result.setMessage("0件");
         result.setRetList(Collections.emptyList());
         System.out.print(result.getMessage());
       } else {
+        List<MenuEntity> retList = tmpList.stream()
+          .filter(ret ->
+                  cond.match(ret.getTotal(), form.getTotal())
+                  && isMatch(form.getType(), ret.getType())
+                  && isMatch(form.getRestaurantName(), ret.getRestaurantName())
+                  )
+                .toList();
+
         result.setSuccess(true);
         result.setRetList(retList);
       }
@@ -60,6 +70,12 @@ public class MenuSearchServiceImpl implements MenuSearchService {
     }
     // return
     return result;
+  }
+
+  private boolean isMatch(String condition, String value) {
+    return condition == null
+            || condition.isEmpty()
+            || condition.equals(value);
   }
 
 }

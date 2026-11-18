@@ -10,7 +10,8 @@
     	type,
     	restaurant_name,
     	singlemenu_flg,
-    	menu, price,
+    	menu,
+    	price,
     	tax ,
     	total,
     	update_user,
@@ -41,17 +42,19 @@
      total,
      update_user
     from "MENU"
-    <!-- 検索条件の入力チェックが破損した  -->
-     where 1 = 1
-    <if test="entity.type != null and entity.type != ''">
-      AND type = #{entity.type}
-    </if>
-    <if test="entity.restaurantName != null and entity.restaurantName != ''">
-      AND restaurant_name = #{entity.restaurantName}
-    </if>
-    <if test="entity.total != null and entity.total != ''">
-      AND total = #{entity.total}
-    </if>
+    <where>
+	    <if test="entity.type != null and entity.type != ''">
+	      AND type = #{entity.type}
+	    </if>
+	    <if test="entity.restaurantName != null and entity.restaurantName != ''">
+	      AND restaurant_name = #{entity.restaurantName}
+	    </if>
+	    <!--  totalはServiceで絞るので実装不要
+	    <if test="entity.total != null and entity.total != ''">
+	      AND total = #{entity.total}
+	    </if>
+	    -->
+    </where>
   </select>
 
 </mapper>
