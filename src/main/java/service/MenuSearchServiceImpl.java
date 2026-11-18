@@ -27,7 +27,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
    */
   public MenuSearchServiceResult execute(MenuSearchForm form, String userName) {
 
-	MenuSearchServiceResult result = new MenuSearchServiceResult();
+    MenuSearchServiceResult result = new MenuSearchServiceResult();
     MenuEntity entity = new MenuEntity(
             GlobalConst.NUM_CSV検索, // 検索
             form.getType(),

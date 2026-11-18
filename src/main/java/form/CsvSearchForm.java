@@ -47,10 +47,10 @@ public class CsvSearchForm {
     // 数値以外
     if (!(this.total == null || this.total.isBlank())
         && !(this.total.matches("[0-9]+"))) {
-        // 数値エラー
-        this.message = MessageUtil.getProperty("msg_w02_csv_input");
+      // 数値エラー
+      this.message = MessageUtil.getProperty("msg_w02_csv_input");
     }
-  return message;
+    return message;
   }
 
 }

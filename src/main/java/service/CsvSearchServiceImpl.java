@@ -30,7 +30,7 @@ public class CsvSearchServiceImpl implements CsvSearchService {
       // ヘッダー一致チェック
       if (!MenuCSV.readHeader(GlobalConst.CSV_FOLDER_PATH + form.getCsvName())) {
         result.setSuccess(false);
-       	result.setMessage(MessageUtil.getProperty("msg_e01_csv_header"));
+        result.setMessage(MessageUtil.getProperty("msg_e01_csv_header"));
       } else {
         list = CsvUtil.read(form.getCsvName()).stream()
           .filter(ret ->
