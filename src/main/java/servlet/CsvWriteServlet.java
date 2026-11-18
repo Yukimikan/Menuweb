@@ -5,7 +5,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -64,12 +63,12 @@ public class CsvWriteServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    String fromScreen = (String) request.getParameter("from_screen") ;
+    String fromScreen = (String) request.getParameter("from_screen");
     // 戻る押下した場合
-    if ("confirm".equals(fromScreen)){
+    if ("confirm".equals(fromScreen)) {
       // 遷移元（確認画面）
       // 1. parameter set
-      HttpSession session = request.getSession();
+      // HttpSession session = request.getSession();
       MenuRegistForm form = new MenuRegistForm(
           "1",
           (String) request.getParameter("type"),

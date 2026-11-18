@@ -35,7 +35,7 @@ public class CsvSearchServiceImpl implements CsvSearchService {
       } else {
         List<MenuCSV> tmpList = CsvUtil.read(form.getCsvName());
         List<MenuCSV> retList = tmpList.stream()
-          .filter(ret ->
+            .filter(ret ->
                   cond.match(ret.getTotal(), total)
                   && isMatch(form.getType(), ret.getType())
                   && isMatch(form.getRestaurantName(), ret.getRestaurantName())

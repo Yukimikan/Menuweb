@@ -56,12 +56,12 @@ public class MenuRegistServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    String fromScreen = (String) request.getParameter("from_screen") ;
+    String fromScreen = (String) request.getParameter("from_screen");
     // 戻る押下した場合
-    if ("confirm".equals(fromScreen)){
+    if ("confirm".equals(fromScreen)) {
       // 遷移元（確認画面）
       // 1. parameter set
-      HttpSession session = request.getSession();
+      // HttpSession session = request.getSession();
       MenuRegistForm form = new MenuRegistForm(
           "1",
           (String) request.getParameter("type"),
