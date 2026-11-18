@@ -56,6 +56,31 @@ public class MenuRegistServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
+    String fromScreen = (String) request.getParameter("from_screen") ;
+    // 戻る押下した場合
+    if ("confirm".equals(fromScreen)){
+      // 遷移元（確認画面）
+      // 1. parameter set
+      HttpSession session = request.getSession();
+      MenuRegistForm form = new MenuRegistForm(
+          "1",
+          (String) request.getParameter("type"),
+          (String) request.getParameter("restaurant_name"),
+          (String) request.getParameter("singlemenu_flg"),
+          (String) request.getParameter("menu"),
+          (String) request.getParameter("price"),
+          (String) request.getParameter("tax"),
+          (String) request.getParameter("total"),
+          "");
+      request.setAttribute("form", form);
+      // 2. 初期表示へ forward
+      RequestDispatcher dispatcher =
+          request.getRequestDispatcher(GlobalConst.MenuRegist);
+      dispatcher.forward(request, response);
+
+      return;
+    }
+
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
@@ -119,4 +144,5 @@ public class MenuRegistServlet extends HttpServlet {
       dispatcher.forward(request, response);
     }
   }
+
 }

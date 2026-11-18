@@ -26,85 +26,95 @@
     <c:if test="${not empty message}">
     	<div class="error-box">${message}</div>
 	</c:if>
-	<form name="form1"
-		action="${pageContext.request.contextPath}/menu_confirm" method="post">
-		<div>
-			ユーザ名：
-			<div class="input">
-			    <c:if test="${not empty sessionScope.userName}">
-				<input type="text" name="user_name" readonly
-				   value="${sessionScope.userName}">
-				</c:if>
-			    <!--  非ログイン時（ログイン機能実装後の動確用） -->
-			    <c:if test="${empty sessionScope.userName}">
-	                <input type="text" name="user_name" value="guest">
-			    </c:if>
+		<form name="form1"
+			action="${pageContext.request.contextPath}/menu_confirm" method="post">
+			<div>
+				ユーザ名：
+				<div class="input">
+				    <c:if test="${not empty sessionScope.userName}">
+					<input type="text" name="user_name" readonly
+					   value="${sessionScope.userName}">
+					</c:if>
+				    <!--  非ログイン時（ログイン機能実装後の動確用） -->
+				    <c:if test="${empty sessionScope.userName}">
+		                <input type="text" name="user_name" value="guest">
+				    </c:if>
+				</div>
 			</div>
-		</div>
-		<!-- ★ 登録内容表示 -->
-		<span>以下登録内容をご確認ください。</span><br>
-		<div class="row">
-			<div class="label">種別：</div>
-			<div class="input">
-				<input type="text" name="type" readonly
-				   value="${form.type}">
+			<!-- ★ 登録内容表示 -->
+			<span>以下登録内容をご確認ください。</span><br>
+			<div class="row">
+				<div class="label">種別：</div>
+				<div class="input">
+					<input type="text" name="type" readonly
+					   value="${form.type}">
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="label">店名：</div>
-			<div class="input">
-				<input type="text" name="restaurant_name" readonly
-				value="${form.restaurantName}">
+			<div class="row">
+				<div class="label">店名：</div>
+				<div class="input">
+					<input type="text" name="restaurant_name" readonly
+					value="${form.restaurantName}">
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="label">単品フラグ：</div>
-			<div class="input">
+			<div class="row">
+				<div class="label">単品フラグ：</div>
+				<div class="input">
 
-				<input type="text" name="singlemenu_flg" readonly
-				      value="${form.singleMenuFlg}">
+					<input type="text" name="singlemenu_flg" readonly
+					      value="${form.singleMenuFlg}">
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="label">メニュー名：</div>
-			<div class="input">
-				<input type="text" name="menu" readonly
-				  value="${form.menu}">
+			<div class="row">
+				<div class="label">メニュー名：</div>
+				<div class="input">
+					<input type="text" name="menu" readonly
+					  value="${form.menu}">
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="label">金額：</div>
-			<div class="input">
-				<input type="text" name="price" readonly
-				  value="${form.price}">円
+			<div class="row">
+				<div class="label">金額：</div>
+				<div class="input">
+					<input type="text" name="price" readonly
+					  value="${form.price}">円
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="label">税額：</div>
-			<div class="input">
-				<input type="text" name="tax" readonly
-				  value="${form.tax}">円
+			<div class="row">
+				<div class="label">税額：</div>
+				<div class="input">
+					<input type="text" name="tax" readonly
+					  value="${form.tax}">円
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="label">合計：</div>
-			<div class="input">
-				<input type="text" name="total" readonly
-				  value="${form.total}">円
+			<div class="row">
+				<div class="label">合計：</div>
+				<div class="input">
+					<input type="text" name="total" readonly
+					  value="${form.total}">円
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="label">メニュー登録：</div>
-			<div class="input">
-				<input type="submit" value="登録" class="btn-submit">
+			<div class="row">
+				<div class="label">メニュー登録：</div>
+				<div class="input">
+					<input type="submit" value="登録" class="btn-submit">
+				</div>
 			</div>
-		</div>
+		</form>
 		<div class="row">
 			<div align="left">
-		 	<a class="btn-arrow back" href="/Menuweb/menu_regist">戻る</a>
+			<form action="${pageContext.request.contextPath}/menu_regist" method="post">
+				<!-- hidden parameter -->
+			    <input type="hidden" name="from_screen" value="confirm">
+				<input type="hidden" name="type" value="${form.type}">
+			    <input type="hidden" name="restaurant_name" value="${form.restaurantName}">
+			    <input type="hidden" name="menu" value="${form.menu}">
+			    <input type="hidden" name="price" value="${form.price}">
+			    <input type="hidden" name="tax" value="${form.tax}">
+			    <input type="hidden" name="total" value="${form.total}">
+			    <input type="submit" value="戻る" class="btn-submit">
+			</form>
 			</div>
 		</div>
-	</form>
 	</div>
 	<div id="footer" class="footer">
 	<%@include file="./footer.jsp"%>
