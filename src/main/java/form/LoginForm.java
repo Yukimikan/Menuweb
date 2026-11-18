@@ -20,6 +20,11 @@ public class LoginForm {
   private String password;
   private String message;
 
+  /**
+   * 共通処理.
+   *
+   * @return boolean
+   */
   public String inputCheck() {
     if (this.name == null || this.name.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w02_login");

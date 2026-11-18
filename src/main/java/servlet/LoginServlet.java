@@ -62,6 +62,7 @@ public class LoginServlet extends HttpServlet {
     String message = form.inputCheck();
     if (!message.isEmpty()) {
       //reload
+      request.setAttribute("form", form);
       request.setAttribute("message", message);
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Login);
       dispatcher.forward(request, response);
@@ -75,7 +76,6 @@ public class LoginServlet extends HttpServlet {
       LoginServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
-        // request.setAttribute("userName", result.getUserName());
         HttpSession session = request.getSession();
         session.setAttribute("userName", result.getUserName());
         // 5. forward
@@ -83,6 +83,7 @@ public class LoginServlet extends HttpServlet {
         dispatcher.forward(request, response);
       } else {
         // 5. forward
+        request.setAttribute("form", form);
         request.setAttribute("message", result.getMessage());
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Login);
         dispatcher.forward(request, response);

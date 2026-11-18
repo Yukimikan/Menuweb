@@ -65,26 +65,26 @@
 			<div class="row">
 				<div class="label">日付：</div>
 				<div class="input">
-					<input type="text" name="date" value="2025/01/01">
+					<input type="text" name="date" value="${form.date}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">種類：</div>
 				<div class="input">
-					<input type="text" name="type" value="">
+					<input type="text" name="type" value="${form.type}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
-					<input type="text" name="restaurant_name" value="">
+					<input type="text" name="restaurant_name" value="${form.restaurantName}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">金額（円）：</div>
 				<div class="input">
-					<input type="text" name="total">円 <select
-						name="total_condition">
+					<input type="text" name="total" value="${form.total}">円
+					<select name="total_condition">
 						<option value="1">以上</option>
 						<option value="2">以下</option>
 						<option value="3">ピッタリ</option>

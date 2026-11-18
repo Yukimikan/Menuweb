@@ -78,10 +78,10 @@ public class MenuRegistServlet extends HttpServlet {
     // 2. inputCheck(フロントで実行)
     String message = form.inputCheck();
     if (!message.isEmpty()) {
-      request.setAttribute("message", message);
-      // CSVリストを再取得（入力画面に戻るため）
-
       // reload
+      request.setAttribute("form", form);
+      request.setAttribute("message", message);
+
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegist);
       dispatcher.forward(request, response);
       return;

@@ -93,19 +93,19 @@ function checkText() {
 			<div class="row">
 				<div class="label">確認画面を省略する</div>
 				<div class="input">
-					<input type="checkbox" name="confirm_flg" checked>
+					<input type="checkbox" name="confirm_flg" value="${form.confirmFlg}" checked>
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">種別：</div>
 				<div class="input">
-					<input type="text" name="type">
+					<input type="text" name="type" value="${form.type}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
-					<input type="text" name="restaurant_name">
+					<input type="text" name="restaurant_name" value="${form.restaurantName}">
 				</div>
 			</div>
 			<div class="row">
@@ -120,25 +120,25 @@ function checkText() {
 			<div class="row">
 				<div class="label">メニュー名：</div>
 				<div class="input">
-					<input type="text" name="menu">
+					<input type="text" name="menu" value="${form.menu}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">金額：</div>
 				<div class="input">
-					<input type="text" name="price">円
+					<input type="text" name="price" value="${form.price}">円
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">税額：</div>
 				<div class="input">
-					<input type="text" name="tax">円
+					<input type="text" name="tax" value="${form.tax}">円
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">合計：</div>
 				<div class="input">
-					<input type="text" name="total">円
+					<input type="text" name="total" value="${form.total}">円
 				</div>
 			</div>
 			<div class="row">

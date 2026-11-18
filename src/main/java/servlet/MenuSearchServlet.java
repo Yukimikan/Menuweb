@@ -73,6 +73,7 @@ public class MenuSearchServlet extends HttpServlet {
     String message = form.inputCheck();
     if (!message.isEmpty()) {
       //reload
+      request.setAttribute("form", form);
       request.setAttribute("message", message);
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearch);
       dispatcher.forward(request, response);
@@ -93,6 +94,7 @@ public class MenuSearchServlet extends HttpServlet {
         dispatcher.forward(request, response);
       } else {
         // 5. forward
+        request.setAttribute("form", form);
         request.setAttribute("message", result.getMessage());
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearch);
         dispatcher.forward(request, response);
