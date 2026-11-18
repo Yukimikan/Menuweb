@@ -21,29 +21,39 @@ public class CsvSearchServiceImpl implements CsvSearchService {
   public CsvSearchServiceResult execute(CsvSearchForm form) {
 
     CsvSearchServiceResult result = new CsvSearchServiceResult();
+
+    ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
+
+    int total = this.convertTotal(form.getTotal());
+
     try {
-      ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
-      int total = form.getTotal();
-
-      List<MenuCSV> list = Collections.emptyList();
-
       // ヘッダー一致チェック
       if (!MenuCSV.readHeader(GlobalConst.CSV_FOLDER_PATH + form.getCsvName())) {
         result.setSuccess(false);
         result.setMessage(MessageUtil.getProperty("msg_e01_csv_header"));
+        result.setRetList(Collections.emptyList());
       } else {
-        list = CsvUtil.read(form.getCsvName()).stream()
+        List<MenuCSV> tmpList = CsvUtil.read(form.getCsvName());
+        List<MenuCSV> retList = tmpList.stream()
           .filter(ret ->
                   cond.match(ret.getTotal(), total)
                   && isMatch(form.getType(), ret.getType())
                   && isMatch(form.getRestaurantName(), ret.getRestaurantName())
                   )
               .toList();
-        result.setSuccess(true);
+        if (tmpList.size() == 0) {
+          // 結果0件
+          result.setSuccess(true);
+          result.setMessage("0件");
+          result.setRetList(Collections.emptyList());
+          System.out.print(result.getMessage());
+        } else {
+          result.setSuccess(true);
+          result.setRetList(retList);
+        }
       }
       // result
       if (result.isSuccess()) {
-        result.setRetList(list);
         return result;
       }
     } catch (Exception e) {
@@ -57,6 +67,20 @@ public class CsvSearchServiceImpl implements CsvSearchService {
     return condition == null
             || condition.isEmpty()
             || condition.equals(value);
+  }
+
+  /**
+   * 合計金額を返す.
+   *
+   * @return total 合計金額 or 0
+   */
+  public int convertTotal(String total) {
+    // ★ int で返す(NULLチェック後)
+    if (total == null || total.isBlank()) {
+      return 0;
+    } else {
+      return Integer.parseInt(total);
+    }
   }
 
 }

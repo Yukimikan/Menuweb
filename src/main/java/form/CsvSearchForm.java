@@ -24,20 +24,6 @@ public class CsvSearchForm {
   private String message;
 
   /**
-   * 合計金額を返す.
-   *
-   * @return total 合計金額 or 0
-   */
-  public int getTotal() {
-    // ★ int で返す(NULLチェック後)
-    if (this.total.isBlank()) {
-      return 0;
-    } else {
-      return Integer.parseInt(this.total);
-    }
-  }
-
-  /**
    * 入力チェック.
    * 合計金額
    *
