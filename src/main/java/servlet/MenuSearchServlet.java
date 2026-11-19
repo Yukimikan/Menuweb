@@ -87,15 +87,17 @@ public class MenuSearchServlet extends HttpServlet {
       MenuSearchServiceResult result = service.execute(form, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
+        request.setAttribute("form", form);
         request.setAttribute("menuList", result.getMenuList());
         request.setAttribute("count", result.getMenuList().size());
         // 5. forward
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearch);
         dispatcher.forward(request, response);
       } else {
-        // 5. forward
+        // 4. requestSetAttribute
         request.setAttribute("form", form);
         request.setAttribute("message", result.getMessage());
+        // 5. forward
         RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearch);
         dispatcher.forward(request, response);
         return;
