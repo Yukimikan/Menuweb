@@ -17,6 +17,6 @@ public class CsvSearchServiceResult {
 
   private boolean success;
   private String message;
-  private List<MenuCSV> retList;
+  private List<MenuCSV> menuList;
 
 }

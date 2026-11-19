@@ -31,10 +31,10 @@ public class CsvSearchServiceImpl implements CsvSearchService {
       if (!MenuCSV.readHeader(GlobalConst.CSV_FOLDER_PATH + form.getCsvName())) {
         result.setSuccess(false);
         result.setMessage(MessageUtil.getProperty("msg_e01_csv_header"));
-        result.setRetList(Collections.emptyList());
+        result.setMenuList(Collections.emptyList());
       } else {
         List<MenuCSV> tmpList = CsvUtil.read(form.getCsvName());
-        List<MenuCSV> retList = tmpList.stream()
+        List<MenuCSV> menuList = tmpList.stream()
             .filter(ret ->
                   cond.match(ret.getTotal(), total)
                   && isMatch(form.getType(), ret.getType())
@@ -45,11 +45,11 @@ public class CsvSearchServiceImpl implements CsvSearchService {
           // 結果0件
           result.setSuccess(true);
           result.setMessage("0件");
-          result.setRetList(Collections.emptyList());
+          result.setMenuList(Collections.emptyList());
           System.out.print(result.getMessage());
         } else {
           result.setSuccess(true);
-          result.setRetList(retList);
+          result.setMenuList(menuList);
         }
       }
       // result

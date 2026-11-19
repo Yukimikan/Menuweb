@@ -17,6 +17,6 @@ public class MenuSearchServiceResult {
 
   private boolean success;
   private String message;
-  private List<MenuEntity> retList;
+  private List<MenuEntity> menuList;
 
 }

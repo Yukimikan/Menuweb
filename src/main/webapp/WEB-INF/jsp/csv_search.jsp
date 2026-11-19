@@ -111,7 +111,7 @@
 			        検索結果はありません。
 			    </c:otherwise>
 			</c:choose>
-	        <c:if test="${not empty resultList}">
+	        <c:if test="${not empty menuList}">
 	  		<table border="1" bgcolor="white" class="search-result-table">
 				<tr>
 					<th>No</th>
@@ -123,7 +123,7 @@
 					<th>税</th>
 					<th>金額</th>
 				</tr>
-	            <c:forEach var="rec" items="${resultList}">
+	            <c:forEach var="rec" items="${menuList}">
 				<tr>
 					<td><c:out value="${rec.no}" /></td>
 					<td><c:out value="${rec.type}" /></td>

@@ -47,7 +47,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
     try {
 
       List<MenuEntity> tmpList = menuDao.select(entity, userName);
-      List<MenuEntity> retList = tmpList.stream()
+      List<MenuEntity> menuList = tmpList.stream()
           .filter(ret ->
                 cond.match(ret.getTotal(), total)
                 && isMatch(form.getType(), ret.getType())
@@ -58,11 +58,11 @@ public class MenuSearchServiceImpl implements MenuSearchService {
         // 結果0件
         result.setSuccess(true);
         result.setMessage("0件");
-        result.setRetList(Collections.emptyList());
+        result.setMenuList(Collections.emptyList());
         System.out.print(result.getMessage());
       } else {
         result.setSuccess(true);
-        result.setRetList(retList);
+        result.setMenuList(menuList);
       }
       // result
       if (result.isSuccess()) {
