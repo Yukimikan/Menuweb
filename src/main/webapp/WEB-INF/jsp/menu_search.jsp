@@ -126,7 +126,7 @@
 					<td><c:out value="${rec.no}" /></td>
 					<td><c:out value="${rec.type}" /></td>
 					<td><c:out value="${rec.restaurantName}" /></td>
-					<td><c:out value="${rec.singleMenuFlg}" /></td>
+					<td><c:if test="${rec.singleMenuFlg == '1'}">○</c:if></td>
 					<td><c:out value="${rec.menu}" /></td>
 					<td><c:out value="${rec.price}" /></td>
 					<td><c:out value="${rec.tax}" /></td>
