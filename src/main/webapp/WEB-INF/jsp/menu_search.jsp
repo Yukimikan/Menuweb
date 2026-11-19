@@ -6,6 +6,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="resource/css/style.css">
+<link rel="stylesheet" href="resource/css/menu_search.css">
 <meta charset="UTF-8">
 <title>メニュー検索（テーブル検索）</title>
 <script>
@@ -45,59 +46,96 @@
     <c:if test="${not empty message}">
     	<div class="error-box">${message}</div>
 	</c:if>
-	<form name="form1"
-		action="${pageContext.request.contextPath}/menu_search"
-		onsubmit="return checkText()" method="post">
-		<div>
-			ユーザ名：
-		    <c:if test="${not empty sessionScope.userName}">
-		        <input type="text" name="user_name" value="${sessionScope.userName}">
-		    </c:if>
-		    <!--  非ログイン時（ログイン機能実装後の動確用） -->
-		    <c:if test="${empty sessionScope.userName}">
-                <input type="text" name="user_name" value="guest">
-		    </c:if>
+		<form name="form1"
+			action="${pageContext.request.contextPath}/menu_search"
+			onsubmit="return checkText()" method="post">
+			<div>
+				ユーザ名：
+			    <c:if test="${not empty sessionScope.userName}">
+			        <input type="text" name="user_name" value="${sessionScope.userName}">
+			    </c:if>
+			    <!--  非ログイン時（ログイン機能実装後の動確用） -->
+			    <c:if test="${empty sessionScope.userName}">
+	                <input type="text" name="user_name" value="guest">
+			    </c:if>
+			</div>
+			<div id="search-input">
+				<h3>・検索条件</h3>
+				<div class="row">
+					<div class="label">日付：</div>
+					<div class="input">
+						<input type="text" name="date" value="${form.date}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">種類：</div>
+					<div class="input">
+						<input type="text" name="type" value="${form.type}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">店名：</div>
+					<div class="input">
+						<input type="text" name="restaurant_name" value="${form.restaurantName}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">金額（円）：</div>
+					<div class="input">
+						<input type="text" name="total" value="${form.total}">円
+						<select name="total_condition">
+							<option value="1">以上</option>
+							<option value="2">以下</option>
+							<option value="3">ピッタリ</option>
+							<option value="4">未満</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">メニュー絞り込み：</div>
+					<div class="input">
+						<input type="submit" value="絞込" class="btn-submit">
+					</div>
+				</div>
+			</div>
+		</form>
+		<div id="search-result">
+			<!-- ★ 結果表示 -->
+			<c:choose>
+			    <c:when test="${count > 0}">
+			        検索結果：${count}件
+			    </c:when>
+			    <c:otherwise>
+			        検索結果はありません。
+			    </c:otherwise>
+			</c:choose>
+	        <c:if test="${not empty resultList}">
+	  		<table border="1" bgcolor="white" class="search-result-table">
+				<tr>
+					<th>No</th>
+					<th>種類</th>
+					<th>店名</th>
+					<th>単品</th>
+					<th>メニュー</th>
+					<th>価格</th>
+					<th>税</th>
+					<th>金額</th>
+				</tr>
+	            <c:forEach var="rec" items="${resultList}">
+				<tr>
+					<td><c:out value="${rec.no}" /></td>
+					<td><c:out value="${rec.type}" /></td>
+					<td><c:out value="${rec.restaurantName}" /></td>
+					<td><c:out value="${rec.singleMenuFlg}" /></td>
+					<td><c:out value="${rec.menu}" /></td>
+					<td><c:out value="${rec.price}" /></td>
+					<td><c:out value="${rec.tax}" /></td>
+					<td><c:out value="${rec.total}" /></td>
+				</tr>
+				</c:forEach>
+			</table>
+			</c:if>
 		</div>
-		<div id="search-input">
-			<h3>・検索条件</h3>
-			<div class="row">
-				<div class="label">日付：</div>
-				<div class="input">
-					<input type="text" name="date" value="${form.date}">
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">種類：</div>
-				<div class="input">
-					<input type="text" name="type" value="${form.type}">
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">店名：</div>
-				<div class="input">
-					<input type="text" name="restaurant_name" value="${form.restaurantName}">
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">金額（円）：</div>
-				<div class="input">
-					<input type="text" name="total" value="${form.total}">円
-					<select name="total_condition">
-						<option value="1">以上</option>
-						<option value="2">以下</option>
-						<option value="3">ピッタリ</option>
-						<option value="4">未満</option>
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">メニュー絞り込み：</div>
-				<div class="input">
-					<input type="submit" value="絞込" class="btn-submit">
-				</div>
-			</div>
-		</div>
-	</form>
 	</div>
 	<div id="footer" class="footer">
 	<%@include file="./footer.jsp"%>

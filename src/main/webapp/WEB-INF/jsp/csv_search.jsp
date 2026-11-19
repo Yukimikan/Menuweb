@@ -128,7 +128,7 @@
 					<td><c:out value="${rec.no}" /></td>
 					<td><c:out value="${rec.type}" /></td>
 					<td><c:out value="${rec.restaurantName}" /></td>
-					<td><c:out value="${rec.singlemenuFlg}" /></td>
+					<td><c:out value="${rec.singleMenuFlg}" /></td>
 					<td><c:out value="${rec.menu}" /></td>
 					<td><c:out value="${rec.price}" /></td>
 					<td><c:out value="${rec.tax}" /></td>
@@ -137,11 +137,6 @@
 				</c:forEach>
 			</table>
 			</c:if>
-			<!--
-	        <c:if test="${empty resultList}">
-				<div>該当するメニューはありません。</div>
-			</c:if>
-			-->
 		</div>
 	</div>
 	<div id="footer" class="footer">

@@ -88,9 +88,9 @@ public class MenuSearchServlet extends HttpServlet {
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());
-        //  request.setAttribute("message", "検索が完了しました");
+        request.setAttribute("count", result.getRetList().size());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearchResult);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearch);
         dispatcher.forward(request, response);
       } else {
         // 5. forward

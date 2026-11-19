@@ -27,7 +27,7 @@ public class MenuCSV {
   private String no;
   private String type;
   private String restaurantName;
-  private String singlemenuFlg;
+  private String singleMenuFlg;
   private String menu;
   private int price;
   private String tax;
@@ -93,7 +93,7 @@ public class MenuCSV {
     String normalizedFlg = normalizeSingleMenuFlg(arrayColumnData[3]);
 
     // ★ 内部表現に変換（○ / 空欄）
-    this.singlemenuFlg = convertSingleMenuFlg(normalizedFlg);
+    this.singleMenuFlg = convertSingleMenuFlg(normalizedFlg);
 
     // 5. 正常ならフィールドにセット
     this.no = arrayColumnData[0];
@@ -120,7 +120,7 @@ public class MenuCSV {
     rec.restaurantName = cols[2];
 
     // ★ 書き込み時は 0/1 → ○/空欄 に変換するだけ
-    rec.singlemenuFlg = convertSingleMenuFlg(cols[3]);
+    rec.singleMenuFlg = convertSingleMenuFlg(cols[3]);
 
     rec.menu = cols[4];
     rec.price = Integer.parseInt(cols[5]);
@@ -154,7 +154,7 @@ public class MenuCSV {
        no,
        type,
        restaurantName,
-       singlemenuFlg,
+       singleMenuFlg,
        menu,
        String.valueOf(price),
        tax,
