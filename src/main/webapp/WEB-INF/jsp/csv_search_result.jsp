@@ -27,7 +27,7 @@
 		</c:if>
 		<!-- ★ 結果表示 -->
         <c:if test="${not empty resultList}">
-  		<table border="1">
+  		<table border="1" class="search-result-table">
 			<tr>
 				<th>No</th>
 				<th>種類</th>

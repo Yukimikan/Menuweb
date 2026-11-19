@@ -91,9 +91,9 @@ public class CsvSearchServlet extends HttpServlet {
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("resultList", result.getRetList());
-        //  request.setAttribute("message", "検索が完了しました");
+        request.setAttribute("count", result.getRetList().size());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearchResult);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
         dispatcher.forward(request, response);
       } else {
         // 5. forward

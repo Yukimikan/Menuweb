@@ -25,17 +25,18 @@ public class GlobalConst {
    */
   public static final String MenuIndexUrl = "./index.html";
   // JSP
-  public static final String Login = "./jsp/login.jsp";
-  public static final String CsvSearch = "./jsp/csv_search.jsp";
-  public static final String CsvSearchResult = "./jsp/csv_search_result.jsp";
-  public static final String CsvWrite = "./jsp/csv_write.jsp";
-  public static final String CsvConfirm = "./jsp/csv_confirm.jsp";
-  public static final String CsvWriteFinish = "./jsp/csv_write_finish.jsp";
-  public static final String MenuSearch = "./jsp/menu_search.jsp";
-  public static final String MenuSearchResult = "./jsp/menu_search_result.jsp";
-  public static final String MenuRegist = "./jsp/menu_regist.jsp";
-  public static final String MenuConfirm = "./jsp/menu_confirm.jsp";
-  public static final String MenuRegistFinish = "./jsp/menu_regist_finish.jsp";
-  public static final String Error = "./jsp/error.jsp";
+  public static final String WebDir = "./WEB-INF/jsp/";
+  public static final String Login = WebDir + "login.jsp";
+  public static final String CsvSearch = WebDir + "csv_search.jsp";
+  public static final String CsvSearchResult = WebDir + "csv_search_result.jsp";
+  public static final String CsvWrite = WebDir + "csv_write.jsp";
+  public static final String CsvConfirm = WebDir + "csv_confirm.jsp";
+  public static final String CsvWriteFinish = WebDir + "csv_write_finish.jsp";
+  public static final String MenuSearch = WebDir + "menu_search.jsp";
+  public static final String MenuSearchResult = WebDir + "menu_search_result.jsp";
+  public static final String MenuRegist = WebDir + "menu_regist.jsp";
+  public static final String MenuConfirm = WebDir + "menu_confirm.jsp";
+  public static final String MenuRegistFinish = WebDir + "menu_regist_finish.jsp";
+  public static final String Error = WebDir + "error.jsp";
 
 }
