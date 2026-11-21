@@ -23,14 +23,16 @@ public class MenuConfirmServlet extends HttpServlet {
 
   private MenuRegistService service;
 
+  /**
+   * コンストラクタ.
+   */
   public MenuConfirmServlet() {
     super();
     service = new MenuRegistServiceImpl();
   }
 
-
   /**
-   * 初期表示
+   * 初期表示.
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -46,9 +48,9 @@ public class MenuConfirmServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-	HttpSession session = request.getSession();
-	String userName = (String) session.getAttribute("userName");
-	MenuConfirmForm menuConfirmform = new MenuConfirmForm(
+    HttpSession session = request.getSession();
+    String userName = (String) session.getAttribute("userName");
+    MenuConfirmForm form = new MenuConfirmForm(
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("singlemenu_flg"),
@@ -64,18 +66,18 @@ public class MenuConfirmServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      MenuRegistServiceResult result = service.execute(menuConfirmform, userName);
+      MenuRegistServiceResult result = service.execute(form, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
 
-    	// 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspMenuResultUrl);
+        // 5. forward
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegistFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
       dispatcher.forward(request, response);
     }
 

@@ -3,6 +3,11 @@ package model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * メニュー
+ * 登録画面の項目.
+ *
+ */
 @Data
 @AllArgsConstructor
 public class MenuEntity {

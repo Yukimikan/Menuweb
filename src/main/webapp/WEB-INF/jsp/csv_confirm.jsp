@@ -95,12 +95,29 @@
 				<input type="submit" value="登録" class="btn-submit">
 			</div>
 		</div>
+		<!--
 		<div class="row">
 			<div align="left">
 		 	<a class="btn-arrow back" href="/Menuweb/csv_search">戻る</a>
 			</div>
 		</div>
-	</form>
+		 -->
+		</form>
+		<div class="row">
+			<div align="left">
+			<form action="${pageContext.request.contextPath}/csv_write" method="post">
+				<!-- hidden parameter -->
+			    <input type="hidden" name="from_screen" value="confirm">
+				<input type="hidden" name="type" value="${form.type}">
+			    <input type="hidden" name="restaurant_name" value="${form.restaurantName}">
+			    <input type="hidden" name="menu" value="${form.menu}">
+			    <input type="hidden" name="price" value="${form.price}">
+			    <input type="hidden" name="tax" value="${form.tax}">
+			    <input type="hidden" name="total" value="${form.total}">
+			    <input type="submit" value="戻る" class="btn-submit">
+			</form>
+			</div>
+		</div>
 	</div>
 	<div id="footer" class="footer">
 	<%@include file="./footer.jsp"%>

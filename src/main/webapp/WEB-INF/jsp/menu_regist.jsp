@@ -7,12 +7,11 @@
 <head>
 <link rel="stylesheet" href="resource/css/style.css">
 <meta charset="UTF-8">
-<title>手入力で登録</title>
+<title>メニュー登録（テーブル登録）</title>
 <script>
 // 入力チェック（フロント側）
 function checkText() {
 
-  var csvname = document.form1.csv_name.value;
   var type = document.form1.type.value;
   var restaurant = document.form1.restaurant_name.value;
   var menu = document.form1.menu.value;
@@ -22,11 +21,6 @@ function checkText() {
 
   document.form1.message.value = "";
 
-  if (csvname.length === 0) {
-    alert('CSV名を指定して下さい');
-    document.form1.message.value = 'CSV名を指定して下さい';
-    return false;
-  }
   if (type.length === 0) {
     alert('種別を指定して下さい');
     document.form1.message.value = '種別を指定して下さい';
@@ -68,7 +62,7 @@ function checkText() {
 	</div>
   	<div id="contents">
 	<h2>＜メニュー登録＞</h2>
-		メニューの新規登録（CSV）を行う。
+	     メニューの新規登録を行う。
 	</div>
 	<div id="main">
 	<!-- ★ エラーメッセージ表示 -->
@@ -76,36 +70,35 @@ function checkText() {
     	<div class="error-box">${message}</div>
 	</c:if>
 	<form name="form1"
-		action="${pageContext.request.contextPath}/csv_write"
+		action="${pageContext.request.contextPath}/menu_regist"
 		onsubmit="return checkText()" method="post">
 		<div>
-			CSV名：
-	        <select name="csv_name">
-		      <c:if test="${empty csvFiles}">
-		        <option value="menu.csv">menu.csv</option>
-		      </c:if>
-	          <c:forEach var="name" items="${csvFiles}">
-	            <option value="${name}" />${name}</option>
-		      </c:forEach>
-		    </select>
+			ユーザ名：
+		    <c:if test="${not empty sessionScope.userName}">
+		        <input type="text" name="user_name" value="${sessionScope.userName}" readonly>
+		    </c:if>
+		    <!--  非ログイン時（ログイン機能実装後の動確用） -->
+		    <c:if test="${empty sessionScope.userName}">
+                <input type="text" name="user_name" value="guest" readonly>
+		    </c:if>
 		</div>
 		<div id="regist-input">
 			<div class="row">
 				<div class="label">確認画面を省略する</div>
 				<div class="input">
-					<input type="checkbox" name="confirm_flg" checked>
+					<input type="checkbox" name="confirm_flg" value="${form.confirmFlg}" checked>
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">種別：</div>
 				<div class="input">
-					<input type="text" name="type">
+					<input type="text" name="type" value="${form.type}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
-					<input type="text" name="restaurant_name">
+					<input type="text" name="restaurant_name" value="${form.restaurantName}">
 				</div>
 			</div>
 			<div class="row">
@@ -120,25 +113,25 @@ function checkText() {
 			<div class="row">
 				<div class="label">メニュー名：</div>
 				<div class="input">
-					<input type="text" name="menu">
+					<input type="text" name="menu" value="${form.menu}">
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">金額：</div>
 				<div class="input">
-					<input type="text" name="price">円
+					<input type="text" name="price" value="${form.price}">円
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">税額：</div>
 				<div class="input">
-					<input type="text" name="tax">円
+					<input type="text" name="tax" value="${form.tax}">円
 				</div>
 			</div>
 			<div class="row">
 				<div class="label">合計：</div>
 				<div class="input">
-					<input type="text" name="total">円
+					<input type="text" name="total" value="${form.total}">円
 				</div>
 			</div>
 			<div class="row">

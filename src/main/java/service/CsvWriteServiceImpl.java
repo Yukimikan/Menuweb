@@ -5,23 +5,23 @@ import java.util.List;
 
 import common.CsvUtil;
 import common.FileControl;
-import form.MenuCsvConfirmForm;
-import form.MenuCsvRegistForm;
+import form.CsvConfirmForm;
+import form.CsvWriteForm;
 import model.GlobalConst;
 import model.MenuCSV;
 
 /**
  * ファイル書込用サービス.
- * */
+ */
 public class CsvWriteServiceImpl implements CsvWriteService {
 
   /**
    * execute.
    */
-  public CsvWriteServiceResult execute(MenuCsvRegistForm form) throws IOException{
+  public CsvWriteServiceResult execute(CsvWriteForm form) throws IOException {
 
-	CsvWriteServiceResult result = new CsvWriteServiceResult();
-   // MenuCSV に渡す(初期化)
+    CsvWriteServiceResult result = new CsvWriteServiceResult();
+    // MenuCSV に渡す(初期化)
     String[] cols = {
       "99", // No（新規登録なので空）
       form.getType(),
@@ -33,7 +33,7 @@ public class CsvWriteServiceImpl implements CsvWriteService {
       form.getTotal()
     };
     MenuCSV rec = MenuCSV.fromInput(cols);
-	String csvName = form.getCsvName();
+    String csvName = form.getCsvName();
     // 1. 新規行だけ書き込む（追記モード）
     try {
       FileControl.append(GlobalConst.CSV_FOLDER_PATH + csvName, rec.returnJoinedString());
@@ -51,16 +51,18 @@ public class CsvWriteServiceImpl implements CsvWriteService {
       throw new IOException(e.getMessage(), e);
     }
     return new CsvWriteServiceResult(
-    		true
-    		,""
-    		,list);
+        true,
+        "",
+        list);
   }
 
   /**
    * execute.
    */
-  public CsvWriteServiceResult execute(MenuCsvConfirmForm form) throws IOException{
-   // MenuCSV に渡す(初期化)
+  public CsvWriteServiceResult execute(CsvConfirmForm form) throws IOException {
+
+    CsvWriteServiceResult result = new CsvWriteServiceResult();
+    // MenuCSV に渡す(初期化)
     String[] cols = {
       "99", // No（新規登録なので空）
       form.getType(),
@@ -72,11 +74,11 @@ public class CsvWriteServiceImpl implements CsvWriteService {
       form.getTotal()
     };
     MenuCSV rec = MenuCSV.fromInput(cols);
-	String csvName = form.getCsvName();
+    String csvName = form.getCsvName();
     // 1. 新規行だけ書き込む（追記モード）
     try {
-        FileControl.append(GlobalConst.CSV_FOLDER_PATH + csvName, rec.returnJoinedString());
-        //CsvUtil.append(csvName, rec);
+      FileControl.append(GlobalConst.CSV_FOLDER_PATH + csvName, rec.returnJoinedString());
+      //CsvUtil.append(csvName, rec);
     } catch (Exception e) {
       // CSV書き込みに失敗
       throw new IOException(e.getMessage(), e);
@@ -90,9 +92,9 @@ public class CsvWriteServiceImpl implements CsvWriteService {
       throw new IOException(e.getMessage(), e);
     }
     return new CsvWriteServiceResult(
-    		true
-    		,""
-    		,list);
+            true,
+            "",
+            list);
   }
 
 }

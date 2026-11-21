@@ -175,7 +175,7 @@ public class CsvUtilServiceImplTest {
 			rec.setNo("99");
 			rec.setType("和食");
 			rec.setRestaurantName("松屋");
-			rec.setSinglemenuFlg("○");
+			rec.setSingleMenuFlg("○");
 			rec.setMenu("チーズ牛丼");
 			rec.setPrice(550);
 			rec.setTax("なし");
@@ -209,7 +209,7 @@ public class CsvUtilServiceImplTest {
 			rec.setNo("99");
 			rec.setType("和食");
 			rec.setRestaurantName("松屋");
-			rec.setSinglemenuFlg("○");
+			rec.setSingleMenuFlg("○");
 			rec.setMenu("チーズ牛丼");
 			rec.setPrice(550);
 			rec.setTax("なし");
@@ -267,7 +267,7 @@ public class CsvUtilServiceImplTest {
         rec.setNo("99");
 		rec.setType("和食");
 		rec.setRestaurantName("松屋");
-		rec.setSinglemenuFlg("○");
+		rec.setSingleMenuFlg("○");
 		rec.setMenu("チーズ牛丼");
 		rec.setPrice(550);
 		rec.setTax("なし");

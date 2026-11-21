@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import form.MenuCsvConfirmForm;
+import form.CsvConfirmForm;
 import model.GlobalConst;
 import service.CsvWriteService;
 import service.CsvWriteServiceImpl;
@@ -22,14 +22,16 @@ public class CsvConfirmServlet extends HttpServlet {
 
   private CsvWriteService service;
 
+  /**
+   * コンストラクタ.
+   */
   public CsvConfirmServlet() {
     super();
     service = new CsvWriteServiceImpl();
   }
 
-
   /**
-   * 初期表示
+   * 初期表示.
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -45,7 +47,7 @@ public class CsvConfirmServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-	MenuCsvConfirmForm menuCsvConfirmform = new MenuCsvConfirmForm(
+    CsvConfirmForm form = new CsvConfirmForm(
         (String) request.getParameter("csv_name"),
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
@@ -62,18 +64,18 @@ public class CsvConfirmServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      CsvWriteServiceResult result = service.execute(menuCsvConfirmform);
+      CsvWriteServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
-        request.setAttribute("resultList", result.getRetList());
+
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvWriteFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
       dispatcher.forward(request, response);
     }
 

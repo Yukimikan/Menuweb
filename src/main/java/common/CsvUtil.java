@@ -18,21 +18,21 @@ import model.MenuCSV;
 
 /**
  * ファイル操作用サービス.
- * */
+ * 参考サイト
+ * https://style.potepan.com/articles/18230.html
+ * Copilotで修正済み。
+ */
 public final class CsvUtil {
-
-  /*
-   * 参考サイト
-   * https://style.potepan.com/articles/18230.html
-   * */
-  //Copilotで修正済み。
 
   //絶対パスで指定
   public static final String CSV_FOLDER_PATH = "C:\\pleiades\\workspace\\Menuweb\\resource\\";
   public static final int MAX_COUNT = 100;
   public static final long MAX_BYTES = 1_000_000; // 1MB
-  /* callしない */
-  //コンストラクタ
+
+  /**
+   * コンストラクタ.
+   *  callしない
+   */
   private CsvUtil() {
   }
 
@@ -94,7 +94,7 @@ public final class CsvUtil {
 
   /**
    * ★ 今は使わないが、将来の編集機能用に残す選択肢
-   * CSV 全書き込み（行削除・並び替えなどで使う）
+   * CSV 全書き込み（行削除・並び替えなどで使う）.
    */
   public static void write(String csvName, List<MenuCSV> list) throws IOException {
 

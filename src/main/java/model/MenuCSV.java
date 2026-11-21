@@ -27,7 +27,7 @@ public class MenuCSV {
   private String no;
   private String type;
   private String restaurantName;
-  private String singlemenuFlg;
+  private String singleMenuFlg;
   private String menu;
   private int price;
   private String tax;
@@ -93,7 +93,7 @@ public class MenuCSV {
     String normalizedFlg = normalizeSingleMenuFlg(arrayColumnData[3]);
 
     // ★ 内部表現に変換（○ / 空欄）
-    this.singlemenuFlg = convertSingleMenuFlg(normalizedFlg);
+    this.singleMenuFlg = convertSingleMenuFlg(normalizedFlg);
 
     // 5. 正常ならフィールドにセット
     this.no = arrayColumnData[0];
@@ -109,6 +109,8 @@ public class MenuCSV {
   /**
    * ★★★ 書き込み用コンストラクタ（Servlet → Model）
    * normalizeSingleMenuFlg() は絶対に使わない.
+   *
+   * @param cols //CSV項目を格納した配列
    */
   public static MenuCSV fromInput(String[] cols) {
 
@@ -118,7 +120,7 @@ public class MenuCSV {
     rec.restaurantName = cols[2];
 
     // ★ 書き込み時は 0/1 → ○/空欄 に変換するだけ
-    rec.singlemenuFlg = convertSingleMenuFlg(cols[3]);
+    rec.singleMenuFlg = convertSingleMenuFlg(cols[3]);
 
     rec.menu = cols[4];
     rec.price = Integer.parseInt(cols[5]);
@@ -141,13 +143,18 @@ public class MenuCSV {
     }
   }
 
+  /**
+   * CSVの一行を文字列型を返す.
+   *
+   * @return //String
+   */
   public String returnJoinedString() {
     return String.join(
        ",",
        no,
        type,
        restaurantName,
-       singlemenuFlg,
+       singleMenuFlg,
        menu,
        String.valueOf(price),
        tax,
@@ -158,8 +165,9 @@ public class MenuCSV {
   /**
    * CsvHeader読み込み.
    *
-   * @param filePath
+   * @param filePath //CSVファイルのパス
    * @return String
+   * @exception Exception // 例外
    */
   // 先頭行（ヘッダー）を読み、ヘッダと一致するかチェックする
   public static boolean readHeader(String filePath) throws Exception {

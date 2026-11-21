@@ -9,13 +9,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import form.MenuCsvInputForm;
+import form.CsvSearchForm;
 import model.GlobalConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
-import service.CsvInputService;
-import service.CsvInputServiceImpl;
-import service.CsvInputServiceResult;
+import service.CsvSearchService;
+import service.CsvSearchServiceImpl;
+import service.CsvSearchServiceResult;
 
 /**
  * Servlet.
@@ -23,30 +23,33 @@ import service.CsvInputServiceResult;
 public class CsvSearchServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  private CsvInputService service;
+  private CsvSearchService service;
   private CsvFileListService fileService;
 
+  /**
+   * コンストラクタ.
+   */
   public CsvSearchServlet() {
     super();
-    service = new CsvInputServiceImpl();
+    service = new CsvSearchServiceImpl();
     fileService = new CsvFileListServiceImpl();
   }
 
   /**
-   * 初期表示
+   * 初期表示.
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-	// 1. 画面情報取得（なし）
+    // 1. 画面情報取得（なし）
 
-	// 1. CSVリスト取得（SharedService）
+    // 1. CSVリスト取得（SharedService）
     List<String> csvFiles = fileService.execute();
     request.setAttribute("csvFiles", csvFiles);
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.JspSearchUrl);
+        request.getRequestDispatcher(GlobalConst.CsvSearch);
     dispatcher.forward(request, response);
   }
 
@@ -59,49 +62,53 @@ public class CsvSearchServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. parameter set
-	MenuCsvInputForm menuCsvInputForm = new MenuCsvInputForm(
-      (String) request.getParameter("date"),
-      (String) request.getParameter("csv_name"),
-      (String) request.getParameter("type"),
-      (String) request.getParameter("restaurant_name"),
-      (String) request.getParameter("total"),
-      (String) request.getParameter("total_condition"),
-      ""
-      );
+    CsvSearchForm form = new CsvSearchForm(
+        (String) request.getParameter("date"),
+        (String) request.getParameter("csv_name"),
+        (String) request.getParameter("type"),
+        (String) request.getParameter("restaurant_name"),
+        (String) request.getParameter("total"),
+        (String) request.getParameter("total_condition"),
+        ""
+        );
 
     // 2. inputCheck(フロントで実行)
-	String message = menuCsvInputForm.inputCheck();
-    if(!message.isEmpty()) {
-    	//reload
-        request.setAttribute("message", message);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
-        dispatcher.forward(request, response);
-        return;
-    };
+    String message = form.inputCheck();
+    if (!message.isEmpty()) {
+      //reload
+      request.setAttribute("form", form);
+      request.setAttribute("message", message);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
+      dispatcher.forward(request, response);
+      return;
+    }
 
     try {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      CsvInputServiceResult result = service.execute(menuCsvInputForm);
+      CsvSearchServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
-        request.setAttribute("resultList", result.getRetList());
-        //  request.setAttribute("message", "検索が完了しました");
+        request.setAttribute("form", form);
+        request.setAttribute("menuList", result.getMenuList());
+        request.setAttribute("count", result.getMenuList().size());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspResultUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
         dispatcher.forward(request, response);
       } else {
-  	    // 5. forward
+        // 4. requestSetAttribute
+        request.setAttribute("form", form);
         request.setAttribute("message", result.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspSearchUrl);
+        // 5. forward
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
         dispatcher.forward(request, response);
-    	return;
+        return;
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.JspErrorUrl);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
       dispatcher.forward(request, response);
     }
   }
