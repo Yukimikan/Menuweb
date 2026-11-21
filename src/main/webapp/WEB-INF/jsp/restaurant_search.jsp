@@ -101,7 +101,7 @@
 				</tr>
 	            <c:forEach var="rec" items="${menuList}">
 				<tr>
-					<td><c:out value="${rec.no}" /></td>
+					<td><c:out value="1" /></td>
 					<td><c:out value="${rec.restaurantId}" /></td>
 					<td><c:out value="${rec.restaurantName}" /></td>
 					<td><c:out value="${rec.type}" /></td>

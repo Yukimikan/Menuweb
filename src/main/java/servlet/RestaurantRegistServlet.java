@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import form.MenuRegistForm;
+import form.RestaurantRegistForm;
 import model.GlobalConst;
-import service.MenuRegistService;
-import service.MenuRegistServiceImpl;
-import service.MenuRegistServiceResult;
+import service.RestaurantRegistService;
+import service.RestaurantRegistServiceImpl;
+import service.RestaurantRegistServiceResult;
 
 /**
  * Servlet.
@@ -21,14 +21,14 @@ import service.MenuRegistServiceResult;
 public class RestaurantRegistServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  private MenuRegistService service;
+  private RestaurantRegistService service;
 
   /**
    * コンストラクタ.
    */
   public RestaurantRegistServlet() {
     super();
-    service = new MenuRegistServiceImpl();
+    service = new RestaurantRegistServiceImpl();
   }
 
 
@@ -62,22 +62,16 @@ public class RestaurantRegistServlet extends HttpServlet {
       // 遷移元（確認画面）
       // 1. parameter set
       // HttpSession session = request.getSession();
-      MenuRegistForm form = new MenuRegistForm(
+      RestaurantRegistForm form = new RestaurantRegistForm(
           "1",
           (String) request.getParameter("restaurant_id"),
           (String) request.getParameter("restaurant_name"),
-          (String) request.getParameter("menu_name"),
-          (String) request.getParameter("category"),
-          (String) request.getParameter("singlemenu_flg"),
-          (String) request.getParameter("eat_in_price"),
-          (String) request.getParameter("takeout_price"),
-          (String) request.getParameter("tax"),
-          (String) request.getParameter("total"),
+          (String) request.getParameter("type"),
           "");
       request.setAttribute("form", form);
       // 2. 初期表示へ forward
       RequestDispatcher dispatcher =
-          request.getRequestDispatcher(GlobalConst.MenuRegist);
+          request.getRequestDispatcher(GlobalConst.RestaurantRegist);
       dispatcher.forward(request, response);
 
       return;
@@ -86,17 +80,11 @@ public class RestaurantRegistServlet extends HttpServlet {
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
-    MenuRegistForm form = new MenuRegistForm(
+    RestaurantRegistForm form = new RestaurantRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("restaurant_id"),
         (String) request.getParameter("restaurant_name"),
-        (String) request.getParameter("menu_name"),
-        (String) request.getParameter("category"),
-        (String) request.getParameter("singlemenu_flg"),
-        (String) request.getParameter("eat_in_price"),
-        (String) request.getParameter("takeout_price"),
-        (String) request.getParameter("tax"),
-        (String) request.getParameter("total"),
+        (String) request.getParameter("type"),
         "");
 
     // チェックボックスの選択された値を取得
@@ -111,7 +99,7 @@ public class RestaurantRegistServlet extends HttpServlet {
       request.setAttribute("form", form);
       request.setAttribute("message", message);
 
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegist);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantRegist);
       dispatcher.forward(request, response);
       return;
     }
@@ -121,12 +109,12 @@ public class RestaurantRegistServlet extends HttpServlet {
       // 3. サーバー側のチェック
       try {
         // 3. service execute
-        MenuRegistServiceResult result = service.execute(form, userName);
+    	  RestaurantRegistServiceResult result = service.execute(form, userName);
         if (result.isSuccess()) {
           // 4. requestSetAttribute
 
           // 5. forward
-          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegistFinish);
+          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantRegistFinish);
           dispatcher.forward(request, response);
         }
       } catch (Exception e) {
@@ -144,7 +132,7 @@ public class RestaurantRegistServlet extends HttpServlet {
       request.setAttribute("user_name", userName);
       request.setAttribute("form", form);
       // 5. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuConfirm);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantConfirm);
       dispatcher.forward(request, response);
     }
   }
