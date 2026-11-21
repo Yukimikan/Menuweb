@@ -12,33 +12,15 @@
 // 入力チェック（フロント側）
 function checkText() {
 
-  var type = document.form1.type.value;
   var restaurant = document.form1.restaurant_name.value;
-  var menu = document.form1.menu.value;
-  var price = document.form1.price.value;
   var tax = document.form1.tax.value;
   var total = document.form1.total.value;
 
   document.form1.message.value = "";
 
-  if (type.length === 0) {
-    alert('種別を指定して下さい');
-    document.form1.message.value = '種別を指定して下さい';
-    return false;
-  }
   if (restaurant.length === 0) {
     alert('店名を指定して下さい');
     document.form1.message.value = '店名を指定して下さい';
-    return false;
-  }
-  if (menu.length === 0) {
-    alert('メニュー名を指定して下さい');
-    document.form1.message.value = 'メニュー名を指定して下さい';
-    return false;
-  }
-  if (price.length === 0) {
-    alert('金額を指定して下さい');
-    document.form1.message.value = '金額を指定して下さい';
     return false;
   }
   if (tax.length === 0) {
