@@ -30,6 +30,38 @@
         CURRENT_TIMESTAMP)
   </insert>
 
+  <insert id="insertMenu2">
+    insert into "MENU"
+    (
+    	no,
+    	restaurant_id,
+    	restaurant_name,
+    	menu_name,
+    	category,
+    	singlemenu_flg,
+    	eat_in_price,
+    	takeout_price,
+    	tax ,
+    	total,
+    	update_user,
+    	update_date
+    )
+    values(
+    	#{entity.no},
+        #{entity.restaurantId},
+        #{entity.restaurantName},
+        #{entity.menuName},
+        #{entity.category},
+        #{entity.singleMenuFlg},
+        #{entity.eatInPrice},
+        #{entity.takeoutPrice},
+        #{entity.tax},
+        #{entity.total},
+        #{entity.updateUser},
+        CURRENT_TIMESTAMP)
+  </insert>
+
+
   <select id="select" resultType="model.MenuEntity">
     select
      no,

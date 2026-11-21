@@ -14,11 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MenuConfirmForm {
 
-  private String type;
+  private String restaurantId;
   private String restaurantName;
+  private String menuName;
+  private String category;
   private String singleMenuFlg;
-  private String menu;
-  private String price;
+  private String eatInPrice;
+  private String takeoutPrice;
   private String tax;
   private String total;
   private String message;

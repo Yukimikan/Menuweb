@@ -7,7 +7,7 @@ import dao.MenuDaoImpl;
 import form.MenuConfirmForm;
 import form.MenuRegistForm;
 import model.GlobalConst;
-import model.MenuEntity;
+import model.MenuEntity2;
 
 /**
  * ファイル書込用サービス.
@@ -27,13 +27,15 @@ public class MenuRegistServiceImpl implements MenuRegistService {
 
     // 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
-    MenuEntity entity = new MenuEntity(
+    MenuEntity2 entity = new MenuEntity2(
           GlobalConst.NUM_CSV新規登録, // 新規登録
-          form.getType(),
+          Integer.parseInt(form.getRestaurantId()),
           form.getRestaurantName(),
+          form.getMenuName(),
+          form.getCategory(),
           form.getSingleMenuFlg(),
-          form.getMenu(),
-          Integer.parseInt(form.getPrice()),
+          Integer.parseInt(form.getEatInPrice()),
+          Integer.parseInt(form.getTakeoutPrice()),
           Integer.parseInt(form.getTax()),
           Integer.parseInt(form.getTotal()),
           userName);
@@ -57,13 +59,15 @@ public class MenuRegistServiceImpl implements MenuRegistService {
 
     // 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
-    MenuEntity entity = new MenuEntity(
+    MenuEntity2 entity = new MenuEntity2(
           GlobalConst.NUM_CSV新規登録, // 新規登録
-          form.getType(),
+          Integer.parseInt(form.getRestaurantId()),
           form.getRestaurantName(),
+          form.getMenuName(),
+          form.getCategory(),
           form.getSingleMenuFlg(),
-          form.getMenu(),
-          Integer.parseInt(form.getPrice()),
+          Integer.parseInt(form.getEatInPrice()),
+          Integer.parseInt(form.getTakeoutPrice()),
           Integer.parseInt(form.getTax()),
           Integer.parseInt(form.getTotal()),
           userName);

@@ -15,11 +15,14 @@ import lombok.NoArgsConstructor;
 public class MenuRegistForm {
 
   private String confirmFlg;
-  private String type;
+  // private String type;
+  private String restaurantId;
   private String restaurantName;
+  private String menuName;
+  private String category;
   private String singleMenuFlg;
-  private String menu;
-  private String price;
+  private String eatInPrice;
+  private String takeoutPrice;
   private String tax;
   private String total;
   private String message;
@@ -32,21 +35,31 @@ public class MenuRegistForm {
   public String inputCheck() {
 
     //チェック
-    if (this.type == null || this.type.isEmpty()) {
+    if (this.restaurantId == null || this.restaurantId.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else if (this.restaurantName == null || this.restaurantName.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
-    } else if (this.menu == null || this.menu.isEmpty()) {
+    } else if (this.menuName == null || this.menuName.isEmpty()) {
+      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
+    } else if (this.category == null || this.category.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     }
-    if (this.price == null || this.price.isEmpty()) {
+    if (this.eatInPrice == null || this.eatInPrice.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else {
       // 未入力の場合
-      if (!price.matches("[0-9]+")) {
+      if (!eatInPrice.matches("[0-9]+")) {
         this.message = MessageUtil.getProperty("msg_w02_csv_regist");
       }
     }
+    if (this.takeoutPrice == null || this.takeoutPrice.isEmpty()) {
+        this.message = MessageUtil.getProperty("msg_w01_csv_regist");
+      } else {
+        // 未入力の場合
+        if (!takeoutPrice.matches("[0-9]+")) {
+          this.message = MessageUtil.getProperty("msg_w02_csv_regist");
+        }
+      }
     if (this.tax == null || this.tax.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else {

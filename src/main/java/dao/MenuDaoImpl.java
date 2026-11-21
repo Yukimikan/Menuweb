@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import mappers.MenuMapper;
 import model.MenuEntity;
+import model.MenuEntity2;
 
 /**
 * MenuDao
@@ -54,4 +55,23 @@ public class MenuDaoImpl implements MenuDao {
       throw new RuntimeException();
     }
   }
+
+  @Override
+  public int insert(MenuEntity2 entity) throws RuntimeException {
+
+    try {
+      String resource = "mybatis-config.xml";
+      InputStream inputStream = Resources.getResourceAsStream(resource);
+      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+      SqlSession session = sqlSessionFactory.openSession();
+      MenuMapper mapper = session.getMapper(MenuMapper.class);
+      int result = mapper.insertMenu2(entity);
+      session.commit(); // ここでコミット
+      return result;
+    } catch (IOException e) {
+      System.out.println(e.getStackTrace());
+      throw new RuntimeException();
+    }
+  }
+
 }

@@ -64,11 +64,13 @@ public class MenuRegistServlet extends HttpServlet {
       // HttpSession session = request.getSession();
       MenuRegistForm form = new MenuRegistForm(
           "1",
-          (String) request.getParameter("type"),
+          (String) request.getParameter("restaurant_id"),
           (String) request.getParameter("restaurant_name"),
+          (String) request.getParameter("menu_name"),
+          (String) request.getParameter("category"),
           (String) request.getParameter("singlemenu_flg"),
-          (String) request.getParameter("menu"),
-          (String) request.getParameter("price"),
+          (String) request.getParameter("eat_in_price"),
+          (String) request.getParameter("takeout_price"),
           (String) request.getParameter("tax"),
           (String) request.getParameter("total"),
           "");
@@ -86,11 +88,13 @@ public class MenuRegistServlet extends HttpServlet {
     String userName = (String) session.getAttribute("userName");
     MenuRegistForm form = new MenuRegistForm(
         (String) request.getParameter("confirm_flg"),
-        (String) request.getParameter("type"),
+        (String) request.getParameter("restaurant_id"),
         (String) request.getParameter("restaurant_name"),
+        (String) request.getParameter("menu_name"),
+        (String) request.getParameter("category"),
         (String) request.getParameter("singlemenu_flg"),
-        (String) request.getParameter("menu"),
-        (String) request.getParameter("price"),
+        (String) request.getParameter("eat_in_price"),
+        (String) request.getParameter("takeout_price"),
         (String) request.getParameter("tax"),
         (String) request.getParameter("total"),
         "");

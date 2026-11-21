@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.List;
 
 import form.CsvWriteForm;
-import form.MenuRegistForm;
 import model.GlobalConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
@@ -69,7 +68,8 @@ public class CsvWriteServlet extends HttpServlet {
       // 遷移元（確認画面）
       // 1. parameter set
       // HttpSession session = request.getSession();
-      MenuRegistForm form = new MenuRegistForm(
+      CsvWriteForm form = new CsvWriteForm(
+          "test.csv",
           "1",
           (String) request.getParameter("type"),
           (String) request.getParameter("restaurant_name"),
