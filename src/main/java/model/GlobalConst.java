@@ -35,6 +35,10 @@ public class GlobalConst {
   public static final String MenuRegist = WebDir + "menu_regist.jsp";
   public static final String MenuConfirm = WebDir + "menu_confirm.jsp";
   public static final String MenuRegistFinish = WebDir + "menu_regist_finish.jsp";
+  public static final String RestaurantSearch = WebDir + "restaurant_search.jsp";
+  public static final String RestaurantRegist = WebDir + "restaurant_regist.jsp";
+  public static final String RestaurantConfirm = WebDir + "restaurant_confirm.jsp";
+  public static final String RestaurantRegistFinish = WebDir + "restaurant_regist_finish.jsp";
   public static final String Error = WebDir + "error.jsp";
 
 }
