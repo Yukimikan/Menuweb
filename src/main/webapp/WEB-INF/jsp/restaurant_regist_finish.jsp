@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" href="resource/css/style.css">
 <meta charset="UTF-8">
-<title>登録完了画面</title>
+<title>登録完了画面（店舗）</title>
 </head>
 <script></script>
 <body>

@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import form.MenuConfirmForm;
+import form.RestaurantConfirmForm;
 import model.GlobalConst;
-import service.MenuRegistService;
-import service.MenuRegistServiceImpl;
-import service.MenuRegistServiceResult;
+import service.RestaurantRegistService;
+import service.RestaurantRegistServiceImpl;
+import service.RestaurantRegistServiceResult;
 
 /**
  * Servlet.
@@ -21,14 +21,14 @@ import service.MenuRegistServiceResult;
 public class RestaurantConfirmServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  private MenuRegistService service;
+  private RestaurantRegistService service;
 
   /**
    * コンストラクタ.
    */
   public RestaurantConfirmServlet() {
     super();
-    service = new MenuRegistServiceImpl();
+    service = new RestaurantRegistServiceImpl();
   }
 
   /**
@@ -50,16 +50,10 @@ public class RestaurantConfirmServlet extends HttpServlet {
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
-    MenuConfirmForm form = new MenuConfirmForm(
+    RestaurantConfirmForm form = new RestaurantConfirmForm(
         (String) request.getParameter("restaurant_id"),
         (String) request.getParameter("restaurant_name"),
-        (String) request.getParameter("menu_name"),
-        (String) request.getParameter("category"),
-        (String) request.getParameter("singlemenu_flg"),
-        (String) request.getParameter("eat_in_price"),
-        (String) request.getParameter("takeout_price"),
-        (String) request.getParameter("tax"),
-        (String) request.getParameter("total"),
+        (String) request.getParameter("type"),
         "");
 
     // 2. inputCheck(フロントで実行)
@@ -68,12 +62,12 @@ public class RestaurantConfirmServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      MenuRegistServiceResult result = service.execute(form, userName);
+      RestaurantRegistServiceResult result = service.execute(form, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
 
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegistFinish);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantRegistFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {

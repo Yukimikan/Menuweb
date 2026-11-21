@@ -14,7 +14,7 @@ import model.RestaurantEntity;
 
 /**
 * RestaurantDao
-* メニューテーブル操作.
+* 店舗テーブル操作.
 */
 public class RestaurantDaoImpl implements RestaurantDao {
 

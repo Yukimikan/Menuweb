@@ -56,21 +56,15 @@
 			<div id="search-input">
 				<h3>・検索条件</h3>
 				<div class="row">
-					<div class="label">日付：</div>
+					<div class="label">店名：</div>
 					<div class="input">
-						<input type="text" name="date" value="${form.date}">
+						<input type="text" name="restaurant_name" value="${form.restaurantName}">
 					</div>
 				</div>
 				<div class="row">
 					<div class="label">種類：</div>
 					<div class="input">
 						<input type="text" name="type" value="${form.type}">
-					</div>
-				</div>
-				<div class="row">
-					<div class="label">店名：</div>
-					<div class="input">
-						<input type="text" name="restaurant_name" value="${form.restaurantName}">
 					</div>
 				</div>
 				<div class="row">
@@ -91,7 +85,7 @@
 			        検索結果はありません。
 			    </c:otherwise>
 			</c:choose>
-	        <c:if test="${not empty menuList}">
+	        <c:if test="${not empty restaurantList}">
 	  		<table border="1" bgcolor="white" class="search-result-table">
 				<tr>
 					<th>No</th>
@@ -99,7 +93,7 @@
 					<th>店名</th>
 					<th>種類</th>
 				</tr>
-	            <c:forEach var="rec" items="${menuList}">
+	            <c:forEach var="rec" items="${restaurantList}">
 				<tr>
 					<td><c:out value="1" /></td>
 					<td><c:out value="${rec.restaurantId}" /></td>

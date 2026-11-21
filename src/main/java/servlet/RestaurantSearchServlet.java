@@ -9,11 +9,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import form.MenuSearchForm;
+import form.RestaurantSearchForm;
 import model.GlobalConst;
-import service.MenuSearchService;
-import service.MenuSearchServiceImpl;
-import service.MenuSearchServiceResult;
+import service.RestaurantSearchService;
+import service.RestaurantSearchServiceImpl;
+import service.RestaurantSearchServiceResult;
 
 /**
  * Servlet.
@@ -21,14 +21,14 @@ import service.MenuSearchServiceResult;
 public class RestaurantSearchServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  private MenuSearchService service;
+  private RestaurantSearchService service;
 
   /**
    * コンストラクタ.
    */
   public RestaurantSearchServlet() {
     super();
-    service = new MenuSearchServiceImpl();
+    service = new RestaurantSearchServiceImpl();
   }
 
   /**
@@ -56,16 +56,9 @@ public class RestaurantSearchServlet extends HttpServlet {
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
-    MenuSearchForm form = new MenuSearchForm(
-        (String) request.getParameter("date"),
-        (String) request.getParameter("type"),
+    RestaurantSearchForm form = new RestaurantSearchForm(
         (String) request.getParameter("restaurant_name"),
-        "0",
-        "",
-        "0",
-        "0",
-        (String) request.getParameter("total"),
-        (String) request.getParameter("total_condition"),
+        (String) request.getParameter("type"),
         ""
         );
 
@@ -75,7 +68,7 @@ public class RestaurantSearchServlet extends HttpServlet {
       //reload
       request.setAttribute("form", form);
       request.setAttribute("message", message);
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearch);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantSearch);
       dispatcher.forward(request, response);
       return;
     }
@@ -84,21 +77,21 @@ public class RestaurantSearchServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      MenuSearchServiceResult result = service.execute(form, userName);
+      RestaurantSearchServiceResult result = service.execute(form, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("form", form);
-        request.setAttribute("menuList", result.getMenuList());
-        request.setAttribute("count", result.getMenuList().size());
+        request.setAttribute("restaurantList", result.getRestaurantList());
+        request.setAttribute("count", result.getRestaurantList().size());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearch);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantSearch);
         dispatcher.forward(request, response);
       } else {
         // 4. requestSetAttribute
         request.setAttribute("form", form);
         request.setAttribute("message", result.getMessage());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuSearch);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantSearch);
         dispatcher.forward(request, response);
         return;
       }
