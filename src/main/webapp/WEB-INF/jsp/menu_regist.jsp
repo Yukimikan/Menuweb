@@ -89,16 +89,36 @@ function checkText() {
 					<input type="checkbox" name="confirm_flg" value="${form.confirmFlg}" checked>
 				</div>
 			</div>
+			<!--
 			<div class="row">
 				<div class="label">種別：</div>
 				<div class="input">
 					<input type="text" name="type" value="${form.type}">
 				</div>
 			</div>
+			 -->
+			<div class="row">
+				<div class="label">店舗ID：</div>
+				<div class="input">
+					<input type="text" name="restaurant_id" value="${form.restaurantId}">
+				</div>
+			</div>
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
 					<input type="text" name="restaurant_name" value="${form.restaurantName}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">メニュー名：</div>
+				<div class="input">
+					<input type="text" name="menu_name" value="${form.menuName}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">メニュー種類：</div>
+				<div class="input">
+					<input type="text" name="category" value="${form.category}">
 				</div>
 			</div>
 			<div class="row">
@@ -111,15 +131,15 @@ function checkText() {
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">メニュー名：</div>
+				<div class="label">金額（店内）：</div>
 				<div class="input">
-					<input type="text" name="menu" value="${form.menu}">
+					<input type="text" name="eat_in_price" value="${form.eatInPrice}">円
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">金額：</div>
+				<div class="label">金額（テイクアウト）：</div>
 				<div class="input">
-					<input type="text" name="price" value="${form.price}">円
+					<input type="text" name="takeout_price" value="${form.takeoutPrice}">円
 				</div>
 			</div>
 			<div class="row">
