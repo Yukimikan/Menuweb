@@ -13,7 +13,7 @@
         update_date
     )
     values(
-        #{entity.restaurantId},
+        nextval('restaurant_seq'),
         #{entity.restaurantName},
         #{entity.type},
         #{entity.updateUser},

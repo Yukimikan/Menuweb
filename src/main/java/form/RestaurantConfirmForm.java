@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 店舗登録確認画面.
- * 店舗ID,店名,種類
+ * 店名,種類
  *
  */
 @Data
@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RestaurantConfirmForm {
 
-  private String restaurantId;
   private String restaurantName;
   private String type;
   private String message;

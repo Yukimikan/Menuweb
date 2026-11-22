@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class RestaurantRegistForm {
 
   private String confirmFlg;
-  private String restaurantId;
   private String restaurantName;
   private String type;
   private String message;
@@ -28,9 +27,7 @@ public class RestaurantRegistForm {
   public String inputCheck() {
 
     //チェック
-    if (this.restaurantId == null || this.restaurantId.isEmpty()) {
-      this.message = MessageUtil.getProperty("msg_w01_restaurant_regist");
-    } else if (this.restaurantName == null || this.restaurantName.isEmpty()) {
+    if (this.restaurantName == null || this.restaurantName.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_restaurant_regist");
     }
     return message;

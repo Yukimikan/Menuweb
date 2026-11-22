@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="java.util.List"%>
-<%@ page import="model.MenuCSV"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,13 +43,6 @@
 			<!-- ★ 登録内容表示 -->
 			<span>以下登録内容をご確認ください。</span><br>
 			<div class="row">
-				<div class="label">店舗ID：</div>
-				<div class="input">
-					<input type="text" name="restaurant_id" readonly
-					value="${form.restaurantId}">
-				</div>
-			</div>
-			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
 					<input type="text" name="restaurant_name" readonly
@@ -76,7 +68,6 @@
 			<form action="${pageContext.request.contextPath}/restaurant_regist" method="post">
 				<!-- hidden parameter -->
 			    <input type="hidden" name="from_screen" value="confirm">
-			    <input type="hidden" name="restaurant_id" value="${form.restaurantId}">
 			    <input type="hidden" name="restaurant_name" value="${form.restaurantName}">
 			    <input type="hidden" name="type" value="${form.type}">
 			    <input type="submit" value="戻る" class="btn-submit">

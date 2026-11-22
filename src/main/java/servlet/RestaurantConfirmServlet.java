@@ -51,7 +51,6 @@ public class RestaurantConfirmServlet extends HttpServlet {
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
     RestaurantConfirmForm form = new RestaurantConfirmForm(
-        (String) request.getParameter("restaurant_id"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
         "");

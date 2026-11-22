@@ -6,6 +6,7 @@ import dao.RestaurantDao;
 import dao.RestaurantDaoImpl;
 import form.RestaurantConfirmForm;
 import form.RestaurantRegistForm;
+import model.GlobalConst;
 import model.RestaurantEntity;
 
 /**
@@ -27,12 +28,12 @@ public class RestaurantRegistServiceImpl implements RestaurantRegistService {
     // 初期化
     RestaurantRegistServiceResult result = new RestaurantRegistServiceResult();
     RestaurantEntity entity = new RestaurantEntity(
-          Integer.parseInt(form.getRestaurantId()), // 新規登録
+          GlobalConst.NUM_CSV新規登録,
           form.getRestaurantName(),
           form.getType(),
           userName);
 
-    // 1. 新規行だけ書き込む（追記モード）
+    // 1. 新規登録
     try {
       int flg = restaurantDao.insert(entity);
       result.setSuccess(true);
@@ -52,12 +53,12 @@ public class RestaurantRegistServiceImpl implements RestaurantRegistService {
     // 初期化
     RestaurantRegistServiceResult result = new RestaurantRegistServiceResult();
     RestaurantEntity entity = new RestaurantEntity(
-          Integer.parseInt(form.getRestaurantId()), // 新規登録
+          GlobalConst.NUM_CSV新規登録,
           form.getRestaurantName(),
           form.getType(),
           userName);
 
-    // 1. 新規行だけ書き込む（追記モード）
+    // 1. 新規登録
     try {
       int flg = restaurantDao.insert(entity);
       result.setSuccess(true);
