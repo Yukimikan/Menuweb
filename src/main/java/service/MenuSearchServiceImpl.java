@@ -8,7 +8,7 @@ import dao.MenuDao;
 import dao.MenuDaoImpl;
 import form.MenuSearchForm;
 import model.GlobalConst;
-import model.MenuEntity;
+import model.MenuEntity2;
 
 /**
  * ファイル読込用サービス.
@@ -29,29 +29,37 @@ public class MenuSearchServiceImpl implements MenuSearchService {
 
     MenuSearchServiceResult result = new MenuSearchServiceResult();
 
-    ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
+    ConditionTotal eatInPriteCond = ConditionTotal.fromCode(form.getEatInCondition());
+    ConditionTotal totalCond = ConditionTotal.fromCode(form.getTotalCondition());
 
+    int eatInPrice = this.convertTotal(form.getEatInPrice());
+    int takeoutPrice = this.convertTotal(form.getTakeoutPrice());
+    int tax = this.convertTotal(form.getTax());
     int total = this.convertTotal(form.getTotal());
 
-    MenuEntity entity = new MenuEntity(
+    MenuEntity2 entity = new MenuEntity2(
             GlobalConst.NUM_CSV検索, // 検索
-            form.getType(),
+            Integer.parseInt(form.getRestaurantId()),
             form.getRestaurantName(),
+            form.getMenuName(),
+            form.getCategory(),
             form.getSingleMenuFlg(),
-            form.getMenu(),
-            Integer.parseInt(form.getPrice()),
-            Integer.parseInt(form.getTax()),
-            this.convertTotal(form.getTotal()),
+            eatInPrice,
+            takeoutPrice,
+            tax,
+            total,
             userName);
 
     try {
 
-      List<MenuEntity> tmpList = menuDao.select(entity, userName);
-      List<MenuEntity> menuList = tmpList.stream()
+      List<MenuEntity2> tmpList = menuDao.select2(entity, userName);
+      List<MenuEntity2> menuList = tmpList.stream()
           .filter(ret ->
-                cond.match(ret.getTotal(), total)
-                && isMatch(form.getType(), ret.getType())
+                eatInPriteCond.match(ret.getEatInPrice(), eatInPrice)
+                && totalCond.match(ret.getTotal(), total)
                 && isMatch(form.getRestaurantName(), ret.getRestaurantName())
+                && isMatch(form.getMenuName(), ret.getMenuName())
+                && isMatch(form.getCategory(), ret.getCategory())
                 )
               .toList();
       if (tmpList.size() == 0) {

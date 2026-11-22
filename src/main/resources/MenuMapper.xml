@@ -61,6 +61,37 @@
         CURRENT_TIMESTAMP)
   </insert>
 
+  <select id="select2" resultType="model.MenuEntity2">
+    select
+     no,
+     restaurant_id,
+     restaurant_name,
+     menu_name,
+     category,
+     singlemenu_flg,
+     eat_in_price,
+     takeout_price,
+     tax ,
+     total,
+     update_user
+    from "MENU"
+    <where>
+	    <if test="entity.restaurantName != null and entity.restaurantName != ''">
+	      AND restaurant_name = #{entity.restaurantName}
+	    </if>
+	    <if test="entity.menuName != null and entity.menuName != ''">
+	      AND menu_name = #{entity.menuName}
+	    </if>
+	    <if test="entity.category != null and entity.category != ''">
+	      AND category = #{entity.category}
+	    </if>
+	    <!--  totalはServiceで絞るので実装不要
+	    <if test="entity.total != null and entity.total != ''">
+	      AND total = #{entity.total}
+	    </if>
+	    -->
+    </where>
+  </select>
 
   <select id="select" resultType="model.MenuEntity">
     select

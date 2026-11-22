@@ -20,6 +20,26 @@ import model.MenuEntity2;
 public class MenuDaoImpl implements MenuDao {
 
   @Override
+  public List<MenuEntity2> select2(MenuEntity2 entity, String userName) throws RuntimeException {
+
+    try {
+      String resource = "mybatis-config.xml";
+      InputStream inputStream = Resources.getResourceAsStream(resource);
+      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+      SqlSession session = sqlSessionFactory.openSession();
+      MenuMapper mapper = session.getMapper(MenuMapper.class);
+      List<MenuEntity2> list = mapper.select2(entity);
+      return list;
+
+    } catch (IOException e) {
+      System.out.println(e.getStackTrace());
+      throw new RuntimeException();
+    }
+
+  }
+
+
+  @Override
   public List<MenuEntity> select(MenuEntity entity, String userName) throws RuntimeException {
 
     try {

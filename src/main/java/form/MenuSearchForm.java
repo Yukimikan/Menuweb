@@ -16,13 +16,16 @@ import lombok.NoArgsConstructor;
 public class MenuSearchForm {
 
   private String date;
-  private String type;
+  private String restaurantId;
   private String restaurantName;
+  private String category;
   private String singleMenuFlg;
-  private String menu;
-  private String price;
+  private String menuName;
+  private String eatInPrice;
+  private String takeoutPrice;
   private String tax;
   private String total;
+  private String eatInCondition;
   private String totalCondition;
   private String message;
 
@@ -33,6 +36,12 @@ public class MenuSearchForm {
    * @return メッセージ
    */
   public String inputCheck() {
+    // 数値以外
+    if (!(this.eatInPrice == null || this.eatInPrice.isBlank())
+        && !(this.eatInPrice.matches("[0-9]+"))) {
+      // 数値エラー
+      this.message = MessageUtil.getProperty("msg_w02_csv_input");
+    }
     // 数値以外
     if (!(this.total == null || this.total.isBlank())
         && !(this.total.matches("[0-9]+"))) {

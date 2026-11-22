@@ -58,13 +58,16 @@ public class MenuSearchServlet extends HttpServlet {
     String userName = (String) session.getAttribute("userName");
     MenuSearchForm form = new MenuSearchForm(
         (String) request.getParameter("date"),
-        (String) request.getParameter("type"),
-        (String) request.getParameter("restaurant_name"),
         "0",
-        "",
+        (String) request.getParameter("restaurant_name"),
+        (String) request.getParameter("category"),
+        "0",
+        (String) request.getParameter("menu_name"),
+        (String) request.getParameter("eat_in_price"),
         "0",
         "0",
         (String) request.getParameter("total"),
+        (String) request.getParameter("eat_in_condition"),
         (String) request.getParameter("total_condition"),
         ""
         );

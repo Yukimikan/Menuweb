@@ -70,7 +70,7 @@
 				<div class="row">
 					<div class="label">種類：</div>
 					<div class="input">
-						<input type="text" name="type" value="${form.type}">
+						<input type="text" name="category" value="${form.category}">
 					</div>
 				</div>
 				<div class="row">
@@ -80,7 +80,25 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="label">金額（円）：</div>
+					<div class="label">メニュー名：</div>
+					<div class="input">
+						<input type="text" name="menu_name" value="${form.menuName}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">金額（店内飲食）：</div>
+					<div class="input">
+						<input type="text" name="eat_in_price" value="${form.eatInPrice}">円
+						<select name="eat_in_condition">
+							<option value="1">以上</option>
+							<option value="2">以下</option>
+							<option value="3">ピッタリ</option>
+							<option value="4">未満</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">金額（合計）：</div>
 					<div class="input">
 						<input type="text" name="total" value="${form.total}">円
 						<select name="total_condition">
@@ -113,22 +131,24 @@
 	  		<table border="1" bgcolor="white" class="search-result-table">
 				<tr>
 					<th>No</th>
-					<th>種類</th>
+					<th>店舗ID</th>
 					<th>店名</th>
+					<th>種類</th>
 					<th>単品</th>
 					<th>メニュー</th>
-					<th>価格</th>
+					<th>金額（店内飲食）</th>
 					<th>税</th>
-					<th>金額</th>
+					<th>金額（合計）</th>
 				</tr>
 	            <c:forEach var="rec" items="${menuList}">
 				<tr>
 					<td><c:out value="${rec.no}" /></td>
-					<td><c:out value="${rec.type}" /></td>
+					<td><c:out value="${rec.restaurantId}" /></td>
 					<td><c:out value="${rec.restaurantName}" /></td>
+					<td><c:out value="${rec.category}" /></td>
 					<td><c:if test="${rec.singleMenuFlg == '1'}">○</c:if></td>
-					<td><c:out value="${rec.menu}" /></td>
-					<td><c:out value="${rec.price}" /></td>
+					<td><c:out value="${rec.menuName}" /></td>
+					<td><c:out value="${rec.eatInPrice}" /></td>
 					<td><c:out value="${rec.tax}" /></td>
 					<td><c:out value="${rec.total}" /></td>
 				</tr>

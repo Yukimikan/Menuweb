@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.MenuEntity;
+import model.MenuEntity2;
 
 /**
  * CsvInputServiceResult.
@@ -17,6 +17,6 @@ public class MenuSearchServiceResult {
 
   private boolean success;
   private String message;
-  private List<MenuEntity> menuList;
+  private List<MenuEntity2> menuList;
 
 }
