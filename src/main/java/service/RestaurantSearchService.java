@@ -8,5 +8,7 @@ import form.RestaurantSearchForm;
  */
 public interface RestaurantSearchService {
 
+  public RestaurantSearchServiceResult initSearch(String userName);
+
   public RestaurantSearchServiceResult execute(RestaurantSearchForm form, String userName);
 }
