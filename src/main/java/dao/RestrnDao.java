@@ -16,4 +16,6 @@ public interface RestrnDao {
 
   public int insert(RestaurantEntity entity) throws RuntimeException;
 
+  public int delete(int restaurantId) throws RuntimeException;
+
 }

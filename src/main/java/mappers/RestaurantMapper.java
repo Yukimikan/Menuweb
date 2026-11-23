@@ -19,4 +19,6 @@ public interface RestaurantMapper {
 
   int insertRestaurant(@Param("entity") RestaurantEntity entity);
 
+  int delete(@Param("restaurantId") int restaurantId);
+
 }

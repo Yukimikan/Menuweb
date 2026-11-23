@@ -104,6 +104,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>RestaurantDeleteServlet</display-name>
+    <servlet-name>RestaurantDeleteServlet</servlet-name>
+    <servlet-class>servlet.RestaurantDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RestaurantDeleteServlet</servlet-name>
+    <url-pattern>/restaurant_delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>RestaurantRegistServlet</display-name>
     <servlet-name>RestaurantRegistServlet</servlet-name>
     <servlet-class>servlet.RestaurantRegistServlet</servlet-class>

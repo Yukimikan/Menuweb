@@ -20,6 +20,11 @@
         CURRENT_TIMESTAMP)
   </insert>
 
+  <delete id="delete">
+    delete from "RESTAURANT"
+    where restaurant_id = #{restaurantId}
+  </delete>
+
   <select id="selectAll" resultType="model.RestaurantEntity">
     select
      restaurant_id,

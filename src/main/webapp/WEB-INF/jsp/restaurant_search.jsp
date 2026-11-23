@@ -96,27 +96,36 @@
 			    </c:otherwise>
 			</c:choose>
 	        <c:if test="${not empty restaurantList}">
-	  		<table border="1" bgcolor="white" class="search-result-table">
-				<tr>
-					<th>No</th>
-					<th>店舗ID</th>
-					<th>店名</th>
-					<th>種類</th>
-				</tr>
-	            <c:forEach var="rec" items="${restaurantList}">
-				<tr>
-					<td><c:out value="1" /></td>
-					<td><c:out value="${rec.restaurantId}" /></td>
-					<td><c:out value="${rec.restaurantName}" /></td>
-					<td><c:out value="${rec.type}" /></td>
-				</tr>
-				</c:forEach>
-			</table>
+				<form name="deleteform"
+					action="${pageContext.request.contextPath}/restaurant_delete"
+					method="post">
+			  		<table border="1" bgcolor="white" class="search-result-table">
+						<tr>
+							<th>No</th>
+							<th>店舗ID</th>
+							<th>店名</th>
+							<th>種類</th>
+						</tr>
+			            <c:forEach var="rec" items="${restaurantList}">
+						<tr>
+							<td>
+							  <input type="radio" name="selected_row" value="${rec.restaurantId}" />
+							</td>
+							<td><c:out value="${rec.restaurantId}" /></td>
+							<td><c:out value="${rec.restaurantName}" /></td>
+							<td><c:out value="${rec.type}" /></td>
+						</tr>
+						</c:forEach>
+					</table>
+					<div class="row">
+						<div class="label">選択行削除：</div>
+						<div class="input">
+							<input type="submit" value="削除" class="btn-submit">
+						</div>
+					</div>
+				</form>
 			</c:if>
 		</div>
-	</div>
-	<div id="footer" class="footer">
-	<%@include file="./footer.jsp"%>
 	</div>
 </body>
 </html>
