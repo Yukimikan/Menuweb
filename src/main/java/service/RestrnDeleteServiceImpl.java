@@ -2,7 +2,7 @@ package service;
 
 import dao.RestrnDao;
 import dao.RestrnDaoImpl;
-import form.RestaurantDeleteForm;
+import form.RestaurantSearchForm;
 
 /**
  * ファイル書込用サービス.
@@ -18,7 +18,7 @@ public class RestrnDeleteServiceImpl implements RestrnDeleteService {
   /**
    * execute.
    */
-  public RestrnDeleteServiceResult execute(RestaurantDeleteForm form, String userName) {
+  public RestrnDeleteServiceResult execute(RestaurantSearchForm form, String userName) {
 
     // 初期化
     RestrnDeleteServiceResult result = new RestrnDeleteServiceResult();

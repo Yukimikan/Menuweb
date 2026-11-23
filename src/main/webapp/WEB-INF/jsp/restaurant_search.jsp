@@ -80,7 +80,7 @@
 				<div class="row">
 					<div class="label">メニュー絞り込み：</div>
 					<div class="input">
-						<input type="submit" value="絞込" class="btn-submit">
+						<input type="submit" name="action" value="検索" class="btn-submit">
 					</div>
 				</div>
 			</div>
@@ -120,7 +120,7 @@
 					<div class="row">
 						<div class="label">選択行削除：</div>
 						<div class="input">
-							<input type="submit" value="削除" class="btn-submit">
+							<input type="submit" name="action" value="削除" class="btn-submit">
 						</div>
 					</div>
 				</form>

@@ -1,7 +1,6 @@
 package service;
 
-import form.RestaurantDeleteForm;
-import form.RestaurantRegistForm;
+import form.RestaurantSearchForm;
 
 /**
  * MenuRegistService
@@ -9,6 +8,6 @@ import form.RestaurantRegistForm;
  */
 public interface RestrnDeleteService {
 
-  public RestrnDeleteServiceResult execute(RestaurantDeleteForm form, String userName);
+  public RestrnDeleteServiceResult execute(RestaurantSearchForm form, String userName);
 
 }

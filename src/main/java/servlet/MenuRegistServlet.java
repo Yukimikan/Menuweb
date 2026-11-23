@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import form.MenuRegistForm;
-import model.GlobalConst;
+import model.WebConst;
 import service.MenuRegistService;
 import service.MenuRegistServiceImpl;
 import service.MenuRegistServiceResult;
@@ -44,7 +44,7 @@ public class MenuRegistServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.MenuRegist);
+        request.getRequestDispatcher(WebConst.MenuRegist);
     dispatcher.forward(request, response);
   }
 
@@ -74,7 +74,7 @@ public class MenuRegistServlet extends HttpServlet {
       request.setAttribute("form", form);
       // 2. 初期表示へ forward
       RequestDispatcher dispatcher =
-          request.getRequestDispatcher(GlobalConst.MenuRegist);
+          request.getRequestDispatcher(WebConst.MenuRegist);
       dispatcher.forward(request, response);
 
       return;
@@ -105,7 +105,7 @@ public class MenuRegistServlet extends HttpServlet {
       request.setAttribute("form", form);
       request.setAttribute("message", message);
 
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegist);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.MenuRegist);
       dispatcher.forward(request, response);
       return;
     }
@@ -120,13 +120,13 @@ public class MenuRegistServlet extends HttpServlet {
           // 4. requestSetAttribute
 
           // 5. forward
-          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegistFinish);
+          RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.MenuRegistFinish);
           dispatcher.forward(request, response);
         }
       } catch (Exception e) {
         // エラー画面に遷移
         System.out.print(e.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
         dispatcher.forward(request, response);
       }
     } else {
@@ -138,7 +138,7 @@ public class MenuRegistServlet extends HttpServlet {
       request.setAttribute("user_name", userName);
       request.setAttribute("form", form);
       // 5. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuConfirm);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.MenuConfirm);
       dispatcher.forward(request, response);
     }
   }

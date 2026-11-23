@@ -1,8 +1,10 @@
 package form;
 
+import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.WebConst;
 
 /**
  * 店舗検索画面.
@@ -14,9 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RestaurantSearchForm {
 
-  // private String restaurantId;
+  private String action;
   private String restaurantName;
   private String type;
+  private String selectedRow;
   private String message;
 
   /**
@@ -26,7 +29,13 @@ public class RestaurantSearchForm {
    * @return メッセージ
    */
   public String inputCheck() {
-    return "";
+    //チェック
+    if (WebConst.Action_削除.equals(this.action)) {
+      if (this.selectedRow == null || this.selectedRow.isEmpty()) {
+        this.message = MessageUtil.getProperty("msg_w02_restaurant_input");
+      }
+    }
+    return message;
   }
 
 }

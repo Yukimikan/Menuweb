@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import form.MenuConfirmForm;
-import model.GlobalConst;
+import model.WebConst;
 import service.MenuRegistService;
 import service.MenuRegistServiceImpl;
 import service.MenuRegistServiceResult;
@@ -70,13 +70,13 @@ public class MenuConfirmServlet extends HttpServlet {
         // 4. requestSetAttribute
 
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegistFinish);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.MenuRegistFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
       dispatcher.forward(request, response);
     }
 

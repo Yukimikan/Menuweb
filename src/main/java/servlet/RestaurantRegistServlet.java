@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import form.RestaurantRegistForm;
-import model.GlobalConst;
+import model.WebConst;
 import service.RestrnRegistService;
 import service.RestrnRegistServiceImpl;
 import service.RestrnRegistServiceResult;
@@ -44,7 +44,7 @@ public class RestaurantRegistServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.RestaurantRegist);
+        request.getRequestDispatcher(WebConst.RestaurantRegist);
     dispatcher.forward(request, response);
   }
 
@@ -70,7 +70,7 @@ public class RestaurantRegistServlet extends HttpServlet {
       request.setAttribute("form", form);
       // 2. 初期表示へ forward
       RequestDispatcher dispatcher =
-          request.getRequestDispatcher(GlobalConst.RestaurantRegist);
+          request.getRequestDispatcher(WebConst.RestaurantRegist);
       dispatcher.forward(request, response);
 
       return;
@@ -97,7 +97,7 @@ public class RestaurantRegistServlet extends HttpServlet {
       request.setAttribute("form", form);
       request.setAttribute("message", message);
 
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantRegist);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.RestaurantRegist);
       dispatcher.forward(request, response);
       return;
     }
@@ -112,13 +112,13 @@ public class RestaurantRegistServlet extends HttpServlet {
           // 4. requestSetAttribute
 
           // 5. forward
-          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantRegistFinish);
+          RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.RestaurantRegistFinish);
           dispatcher.forward(request, response);
         }
       } catch (Exception e) {
         // エラー画面に遷移
         System.out.print(e.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
         dispatcher.forward(request, response);
       }
     } else {
@@ -130,7 +130,7 @@ public class RestaurantRegistServlet extends HttpServlet {
       request.setAttribute("user_name", userName);
       request.setAttribute("form", form);
       // 5. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantConfirm);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.RestaurantConfirm);
       dispatcher.forward(request, response);
     }
   }

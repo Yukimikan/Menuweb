@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import form.CsvConfirmForm;
-import model.GlobalConst;
+import model.WebConst;
 import service.CsvWriteService;
 import service.CsvWriteServiceImpl;
 import service.CsvWriteServiceResult;
@@ -69,13 +69,13 @@ public class CsvConfirmServlet extends HttpServlet {
         // 4. requestSetAttribute
 
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvWriteFinish);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.CsvWriteFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
       dispatcher.forward(request, response);
     }
 

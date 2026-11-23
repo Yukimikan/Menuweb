@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 import form.CsvWriteForm;
-import model.GlobalConst;
+import model.WebConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
 import service.CsvWriteService;
@@ -50,7 +50,7 @@ public class CsvWriteServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.CsvWrite);
+        request.getRequestDispatcher(WebConst.CsvWrite);
     dispatcher.forward(request, response);
   }
 
@@ -82,7 +82,7 @@ public class CsvWriteServlet extends HttpServlet {
       request.setAttribute("form", form);
       // 2. 初期表示へ forward
       RequestDispatcher dispatcher =
-          request.getRequestDispatcher(GlobalConst.CsvWrite);
+          request.getRequestDispatcher(WebConst.CsvWrite);
       dispatcher.forward(request, response);
 
       return;
@@ -114,7 +114,7 @@ public class CsvWriteServlet extends HttpServlet {
       List<String> csvFiles = fileService.getList();
       request.setAttribute("csvFiles", csvFiles);
       // reload
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvWrite);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.CsvWrite);
       dispatcher.forward(request, response);
       return;
     }
@@ -129,13 +129,13 @@ public class CsvWriteServlet extends HttpServlet {
           // 4. requestSetAttribute
           request.setAttribute("resultList", result.getRetList());
           // 5. forward
-          RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvWriteFinish);
+          RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.CsvWriteFinish);
           dispatcher.forward(request, response);
         }
       } catch (Exception e) {
         // エラー画面に遷移
         System.out.print(e.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
         dispatcher.forward(request, response);
       }
     } else {
@@ -146,7 +146,7 @@ public class CsvWriteServlet extends HttpServlet {
       // 4. requestSetAttribute
       request.setAttribute("form", form);
       // 5. forward
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvConfirm);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.CsvConfirm);
       dispatcher.forward(request, response);
     }
   }

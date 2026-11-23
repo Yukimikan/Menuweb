@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import form.RestaurantConfirmForm;
-import model.GlobalConst;
+import model.WebConst;
 import service.RestrnRegistService;
 import service.RestrnRegistServiceImpl;
 import service.RestrnRegistServiceResult;
@@ -66,13 +66,13 @@ public class RestaurantConfirmServlet extends HttpServlet {
         // 4. requestSetAttribute
 
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.RestaurantRegistFinish);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.RestaurantRegistFinish);
         dispatcher.forward(request, response);
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
       dispatcher.forward(request, response);
     }
 
