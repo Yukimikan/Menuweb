@@ -11,9 +11,9 @@ import java.io.IOException;
 
 import form.RestaurantRegistForm;
 import model.GlobalConst;
-import service.RestaurantRegistService;
-import service.RestaurantRegistServiceImpl;
-import service.RestaurantRegistServiceResult;
+import service.RestrnRegistService;
+import service.RestrnRegistServiceImpl;
+import service.RestrnRegistServiceResult;
 
 /**
  * Servlet.
@@ -21,14 +21,14 @@ import service.RestaurantRegistServiceResult;
 public class RestaurantRegistServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  private RestaurantRegistService service;
+  private RestrnRegistService service;
 
   /**
    * コンストラクタ.
    */
   public RestaurantRegistServlet() {
     super();
-    service = new RestaurantRegistServiceImpl();
+    service = new RestrnRegistServiceImpl();
   }
 
 
@@ -107,7 +107,7 @@ public class RestaurantRegistServlet extends HttpServlet {
       // 3. サーバー側のチェック
       try {
         // 3. service execute
-    	  RestaurantRegistServiceResult result = service.execute(form, userName);
+        RestrnRegistServiceResult result = service.execute(form, userName);
         if (result.isSuccess()) {
           // 4. requestSetAttribute
 

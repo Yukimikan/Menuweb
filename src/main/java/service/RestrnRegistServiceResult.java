@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantRegistServiceResult {
+public class RestrnRegistServiceResult {
 
   private boolean success;
   private String message;

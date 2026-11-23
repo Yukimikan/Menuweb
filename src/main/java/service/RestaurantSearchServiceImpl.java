@@ -32,19 +32,19 @@ public class RestaurantSearchServiceImpl implements RestaurantSearchService {
     try {
       List<RestaurantEntity> restaurantList = restaurantDao.selectAll(userName);
       if (restaurantList.size() == 0) {
-          // 結果0件
-          result.setSuccess(true);
-          result.setMessage("0件");
-          result.setRestaurantList(Collections.emptyList());
-          System.out.print(result.getMessage());
-        } else {
-          result.setSuccess(true);
-          result.setRestaurantList(restaurantList);
-        }
+        // 結果0件
+        result.setSuccess(true);
+        result.setMessage("0件");
+        result.setRestaurantList(Collections.emptyList());
+        System.out.print(result.getMessage());
+      } else {
+        result.setSuccess(true);
+        result.setRestaurantList(restaurantList);
+      }
         // result
         if (result.isSuccess()) {
           return result;
-        }
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -58,8 +58,6 @@ public class RestaurantSearchServiceImpl implements RestaurantSearchService {
   public RestaurantSearchServiceResult execute(RestaurantSearchForm form, String userName) {
 
     RestaurantSearchServiceResult result = new RestaurantSearchServiceResult();
-
-    // ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
 
     RestaurantEntity entity = new RestaurantEntity(
             GlobalConst.NUM_CSV検索, // 検索

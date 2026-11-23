@@ -1,7 +1,5 @@
 package service;
 
-import java.io.IOException;
-
 import dao.RestaurantDao;
 import dao.RestaurantDaoImpl;
 import form.RestaurantConfirmForm;
@@ -12,21 +10,21 @@ import model.RestaurantEntity;
 /**
  * ファイル書込用サービス.
  * */
-public class RestaurantRegistServiceImpl implements RestaurantRegistService {
+public class RestrnRegistServiceImpl implements RestrnRegistService {
 
   private RestaurantDao restaurantDao;
 
-  public RestaurantRegistServiceImpl() {
+  public RestrnRegistServiceImpl() {
     restaurantDao = new RestaurantDaoImpl();
   }
 
   /**
    * execute.
    */
-  public RestaurantRegistServiceResult execute(RestaurantRegistForm form, String userName) throws IOException {
+  public RestrnRegistServiceResult execute(RestaurantRegistForm form, String userName) {
 
     // 初期化
-    RestaurantRegistServiceResult result = new RestaurantRegistServiceResult();
+    RestrnRegistServiceResult result = new RestrnRegistServiceResult();
     RestaurantEntity entity = new RestaurantEntity(
           GlobalConst.NUM_CSV新規登録,
           form.getRestaurantName(),
@@ -40,7 +38,7 @@ public class RestaurantRegistServiceImpl implements RestaurantRegistService {
     } catch (Exception e) {
       // CSV書き込みに失敗
       result.setMessage("登録エラー");
-      throw new IOException(e.getMessage(), e);
+      System.out.println(e.getMessage());
     }
     return result;
   }
@@ -48,10 +46,10 @@ public class RestaurantRegistServiceImpl implements RestaurantRegistService {
   /**
    * execute.
    */
-  public RestaurantRegistServiceResult execute(RestaurantConfirmForm form, String userName) throws IOException {
+  public RestrnRegistServiceResult execute(RestaurantConfirmForm form, String userName) {
 
     // 初期化
-    RestaurantRegistServiceResult result = new RestaurantRegistServiceResult();
+    RestrnRegistServiceResult result = new RestrnRegistServiceResult();
     RestaurantEntity entity = new RestaurantEntity(
           GlobalConst.NUM_CSV新規登録,
           form.getRestaurantName(),
@@ -65,7 +63,7 @@ public class RestaurantRegistServiceImpl implements RestaurantRegistService {
     } catch (Exception e) {
       // CSV書き込みに失敗
       result.setMessage("登録エラー");
-      throw new IOException(e.getMessage(), e);
+      System.out.println(e.getMessage());
     }
     return result;
   }
