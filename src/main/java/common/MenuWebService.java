@@ -2,12 +2,12 @@ package common;
 
 /**
  * MenuWebService
- * 共通化インターフェース
+ * 共通化インターフェース.
  *
- * @param <F>
- * @param <R>
+ * @param <F> Form
+ * @param <R> Result
  */
 public interface MenuWebService<F, R> {
 
-    R execute(F form);
+  R execute(F form);
 }

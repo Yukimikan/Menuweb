@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * Type
  * 項目「種類」
+ * プルダウンの種別を設定.
  */
 public enum Type {
 
@@ -20,13 +21,19 @@ public enum Type {
   private final String value;
 
   Type(String value) {
-      this.value = value;
+    this.value = value;
   }
 
   public String getValue() {
-      return value;
+    return value;
   }
 
+  /**
+   * Enumの値判定.
+   *
+   * @param value 文字列
+   * @return String
+   */
   public static boolean isValid(String value) {
     //enum に存在しない場合エラー
     return Arrays.stream(values())
