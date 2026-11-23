@@ -34,7 +34,7 @@
         CURRENT_TIMESTAMP)
   </insert>
 
-  <select id="select" resultType="model.MenuEntity2">
+  <select id="select" resultType="model.MenuEntity">
     select
      no,
      restaurant_id,
@@ -65,57 +65,5 @@
 	    -->
     </where>
   </select>
-
-  <!--
-  <insert id="insertMenu">
-    insert into "MENU"
-    (
-    	no,
-    	type,
-    	restaurant_name,
-    	singlemenu_flg,
-    	menu,
-    	price,
-    	tax ,
-    	total,
-    	update_user,
-    	update_date
-    )
-    values(
-    	#{entity.no},
-        #{entity.type},
-        #{entity.restaurantName},
-        #{entity.singleMenuFlg},
-        #{entity.menu},
-        #{entity.price},
-        #{entity.tax},
-        #{entity.total},
-        #{entity.updateUser},
-        CURRENT_TIMESTAMP)
-  </insert>
-   -->
-  <!--
-  <select id="select" resultType="model.MenuEntity">
-    select
-     no,
-     type,
-     restaurant_name,
-     singlemenu_flg,
-     menu,
-     price,
-     tax ,
-     total,
-     update_user
-    from "MENU"
-    <where>
-	    <if test="entity.type != null and entity.type != ''">
-	      AND type = #{entity.type}
-	    </if>
-	    <if test="entity.restaurantName != null and entity.restaurantName != ''">
-	      AND restaurant_name = #{entity.restaurantName}
-	    </if>
-    </where>
-  </select>
-   -->
 
 </mapper>

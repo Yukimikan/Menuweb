@@ -8,7 +8,7 @@ import dao.MenuDao;
 import dao.MenuDaoImpl;
 import form.MenuSearchForm;
 import model.GlobalConst;
-import model.MenuEntity2;
+import model.MenuEntity;
 
 /**
  * ファイル読込用サービス.
@@ -35,7 +35,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
     int eatInPrice = this.convertTotal(form.getEatInPrice());
     int takeoutPrice = this.convertTotal(form.getTakeoutPrice());
 
-    MenuEntity2 entity = new MenuEntity2(
+    MenuEntity entity = new MenuEntity(
             GlobalConst.NUM_CSV検索, // 検索
             0,
             form.getRestaurantName(),
@@ -50,8 +50,8 @@ public class MenuSearchServiceImpl implements MenuSearchService {
 
     try {
 
-      List<MenuEntity2> tmpList = menuDao.select(entity, userName);
-      List<MenuEntity2> menuList = tmpList.stream()
+      List<MenuEntity> tmpList = menuDao.select(entity, userName);
+      List<MenuEntity> menuList = tmpList.stream()
           .filter(ret ->
                 eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)
                 && takeoutPriceCond.match(ret.getTakeoutPrice(), takeoutPrice)

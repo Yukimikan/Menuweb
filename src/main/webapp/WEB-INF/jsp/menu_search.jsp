@@ -9,28 +9,6 @@
 <link rel="stylesheet" href="resource/css/menu_search.css">
 <meta charset="UTF-8">
 <title>メニュー検索（テーブル検索）</title>
-<script>
-  function checkText(context) {
-
-    //1. 入力チェック
-    var indate = document.form1.date.value;
-    var csvname = document.form1.csv_name.value;
-    document.form1.message.value = "";
-
-    //1-1 必須
-    if(indate.length === 0) {
-        alert('日付を指定して下さい');
-        document.form1.message.value ='日付を指定して下さい';
-        return false;
-    }
-    if(csvname.length === 0) {
-        alert('CSV名を指定して下さい');
-        document.form1.message.value ='CSV名を指定して下さい';
-        return false;
-    }
-    return true;
-  }
-</script>
 </head>
 <body>
 	<div id="header" class="header">
@@ -61,12 +39,6 @@
 			</div>
 			<div id="search-input">
 				<h3>・検索条件</h3>
-				<div class="row">
-					<div class="label">日付：</div>
-					<div class="input">
-						<input type="text" name="date" value="${form.date}">
-					</div>
-				</div>
 				<div class="row">
 					<div class="label">店名：</div>
 					<div class="input">

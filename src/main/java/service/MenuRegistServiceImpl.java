@@ -10,7 +10,7 @@ import dao.RestrnDaoImpl;
 import form.MenuConfirmForm;
 import form.MenuRegistForm;
 import model.GlobalConst;
-import model.MenuEntity2;
+import model.MenuEntity;
 import model.RestaurantEntity;
 
 /**
@@ -39,7 +39,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
           "",
           userName
           );
-    MenuEntity2 menuEntity = new MenuEntity2(
+    MenuEntity menuEntity = new MenuEntity(
           GlobalConst.NUM_CSV新規登録, // 新規登録
           0,
           form.getRestaurantName(),
@@ -86,7 +86,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
             "",
             userName
             );
-    MenuEntity2 menuEntity = new MenuEntity2(
+    MenuEntity menuEntity = new MenuEntity(
           GlobalConst.NUM_CSV新規登録, // 新規登録
           0,
           form.getRestaurantName(),
