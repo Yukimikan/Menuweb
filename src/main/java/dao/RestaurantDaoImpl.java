@@ -19,6 +19,25 @@ import model.RestaurantEntity;
 public class RestaurantDaoImpl implements RestaurantDao {
 
   @Override
+  public List<RestaurantEntity> selectAll(String userName) throws RuntimeException {
+
+    try {
+      String resource = "mybatis-config.xml";
+      InputStream inputStream = Resources.getResourceAsStream(resource);
+      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+      SqlSession session = sqlSessionFactory.openSession();
+      RestaurantMapper mapper = session.getMapper(RestaurantMapper.class);
+      List<RestaurantEntity> list = mapper.selectAll(userName);
+      return list;
+
+    } catch (IOException e) {
+      System.out.println(e.getStackTrace());
+      throw new RuntimeException();
+    }
+
+  }
+
+  @Override
   public List<RestaurantEntity> select(RestaurantEntity entity, String userName) throws RuntimeException {
 
     try {

@@ -13,6 +13,8 @@ import model.RestaurantEntity;
  */
 public interface RestaurantMapper {
 
+  List<RestaurantEntity> selectAll(@Param("userName") String userName);
+
   List<RestaurantEntity> select(@Param("entity") RestaurantEntity entity);
 
   int insertRestaurant(@Param("entity") RestaurantEntity entity);

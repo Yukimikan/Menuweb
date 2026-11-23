@@ -11,6 +11,9 @@ import java.io.IOException;
 
 import form.RestaurantSearchForm;
 import model.GlobalConst;
+import service.RestaurantListGetService;
+import service.RestaurantListGetServiceImpl;
+import service.RestaurantListGetServiceResult;
 import service.RestaurantSearchService;
 import service.RestaurantSearchServiceImpl;
 import service.RestaurantSearchServiceResult;
@@ -22,12 +25,14 @@ public class RestaurantSearchServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   private RestaurantSearchService service;
+  private RestaurantListGetService listGetService;
 
   /**
    * コンストラクタ.
    */
   public RestaurantSearchServlet() {
     super();
+    listGetService = new RestaurantListGetServiceImpl();
     service = new RestaurantSearchServiceImpl();
   }
 
@@ -37,9 +42,18 @@ public class RestaurantSearchServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // 1. 画面情報取得（なし）
+    // 1. 画面情報取得
+    // 1. parameter set
+    HttpSession session = request.getSession();
+    String userName = (String) session.getAttribute("userName");
 
-    // 2. 初期表示へ forward
+    // 2. inputCheck(フロントで実行)
+
+    // 3. service execute
+    RestaurantListGetServiceResult result = listGetService.execute(userName);
+    // 4. requestSetAttribute
+    request.setAttribute("restaurantList", result.getRestaurantList());
+    // 5. 初期表示
     RequestDispatcher dispatcher =
         request.getRequestDispatcher(GlobalConst.RestaurantSearch);
     dispatcher.forward(request, response);

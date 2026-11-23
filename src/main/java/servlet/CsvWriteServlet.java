@@ -45,7 +45,7 @@ public class CsvWriteServlet extends HttpServlet {
     // 初期化
 
     // 1. CSVリスト取得（SharedService）
-    List<String> csvFiles = fileService.execute();
+    List<String> csvFiles = fileService.getList();
     request.setAttribute("csvFiles", csvFiles);
 
     // 2. 初期表示へ forward
@@ -111,7 +111,7 @@ public class CsvWriteServlet extends HttpServlet {
       request.setAttribute("form", form);
       request.setAttribute("message", message);
       // CSVリストを再取得（入力画面に戻るため）
-      List<String> csvFiles = fileService.execute();
+      List<String> csvFiles = fileService.getList();
       request.setAttribute("csvFiles", csvFiles);
       // reload
       RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvWrite);

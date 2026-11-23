@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface CsvFileListService {
 
-  public List<String> execute() throws IOException;
+  public List<String> getList() throws IOException;
 
 }

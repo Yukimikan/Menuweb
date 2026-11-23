@@ -44,7 +44,7 @@ public class CsvSearchServlet extends HttpServlet {
     // 1. 画面情報取得（なし）
 
     // 1. CSVリスト取得（SharedService）
-    List<String> csvFiles = fileService.execute();
+    List<String> csvFiles = fileService.getList();
     request.setAttribute("csvFiles", csvFiles);
 
     // 2. 初期表示へ forward
