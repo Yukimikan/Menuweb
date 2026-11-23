@@ -14,7 +14,7 @@ import form.RestaurantSearchForm;
 import model.GlobalConst;
 import service.RestrnDeleteService;
 import service.RestrnDeleteServiceImpl;
-import service.RestrnRegistServiceResult;
+import service.RestrnDeleteServiceResult;
 
 /**
  * Servlet.
@@ -79,7 +79,7 @@ public class RestaurantDeleteServlet extends HttpServlet {
     // 3. サーバー側のチェック
     try {
       // 3. service execute
-      RestrnRegistServiceResult result = service.execute(form, userName);
+      RestrnDeleteServiceResult result = service.execute(form, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         // 5. forward

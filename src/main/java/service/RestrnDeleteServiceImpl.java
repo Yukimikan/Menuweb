@@ -18,10 +18,10 @@ public class RestrnDeleteServiceImpl implements RestrnDeleteService {
   /**
    * execute.
    */
-  public RestrnRegistServiceResult execute(RestaurantDeleteForm form, String userName) {
+  public RestrnDeleteServiceResult execute(RestaurantDeleteForm form, String userName) {
 
     // 初期化
-    RestrnRegistServiceResult result = new RestrnRegistServiceResult();
+    RestrnDeleteServiceResult result = new RestrnDeleteServiceResult();
     int id = Integer.parseInt(form.getSelectedRow());
 
     // 1. 新規登録

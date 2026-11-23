@@ -9,6 +9,6 @@ import form.RestaurantRegistForm;
  */
 public interface RestrnDeleteService {
 
-  public RestrnRegistServiceResult execute(RestaurantDeleteForm form, String userName);
+  public RestrnDeleteServiceResult execute(RestaurantDeleteForm form, String userName);
 
 }
