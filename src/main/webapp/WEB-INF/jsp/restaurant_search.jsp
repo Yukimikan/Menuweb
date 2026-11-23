@@ -64,7 +64,17 @@
 				<div class="row">
 					<div class="label">種類：</div>
 					<div class="input">
-						<input type="text" name="type" value="${form.type}">
+						<select name="type" value="${form.type}">
+							<option value="">-</option>
+							<option value="定食屋">定食屋</option>
+							<option value="ファストフード">ファストフード</option>
+							<option value="和風料理">和風料理</option>
+							<option value="洋風料理">洋風料理</option>
+							<option value="中華料理">中華料理</option>
+							<option value="喫茶店">喫茶店</option>
+							<option value="バイキング">バイキング</option>
+							<option value="デザート">デザート</option>
+						</select>
 					</div>
 				</div>
 				<div class="row">

@@ -1,6 +1,7 @@
 package form;
 
 import common.MessageUtil;
+import common.Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,9 @@ public class RestaurantRegistForm {
     //チェック
     if (this.restaurantName == null || this.restaurantName.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_restaurant_regist");
+    }
+    if (!Type.isValid(this.type)) {
+      this.message = MessageUtil.getProperty("msg_w02_restaurant_regist");
     }
     return message;
   }
