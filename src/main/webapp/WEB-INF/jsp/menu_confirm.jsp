@@ -86,20 +86,6 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">税額：</div>
-				<div class="input">
-					<input type="text" name="tax" readonly
-					  value="${form.tax}">円
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">合計：</div>
-				<div class="input">
-					<input type="text" name="total" readonly
-					  value="${form.total}">円
-				</div>
-			</div>
-			<div class="row">
 				<div class="label">メニュー登録：</div>
 				<div class="input">
 					<input type="submit" value="登録" class="btn-submit">
@@ -117,8 +103,6 @@
 			    <input type="hidden" name="singlemenu_flg" value="${form.singleMenuFlg}">
 			    <input type="hidden" name="eat_in_price" value="${form.eatInPrice}">
 			    <input type="hidden" name="takeout_price" value="${form.takeoutPrice}">
-			    <input type="hidden" name="tax" value="${form.tax}">
-			    <input type="hidden" name="total" value="${form.total}">
 			    <input type="submit" value="戻る" class="btn-submit">
 			</form>
 			</div>

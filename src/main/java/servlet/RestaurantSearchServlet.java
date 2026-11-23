@@ -48,6 +48,7 @@ public class RestaurantSearchServlet extends HttpServlet {
     RestaurantSearchServiceResult result = service.initSearch(userName);
     // 4. requestSetAttribute
     request.setAttribute("restaurantList", result.getRestaurantList());
+    request.setAttribute("count", result.getRestaurantList().size());
     // 5. 初期表示
     RequestDispatcher dispatcher =
         request.getRequestDispatcher(GlobalConst.RestaurantSearch);

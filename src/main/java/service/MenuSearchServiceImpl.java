@@ -31,12 +31,9 @@ public class MenuSearchServiceImpl implements MenuSearchService {
 
     ConditionPrice eatInPriceCond = ConditionPrice.fromCode(form.getEatInCondition());
     ConditionPrice takeoutPriceCond = ConditionPrice.fromCode(form.getTakeoutCondition());
-    ConditionPrice totalCond = ConditionPrice.fromCode(form.getTotalCondition());
 
     int eatInPrice = this.convertTotal(form.getEatInPrice());
     int takeoutPrice = this.convertTotal(form.getTakeoutPrice());
-    int tax = this.convertTotal(form.getTax());
-    int total = this.convertTotal(form.getTotal());
 
     MenuEntity2 entity = new MenuEntity2(
             GlobalConst.NUM_CSV検索, // 検索
@@ -47,8 +44,8 @@ public class MenuSearchServiceImpl implements MenuSearchService {
             form.getSingleMenuFlg(),
             eatInPrice,
             takeoutPrice,
-            tax,
-            total,
+            0,
+            0,
             userName);
 
     try {
@@ -58,7 +55,6 @@ public class MenuSearchServiceImpl implements MenuSearchService {
           .filter(ret ->
                 eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)
                 && takeoutPriceCond.match(ret.getTakeoutPrice(), takeoutPrice)
-                && totalCond.match(ret.getTotal(), total)
                 && isMatch(form.getRestaurantName(), ret.getRestaurantName())
                 && isMatch(form.getMenuName(), ret.getMenuName())
                 && isMatch(form.getCategory(), ret.getCategory())

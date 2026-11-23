@@ -48,8 +48,8 @@ public class MenuRegistServiceImpl implements MenuRegistService {
           form.getSingleMenuFlg(),
           Integer.parseInt(form.getEatInPrice()),
           Integer.parseInt(form.getTakeoutPrice()),
-          Integer.parseInt(form.getTax()),
-          Integer.parseInt(form.getTotal()),
+          0,
+          0,
           userName);
 
     try {
@@ -95,8 +95,8 @@ public class MenuRegistServiceImpl implements MenuRegistService {
           form.getSingleMenuFlg(),
           Integer.parseInt(form.getEatInPrice()),
           Integer.parseInt(form.getTakeoutPrice()),
-          Integer.parseInt(form.getTax()),
-          Integer.parseInt(form.getTotal()),
+          0,
+          0,
           userName);
 
     try {

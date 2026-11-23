@@ -23,16 +23,6 @@ function checkText() {
     document.form1.message.value = '店名を指定して下さい';
     return false;
   }
-  if (tax.length === 0) {
-    alert('税額を指定して下さい');
-    document.form1.message.value = '税額を指定して下さい';
-    return false;
-  }
-  if (total.length === 0) {
-    alert('合計金額を指定して下さい');
-    document.form1.message.value = '合計金額を指定して下さい';
-    return false;
-  }
 
   return true;
 }
@@ -71,22 +61,6 @@ function checkText() {
 					<input type="checkbox" name="confirm_flg" value="${form.confirmFlg}" checked>
 				</div>
 			</div>
-			<!--
-			<div class="row">
-				<div class="label">種別：</div>
-				<div class="input">
-					<input type="text" name="type" value="${form.type}">
-				</div>
-			</div>
-			 -->
-			<!--
-			<div class="row">
-				<div class="label">店舗ID：</div>
-				<div class="input">
-					<input type="text" name="restaurant_id" value="${form.restaurantId}">
-				</div>
-			</div>
-			 -->
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
@@ -124,18 +98,6 @@ function checkText() {
 				<div class="label">金額（テイクアウト）：</div>
 				<div class="input">
 					<input type="text" name="takeout_price" value="${form.takeoutPrice}">円
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">税額：</div>
-				<div class="input">
-					<input type="text" name="tax" value="${form.tax}">円
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">合計：</div>
-				<div class="input">
-					<input type="text" name="total" value="${form.total}">円
 				</div>
 			</div>
 			<div class="row">

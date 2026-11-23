@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * メニュー登録確認画面.
- * 種類,店名,単品,メニュー,価格,税,金額
+ * 種類,店名,単品,メニュー,価格
  *
  */
 @Data
@@ -20,8 +20,6 @@ public class MenuConfirmForm {
   private String singleMenuFlg;
   private String eatInPrice;
   private String takeoutPrice;
-  private String tax;
-  private String total;
   private String message;
 
 }

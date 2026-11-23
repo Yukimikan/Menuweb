@@ -110,18 +110,6 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="label">金額（合計）：</div>
-					<div class="input">
-						<input type="text" name="total" value="${form.total}">円
-						<select name="total_condition">
-							<option value="1">以上</option>
-							<option value="2">以下</option>
-							<option value="3">ピッタリ</option>
-							<option value="4">未満</option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
 					<div class="label">メニュー絞り込み：</div>
 					<div class="input">
 						<input type="submit" value="絞込" class="btn-submit">
@@ -150,8 +138,6 @@
 					<th>単品</th>
 					<th>金額（店内飲食）</th>
 					<th>金額（テイクアウト）</th>
-					<th>税</th>
-					<th>金額（合計）</th>
 				</tr>
 	            <c:forEach var="rec" items="${menuList}">
 				<tr>
@@ -163,8 +149,6 @@
 					<td><c:if test="${rec.singleMenuFlg == '1'}">○</c:if></td>
 					<td><c:out value="${rec.eatInPrice}" /></td>
 					<td><c:out value="${rec.takeoutPrice}" /></td>
-					<td><c:out value="${rec.tax}" /></td>
-					<td><c:out value="${rec.total}" /></td>
 				</tr>
 				</c:forEach>
 			</table>

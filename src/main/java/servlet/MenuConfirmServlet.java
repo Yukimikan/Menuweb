@@ -57,8 +57,6 @@ public class MenuConfirmServlet extends HttpServlet {
         (String) request.getParameter("singlemenu_flg"),
         (String) request.getParameter("eat_in_price"),
         (String) request.getParameter("takeout_price"),
-        (String) request.getParameter("tax"),
-        (String) request.getParameter("total"),
         "");
 
     // 2. inputCheck(フロントで実行)

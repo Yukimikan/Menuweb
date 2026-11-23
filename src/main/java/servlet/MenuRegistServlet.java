@@ -70,8 +70,6 @@ public class MenuRegistServlet extends HttpServlet {
           (String) request.getParameter("singlemenu_flg"),
           (String) request.getParameter("eat_in_price"),
           (String) request.getParameter("takeout_price"),
-          (String) request.getParameter("tax"),
-          (String) request.getParameter("total"),
           "");
       request.setAttribute("form", form);
       // 2. 初期表示へ forward
@@ -93,8 +91,6 @@ public class MenuRegistServlet extends HttpServlet {
         (String) request.getParameter("singlemenu_flg"),
         (String) request.getParameter("eat_in_price"),
         (String) request.getParameter("takeout_price"),
-        (String) request.getParameter("tax"),
-        (String) request.getParameter("total"),
         "");
 
     // チェックボックスの選択された値を取得
