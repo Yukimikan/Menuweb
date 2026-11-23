@@ -52,7 +52,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
 
     try {
 
-      List<MenuEntity2> tmpList = menuDao.select2(entity, userName);
+      List<MenuEntity2> tmpList = menuDao.select(entity, userName);
       List<MenuEntity2> menuList = tmpList.stream()
           .filter(ret ->
                 eatInPriteCond.match(ret.getEatInPrice(), eatInPrice)

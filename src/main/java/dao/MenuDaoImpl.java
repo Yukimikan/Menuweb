@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import mappers.MenuMapper;
-import model.MenuEntity;
 import model.MenuEntity2;
 
 /**
@@ -20,7 +19,7 @@ import model.MenuEntity2;
 public class MenuDaoImpl implements MenuDao {
 
   @Override
-  public List<MenuEntity2> select2(MenuEntity2 entity, String userName) throws RuntimeException {
+  public List<MenuEntity2> select(MenuEntity2 entity, String userName) throws RuntimeException {
 
     try {
       String resource = "mybatis-config.xml";
@@ -28,27 +27,7 @@ public class MenuDaoImpl implements MenuDao {
       SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
       SqlSession session = sqlSessionFactory.openSession();
       MenuMapper mapper = session.getMapper(MenuMapper.class);
-      List<MenuEntity2> list = mapper.select2(entity);
-      return list;
-
-    } catch (IOException e) {
-      System.out.println(e.getStackTrace());
-      throw new RuntimeException();
-    }
-
-  }
-
-
-  @Override
-  public List<MenuEntity> select(MenuEntity entity, String userName) throws RuntimeException {
-
-    try {
-      String resource = "mybatis-config.xml";
-      InputStream inputStream = Resources.getResourceAsStream(resource);
-      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-      SqlSession session = sqlSessionFactory.openSession();
-      MenuMapper mapper = session.getMapper(MenuMapper.class);
-      List<MenuEntity> list = mapper.select(entity);
+      List<MenuEntity2> list = mapper.select(entity);
       return list;
 
     } catch (IOException e) {
@@ -59,7 +38,7 @@ public class MenuDaoImpl implements MenuDao {
   }
 
   @Override
-  public int insert(MenuEntity entity) throws RuntimeException {
+  public int insert(MenuEntity2 entity) throws RuntimeException {
 
     try {
       String resource = "mybatis-config.xml";
@@ -76,22 +55,39 @@ public class MenuDaoImpl implements MenuDao {
     }
   }
 
-  @Override
-  public int insert(MenuEntity2 entity) throws RuntimeException {
-
-    try {
-      String resource = "mybatis-config.xml";
-      InputStream inputStream = Resources.getResourceAsStream(resource);
-      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-      SqlSession session = sqlSessionFactory.openSession();
-      MenuMapper mapper = session.getMapper(MenuMapper.class);
-      int result = mapper.insertMenu2(entity);
-      session.commit(); // ここでコミット
-      return result;
-    } catch (IOException e) {
-      System.out.println(e.getStackTrace());
-      throw new RuntimeException();
-    }
-  }
+//  public List<MenuEntity> select(MenuEntity entity, String userName) throws RuntimeException {
+//
+//    try {
+//      String resource = "mybatis-config.xml";
+//      InputStream inputStream = Resources.getResourceAsStream(resource);
+//      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//      SqlSession session = sqlSessionFactory.openSession();
+//      MenuMapper mapper = session.getMapper(MenuMapper.class);
+//      List<MenuEntity> list = mapper.select(entity);
+//      return list;
+//
+//    } catch (IOException e) {
+//      System.out.println(e.getStackTrace());
+//      throw new RuntimeException();
+//    }
+//
+//  }
+//
+//  public int insert(MenuEntity entity) throws RuntimeException {
+//
+//    try {
+//      String resource = "mybatis-config.xml";
+//      InputStream inputStream = Resources.getResourceAsStream(resource);
+//      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+//      SqlSession session = sqlSessionFactory.openSession();
+//      MenuMapper mapper = session.getMapper(MenuMapper.class);
+//      int result = mapper.insertMenu(entity);
+//      session.commit(); // ここでコミット
+//      return result;
+//    } catch (IOException e) {
+//      System.out.println(e.getStackTrace());
+//      throw new RuntimeException();
+//    }
+//  }
 
 }

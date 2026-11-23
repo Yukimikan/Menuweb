@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import model.MenuEntity;
 import model.MenuEntity2;
 
 /**
@@ -14,12 +13,11 @@ import model.MenuEntity2;
  */
 public interface MenuMapper {
 
-  List<MenuEntity> select(@Param("entity") MenuEntity entity);
+  List<MenuEntity2> select(@Param("entity") MenuEntity2 entity);
 
-  List<MenuEntity2> select2(@Param("entity") MenuEntity2 entity);
+  int insertMenu(@Param("entity") MenuEntity2 entity);
 
-  int insertMenu(@Param("entity") MenuEntity entity);
-
-  int insertMenu2(@Param("entity") MenuEntity2 entity);
+  // List<MenuEntity> select(@Param("entity") MenuEntity entity);
+  // int insertMenu(@Param("entity") MenuEntity entity);
 
 }
