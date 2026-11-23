@@ -43,15 +43,6 @@
 			</div>
 			<!-- ★ 登録内容表示 -->
 			<span>以下登録内容をご確認ください。</span><br>
-			<!--
-			<div class="row">
-				<div class="label">店舗ID：</div>
-				<div class="input">
-					<input type="text" name="restaurant_id" readonly
-					value="${form.restaurantId}">
-				</div>
-			</div>
-			-->
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">

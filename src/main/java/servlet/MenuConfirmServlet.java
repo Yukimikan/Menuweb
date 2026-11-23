@@ -51,7 +51,6 @@ public class MenuConfirmServlet extends HttpServlet {
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
     MenuConfirmForm form = new MenuConfirmForm(
-        (String) request.getParameter("restaurant_id"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("menu_name"),
         (String) request.getParameter("category"),

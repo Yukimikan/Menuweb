@@ -64,10 +64,11 @@ public class MenuSearchServlet extends HttpServlet {
         "0",
         (String) request.getParameter("menu_name"),
         (String) request.getParameter("eat_in_price"),
-        "0",
+        (String) request.getParameter("takeout_price"),
         "0",
         (String) request.getParameter("total"),
         (String) request.getParameter("eat_in_condition"),
+        (String) request.getParameter("takeout_condition"),
         (String) request.getParameter("total_condition"),
         ""
         );

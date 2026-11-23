@@ -3,7 +3,7 @@ package service;
 import java.util.Collections;
 import java.util.List;
 
-import common.ConditionTotal;
+import common.ConditionPrice;
 import dao.MenuDao;
 import dao.MenuDaoImpl;
 import form.MenuSearchForm;
@@ -29,8 +29,9 @@ public class MenuSearchServiceImpl implements MenuSearchService {
 
     MenuSearchServiceResult result = new MenuSearchServiceResult();
 
-    ConditionTotal eatInPriteCond = ConditionTotal.fromCode(form.getEatInCondition());
-    ConditionTotal totalCond = ConditionTotal.fromCode(form.getTotalCondition());
+    ConditionPrice eatInPriceCond = ConditionPrice.fromCode(form.getEatInCondition());
+    ConditionPrice takeoutPriceCond = ConditionPrice.fromCode(form.getTakeoutCondition());
+    ConditionPrice totalCond = ConditionPrice.fromCode(form.getTotalCondition());
 
     int eatInPrice = this.convertTotal(form.getEatInPrice());
     int takeoutPrice = this.convertTotal(form.getTakeoutPrice());
@@ -55,7 +56,8 @@ public class MenuSearchServiceImpl implements MenuSearchService {
       List<MenuEntity2> tmpList = menuDao.select(entity, userName);
       List<MenuEntity2> menuList = tmpList.stream()
           .filter(ret ->
-                eatInPriteCond.match(ret.getEatInPrice(), eatInPrice)
+                eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)
+                && takeoutPriceCond.match(ret.getTakeoutPrice(), takeoutPrice)
                 && totalCond.match(ret.getTotal(), total)
                 && isMatch(form.getRestaurantName(), ret.getRestaurantName())
                 && isMatch(form.getMenuName(), ret.getMenuName())

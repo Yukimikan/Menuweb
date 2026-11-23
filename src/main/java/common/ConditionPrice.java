@@ -11,7 +11,7 @@ package common;
  * 未満
  *
  */
-public enum ConditionTotal {
+public enum ConditionPrice {
 
    以上 {
     @Override
@@ -44,7 +44,7 @@ public enum ConditionTotal {
    * @param code 合計（コード値）
    * @return ConditionTotal
    */
-  public static ConditionTotal fromCode(String code) {
+  public static ConditionPrice fromCode(String code) {
     return switch (code) {
       case "1" -> 以上;
       case "2" -> 以下;

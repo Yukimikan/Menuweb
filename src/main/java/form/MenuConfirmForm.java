@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MenuConfirmForm {
 
-  private String restaurantId;
   private String restaurantName;
   private String menuName;
   private String category;

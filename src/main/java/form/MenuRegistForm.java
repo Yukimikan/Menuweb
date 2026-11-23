@@ -15,8 +15,6 @@ import lombok.NoArgsConstructor;
 public class MenuRegistForm {
 
   private String confirmFlg;
-  // private String type;
-  private String restaurantId;
   private String restaurantName;
   private String menuName;
   private String category;
