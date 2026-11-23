@@ -28,6 +28,7 @@ public class MenuSearchForm {
   private String eatInCondition;
   private String takeoutCondition;
   private String totalCondition;
+  private String userName;
   private String message;
 
   /**

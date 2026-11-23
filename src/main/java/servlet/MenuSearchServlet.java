@@ -70,6 +70,7 @@ public class MenuSearchServlet extends HttpServlet {
         (String) request.getParameter("eat_in_condition"),
         (String) request.getParameter("takeout_condition"),
         (String) request.getParameter("total_condition"),
+        userName,
         ""
         );
 
@@ -88,7 +89,7 @@ public class MenuSearchServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      MenuSearchServiceResult result = service.execute(form, userName);
+      MenuSearchServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("form", form);

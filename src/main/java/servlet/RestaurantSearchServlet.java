@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import form.RestaurantSearchForm;
+import form.RestrnSearchForm;
 import model.WebConst;
 import service.RestrnDeleteService;
 import service.RestrnDeleteServiceImpl;
@@ -92,11 +92,12 @@ public class RestaurantSearchServlet extends HttpServlet {
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
-    RestaurantSearchForm form = new RestaurantSearchForm(
+    RestrnSearchForm form = new RestrnSearchForm(
         (String) request.getParameter("action"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
         null,
+        userName,
         ""
         );
 
@@ -115,7 +116,7 @@ public class RestaurantSearchServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      RestrnSearchServiceResult result = service.execute(form, userName);
+      RestrnSearchServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("form", form);
@@ -153,11 +154,12 @@ public class RestaurantSearchServlet extends HttpServlet {
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
-    RestaurantSearchForm form = new RestaurantSearchForm(
+    RestrnSearchForm form = new RestrnSearchForm(
         (String) request.getParameter("action"),
         "",
         "",
         (String) request.getParameter("selected_row"),
+        userName,
         "");
 
     // 2. inputCheck(フロントで実行)

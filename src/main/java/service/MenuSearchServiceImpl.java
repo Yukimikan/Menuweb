@@ -25,7 +25,8 @@ public class MenuSearchServiceImpl implements MenuSearchService {
   /**
    * execute.
    */
-  public MenuSearchServiceResult execute(MenuSearchForm form, String userName) {
+  @Override
+  public MenuSearchServiceResult execute(MenuSearchForm form) {
 
     MenuSearchServiceResult result = new MenuSearchServiceResult();
 
@@ -46,11 +47,11 @@ public class MenuSearchServiceImpl implements MenuSearchService {
             takeoutPrice,
             0,
             0,
-            userName);
+            form.getUserName());
 
     try {
 
-      List<MenuEntity> tmpList = menuDao.select(entity, userName);
+      List<MenuEntity> tmpList = menuDao.select(entity, form.getUserName());
       List<MenuEntity> menuList = tmpList.stream()
           .filter(ret ->
                 eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)

@@ -5,7 +5,7 @@ import java.util.List;
 
 import dao.RestrnDao;
 import dao.RestrnDaoImpl;
-import form.RestaurantSearchForm;
+import form.RestrnSearchForm;
 import model.GlobalConst;
 import model.RestaurantEntity;
 
@@ -55,7 +55,8 @@ public class RestrnSearchServiceImpl implements RestrnSearchService {
   /**
    * execute.
    */
-  public RestrnSearchServiceResult execute(RestaurantSearchForm form, String userName) {
+  @Override
+  public RestrnSearchServiceResult execute(RestrnSearchForm form) {
 
     RestrnSearchServiceResult result = new RestrnSearchServiceResult();
 
@@ -63,11 +64,11 @@ public class RestrnSearchServiceImpl implements RestrnSearchService {
             GlobalConst.NUM_CSV検索, // 検索
             form.getRestaurantName(),
             form.getType(),
-            userName);
+            form.getUserName());
 
     try {
 
-      List<RestaurantEntity> tmpList = restaurantDao.select(entity, userName);
+      List<RestaurantEntity> tmpList = restaurantDao.select(entity, form.getUserName());
       List<RestaurantEntity> restaurantList = tmpList.stream()
           .filter(ret ->
                 isMatch(form.getType(), ret.getType())

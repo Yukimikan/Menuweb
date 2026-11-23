@@ -14,12 +14,13 @@ import model.WebConst;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantSearchForm {
+public class RestrnSearchForm {
 
   private String action;
   private String restaurantName;
   private String type;
   private String selectedRow;
+  private String userName;
   private String message;
 
   /**

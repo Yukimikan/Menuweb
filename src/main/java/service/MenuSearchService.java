@@ -1,12 +1,13 @@
 package service;
 
+import common.MenuWebService;
 import form.MenuSearchForm;
 
 /**
- * CsvInputService
- * CSVの検索条件入力.
+ * MenuSearchService
+ * メニュー検索条件入力.
  */
-public interface MenuSearchService {
+public interface MenuSearchService extends MenuWebService<MenuSearchForm, MenuSearchServiceResult> {
 
-  public MenuSearchServiceResult execute(MenuSearchForm form, String userName);
+  public MenuSearchServiceResult execute(MenuSearchForm form);
 }

@@ -1,14 +1,15 @@
 package service;
 
-import form.RestaurantSearchForm;
+import common.MenuWebService;
+import form.RestrnSearchForm;
 
 /**
  * CsvInputService
  * CSVの検索条件入力.
  */
-public interface RestrnSearchService {
+public interface RestrnSearchService extends MenuWebService<RestrnSearchForm, RestrnSearchServiceResult> {
 
   public RestrnSearchServiceResult initSearch(String userName);
 
-  public RestrnSearchServiceResult execute(RestaurantSearchForm form, String userName);
+  public RestrnSearchServiceResult execute(RestrnSearchForm form);
 }
