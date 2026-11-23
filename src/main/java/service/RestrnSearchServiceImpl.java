@@ -3,8 +3,8 @@ package service;
 import java.util.Collections;
 import java.util.List;
 
-import dao.RestaurantDao;
-import dao.RestaurantDaoImpl;
+import dao.RestrnDao;
+import dao.RestrnDaoImpl;
 import form.RestaurantSearchForm;
 import model.GlobalConst;
 import model.RestaurantEntity;
@@ -12,21 +12,21 @@ import model.RestaurantEntity;
 /**
  * ファイル読込用サービス.
  * */
-public class RestaurantSearchServiceImpl implements RestaurantSearchService {
+public class RestrnSearchServiceImpl implements RestrnSearchService {
 
-  private RestaurantDao restaurantDao;
+  private RestrnDao restaurantDao;
 
-  public RestaurantSearchServiceImpl() {
-    restaurantDao = new RestaurantDaoImpl();
+  public RestrnSearchServiceImpl() {
+    restaurantDao = new RestrnDaoImpl();
   }
 
   /**
    * execute.
    */
-  public RestaurantSearchServiceResult initSearch(String userName) {
+  public RestrnSearchServiceResult initSearch(String userName) {
 
     // 初期化
-    RestaurantSearchServiceResult result = new RestaurantSearchServiceResult();
+    RestrnSearchServiceResult result = new RestrnSearchServiceResult();
 
     // 1. 全件検索
     try {
@@ -41,9 +41,9 @@ public class RestaurantSearchServiceImpl implements RestaurantSearchService {
         result.setSuccess(true);
         result.setRestaurantList(restaurantList);
       }
-        // result
-        if (result.isSuccess()) {
-          return result;
+      // result
+      if (result.isSuccess()) {
+        return result;
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -55,9 +55,9 @@ public class RestaurantSearchServiceImpl implements RestaurantSearchService {
   /**
    * execute.
    */
-  public RestaurantSearchServiceResult execute(RestaurantSearchForm form, String userName) {
+  public RestrnSearchServiceResult execute(RestaurantSearchForm form, String userName) {
 
-    RestaurantSearchServiceResult result = new RestaurantSearchServiceResult();
+    RestrnSearchServiceResult result = new RestrnSearchServiceResult();
 
     RestaurantEntity entity = new RestaurantEntity(
             GlobalConst.NUM_CSV検索, // 検索

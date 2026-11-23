@@ -5,8 +5,8 @@ import java.util.List;
 
 import dao.MenuDao;
 import dao.MenuDaoImpl;
-import dao.RestaurantDao;
-import dao.RestaurantDaoImpl;
+import dao.RestrnDao;
+import dao.RestrnDaoImpl;
 import form.MenuConfirmForm;
 import form.MenuRegistForm;
 import model.GlobalConst;
@@ -18,11 +18,11 @@ import model.RestaurantEntity;
  * */
 public class MenuRegistServiceImpl implements MenuRegistService {
 
-  private RestaurantDao restaurantDao;
+  private RestrnDao restrnDao;
   private MenuDao menuDao;
 
   public MenuRegistServiceImpl() {
-    restaurantDao = new RestaurantDaoImpl();
+    restrnDao = new RestrnDaoImpl();
     menuDao = new MenuDaoImpl();
   }
 
@@ -56,7 +56,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
 
       // 1.idを取得して設定
       List<RestaurantEntity> resultList =
-        restaurantDao.select(searchEntity, userName);
+        restrnDao.select(searchEntity, userName);
       if (resultList.size() > 0) {
         menuEntity.setRestaurantId(resultList.get(0).getRestaurantId());
       } else {
@@ -102,7 +102,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
     try {
       // 1.idを取得して設定
       List<RestaurantEntity> resultList =
-        restaurantDao.select(searchEntity, userName);
+        restrnDao.select(searchEntity, userName);
       if (resultList.size() > 0) {
         menuEntity.setRestaurantId(resultList.get(0).getRestaurantId());
       } else {

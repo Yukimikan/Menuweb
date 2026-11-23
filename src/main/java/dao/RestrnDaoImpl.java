@@ -16,7 +16,7 @@ import model.RestaurantEntity;
 * RestaurantDao
 * 店舗テーブル操作.
 */
-public class RestaurantDaoImpl implements RestaurantDao {
+public class RestrnDaoImpl implements RestrnDao {
 
   @Override
   public List<RestaurantEntity> selectAll(String userName) throws RuntimeException {

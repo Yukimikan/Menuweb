@@ -13,7 +13,7 @@ import model.RestaurantEntity;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantSearchServiceResult {
+public class RestrnSearchServiceResult {
 
   private boolean success;
   private String message;

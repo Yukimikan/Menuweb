@@ -11,9 +11,9 @@ import java.io.IOException;
 
 import form.RestaurantSearchForm;
 import model.GlobalConst;
-import service.RestaurantSearchService;
-import service.RestaurantSearchServiceImpl;
-import service.RestaurantSearchServiceResult;
+import service.RestrnSearchService;
+import service.RestrnSearchServiceImpl;
+import service.RestrnSearchServiceResult;
 
 /**
  * Servlet.
@@ -21,14 +21,14 @@ import service.RestaurantSearchServiceResult;
 public class RestaurantSearchServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  private RestaurantSearchService service;
+  private RestrnSearchService service;
 
   /**
    * コンストラクタ.
    */
   public RestaurantSearchServlet() {
     super();
-    service = new RestaurantSearchServiceImpl();
+    service = new RestrnSearchServiceImpl();
   }
 
   /**
@@ -45,7 +45,7 @@ public class RestaurantSearchServlet extends HttpServlet {
     // 2. inputCheck(フロントで実行)
 
     // 3. service execute
-    RestaurantSearchServiceResult result = service.initSearch(userName);
+    RestrnSearchServiceResult result = service.initSearch(userName);
     // 4. requestSetAttribute
     request.setAttribute("restaurantList", result.getRestaurantList());
     request.setAttribute("count", result.getRestaurantList().size());
@@ -87,7 +87,7 @@ public class RestaurantSearchServlet extends HttpServlet {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      RestaurantSearchServiceResult result = service.execute(form, userName);
+      RestrnSearchServiceResult result = service.execute(form, userName);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         request.setAttribute("form", form);

@@ -8,7 +8,7 @@ import model.RestaurantEntity;
 * RestaurantDao
 * 店舗テーブル操作.
 */
-public interface RestaurantDao {
+public interface RestrnDao {
 
   public List<RestaurantEntity> selectAll(String userName) throws RuntimeException;
 

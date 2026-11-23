@@ -1,7 +1,7 @@
 package service;
 
-import dao.RestaurantDao;
-import dao.RestaurantDaoImpl;
+import dao.RestrnDao;
+import dao.RestrnDaoImpl;
 import form.RestaurantConfirmForm;
 import form.RestaurantRegistForm;
 import model.GlobalConst;
@@ -12,10 +12,10 @@ import model.RestaurantEntity;
  * */
 public class RestrnRegistServiceImpl implements RestrnRegistService {
 
-  private RestaurantDao restaurantDao;
+  private RestrnDao restrnDao;
 
   public RestrnRegistServiceImpl() {
-    restaurantDao = new RestaurantDaoImpl();
+    restrnDao = new RestrnDaoImpl();
   }
 
   /**
@@ -33,7 +33,7 @@ public class RestrnRegistServiceImpl implements RestrnRegistService {
 
     // 1. 新規登録
     try {
-      int flg = restaurantDao.insert(entity);
+      int flg = restrnDao.insert(entity);
       result.setSuccess(true);
     } catch (Exception e) {
       // CSV書き込みに失敗
@@ -58,7 +58,7 @@ public class RestrnRegistServiceImpl implements RestrnRegistService {
 
     // 1. 新規登録
     try {
-      int flg = restaurantDao.insert(entity);
+      int flg = restrnDao.insert(entity);
       result.setSuccess(true);
     } catch (Exception e) {
       // CSV書き込みに失敗
