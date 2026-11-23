@@ -44,16 +44,6 @@ function checkText() {
 	<form name="form1"
 		action="${pageContext.request.contextPath}/menu_regist"
 		onsubmit="return checkText()" method="post">
-		<div>
-			ユーザ名：
-		    <c:if test="${not empty sessionScope.userName}">
-		        <input type="text" name="user_name" value="${sessionScope.userName}" readonly>
-		    </c:if>
-		    <!--  非ログイン時（ログイン機能実装後の動確用） -->
-		    <c:if test="${empty sessionScope.userName}">
-                <input type="text" name="user_name" value="guest" readonly>
-		    </c:if>
-		</div>
 		<div id="regist-input">
 			<div class="row">
 				<div class="label">確認画面を省略する</div>

@@ -21,6 +21,7 @@ public class MenuRegistForm {
   private String singleMenuFlg;
   private String eatInPrice;
   private String takeoutPrice;
+  private String userName;
   private String message;
 
   /**
@@ -29,7 +30,11 @@ public class MenuRegistForm {
    * @return boolean
    */
   public String inputCheck() {
-
+    //認証・認可チェック
+    if (this.userName == null || this.userName.isEmpty()) {
+      // error
+      return MessageUtil.getProperty("msg_e02_no_login");
+    }
     //チェック
     if (this.restaurantName == null || this.restaurantName.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");

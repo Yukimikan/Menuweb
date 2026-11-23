@@ -30,6 +30,12 @@ public class RestrnSearchForm {
    * @return メッセージ
    */
   public String inputCheck() {
+	// 認証
+    if (WebConst.Action_削除.equals(this.action)) {
+        if (this.userName == null || this.userName.isEmpty()) {
+          return MessageUtil.getProperty("msg_e02_no_login");
+        }
+      }
     //チェック
     if (WebConst.Action_削除.equals(this.action)) {
       if (this.selectedRow == null || this.selectedRow.isEmpty()) {

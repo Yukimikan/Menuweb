@@ -18,6 +18,7 @@ public class RestaurantRegistForm {
   private String confirmFlg;
   private String restaurantName;
   private String type;
+  private String userName;
   private String message;
 
   /**
@@ -26,6 +27,12 @@ public class RestaurantRegistForm {
    * @return boolean
    */
   public String inputCheck() {
+
+    //認証・認可チェック
+    if (this.userName == null || this.userName.isEmpty()) {
+      // error
+      return MessageUtil.getProperty("msg_e02_no_login");
+    }
 
     //チェック
     if (this.restaurantName == null || this.restaurantName.isEmpty()) {

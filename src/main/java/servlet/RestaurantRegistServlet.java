@@ -57,15 +57,17 @@ public class RestaurantRegistServlet extends HttpServlet {
           throws ServletException, IOException {
 
     String fromScreen = (String) request.getParameter("from_screen");
+    HttpSession session = request.getSession();
+    String userName = (String) session.getAttribute("userName");
     // 戻る押下した場合
     if ("confirm".equals(fromScreen)) {
       // 遷移元（確認画面）
       // 1. parameter set
-      // HttpSession session = request.getSession();
       RestaurantRegistForm form = new RestaurantRegistForm(
           "1",
           (String) request.getParameter("restaurant_name"),
           (String) request.getParameter("type"),
+          userName,
           "");
       request.setAttribute("form", form);
       // 2. 初期表示へ forward
@@ -77,12 +79,11 @@ public class RestaurantRegistServlet extends HttpServlet {
     }
 
     // 1. parameter set
-    HttpSession session = request.getSession();
-    String userName = (String) session.getAttribute("userName");
     RestaurantRegistForm form = new RestaurantRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
+        userName,
         "");
 
     // チェックボックスの選択された値を取得
