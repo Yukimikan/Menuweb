@@ -79,12 +79,14 @@ function checkText() {
 				</div>
 			</div>
 			 -->
+			<!--
 			<div class="row">
 				<div class="label">店舗ID：</div>
 				<div class="input">
 					<input type="text" name="restaurant_id" value="${form.restaurantId}">
 				</div>
 			</div>
+			 -->
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">

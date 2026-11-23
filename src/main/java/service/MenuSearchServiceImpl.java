@@ -39,7 +39,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
 
     MenuEntity2 entity = new MenuEntity2(
             GlobalConst.NUM_CSV検索, // 検索
-            Integer.parseInt(form.getRestaurantId()),
+            0,
             form.getRestaurantName(),
             form.getMenuName(),
             form.getCategory(),

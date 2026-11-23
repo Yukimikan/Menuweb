@@ -43,6 +43,7 @@
 			</div>
 			<!-- ★ 登録内容表示 -->
 			<span>以下登録内容をご確認ください。</span><br>
+			<!--
 			<div class="row">
 				<div class="label">店舗ID：</div>
 				<div class="input">
@@ -50,6 +51,7 @@
 					value="${form.restaurantId}">
 				</div>
 			</div>
+			-->
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
@@ -118,7 +120,6 @@
 			<form action="${pageContext.request.contextPath}/menu_regist" method="post">
 				<!-- hidden parameter -->
 			    <input type="hidden" name="from_screen" value="confirm">
-			    <input type="hidden" name="restaurant_id" value="${form.restaurantId}">
 			    <input type="hidden" name="restaurant_name" value="${form.restaurantName}">
 			    <input type="hidden" name="menu_name" value="${form.menuName}">
 			    <input type="hidden" name="category" value="${form.category}">

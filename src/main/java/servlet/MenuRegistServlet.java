@@ -64,7 +64,7 @@ public class MenuRegistServlet extends HttpServlet {
       // HttpSession session = request.getSession();
       MenuRegistForm form = new MenuRegistForm(
           "1",
-          (String) request.getParameter("restaurant_id"),
+          "",
           (String) request.getParameter("restaurant_name"),
           (String) request.getParameter("menu_name"),
           (String) request.getParameter("category"),
@@ -88,7 +88,7 @@ public class MenuRegistServlet extends HttpServlet {
     String userName = (String) session.getAttribute("userName");
     MenuRegistForm form = new MenuRegistForm(
         (String) request.getParameter("confirm_flg"),
-        (String) request.getParameter("restaurant_id"),
+        "",
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("menu_name"),
         (String) request.getParameter("category"),

@@ -35,9 +35,7 @@ public class MenuRegistForm {
   public String inputCheck() {
 
     //チェック
-    if (this.restaurantId == null || this.restaurantId.isEmpty()) {
-      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
-    } else if (this.restaurantName == null || this.restaurantName.isEmpty()) {
+    if (this.restaurantName == null || this.restaurantName.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else if (this.menuName == null || this.menuName.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
