@@ -156,8 +156,8 @@ public class RestaurantSearchServlet extends HttpServlet {
     String userName = (String) session.getAttribute("userName");
     RestrnSearchForm form = new RestrnSearchForm(
         (String) request.getParameter("action"),
-        "",
-        "",
+        (String) request.getParameter("restaurant_name"),
+        (String) request.getParameter("type"),
         (String) request.getParameter("selected_row"),
         userName,
         "");
@@ -178,7 +178,7 @@ public class RestaurantSearchServlet extends HttpServlet {
     // 3. サーバー側のチェック
     try {
       // 3. service execute
-      RestrnDeleteServiceResult result = deleteService.execute(form, userName);
+      RestrnDeleteServiceResult result = deleteService.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
         // 5. forward

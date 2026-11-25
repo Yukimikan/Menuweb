@@ -18,7 +18,8 @@ public class RestrnDeleteServiceImpl implements RestrnDeleteService {
   /**
    * execute.
    */
-  public RestrnDeleteServiceResult execute(RestrnSearchForm form, String userName) {
+  @Override
+  public RestrnDeleteServiceResult execute(RestrnSearchForm form) {
 
     // 初期化
     RestrnDeleteServiceResult result = new RestrnDeleteServiceResult();
