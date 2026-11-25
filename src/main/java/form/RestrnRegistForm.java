@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantRegistForm {
+public class RestrnRegistForm {
 
   private String confirmFlg;
   private String restaurantName;

@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import form.RestaurantRegistForm;
+import form.RestrnRegistForm;
 import model.WebConst;
 import service.RestrnRegistService;
 import service.RestrnRegistServiceImpl;
@@ -64,7 +64,7 @@ public class RestaurantRegistServlet extends HttpServlet {
     if ("confirm".equals(fromScreen)) {
       // 遷移元（確認画面）
       // 1. parameter set
-      RestaurantRegistForm form = new RestaurantRegistForm(
+      RestrnRegistForm form = new RestrnRegistForm(
           "1",
           (String) request.getParameter("restaurant_name"),
           (String) request.getParameter("type"),
@@ -104,7 +104,7 @@ public class RestaurantRegistServlet extends HttpServlet {
     HttpSession session = request.getSession();
 
     String userName = (String) session.getAttribute("userName");
-    RestaurantRegistForm form = new RestaurantRegistForm(
+    RestrnRegistForm form = new RestrnRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
@@ -155,7 +155,7 @@ public class RestaurantRegistServlet extends HttpServlet {
     HttpSession session = request.getSession();
 
     String userName = (String) session.getAttribute("userName");
-    RestaurantRegistForm form = new RestaurantRegistForm(
+    RestrnRegistForm form = new RestrnRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),

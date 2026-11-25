@@ -1,15 +1,15 @@
 package service;
 
 import common.MenuWebService;
-import form.RestaurantRegistForm;
+import form.RestrnRegistForm;
 
 /**
  * MenuRegistService
  * メニュー登録操作.
  */
 public interface RestrnRegistService
-    extends MenuWebService<RestaurantRegistForm, RestrnRegistServiceResult> {
+    extends MenuWebService<RestrnRegistForm, RestrnRegistServiceResult> {
 
-  public RestrnRegistServiceResult execute(RestaurantRegistForm form);
+  public RestrnRegistServiceResult execute(RestrnRegistForm form);
 
 }

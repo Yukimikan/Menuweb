@@ -2,7 +2,7 @@ package service;
 
 import dao.RestrnDao;
 import dao.RestrnDaoImpl;
-import form.RestaurantRegistForm;
+import form.RestrnRegistForm;
 import model.GlobalConst;
 import model.RestaurantEntity;
 
@@ -20,7 +20,7 @@ public class RestrnRegistServiceImpl implements RestrnRegistService {
   /**
    * execute.
    */
-  public RestrnRegistServiceResult execute(RestaurantRegistForm form) {
+  public RestrnRegistServiceResult execute(RestrnRegistForm form) {
 
     // 初期化
     RestrnRegistServiceResult result = new RestrnRegistServiceResult();
