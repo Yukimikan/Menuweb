@@ -10,7 +10,7 @@ import model.MenuEntity;
 */
 public interface MenuDao {
 
-  public List<MenuEntity> select(MenuEntity entity, String userName) throws RuntimeException;
+  public List<MenuEntity> select(MenuEntity entity) throws RuntimeException;
 
   public int insert(MenuEntity entity) throws RuntimeException;
 

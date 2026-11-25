@@ -38,7 +38,7 @@ public class RestrnDaoImpl implements RestrnDao {
   }
 
   @Override
-  public List<RestaurantEntity> select(RestaurantEntity entity, String userName) throws RuntimeException {
+  public List<RestaurantEntity> select(RestaurantEntity entity) throws RuntimeException {
 
     try {
       String resource = "mybatis-config.xml";

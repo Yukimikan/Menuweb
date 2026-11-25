@@ -51,7 +51,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
 
     try {
 
-      List<MenuEntity> tmpList = menuDao.select(entity, form.getUserName());
+      List<MenuEntity> tmpList = menuDao.select(entity);
       List<MenuEntity> menuList = tmpList.stream()
           .filter(ret ->
                 eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)

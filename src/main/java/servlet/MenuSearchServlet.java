@@ -53,9 +53,9 @@ public class MenuSearchServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // 1. parameter set
+    // 1. 画面情報取得
     HttpSession session = request.getSession();
-    String userName = (String) session.getAttribute("userName");
+    // 1. parameter set
     MenuSearchForm form = new MenuSearchForm(
         (String) request.getParameter("date"),
         "0",
@@ -70,7 +70,7 @@ public class MenuSearchServlet extends HttpServlet {
         (String) request.getParameter("eat_in_condition"),
         (String) request.getParameter("takeout_condition"),
         (String) request.getParameter("total_condition"),
-        userName,
+        (String) session.getAttribute("userName"),
         ""
         );
 

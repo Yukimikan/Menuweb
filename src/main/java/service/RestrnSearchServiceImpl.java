@@ -68,7 +68,7 @@ public class RestrnSearchServiceImpl implements RestrnSearchService {
 
     try {
 
-      List<RestaurantEntity> tmpList = restaurantDao.select(entity, form.getUserName());
+      List<RestaurantEntity> tmpList = restaurantDao.select(entity);
       List<RestaurantEntity> restaurantList = tmpList.stream()
           .filter(ret ->
                 isMatch(form.getType(), ret.getType())

@@ -43,8 +43,8 @@ public class RestaurantSearchServlet extends HttpServlet {
       throws ServletException, IOException {
 
     // 1. 画面情報取得
-    // 1. parameter set
     HttpSession session = request.getSession();
+    // 1. parameter set
     String userName = (String) session.getAttribute("userName");
 
     // 2. inputCheck(フロントで実行)
@@ -89,15 +89,15 @@ public class RestaurantSearchServlet extends HttpServlet {
   private void search(HttpServletRequest request, HttpServletResponse response)
 	      throws ServletException, IOException {
 
-    // 1. parameter set
+    // 1. 画面情報取得
     HttpSession session = request.getSession();
-    String userName = (String) session.getAttribute("userName");
+    // 1. parameter set
     RestrnSearchForm form = new RestrnSearchForm(
         (String) request.getParameter("action"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
         null,
-        userName,
+        (String) session.getAttribute("userName"),
         ""
         );
 
@@ -151,15 +151,15 @@ public class RestaurantSearchServlet extends HttpServlet {
   private void delete(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    // 1. parameter set
+    // 1. 画面情報取得
     HttpSession session = request.getSession();
-    String userName = (String) session.getAttribute("userName");
+    // 1. parameter set
     RestrnSearchForm form = new RestrnSearchForm(
         (String) request.getParameter("action"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
         (String) request.getParameter("selected_row"),
-        userName,
+        (String) session.getAttribute("userName"),
         "");
 
     // 2. inputCheck(フロントで実行)

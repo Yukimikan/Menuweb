@@ -39,14 +39,14 @@ public class RestaurantConfirmServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    // 1. parameter set
+    // 1. 画面情報取得
     HttpSession session = request.getSession();
-    String userName = (String) session.getAttribute("userName");
+    // 1. parameter set
     RestrnRegistForm form = new RestrnRegistForm(
         null,
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
-        userName,
+        (String) session.getAttribute("userName"),
         "");
 
     // 2. inputCheck(フロントで実行)

@@ -57,18 +57,18 @@ public class RestaurantRegistServlet extends HttpServlet {
           throws ServletException, IOException {
 
     String fromScreen = (String) request.getParameter("from_screen");
-    HttpSession session = request.getSession();
-
-    String userName = (String) session.getAttribute("userName");
     // 戻る押下した場合
     if ("confirm".equals(fromScreen)) {
       // 遷移元（確認画面）
+
+      // 1. 画面情報取得
+      HttpSession session = request.getSession();
       // 1. parameter set
       RestrnRegistForm form = new RestrnRegistForm(
           "1",
           (String) request.getParameter("restaurant_name"),
           (String) request.getParameter("type"),
-          userName,
+          (String) session.getAttribute("userName"),
           "");
       request.setAttribute("form", form);
       // 2. 初期表示へ forward
@@ -100,15 +100,14 @@ public class RestaurantRegistServlet extends HttpServlet {
   private void regist(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    // 1. parameter set
+    // 1. 画面情報取得
     HttpSession session = request.getSession();
-
-    String userName = (String) session.getAttribute("userName");
+    // 1. parameter set
     RestrnRegistForm form = new RestrnRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
-        userName,
+        (String) session.getAttribute("userName"),
         "");
 
     // 2. inputCheck(フロントで実行)
@@ -151,15 +150,14 @@ public class RestaurantRegistServlet extends HttpServlet {
   private void confirm(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    // 1. parameter set
+    // 1. 画面情報取得
     HttpSession session = request.getSession();
-
-    String userName = (String) session.getAttribute("userName");
+    // 1. parameter set
     RestrnRegistForm form = new RestrnRegistForm(
         (String) request.getParameter("confirm_flg"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
-        userName,
+        (String) session.getAttribute("userName"),
         "");
 
     // 2. inputCheck(フロントで実行)

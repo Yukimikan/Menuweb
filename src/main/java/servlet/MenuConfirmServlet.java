@@ -39,9 +39,9 @@ public class MenuConfirmServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    // 1. parameter set
+    // 1. 画面情報取得
     HttpSession session = request.getSession();
-    String userName = (String) session.getAttribute("userName");
+    // 1. parameter set
     MenuRegistForm form = new MenuRegistForm(
         null,
         (String) request.getParameter("restaurant_name"),
@@ -50,7 +50,7 @@ public class MenuConfirmServlet extends HttpServlet {
         (String) request.getParameter("singlemenu_flg"),
         (String) request.getParameter("eat_in_price"),
         (String) request.getParameter("takeout_price"),
-        userName,
+        (String) session.getAttribute("userName"),
         "");
 
     // 2. inputCheck(フロントで実行)

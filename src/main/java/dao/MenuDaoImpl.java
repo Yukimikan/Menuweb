@@ -19,7 +19,7 @@ import model.MenuEntity;
 public class MenuDaoImpl implements MenuDao {
 
   @Override
-  public List<MenuEntity> select(MenuEntity entity, String userName) throws RuntimeException {
+  public List<MenuEntity> select(MenuEntity entity) throws RuntimeException {
 
     try {
       String resource = "mybatis-config.xml";
@@ -54,40 +54,4 @@ public class MenuDaoImpl implements MenuDao {
       throw new RuntimeException();
     }
   }
-
-//  public List<MenuEntity> select(MenuEntity entity, String userName) throws RuntimeException {
-//
-//    try {
-//      String resource = "mybatis-config.xml";
-//      InputStream inputStream = Resources.getResourceAsStream(resource);
-//      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-//      SqlSession session = sqlSessionFactory.openSession();
-//      MenuMapper mapper = session.getMapper(MenuMapper.class);
-//      List<MenuEntity> list = mapper.select(entity);
-//      return list;
-//
-//    } catch (IOException e) {
-//      System.out.println(e.getStackTrace());
-//      throw new RuntimeException();
-//    }
-//
-//  }
-//
-//  public int insert(MenuEntity entity) throws RuntimeException {
-//
-//    try {
-//      String resource = "mybatis-config.xml";
-//      InputStream inputStream = Resources.getResourceAsStream(resource);
-//      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-//      SqlSession session = sqlSessionFactory.openSession();
-//      MenuMapper mapper = session.getMapper(MenuMapper.class);
-//      int result = mapper.insertMenu(entity);
-//      session.commit(); // ここでコミット
-//      return result;
-//    } catch (IOException e) {
-//      System.out.println(e.getStackTrace());
-//      throw new RuntimeException();
-//    }
-//  }
-
 }

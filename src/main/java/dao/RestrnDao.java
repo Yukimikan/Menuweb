@@ -12,7 +12,7 @@ public interface RestrnDao {
 
   public List<RestaurantEntity> selectAll(String userName) throws RuntimeException;
 
-  public List<RestaurantEntity> select(RestaurantEntity entity, String userName) throws RuntimeException;
+  public List<RestaurantEntity> select(RestaurantEntity entity) throws RuntimeException;
 
   public int insert(RestaurantEntity entity) throws RuntimeException;
 

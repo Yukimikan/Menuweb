@@ -56,7 +56,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
 
       // 1.idを取得して設定
       List<RestaurantEntity> resultList =
-        restrnDao.select(searchEntity, userName);
+        restrnDao.select(searchEntity);
       if (resultList.size() > 0) {
         menuEntity.setRestaurantId(resultList.get(0).getRestaurantId());
       } else {
