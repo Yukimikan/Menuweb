@@ -72,9 +72,10 @@ public class MenuConfirmServlet extends HttpServlet {
       if (result.isSuccess()) {
         // 4. requestSetAttribute
 
-        // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.MenuRegistFinish);
-        dispatcher.forward(request, response);
+        // 5. redirect
+        // PRGパターン(Post/Redirect/Get) を使う
+        response.sendRedirect(
+            request.getContextPath() + WebConst.Action_MenuRegistFinish);
       }
     } catch (Exception e) {
       // エラー画面に遷移

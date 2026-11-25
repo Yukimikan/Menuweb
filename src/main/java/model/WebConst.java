@@ -5,6 +5,8 @@ public class WebConst {
   //ACTION
   public static final String Action_検索 = "検索";
   public static final String Action_削除 = "削除";
+  public static final String Action_MenuRegistFinish = "/menu_regist_finish";
+  public static final String Action_RestaurantRegistFinish = "/restaurant_regist_finish";
   //URL
   /*
    * Index

@@ -84,6 +84,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>MenuRegistFinishServlet</display-name>
+    <servlet-name>MenuRegistFinishServlet</servlet-name>
+    <servlet-class>servlet.MenuRegistFinishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MenuRegistFinishServlet</servlet-name>
+    <url-pattern>/menu_regist_finish</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>MenuConfirmServlet</display-name>
     <servlet-name>MenuConfirmServlet</servlet-name>
     <servlet-class>servlet.MenuConfirmServlet</servlet-class>
@@ -115,6 +125,16 @@
   <servlet-mapping>
     <servlet-name>RestaurantRegistServlet</servlet-name>
     <url-pattern>/restaurant_regist</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RestaurantRegistFinishServlet</display-name>
+    <servlet-name>RestaurantRegistFinishServlet</servlet-name>
+    <servlet-class>servlet.RestaurantRegistFinishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RestaurantRegistFinishServlet</servlet-name>
+    <url-pattern>/restaurant_regist_finish</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
