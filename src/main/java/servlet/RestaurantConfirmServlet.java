@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import form.RestaurantConfirmForm;
+import form.RestaurantRegistForm;
 import model.WebConst;
 import service.RestrnRegistService;
 import service.RestrnRegistServiceImpl;
@@ -50,18 +50,29 @@ public class RestaurantConfirmServlet extends HttpServlet {
     // 1. parameter set
     HttpSession session = request.getSession();
     String userName = (String) session.getAttribute("userName");
-    RestaurantConfirmForm form = new RestaurantConfirmForm(
+    RestaurantRegistForm form = new RestaurantRegistForm(
+        null,
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("type"),
+        userName,
         "");
 
     // 2. inputCheck(フロントで実行)
+    String message = form.inputCheck();
+    if (!message.isEmpty()) {
+      // error
+      request.setAttribute("form", form);
+      request.setAttribute("message", message);
 
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
+      dispatcher.forward(request, response);
+      return;
+    }
     try {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      RestrnRegistServiceResult result = service.execute(form, userName);
+      RestrnRegistServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
 

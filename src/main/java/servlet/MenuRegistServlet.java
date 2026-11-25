@@ -116,7 +116,7 @@ public class MenuRegistServlet extends HttpServlet {
       // 3. サーバー側のチェック
       try {
         // 3. service execute
-        MenuRegistServiceResult result = service.execute(form, userName);
+        MenuRegistServiceResult result = service.execute(form);
         if (result.isSuccess()) {
           // 4. requestSetAttribute
 
