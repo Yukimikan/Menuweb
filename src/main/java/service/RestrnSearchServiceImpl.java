@@ -27,10 +27,15 @@ public class RestrnSearchServiceImpl implements RestrnSearchService {
 
     // 初期化
     RestrnSearchServiceResult result = new RestrnSearchServiceResult();
+    RestaurantEntity entity = new RestaurantEntity(
+            GlobalConst.NUM_CSV検索, // 検索
+            null,
+            null,
+            userName);
 
     // 1. 全件検索
     try {
-      List<RestaurantEntity> restaurantList = restaurantDao.selectAll(userName);
+      List<RestaurantEntity> restaurantList = restaurantDao.select(entity);
       if (restaurantList.size() == 0) {
         // 結果0件
         result.setSuccess(true);

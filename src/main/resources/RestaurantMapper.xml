@@ -25,24 +25,6 @@
     where restaurant_id = #{restaurantId}
   </delete>
 
-  <select id="selectAll" resultType="model.RestaurantEntity">
-    select
-     restaurant_id,
-     restaurant_name,
-     type,
-     update_user
-    from "RESTAURANT"
-    <!-- ユーザ名で絞り込み予定(未実装) -->
-    <!--
-    <where>
-	    <if test="entity.userName != null and entity.userName != ''">
-	      AND user_name = #{entity.userName}
-	    </if>
-    </where>
-     -->
-  </select>
-
-
   <select id="select" resultType="model.RestaurantEntity">
     select
      restaurant_id,
@@ -58,6 +40,13 @@
 	      AND restaurant_name = #{entity.restaurantName}
 	    </if>
     </where>
+    <!--
+    <where>
+	    <if test="entity.userName != null and entity.userName != ''">
+	      AND user_name = #{entity.userName}
+	    </if>
+    </where>
+     -->
   </select>
 
 </mapper>

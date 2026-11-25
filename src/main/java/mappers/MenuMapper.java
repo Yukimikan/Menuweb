@@ -17,7 +17,4 @@ public interface MenuMapper {
 
   int insertMenu(@Param("entity") MenuEntity entity);
 
-  // List<MenuEntity> select(@Param("entity") MenuEntity entity);
-  // int insertMenu(@Param("entity") MenuEntity entity);
-
 }

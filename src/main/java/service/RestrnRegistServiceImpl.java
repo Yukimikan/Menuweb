@@ -20,6 +20,7 @@ public class RestrnRegistServiceImpl implements RestrnRegistService {
   /**
    * execute.
    */
+  @Override
   public RestrnRegistServiceResult execute(RestrnRegistForm form) {
 
     // 初期化
