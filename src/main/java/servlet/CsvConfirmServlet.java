@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import form.CsvConfirmForm;
+import form.CsvWriteForm;
 import model.WebConst;
 import service.CsvWriteService;
 import service.CsvWriteServiceImpl;
@@ -39,8 +39,9 @@ public class CsvConfirmServlet extends HttpServlet {
           throws ServletException, IOException {
 
     // 1. parameter set
-    CsvConfirmForm form = new CsvConfirmForm(
+    CsvWriteForm form = new CsvWriteForm(
         (String) request.getParameter("csv_name"),
+        null,
         (String) request.getParameter("type"),
         (String) request.getParameter("restaurant_name"),
         (String) request.getParameter("singlemenu_flg"),
