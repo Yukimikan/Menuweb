@@ -61,7 +61,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
                 && isMatch(form.getCategory(), ret.getCategory())
                 )
               .toList();
-      if (tmpList.size() == 0) {
+      if (menuList.size() == 0) {
         // 結果0件
         result.setSuccess(true);
         result.setMessage("0件");

@@ -42,7 +42,7 @@ public class CsvSearchServiceImpl implements CsvSearchService {
                   && isMatch(form.getRestaurantName(), ret.getRestaurantName())
                   )
               .toList();
-        if (tmpList.size() == 0) {
+        if (menuList.size() == 0) {
           // 結果0件
           result.setSuccess(true);
           result.setMessage("0件");

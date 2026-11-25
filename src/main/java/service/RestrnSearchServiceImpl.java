@@ -75,7 +75,7 @@ public class RestrnSearchServiceImpl implements RestrnSearchService {
                 && isMatch(form.getRestaurantName(), ret.getRestaurantName())
                 )
               .toList();
-      if (tmpList.size() == 0) {
+      if (restaurantList.size() == 0) {
         // 結果0件
         result.setSuccess(true);
         result.setMessage("0件");
