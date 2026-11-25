@@ -32,8 +32,13 @@ public class RestrnRegistServiceImpl implements RestrnRegistService {
 
     // 1. 新規登録
     try {
-      int flg = restrnDao.insert(entity);
-      result.setSuccess(true);
+      int count = restrnDao.insert(entity);
+      if (count == 1) {
+        result.setSuccess(true);
+      } else {
+        result.setSuccess(false);
+        result.setMessage("登録完了しませんでした（0件）");
+      }
     } catch (Exception e) {
       // CSV書き込みに失敗
       result.setMessage("登録エラー");

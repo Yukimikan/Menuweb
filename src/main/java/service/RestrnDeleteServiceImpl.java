@@ -27,8 +27,13 @@ public class RestrnDeleteServiceImpl implements RestrnDeleteService {
 
     // 1. 新規登録
     try {
-      int flg = restrnDao.delete(id);
-      result.setSuccess(true);
+      int count = restrnDao.delete(id);
+      if (count == 1) {
+        result.setSuccess(true);
+      } else {
+        result.setSuccess(false);
+        result.setMessage("削除完了しませんでした（0件）");
+      }
     } catch (Exception e) {
       // 削除失敗
       result.setMessage("削除エラー");

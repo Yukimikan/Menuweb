@@ -63,10 +63,15 @@ public class MenuRegistServiceImpl implements MenuRegistService {
         menuEntity.setRestaurantId(9999);
       }
       // 2. 新規登録
-      int flg = menuDao.insert(menuEntity);
-      result.setSuccess(true);
+      int count = menuDao.insert(menuEntity);
+      if (count == 1) {
+        result.setSuccess(true);
+      } else {
+        result.setSuccess(false);
+        result.setMessage("登録が完了しませんでした（登録0件）");
+      }
     } catch (Exception e) {
-      // 登録失
+      // 登録失敗
       result.setMessage("登録エラー");
       System.out.println(e.getMessage());
 

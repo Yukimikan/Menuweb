@@ -31,9 +31,8 @@
 	<%@include file="./header.jsp"%>
 	</div>
 	<div id="contents" class="contents">
-	<h2>＜メニュー取込＞</h2>
-		プルダウン機能でメニュー一覧を選択。<br>
-		1000円以上、店名といった条件で絞り込む。<br>
+	<h2>＜店舗検索＞</h2>
+		店舗の検索を行う。選択行を削除する。<br>
 	</div>
 	<div id="main">
 	<!-- ★ エラーメッセージ表示 -->

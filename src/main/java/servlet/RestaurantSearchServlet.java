@@ -70,14 +70,14 @@ public class RestaurantSearchServlet extends HttpServlet {
 
     // 1. parameter set
     String action = (String) request.getParameter("action");
-    switch(action) {
+    switch (action) {
       case WebConst.Action_検索:
         this.search(request, response);
         break;
       case WebConst.Action_削除:
         this.delete(request, response);
         break;
-      default :
+      default:
     }
   }
 
@@ -87,7 +87,7 @@ public class RestaurantSearchServlet extends HttpServlet {
    *  @param HttpServletRequest request, HttpServletResponse response
    */
   private void search(HttpServletRequest request, HttpServletResponse response)
-	      throws ServletException, IOException {
+        throws ServletException, IOException {
 
     // 1. 画面情報取得
     HttpSession session = request.getSession();
