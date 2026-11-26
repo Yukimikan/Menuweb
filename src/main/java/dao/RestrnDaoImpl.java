@@ -19,7 +19,7 @@ import model.RestaurantEntity;
 public class RestrnDaoImpl implements RestrnDao {
 
   @Override
-  public List<RestaurantEntity> select(RestaurantEntity entity) throws RuntimeException {
+  public List<RestaurantEntity> select(String type, String restaurantName) throws RuntimeException {
 
     try {
       String resource = "mybatis-config.xml";
@@ -27,7 +27,7 @@ public class RestrnDaoImpl implements RestrnDao {
       SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
       SqlSession session = sqlSessionFactory.openSession();
       RestaurantMapper mapper = session.getMapper(RestaurantMapper.class);
-      List<RestaurantEntity> list = mapper.select(entity);
+      List<RestaurantEntity> list = mapper.select(type, restaurantName);
       return list;
 
     } catch (IOException e) {

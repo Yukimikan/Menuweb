@@ -33,12 +33,6 @@ public class MenuRegistServiceImpl implements MenuRegistService {
     // 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
     String userName = form.getUserName();
-    RestaurantEntity searchEntity = new RestaurantEntity(
-          0,
-          form.getRestaurantName(),
-          "",
-          userName
-          );
     MenuEntity menuEntity = new MenuEntity(
           GlobalConst.NUM_CSV新規登録, // 新規登録
           0,
@@ -56,7 +50,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
 
       // 1.idを取得して設定
       List<RestaurantEntity> resultList =
-        restrnDao.select(searchEntity);
+        restrnDao.select(null, form.getRestaurantName());
       if (resultList.size() > 0) {
         menuEntity.setRestaurantId(resultList.get(0).getRestaurantId());
       } else {

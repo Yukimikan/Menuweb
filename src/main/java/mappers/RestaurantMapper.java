@@ -13,7 +13,9 @@ import model.RestaurantEntity;
  */
 public interface RestaurantMapper {
 
-  List<RestaurantEntity> select(@Param("entity") RestaurantEntity entity);
+  List<RestaurantEntity> select(
+      @Param("type") String type,
+      @Param("restaurantName") String restaurantName);
 
   int insertRestaurant(@Param("entity") RestaurantEntity entity);
 

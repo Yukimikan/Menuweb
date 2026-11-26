@@ -6,7 +6,6 @@ import java.util.List;
 import dao.RestrnDao;
 import dao.RestrnDaoImpl;
 import form.RestrnSearchForm;
-import model.GlobalConst;
 import model.RestaurantEntity;
 
 /**
@@ -27,15 +26,10 @@ public class RestrnSearchServiceImpl implements RestrnSearchService {
 
     // 初期化
     RestrnSearchServiceResult result = new RestrnSearchServiceResult();
-    RestaurantEntity entity = new RestaurantEntity(
-            GlobalConst.NUM_CSV検索, // 検索
-            null,
-            null,
-            userName);
 
     // 1. 全件検索
     try {
-      List<RestaurantEntity> restaurantList = restaurantDao.select(entity);
+      List<RestaurantEntity> restaurantList = restaurantDao.select(null, null);
       if (restaurantList.size() == 0) {
         // 結果0件
         result.setSuccess(true);
@@ -64,16 +58,11 @@ public class RestrnSearchServiceImpl implements RestrnSearchService {
   public RestrnSearchServiceResult execute(RestrnSearchForm form) {
 
     RestrnSearchServiceResult result = new RestrnSearchServiceResult();
-
-    RestaurantEntity entity = new RestaurantEntity(
-            GlobalConst.NUM_CSV検索, // 検索
-            form.getRestaurantName(),
-            form.getType(),
-            form.getUserName());
+    String userName = form.getUserName();
 
     try {
 
-      List<RestaurantEntity> tmpList = restaurantDao.select(entity);
+      List<RestaurantEntity> tmpList = restaurantDao.select(form.getType(), form.getUserName());
       List<RestaurantEntity> restaurantList = tmpList.stream()
           .filter(ret ->
                 isMatch(form.getType(), ret.getType())

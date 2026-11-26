@@ -10,7 +10,7 @@ import model.RestaurantEntity;
 */
 public interface RestrnDao {
 
-  public List<RestaurantEntity> select(RestaurantEntity entity) throws RuntimeException;
+  public List<RestaurantEntity> select(String type, String restaurantName) throws RuntimeException;
 
   public int insert(RestaurantEntity entity) throws RuntimeException;
 
