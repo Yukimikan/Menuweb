@@ -40,13 +40,6 @@
 	      AND restaurant_name = #{restaurantName}
 	    </if>
     </where>
-    <!--
-    <where>
-	    <if test="entity.userName != null and entity.userName != ''">
-	      AND user_name = #{entity.userName}
-	    </if>
-    </where>
-     -->
   </select>
 
 </mapper>

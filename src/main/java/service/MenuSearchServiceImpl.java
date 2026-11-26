@@ -7,7 +7,6 @@ import common.ConditionPrice;
 import dao.MenuDao;
 import dao.MenuDaoImpl;
 import form.MenuSearchForm;
-import model.GlobalConst;
 import model.MenuEntity;
 
 /**
@@ -29,6 +28,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
   public MenuSearchServiceResult execute(MenuSearchForm form) {
 
     MenuSearchServiceResult result = new MenuSearchServiceResult();
+    String userName = form.getUserName();
 
     ConditionPrice eatInPriceCond = ConditionPrice.fromCode(form.getEatInCondition());
     ConditionPrice takeoutPriceCond = ConditionPrice.fromCode(form.getTakeoutCondition());
@@ -36,22 +36,10 @@ public class MenuSearchServiceImpl implements MenuSearchService {
     int eatInPrice = this.convertTotal(form.getEatInPrice());
     int takeoutPrice = this.convertTotal(form.getTakeoutPrice());
 
-    MenuEntity entity = new MenuEntity(
-            GlobalConst.NUM_CSV検索, // 検索
-            0,
-            form.getRestaurantName(),
-            form.getMenuName(),
-            form.getCategory(),
-            form.getSingleMenuFlg(),
-            eatInPrice,
-            takeoutPrice,
-            0,
-            0,
-            form.getUserName());
-
     try {
 
-      List<MenuEntity> tmpList = menuDao.select(entity);
+      List<MenuEntity> tmpList =
+          menuDao.select(form.getRestaurantName(), form.getMenuName(), form.getCategory());
       List<MenuEntity> menuList = tmpList.stream()
           .filter(ret ->
                 eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)
