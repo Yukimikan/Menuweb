@@ -1,8 +1,10 @@
 package form;
 
+import common.BaseForm;
 import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -11,9 +13,10 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuSearchForm {
+public class MenuSearchForm extends BaseForm{
 
   private String date;
   private String restaurantId;
@@ -37,6 +40,7 @@ public class MenuSearchForm {
    *
    * @return メッセージ
    */
+  @Override
   public String inputCheck() {
     // 数値以外
     if (!(this.eatInPrice == null || this.eatInPrice.isBlank())

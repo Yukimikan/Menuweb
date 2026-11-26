@@ -1,8 +1,10 @@
 package form;
 
+import common.BaseForm;
 import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -11,9 +13,10 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class CsvSearchForm {
+public class CsvSearchForm extends BaseForm{
 
   private String date;
   private String csvName;
@@ -29,6 +32,7 @@ public class CsvSearchForm {
    *
    * @return メッセージ
    */
+  @Override
   public String inputCheck() {
     // 数値以外
     if (!(this.total == null || this.total.isBlank())

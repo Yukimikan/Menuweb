@@ -1,8 +1,10 @@
 package form;
 
+import common.BaseForm;
 import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -10,9 +12,10 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuRegistForm {
+public class MenuRegistForm extends BaseForm{
 
   private String confirmFlg;
   private String restaurantName;
@@ -29,9 +32,10 @@ public class MenuRegistForm {
    *
    * @return boolean
    */
+  @Override
   public String inputCheck() {
     //認証・認可チェック
-    if (this.userName == null || this.userName.isEmpty()) {
+    if (super.authCheck(this.userName) == false) {
       // error
       return MessageUtil.getProperty("msg_e02_no_login");
     }

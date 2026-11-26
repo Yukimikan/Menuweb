@@ -1,8 +1,10 @@
 package form;
 
+import common.BaseForm;
 import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import model.WebConst;
 
@@ -12,9 +14,10 @@ import model.WebConst;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestrnSearchForm {
+public class RestrnSearchForm extends BaseForm{
 
   private String action;
   private String restaurantName;
@@ -29,18 +32,20 @@ public class RestrnSearchForm {
    *
    * @return メッセージ
    */
+  @Override
   public String inputCheck() {
 	// 認証
     if (WebConst.Action_削除.equals(this.action)) {
-        if (this.userName == null || this.userName.isEmpty()) {
-          return MessageUtil.getProperty("msg_e02_no_login");
-        }
+      //認証・認可チェック
+      if (super.authCheck(this.userName) == false) {
+        // error
+        return MessageUtil.getProperty("msg_e02_no_login");
       }
-    //チェック
-    if (WebConst.Action_削除.equals(this.action)) {
       if (this.selectedRow == null || this.selectedRow.isEmpty()) {
         this.message = MessageUtil.getProperty("msg_w02_restaurant_input");
       }
+    } else {
+      // no check
     }
     return message;
   }

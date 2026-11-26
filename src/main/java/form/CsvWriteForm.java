@@ -1,8 +1,10 @@
 package form;
 
+import common.BaseForm;
 import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -10,9 +12,10 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class CsvWriteForm {
+public class CsvWriteForm extends BaseForm{
 
   private String csvName;
   private String confirmFlg;
@@ -30,6 +33,7 @@ public class CsvWriteForm {
    *
    * @return boolean
    */
+  @Override
   public String inputCheck() {
 
     //チェック
