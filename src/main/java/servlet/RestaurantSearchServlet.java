@@ -181,9 +181,12 @@ public class RestaurantSearchServlet extends HttpServlet {
       RestrnDeleteServiceResult result = deleteService.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
+        // 未実装機能（削除メッセージはGet後に引き継がれない）
+        request.setAttribute("message", "削除完了");
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.RestaurantRegistFinish);
-        dispatcher.forward(request, response);
+        // PRGパターン(Post/Redirect/Get) を使う
+        response.sendRedirect(
+            request.getContextPath() + WebConst.Action_RestaurantSearch);
       }
     } catch (Exception e) {
       // エラー画面に遷移
