@@ -10,7 +10,11 @@ import model.MenuEntity;
 */
 public interface MenuDao {
 
-  public List<MenuEntity> select(String restaurantName, String menuName, String category) throws RuntimeException;
+  public List<MenuEntity> select(
+                                 String restaurantName,
+                                 String menuName,
+                                 String category,
+                                 String singleMenuFlg) throws RuntimeException;
 
   public int insert(MenuEntity entity) throws RuntimeException;
 

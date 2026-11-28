@@ -48,6 +48,16 @@
 					</div>
 				</div>
 				<div class="row">
+					<div class="label">単品フラグ：</div>
+					<div class="input">
+						<select name="singlemenu_flg" value="${form.singleMenuFlg}">
+							<option value="">-</option>
+							<option value="0">セット</option>
+							<option value="1">単品</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
 					<div class="label">金額（店内飲食）：</div>
 					<div class="input">
 						<input type="text" name="eat_in_price" value="${form.eatInPrice}">円

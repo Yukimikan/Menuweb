@@ -39,7 +39,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
     try {
 
       List<MenuEntity> tmpList =
-          menuDao.select(form.getRestaurantName(), form.getMenuName(), form.getCategory());
+          menuDao.select(form.getRestaurantName(), form.getMenuName(), form.getCategory(), form.getSingleMenuFlg());
       List<MenuEntity> menuList = tmpList.stream()
           .filter(ret ->
                 eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)
@@ -47,6 +47,7 @@ public class MenuSearchServiceImpl implements MenuSearchService {
                 && isMatch(form.getRestaurantName(), ret.getRestaurantName())
                 && isMatch(form.getMenuName(), ret.getMenuName())
                 && isMatch(form.getCategory(), ret.getCategory())
+                && isMatch(form.getSingleMenuFlg(), ret.getSingleMenuFlg())
                 )
               .toList();
       if (menuList.size() == 0) {

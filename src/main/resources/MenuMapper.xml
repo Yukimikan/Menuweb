@@ -58,6 +58,9 @@
 	    <if test="category != null and category != ''">
 	      AND category = #{category}
 	    </if>
+	    <if test="singleMenuFlg != null and singleMenuFlg != ''">
+	      AND singlemenu_flg = #{singleMenuFlg}
+	    </if>
     </where>
   </select>
 

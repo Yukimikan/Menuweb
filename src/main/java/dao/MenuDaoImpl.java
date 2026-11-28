@@ -19,7 +19,7 @@ import model.MenuEntity;
 public class MenuDaoImpl implements MenuDao {
 
   @Override
-  public List<MenuEntity> select(String restaurantName, String menuName, String category) throws RuntimeException {
+  public List<MenuEntity> select(String restaurantName, String menuName, String category, String singleMenuFlg) throws RuntimeException {
 
     try {
       String resource = "mybatis-config.xml";
@@ -27,7 +27,7 @@ public class MenuDaoImpl implements MenuDao {
       SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
       SqlSession session = sqlSessionFactory.openSession();
       MenuMapper mapper = session.getMapper(MenuMapper.class);
-      List<MenuEntity> list = mapper.select(restaurantName, menuName, category);
+      List<MenuEntity> list = mapper.select(restaurantName, menuName, category, singleMenuFlg);
       return list;
 
     } catch (IOException e) {
