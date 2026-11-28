@@ -17,7 +17,7 @@
 	<%@include file="./header.jsp"%>
 	</div>
   	<div id="contents">
-	<h2>＜メニュー確認＞</h2>
+	<h2>＜店舗確認＞</h2>
 		登録確認画面<br>
 	</div>
 	<div id="main">
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">メニュー登録：</div>
+				<div class="label">店舗登録：</div>
 				<div class="input">
 					<input type="submit" value="登録" class="btn-submit">
 				</div>
