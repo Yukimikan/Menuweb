@@ -1,8 +1,10 @@
 package form;
 
+import common.BaseForm;
 import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -10,18 +12,19 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuRegistForm {
+public class MenuRegistForm extends BaseForm {
 
   private String confirmFlg;
-  private String type;
   private String restaurantName;
+  private String menuName;
+  private String category;
   private String singleMenuFlg;
-  private String menu;
-  private String price;
-  private String tax;
-  private String total;
+  private String eatInPrice;
+  private String takeoutPrice;
+  private String userName;
   private String message;
 
   /**
@@ -29,37 +32,34 @@ public class MenuRegistForm {
    *
    * @return boolean
    */
+  @Override
   public String inputCheck() {
-
+    //認証・認可チェック
+    if (super.authCheck(this.userName) == false) {
+      // error
+      return MessageUtil.getProperty("msg_e02_no_login");
+    }
     //チェック
-    if (this.type == null || this.type.isEmpty()) {
+    if (this.restaurantName == null || this.restaurantName.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
-    } else if (this.restaurantName == null || this.restaurantName.isEmpty()) {
+    } else if (this.menuName == null || this.menuName.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
-    } else if (this.menu == null || this.menu.isEmpty()) {
+    } else if (this.category == null || this.category.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     }
-    if (this.price == null || this.price.isEmpty()) {
+    if (this.eatInPrice == null || this.eatInPrice.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else {
       // 未入力の場合
-      if (!price.matches("[0-9]+")) {
+      if (!eatInPrice.matches("[0-9]+")) {
         this.message = MessageUtil.getProperty("msg_w02_csv_regist");
       }
     }
-    if (this.tax == null || this.tax.isEmpty()) {
+    if (this.takeoutPrice == null || this.takeoutPrice.isEmpty()) {
       this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else {
       // 未入力の場合
-      if (!tax.matches("[0-9]+")) {
-        this.message = MessageUtil.getProperty("msg_w02_csv_regist");
-      }
-    }
-    if (this.total == null || this.total.isEmpty()) {
-      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
-    } else {
-      // 未入力の場合
-      if (!total.matches("[0-9]+")) {
+      if (!takeoutPrice.matches("[0-9]+")) {
         this.message = MessageUtil.getProperty("msg_w02_csv_regist");
       }
     }

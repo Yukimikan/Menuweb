@@ -1,8 +1,10 @@
 package form;
 
+import common.BaseForm;
 import common.MessageUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -11,19 +13,23 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuSearchForm {
+public class MenuSearchForm extends BaseForm {
 
   private String date;
-  private String type;
+  private String restaurantId;
   private String restaurantName;
+  private String category;
   private String singleMenuFlg;
-  private String menu;
-  private String price;
-  private String tax;
-  private String total;
+  private String menuName;
+  private String eatInPrice;
+  private String takeoutPrice;
+  private String eatInCondition;
+  private String takeoutCondition;
   private String totalCondition;
+  private String userName;
   private String message;
 
   /**
@@ -32,10 +38,17 @@ public class MenuSearchForm {
    *
    * @return メッセージ
    */
+  @Override
   public String inputCheck() {
     // 数値以外
-    if (!(this.total == null || this.total.isBlank())
-        && !(this.total.matches("[0-9]+"))) {
+    if (!(this.eatInPrice == null || this.eatInPrice.isBlank())
+        && !(this.eatInPrice.matches("[0-9]+"))) {
+      // 数値エラー
+      this.message = MessageUtil.getProperty("msg_w02_csv_input");
+    }
+    // 数値以外
+    if (!(this.takeoutPrice == null || this.takeoutPrice.isBlank())
+        && !(this.takeoutPrice.matches("[0-9]+"))) {
       // 数値エラー
       this.message = MessageUtil.getProperty("msg_w02_csv_input");
     }

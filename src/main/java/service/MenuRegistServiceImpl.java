@@ -1,81 +1,73 @@
 package service;
 
-import java.io.IOException;
+import java.util.List;
 
 import dao.MenuDao;
 import dao.MenuDaoImpl;
-import form.MenuConfirmForm;
+import dao.RestrnDao;
+import dao.RestrnDaoImpl;
 import form.MenuRegistForm;
 import model.GlobalConst;
 import model.MenuEntity;
+import model.RestaurantEntity;
 
 /**
- * ファイル書込用サービス.
- * */
+ * MenuRegistService
+ * メニュー登録操作.
+ */
 public class MenuRegistServiceImpl implements MenuRegistService {
 
+  private RestrnDao restrnDao;
   private MenuDao menuDao;
 
   public MenuRegistServiceImpl() {
+    restrnDao = new RestrnDaoImpl();
     menuDao = new MenuDaoImpl();
   }
 
   /**
    * execute.
    */
-  public MenuRegistServiceResult execute(MenuRegistForm form, String userName) throws IOException {
+  @Override
+  public MenuRegistServiceResult execute(MenuRegistForm form) {
 
     // 初期化
     MenuRegistServiceResult result = new MenuRegistServiceResult();
-    MenuEntity entity = new MenuEntity(
+    String userName = form.getUserName();
+    MenuEntity menuEntity = new MenuEntity(
           GlobalConst.NUM_CSV新規登録, // 新規登録
-          form.getType(),
+          GlobalConst.NUM_CSV新規登録,
           form.getRestaurantName(),
+          form.getMenuName(),
+          form.getCategory(),
           form.getSingleMenuFlg(),
-          form.getMenu(),
-          Integer.parseInt(form.getPrice()),
-          Integer.parseInt(form.getTax()),
-          Integer.parseInt(form.getTotal()),
+          Integer.parseInt(form.getEatInPrice()),
+          Integer.parseInt(form.getTakeoutPrice()),
           userName);
 
-    // 1. 新規行だけ書き込む（追記モード）
     try {
-      int flg = menuDao.insert(entity);
-      result.setSuccess(true);
+
+      // 1.idを取得して設定
+      List<RestaurantEntity> resultList =
+          restrnDao.select(null, form.getRestaurantName());
+      if (resultList.size() > 0) {
+        menuEntity.setRestaurantId(resultList.get(0).getRestaurantId());
+      } else {
+        menuEntity.setRestaurantId(9999);
+      }
+      // 2. 新規登録
+      int count = menuDao.insert(menuEntity);
+      if (count == 1) {
+        result.setSuccess(true);
+      } else {
+        result.setSuccess(false);
+        result.setMessage("登録が完了しませんでした（登録0件）");
+      }
     } catch (Exception e) {
-      // CSV書き込みに失敗
+      // 登録失敗
       result.setMessage("登録エラー");
-      throw new IOException(e.getMessage(), e);
-    }
-    return result;
-  }
+      System.out.println(e.getMessage());
 
-  /**
-   * execute.
-   */
-  public MenuRegistServiceResult execute(MenuConfirmForm form, String userName) throws IOException {
-
-    // 初期化
-    MenuRegistServiceResult result = new MenuRegistServiceResult();
-    MenuEntity entity = new MenuEntity(
-          GlobalConst.NUM_CSV新規登録, // 新規登録
-          form.getType(),
-          form.getRestaurantName(),
-          form.getSingleMenuFlg(),
-          form.getMenu(),
-          Integer.parseInt(form.getPrice()),
-          Integer.parseInt(form.getTax()),
-          Integer.parseInt(form.getTotal()),
-          userName);
-
-    // 1. 新規行だけ書き込む（追記モード）
-    try {
-      int flg = menuDao.insert(entity);
-      result.setSuccess(true);
-    } catch (Exception e) {
-      // CSV書き込みに失敗
-      result.setMessage("登録エラー");
-      throw new IOException(e.getMessage(), e);
     }
     return result;
   }

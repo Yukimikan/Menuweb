@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import form.LoginForm;
-import model.GlobalConst;
+import model.WebConst;
 import service.LoginService;
 import service.LoginServiceImpl;
 import service.LoginServiceResult;
@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.Login);
+        request.getRequestDispatcher(WebConst.Login);
     dispatcher.forward(request, response);
   }
 
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
       //reload
       request.setAttribute("form", form);
       request.setAttribute("message", message);
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Login);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Login);
       dispatcher.forward(request, response);
       return;
     }
@@ -79,20 +79,20 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("userName", result.getUserName());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuIndexUrl);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.MenuIndexUrl);
         dispatcher.forward(request, response);
       } else {
         // 5. forward
         request.setAttribute("form", form);
         request.setAttribute("message", result.getMessage());
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Login);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Login);
         dispatcher.forward(request, response);
       }
 
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
       dispatcher.forward(request, response);
     }
 

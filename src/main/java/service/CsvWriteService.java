@@ -1,20 +1,14 @@
 package service;
 
-import java.io.IOException;
-
-import form.CsvConfirmForm;
+import common.MenuWebService;
 import form.CsvWriteForm;
 
 /**
  * CsvWriteService
  * CSVの書込み.
  */
-public interface CsvWriteService {
+public interface CsvWriteService extends MenuWebService<CsvWriteForm, CsvWriteServiceResult> {
 
-  public CsvWriteServiceResult execute(CsvWriteForm input) throws IOException;
-
-  public CsvWriteServiceResult execute(CsvConfirmForm input) throws IOException;
-
-  // public boolean formatCheck(MenuCSV rec);
+  public CsvWriteServiceResult execute(CsvWriteForm input);
 
 }

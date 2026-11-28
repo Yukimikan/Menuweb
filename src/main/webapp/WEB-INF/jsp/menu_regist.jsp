@@ -12,43 +12,15 @@
 // 入力チェック（フロント側）
 function checkText() {
 
-  var type = document.form1.type.value;
   var restaurant = document.form1.restaurant_name.value;
-  var menu = document.form1.menu.value;
-  var price = document.form1.price.value;
   var tax = document.form1.tax.value;
   var total = document.form1.total.value;
 
   document.form1.message.value = "";
 
-  if (type.length === 0) {
-    alert('種別を指定して下さい');
-    document.form1.message.value = '種別を指定して下さい';
-    return false;
-  }
   if (restaurant.length === 0) {
     alert('店名を指定して下さい');
     document.form1.message.value = '店名を指定して下さい';
-    return false;
-  }
-  if (menu.length === 0) {
-    alert('メニュー名を指定して下さい');
-    document.form1.message.value = 'メニュー名を指定して下さい';
-    return false;
-  }
-  if (price.length === 0) {
-    alert('金額を指定して下さい');
-    document.form1.message.value = '金額を指定して下さい';
-    return false;
-  }
-  if (tax.length === 0) {
-    alert('税額を指定して下さい');
-    document.form1.message.value = '税額を指定して下さい';
-    return false;
-  }
-  if (total.length === 0) {
-    alert('合計金額を指定して下さい');
-    document.form1.message.value = '合計金額を指定して下さい';
     return false;
   }
 
@@ -72,16 +44,6 @@ function checkText() {
 	<form name="form1"
 		action="${pageContext.request.contextPath}/menu_regist"
 		onsubmit="return checkText()" method="post">
-		<div>
-			ユーザ名：
-		    <c:if test="${not empty sessionScope.userName}">
-		        <input type="text" name="user_name" value="${sessionScope.userName}" readonly>
-		    </c:if>
-		    <!--  非ログイン時（ログイン機能実装後の動確用） -->
-		    <c:if test="${empty sessionScope.userName}">
-                <input type="text" name="user_name" value="guest" readonly>
-		    </c:if>
-		</div>
 		<div id="regist-input">
 			<div class="row">
 				<div class="label">確認画面を省略する</div>
@@ -90,15 +52,21 @@ function checkText() {
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">種別：</div>
-				<div class="input">
-					<input type="text" name="type" value="${form.type}">
-				</div>
-			</div>
-			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
 					<input type="text" name="restaurant_name" value="${form.restaurantName}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">メニュー名：</div>
+				<div class="input">
+					<input type="text" name="menu_name" value="${form.menuName}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">メニュー種類：</div>
+				<div class="input">
+					<input type="text" name="category" value="${form.category}">
 				</div>
 			</div>
 			<div class="row">
@@ -111,27 +79,15 @@ function checkText() {
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">メニュー名：</div>
+				<div class="label">金額（店内）：</div>
 				<div class="input">
-					<input type="text" name="menu" value="${form.menu}">
+					<input type="text" name="eat_in_price" value="${form.eatInPrice}">円
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">金額：</div>
+				<div class="label">金額（テイクアウト）：</div>
 				<div class="input">
-					<input type="text" name="price" value="${form.price}">円
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">税額：</div>
-				<div class="input">
-					<input type="text" name="tax" value="${form.tax}">円
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">合計：</div>
-				<div class="input">
-					<input type="text" name="total" value="${form.total}">円
+					<input type="text" name="takeout_price" value="${form.takeoutPrice}">円
 				</div>
 			</div>
 			<div class="row">

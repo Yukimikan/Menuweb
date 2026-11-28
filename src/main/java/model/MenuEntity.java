@@ -13,13 +13,13 @@ import lombok.Data;
 public class MenuEntity {
 
   private int no;
-  private String type;
+  private int restaurantId;
   private String restaurantName;
+  private String menuName;
+  private String category;
   private String singleMenuFlg;
-  private String menu;
-  private int price;
-  private int tax;
-  private int total;
+  private int eatInPrice;
+  private int takeoutPrice;
   private String updateUser;
   // private Date update_date // SQLで発行
 

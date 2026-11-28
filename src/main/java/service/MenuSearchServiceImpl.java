@@ -3,16 +3,16 @@ package service;
 import java.util.Collections;
 import java.util.List;
 
-import common.ConditionTotal;
+import common.ConditionPrice;
 import dao.MenuDao;
 import dao.MenuDaoImpl;
 import form.MenuSearchForm;
-import model.GlobalConst;
 import model.MenuEntity;
 
 /**
- * ファイル読込用サービス.
- * */
+ * MenuSearchService
+ * メニュー検索条件入力.
+ */
 public class MenuSearchServiceImpl implements MenuSearchService {
 
   private MenuDao menuDao;
@@ -25,36 +25,37 @@ public class MenuSearchServiceImpl implements MenuSearchService {
   /**
    * execute.
    */
-  public MenuSearchServiceResult execute(MenuSearchForm form, String userName) {
+  @Override
+  public MenuSearchServiceResult execute(MenuSearchForm form) {
 
     MenuSearchServiceResult result = new MenuSearchServiceResult();
+    String userName = form.getUserName();
 
-    ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
+    ConditionPrice eatInPriceCond = ConditionPrice.fromCode(form.getEatInCondition());
+    ConditionPrice takeoutPriceCond = ConditionPrice.fromCode(form.getTakeoutCondition());
 
-    int total = this.convertTotal(form.getTotal());
-
-    MenuEntity entity = new MenuEntity(
-            GlobalConst.NUM_CSV検索, // 検索
-            form.getType(),
-            form.getRestaurantName(),
-            form.getSingleMenuFlg(),
-            form.getMenu(),
-            Integer.parseInt(form.getPrice()),
-            Integer.parseInt(form.getTax()),
-            this.convertTotal(form.getTotal()),
-            userName);
+    int eatInPrice = this.convertTotal(form.getEatInPrice());
+    int takeoutPrice = this.convertTotal(form.getTakeoutPrice());
 
     try {
 
-      List<MenuEntity> tmpList = menuDao.select(entity, userName);
+      List<MenuEntity> tmpList =
+          menuDao.select(
+              form.getRestaurantName(),
+              form.getMenuName(),
+              form.getCategory(),
+              form.getSingleMenuFlg());
       List<MenuEntity> menuList = tmpList.stream()
           .filter(ret ->
-                cond.match(ret.getTotal(), total)
-                && isMatch(form.getType(), ret.getType())
+                eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)
+                && takeoutPriceCond.match(ret.getTakeoutPrice(), takeoutPrice)
                 && isMatch(form.getRestaurantName(), ret.getRestaurantName())
+                && isMatch(form.getMenuName(), ret.getMenuName())
+                && isMatch(form.getCategory(), ret.getCategory())
+                && isMatch(form.getSingleMenuFlg(), ret.getSingleMenuFlg())
                 )
               .toList();
-      if (tmpList.size() == 0) {
+      if (menuList.size() == 0) {
         // 結果0件
         result.setSuccess(true);
         result.setMessage("0件");

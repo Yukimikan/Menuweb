@@ -44,8 +44,8 @@
 		</c:if>
 		<form action="${pageContext.request.contextPath}/login" method="post"
    	          onsubmit="return checkText()">
-			ユーザ名；<input type="text" name="user" value="${form.name}" />
-			パスワード<input type="text" name="password" value="${form.password}" />
+			ユーザ名<input type="text" name="user" value="${form.name}" />
+			パスワード<input type="text" name="password" value="" />
 	     	<button type="submit" value="login" >ログイン</button>
 		</form>
 	</div>

@@ -18,6 +18,7 @@
   </environments>
   <mappers>
     <mapper resource="UserMapper.xml"/>
+    <mapper resource="RestaurantMapper.xml"/>
     <mapper resource="MenuMapper.xml"/>
   </mappers>
 </configuration>

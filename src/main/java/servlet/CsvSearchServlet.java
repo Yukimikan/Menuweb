@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 import form.CsvSearchForm;
-import model.GlobalConst;
+import model.WebConst;
 import service.CsvFileListService;
 import service.CsvFileListServiceImpl;
 import service.CsvSearchService;
@@ -44,12 +44,12 @@ public class CsvSearchServlet extends HttpServlet {
     // 1. 画面情報取得（なし）
 
     // 1. CSVリスト取得（SharedService）
-    List<String> csvFiles = fileService.execute();
+    List<String> csvFiles = fileService.getList();
     request.setAttribute("csvFiles", csvFiles);
 
     // 2. 初期表示へ forward
     RequestDispatcher dispatcher =
-        request.getRequestDispatcher(GlobalConst.CsvSearch);
+        request.getRequestDispatcher(WebConst.CsvSearch);
     dispatcher.forward(request, response);
   }
 
@@ -78,7 +78,7 @@ public class CsvSearchServlet extends HttpServlet {
       //reload
       request.setAttribute("form", form);
       request.setAttribute("message", message);
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.CsvSearch);
       dispatcher.forward(request, response);
       return;
     }
@@ -94,21 +94,21 @@ public class CsvSearchServlet extends HttpServlet {
         request.setAttribute("menuList", result.getMenuList());
         request.setAttribute("count", result.getMenuList().size());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.CsvSearch);
         dispatcher.forward(request, response);
       } else {
         // 4. requestSetAttribute
         request.setAttribute("form", form);
         request.setAttribute("message", result.getMessage());
         // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.CsvSearch);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.CsvSearch);
         dispatcher.forward(request, response);
         return;
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
       dispatcher.forward(request, response);
     }
   }

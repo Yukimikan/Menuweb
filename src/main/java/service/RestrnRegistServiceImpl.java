@@ -1,0 +1,52 @@
+package service;
+
+import dao.RestrnDao;
+import dao.RestrnDaoImpl;
+import form.RestrnRegistForm;
+import model.GlobalConst;
+import model.RestaurantEntity;
+
+/**
+ * RestrnRegistService
+ * 店舗登録操作.
+ */
+public class RestrnRegistServiceImpl implements RestrnRegistService {
+
+  private RestrnDao restrnDao;
+
+  public RestrnRegistServiceImpl() {
+    restrnDao = new RestrnDaoImpl();
+  }
+
+  /**
+   * execute.
+   */
+  @Override
+  public RestrnRegistServiceResult execute(RestrnRegistForm form) {
+
+    // 初期化
+    RestrnRegistServiceResult result = new RestrnRegistServiceResult();
+    RestaurantEntity entity = new RestaurantEntity(
+          GlobalConst.NUM_CSV新規登録,
+          form.getRestaurantName(),
+          form.getType(),
+          form.getUserName());
+
+    // 1. 新規登録
+    try {
+      int count = restrnDao.insert(entity);
+      if (count == 1) {
+        result.setSuccess(true);
+      } else {
+        result.setSuccess(false);
+        result.setMessage("登録完了しませんでした（0件）");
+      }
+    } catch (Exception e) {
+      // CSV書き込みに失敗
+      result.setMessage("登録エラー");
+      System.out.println(e.getMessage());
+    }
+    return result;
+  }
+
+}

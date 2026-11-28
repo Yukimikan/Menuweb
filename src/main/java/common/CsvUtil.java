@@ -39,9 +39,9 @@ public final class CsvUtil {
   /**
    * 読取CSV.
    *
-   * @param infilename
+   * @param infilename ファイル名
    * @return retList
-   * @exception FileNotFoundException
+   * @exception FileNotFoundException ファイル未存在
    */
   public static List<MenuCSV> read(String infilename)
             throws IOException {

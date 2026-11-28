@@ -28,28 +28,8 @@
 	</c:if>
 		<form name="form1"
 			action="${pageContext.request.contextPath}/menu_confirm" method="post">
-			<div>
-				ユーザ名：
-				<div class="input">
-				    <c:if test="${not empty sessionScope.userName}">
-					<input type="text" name="user_name" readonly
-					   value="${sessionScope.userName}">
-					</c:if>
-				    <!--  非ログイン時（ログイン機能実装後の動確用） -->
-				    <c:if test="${empty sessionScope.userName}">
-		                <input type="text" name="user_name" value="guest">
-				    </c:if>
-				</div>
-			</div>
 			<!-- ★ 登録内容表示 -->
 			<span>以下登録内容をご確認ください。</span><br>
-			<div class="row">
-				<div class="label">種別：</div>
-				<div class="input">
-					<input type="text" name="type" readonly
-					   value="${form.type}">
-				</div>
-			</div>
 			<div class="row">
 				<div class="label">店名：</div>
 				<div class="input">
@@ -58,39 +38,38 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="label">メニュー名：</div>
+				<div class="input">
+					<input type="text" name="menu_name" readonly
+					  value="${form.menuName}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="label">メニュー種類：</div>
+				<div class="input">
+					<input type="text" name="category" readonly
+					  value="${form.category}">
+				</div>
+			</div>
+			<div class="row">
 				<div class="label">単品フラグ：</div>
 				<div class="input">
-
 					<input type="text" name="singlemenu_flg" readonly
 					      value="${form.singleMenuFlg}">
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">メニュー名：</div>
+				<div class="label">金額（店内）：</div>
 				<div class="input">
-					<input type="text" name="menu" readonly
-					  value="${form.menu}">
+					<input type="text" name="eat_in_price" readonly
+					  value="${form.eatInPrice}">円
 				</div>
 			</div>
 			<div class="row">
-				<div class="label">金額：</div>
+				<div class="label">金額（テイクアウト）：</div>
 				<div class="input">
-					<input type="text" name="price" readonly
-					  value="${form.price}">円
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">税額：</div>
-				<div class="input">
-					<input type="text" name="tax" readonly
-					  value="${form.tax}">円
-				</div>
-			</div>
-			<div class="row">
-				<div class="label">合計：</div>
-				<div class="input">
-					<input type="text" name="total" readonly
-					  value="${form.total}">円
+					<input type="text" name="takeout_price" readonly
+					  value="${form.takeoutPrice}">円
 				</div>
 			</div>
 			<div class="row">
@@ -105,12 +84,12 @@
 			<form action="${pageContext.request.contextPath}/menu_regist" method="post">
 				<!-- hidden parameter -->
 			    <input type="hidden" name="from_screen" value="confirm">
-				<input type="hidden" name="type" value="${form.type}">
 			    <input type="hidden" name="restaurant_name" value="${form.restaurantName}">
-			    <input type="hidden" name="menu" value="${form.menu}">
-			    <input type="hidden" name="price" value="${form.price}">
-			    <input type="hidden" name="tax" value="${form.tax}">
-			    <input type="hidden" name="total" value="${form.total}">
+			    <input type="hidden" name="menu_name" value="${form.menuName}">
+			    <input type="hidden" name="category" value="${form.category}">
+			    <input type="hidden" name="singlemenu_flg" value="${form.singleMenuFlg}">
+			    <input type="hidden" name="eat_in_price" value="${form.eatInPrice}">
+			    <input type="hidden" name="takeout_price" value="${form.takeoutPrice}">
 			    <input type="submit" value="戻る" class="btn-submit">
 			</form>
 			</div>

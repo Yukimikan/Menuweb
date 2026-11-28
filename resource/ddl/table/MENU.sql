@@ -5,13 +5,13 @@
 CREATE TABLE IF NOT EXISTS public."MENU"
 (
     no integer,
-    type text COLLATE pg_catalog."default",
+    restaurant_id integer,
     restaurant_name text COLLATE pg_catalog."default",
+    menu_name text COLLATE pg_catalog."default",
+    category text COLLATE pg_catalog."default",
     singlemenu_flg text COLLATE pg_catalog."default",
-    menu text COLLATE pg_catalog."default",
-    price integer,
-    tax integer,
-    total integer,
+    eat_in_price integer,
+    takeout_price integer,
     update_user text COLLATE pg_catalog."default",
     update_date timestamp without time zone
 )

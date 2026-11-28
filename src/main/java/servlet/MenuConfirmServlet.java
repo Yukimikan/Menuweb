@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import form.MenuConfirmForm;
-import model.GlobalConst;
+import form.MenuRegistForm;
+import model.WebConst;
 import service.MenuRegistService;
 import service.MenuRegistServiceImpl;
 import service.MenuRegistServiceResult;
@@ -32,14 +32,6 @@ public class MenuConfirmServlet extends HttpServlet {
   }
 
   /**
-   * 初期表示.
-   */
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    // エラー
-  }
-
-  /**
    *  ポスト処理.
    *
    *  @param HttpServletRequest request, HttpServletResponse response
@@ -47,37 +39,48 @@ public class MenuConfirmServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 
-    // 1. parameter set
+    // 1. 画面情報取得
     HttpSession session = request.getSession();
-    String userName = (String) session.getAttribute("userName");
-    MenuConfirmForm form = new MenuConfirmForm(
-        (String) request.getParameter("type"),
+    // 1. parameter set
+    MenuRegistForm form = new MenuRegistForm(
+        null,
         (String) request.getParameter("restaurant_name"),
+        (String) request.getParameter("menu_name"),
+        (String) request.getParameter("category"),
         (String) request.getParameter("singlemenu_flg"),
-        (String) request.getParameter("menu"),
-        (String) request.getParameter("price"),
-        (String) request.getParameter("tax"),
-        (String) request.getParameter("total"),
+        (String) request.getParameter("eat_in_price"),
+        (String) request.getParameter("takeout_price"),
+        (String) session.getAttribute("userName"),
         "");
 
     // 2. inputCheck(フロントで実行)
+    String message = form.inputCheck();
+    if (!message.isEmpty()) {
+      // reload
+      request.setAttribute("form", form);
+      request.setAttribute("message", message);
 
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
+      dispatcher.forward(request, response);
+      return;
+    }
     try {
       // 3. サーバー側のチェック
 
       // 3. service execute
-      MenuRegistServiceResult result = service.execute(form, userName);
+      MenuRegistServiceResult result = service.execute(form);
       if (result.isSuccess()) {
         // 4. requestSetAttribute
 
-        // 5. forward
-        RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.MenuRegistFinish);
-        dispatcher.forward(request, response);
+        // 5. redirect
+        // PRGパターン(Post/Redirect/Get) を使う
+        response.sendRedirect(
+            request.getContextPath() + WebConst.Action_MenuRegistFinish);
       }
     } catch (Exception e) {
       // エラー画面に遷移
       System.out.print(e.getMessage());
-      RequestDispatcher dispatcher = request.getRequestDispatcher(GlobalConst.Error);
+      RequestDispatcher dispatcher = request.getRequestDispatcher(WebConst.Error);
       dispatcher.forward(request, response);
     }
 

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import model.MenuEntity;
 
 /**
- * CsvInputServiceResult.
+ * MenuSearchServiceResult.
  */
 @Data
 @NoArgsConstructor

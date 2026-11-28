@@ -1,0 +1,120 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>  <!-- jspのJSTL式追加用 -->
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="resource/css/style.css">
+<link rel="stylesheet" href="resource/css/menu_search.css">
+<meta charset="UTF-8">
+<title>店舗検索（テーブル検索）</title>
+<script>
+  function checkText(context) {
+
+    //1. 入力チェック
+    var indate = document.form1.date.value;
+    document.form1.message.value = "";
+
+    //1-1 必須
+    if(indate.length === 0) {
+        alert('日付を指定して下さい');
+        document.form1.message.value ='日付を指定して下さい';
+        return false;
+    }
+    return true;
+  }
+</script>
+</head>
+<body>
+	<div id="header" class="header">
+	<%@include file="./header.jsp"%>
+	</div>
+	<div id="contents" class="contents">
+	<h2>＜店舗検索＞</h2>
+		店舗の検索を行う。選択行を削除する。<br>
+	</div>
+	<div id="main">
+	<!-- ★ エラーメッセージ表示 -->
+    <c:if test="${not empty message}">
+    	<div class="error-box">${message}</div>
+	</c:if>
+		<form name="form1"
+			action="${pageContext.request.contextPath}/restaurant_search"
+			onsubmit="return checkText()" method="post">
+			<div id="search-input">
+				<h3>・検索条件</h3>
+				<div class="row">
+					<div class="label">店名：</div>
+					<div class="input">
+						<input type="text" name="restaurant_name" value="${form.restaurantName}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">種類：</div>
+					<div class="input">
+						<select name="type">
+							<option value="">-</option>
+							<option value="定食屋">定食屋</option>
+							<option value="ファストフード">ファストフード</option>
+							<option value="和風料理">和風料理</option>
+							<option value="洋風料理">洋風料理</option>
+							<option value="中華料理">中華料理</option>
+							<option value="喫茶店">喫茶店</option>
+							<option value="バイキング">バイキング</option>
+							<option value="デザート">デザート</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="label">検索：</div>
+					<div class="input">
+						<input type="submit" name="action" value="検索" class="btn-submit">
+					</div>
+				</div>
+			</div>
+		</form>
+		<div id="search-result">
+			<!-- ★ 結果表示 -->
+			<c:choose>
+			    <c:when test="${count > 0}">
+			        検索結果：${count}件
+			    </c:when>
+			    <c:otherwise>
+			        検索結果はありません。
+			    </c:otherwise>
+			</c:choose>
+	        <c:if test="${not empty restaurantList}">
+				<form name="deleteform"
+					action="${pageContext.request.contextPath}/restaurant_delete"
+					method="post">
+			  		<table border="1" bgcolor="white" class="search-result-table">
+						<tr>
+							<th>No</th>
+							<th>店舗ID</th>
+							<th>店名</th>
+							<th>種類</th>
+						</tr>
+			            <c:forEach var="rec" items="${restaurantList}">
+						<tr>
+							<td>
+							  <input type="radio" name="selected_row" value="${rec.restaurantId}" />
+							</td>
+							<td><c:out value="${rec.restaurantId}" /></td>
+							<td><c:out value="${rec.restaurantName}" /></td>
+							<td><c:out value="${rec.type}" /></td>
+						</tr>
+						</c:forEach>
+					</table>
+					<div class="row">
+						<div class="label">選択行削除：</div>
+						<div class="input">
+							<input type="submit" name="action" value="削除" class="btn-submit">
+						</div>
+					</div>
+				</form>
+			</c:if>
+		</div>
+	</div>
+</body>
+</html>

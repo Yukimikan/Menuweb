@@ -11,32 +11,38 @@ package common;
  * 未満
  *
  */
-public enum ConditionTotal {
+public enum ConditionPrice {
 
-   以上 {
+    BLANK {
     @Override
       public boolean match(int price, int total) {
       return price >= total;
     }
-   },
-   以下 {
+    },
+    以上 {
+    @Override
+      public boolean match(int price, int total) {
+      return price >= total;
+    }
+    },
+    以下 {
     @Override
       public boolean match(int price, int total) {
       return price <= total;
     }
-   },
-   等しい {
+    },
+    等しい {
     @Override
       public boolean match(int price, int total) {
       return price == total;
     }
-   },
-   未満 {
+    },
+    未満 {
     @Override
       public boolean match(int price, int total) {
       return price < total;
     }
-   };
+    };
 
   /**
    * コード値変換.
@@ -44,8 +50,9 @@ public enum ConditionTotal {
    * @param code 合計（コード値）
    * @return ConditionTotal
    */
-  public static ConditionTotal fromCode(String code) {
+  public static ConditionPrice fromCode(String code) {
     return switch (code) {
+      case "" -> BLANK;
       case "1" -> 以上;
       case "2" -> 以下;
       case "3" -> 等しい;

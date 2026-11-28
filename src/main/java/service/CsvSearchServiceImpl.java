@@ -3,7 +3,7 @@ package service;
 import java.util.Collections;
 import java.util.List;
 
-import common.ConditionTotal;
+import common.ConditionPrice;
 import common.CsvUtil;
 import common.MessageUtil;
 import form.CsvSearchForm;
@@ -18,11 +18,12 @@ public class CsvSearchServiceImpl implements CsvSearchService {
   /**
    * execute.
    */
+  @Override
   public CsvSearchServiceResult execute(CsvSearchForm form) {
 
     CsvSearchServiceResult result = new CsvSearchServiceResult();
 
-    ConditionTotal cond = ConditionTotal.fromCode(form.getTotalCondition());
+    ConditionPrice cond = ConditionPrice.fromCode(form.getTotalCondition());
 
     int total = this.convertTotal(form.getTotal());
 
@@ -41,7 +42,7 @@ public class CsvSearchServiceImpl implements CsvSearchService {
                   && isMatch(form.getRestaurantName(), ret.getRestaurantName())
                   )
               .toList();
-        if (tmpList.size() == 0) {
+        if (menuList.size() == 0) {
           // 結果0件
           result.setSuccess(true);
           result.setMessage("0件");
