@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuSearchForm extends BaseForm{
+public class MenuSearchForm extends BaseForm {
 
   private String date;
   private String restaurantId;

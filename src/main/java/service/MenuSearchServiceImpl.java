@@ -10,8 +10,9 @@ import form.MenuSearchForm;
 import model.MenuEntity;
 
 /**
- * ファイル読込用サービス.
- * */
+ * MenuSearchService
+ * メニュー検索条件入力.
+ */
 public class MenuSearchServiceImpl implements MenuSearchService {
 
   private MenuDao menuDao;
@@ -39,7 +40,11 @@ public class MenuSearchServiceImpl implements MenuSearchService {
     try {
 
       List<MenuEntity> tmpList =
-          menuDao.select(form.getRestaurantName(), form.getMenuName(), form.getCategory(), form.getSingleMenuFlg());
+          menuDao.select(
+              form.getRestaurantName(),
+              form.getMenuName(),
+              form.getCategory(),
+              form.getSingleMenuFlg());
       List<MenuEntity> menuList = tmpList.stream()
           .filter(ret ->
                 eatInPriceCond.match(ret.getEatInPrice(), eatInPrice)

@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginForm extends BaseForm{
+public class LoginForm extends BaseForm {
 
   private String name;
   private String password;

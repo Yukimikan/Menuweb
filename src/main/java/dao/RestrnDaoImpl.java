@@ -54,21 +54,23 @@ public class RestrnDaoImpl implements RestrnDao {
       throw new RuntimeException();
     }
   }
+
+  @Override
   public int delete(int restaurantId) throws RuntimeException {
 
     try {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession session = sqlSessionFactory.openSession();
-        RestaurantMapper mapper = session.getMapper(RestaurantMapper.class);
-        int result = mapper.delete(restaurantId);
-        session.commit(); // ここでコミット
-        return result;
-      } catch (IOException e) {
-        System.out.println(e.getStackTrace());
-        throw new RuntimeException();
-      }
+      String resource = "mybatis-config.xml";
+      InputStream inputStream = Resources.getResourceAsStream(resource);
+      SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+      SqlSession session = sqlSessionFactory.openSession();
+      RestaurantMapper mapper = session.getMapper(RestaurantMapper.class);
+      int result = mapper.delete(restaurantId);
+      session.commit(); // ここでコミット
+      return result;
+    } catch (IOException e) {
+      System.out.println(e.getStackTrace());
+      throw new RuntimeException();
+    }
   }
 
 }

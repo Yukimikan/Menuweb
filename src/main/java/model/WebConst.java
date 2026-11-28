@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * WebConst.
+ *
+ */
 public class WebConst {
 
   //ACTION

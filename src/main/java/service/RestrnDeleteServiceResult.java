@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * MenuRegistServiceResult.
+ * RestrnDeleteServiceResult.
  */
 @Data
 @NoArgsConstructor

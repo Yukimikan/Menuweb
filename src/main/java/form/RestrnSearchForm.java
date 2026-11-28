@@ -14,10 +14,10 @@ import model.WebConst;
  *
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestrnSearchForm extends BaseForm{
+public class RestrnSearchForm extends BaseForm {
 
   private String action;
   private String restaurantName;
@@ -34,7 +34,7 @@ public class RestrnSearchForm extends BaseForm{
    */
   @Override
   public String inputCheck() {
-	// 認証
+    // 認証
     if (WebConst.Action_削除.equals(this.action)) {
       //認証・認可チェック
       if (super.authCheck(this.userName) == false) {

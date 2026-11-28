@@ -5,8 +5,9 @@ import dao.RestrnDaoImpl;
 import form.RestrnSearchForm;
 
 /**
- * ファイル書込用サービス.
- * */
+ * RestrnDeleteService
+ * 店舗削除操作.
+ */
 public class RestrnDeleteServiceImpl implements RestrnDeleteService {
 
   private RestrnDao restrnDao;

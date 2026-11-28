@@ -13,36 +13,36 @@ package common;
  */
 public enum ConditionPrice {
 
-   BLANK {
-   @Override
-      public boolean match(int price, int total) {
-      return price >= total;
-    }
-   },
-   以上 {
+    BLANK {
     @Override
       public boolean match(int price, int total) {
       return price >= total;
     }
-   },
-   以下 {
+    },
+    以上 {
+    @Override
+      public boolean match(int price, int total) {
+      return price >= total;
+    }
+    },
+    以下 {
     @Override
       public boolean match(int price, int total) {
       return price <= total;
     }
-   },
-   等しい {
+    },
+    等しい {
     @Override
       public boolean match(int price, int total) {
       return price == total;
     }
-   },
-   未満 {
+    },
+    未満 {
     @Override
       public boolean match(int price, int total) {
       return price < total;
     }
-   };
+    };
 
   /**
    * コード値変換.

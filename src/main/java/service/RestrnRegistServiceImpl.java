@@ -7,8 +7,9 @@ import model.GlobalConst;
 import model.RestaurantEntity;
 
 /**
- * ファイル書込用サービス.
- * */
+ * RestrnRegistService
+ * 店舗登録操作.
+ */
 public class RestrnRegistServiceImpl implements RestrnRegistService {
 
   private RestrnDao restrnDao;

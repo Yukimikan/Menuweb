@@ -4,10 +4,11 @@ import common.MenuWebService;
 import form.RestrnSearchForm;
 
 /**
- * MenuRegistService
- * メニュー登録操作.
+ * RestrnDeleteService
+ * 店舗削除操作.
  */
-public interface RestrnDeleteService extends MenuWebService<RestrnSearchForm, RestrnDeleteServiceResult>{
+public interface RestrnDeleteService
+    extends MenuWebService<RestrnSearchForm, RestrnDeleteServiceResult> {
 
   public RestrnDeleteServiceResult execute(RestrnSearchForm form);
 

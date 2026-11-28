@@ -12,8 +12,9 @@ import model.MenuEntity;
 import model.RestaurantEntity;
 
 /**
- * ファイル書込用サービス.
- * */
+ * MenuRegistService
+ * メニュー登録操作.
+ */
 public class MenuRegistServiceImpl implements MenuRegistService {
 
   private RestrnDao restrnDao;
@@ -48,7 +49,7 @@ public class MenuRegistServiceImpl implements MenuRegistService {
 
       // 1.idを取得して設定
       List<RestaurantEntity> resultList =
-        restrnDao.select(null, form.getRestaurantName());
+          restrnDao.select(null, form.getRestaurantName());
       if (resultList.size() > 0) {
         menuEntity.setRestaurantId(resultList.get(0).getRestaurantId());
       } else {

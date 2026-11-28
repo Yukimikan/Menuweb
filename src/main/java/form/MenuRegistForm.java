@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuRegistForm extends BaseForm{
+public class MenuRegistForm extends BaseForm {
 
   private String confirmFlg;
   private String restaurantName;
@@ -56,7 +56,7 @@ public class MenuRegistForm extends BaseForm{
       }
     }
     if (this.takeoutPrice == null || this.takeoutPrice.isEmpty()) {
-        this.message = MessageUtil.getProperty("msg_w01_csv_regist");
+      this.message = MessageUtil.getProperty("msg_w01_csv_regist");
     } else {
       // 未入力の場合
       if (!takeoutPrice.matches("[0-9]+")) {

@@ -19,7 +19,11 @@ import model.MenuEntity;
 public class MenuDaoImpl implements MenuDao {
 
   @Override
-  public List<MenuEntity> select(String restaurantName, String menuName, String category, String singleMenuFlg) throws RuntimeException {
+  public List<MenuEntity> select(
+      String restaurantName,
+      String menuName,
+      String category,
+      String singleMenuFlg) throws RuntimeException {
 
     try {
       String resource = "mybatis-config.xml";

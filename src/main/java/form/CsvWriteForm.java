@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class CsvWriteForm extends BaseForm{
+public class CsvWriteForm extends BaseForm {
 
   private String csvName;
   private String confirmFlg;

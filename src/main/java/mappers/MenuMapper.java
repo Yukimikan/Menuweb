@@ -14,10 +14,10 @@ import model.MenuEntity;
 public interface MenuMapper {
 
   List<MenuEntity> select(
-     @Param("restaurantName") String restaurantName,
-     @Param("menuName") String menuName,
-     @Param("category") String category,
-     @Param("singleMenuFlg") String singleMenuFlg);
+      @Param("restaurantName") String restaurantName,
+      @Param("menuName") String menuName,
+      @Param("category") String category,
+      @Param("singleMenuFlg") String singleMenuFlg);
 
   int insertMenu(@Param("entity") MenuEntity entity);
 
