@@ -37,7 +37,7 @@
 	<%@include file="./header.jsp"%>
 	</div>
 	<div id="contents" class="contents">
-	<h2>＜メニュー取込＞</h2>
+	<h2>＜CSV検索＞</h2>
 		プルダウン機能でメニュー一覧を選択。<br>
 		1000円以上、店名といった条件で絞り込む。<br>
 		＜追加予定＞CSV日付は仮決め

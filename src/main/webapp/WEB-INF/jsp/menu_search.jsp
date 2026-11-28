@@ -15,7 +15,7 @@
 	<%@include file="./header.jsp"%>
 	</div>
 	<div id="contents" class="contents">
-	<h2>＜メニュー取込＞</h2>
+	<h2>＜メニュー検索＞</h2>
 		プルダウン機能でメニュー一覧を選択。<br>
 		1000円以上、店名といった条件で絞り込む。<br>
 	</div>

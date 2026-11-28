@@ -67,7 +67,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="label">メニュー絞り込み：</div>
+					<div class="label">検索：</div>
 					<div class="input">
 						<input type="submit" name="action" value="検索" class="btn-submit">
 					</div>
