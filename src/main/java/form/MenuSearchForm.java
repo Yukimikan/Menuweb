@@ -26,8 +26,6 @@ public class MenuSearchForm extends BaseForm{
   private String menuName;
   private String eatInPrice;
   private String takeoutPrice;
-  private String tax;
-  private String total;
   private String eatInCondition;
   private String takeoutCondition;
   private String totalCondition;
@@ -51,12 +49,6 @@ public class MenuSearchForm extends BaseForm{
     // 数値以外
     if (!(this.takeoutPrice == null || this.takeoutPrice.isBlank())
         && !(this.takeoutPrice.matches("[0-9]+"))) {
-      // 数値エラー
-      this.message = MessageUtil.getProperty("msg_w02_csv_input");
-    }
-    // 数値以外
-    if (!(this.total == null || this.total.isBlank())
-        && !(this.total.matches("[0-9]+"))) {
       // 数値エラー
       this.message = MessageUtil.getProperty("msg_w02_csv_input");
     }

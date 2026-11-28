@@ -14,8 +14,6 @@
     	singlemenu_flg,
     	eat_in_price,
     	takeout_price,
-    	tax ,
-    	total,
     	update_user,
     	update_date
     )
@@ -28,8 +26,6 @@
         #{entity.singleMenuFlg},
         #{entity.eatInPrice},
         #{entity.takeoutPrice},
-        #{entity.tax},
-        #{entity.total},
         #{entity.updateUser},
         CURRENT_TIMESTAMP)
   </insert>
@@ -44,8 +40,6 @@
      singlemenu_flg,
      eat_in_price,
      takeout_price,
-     tax ,
-     total,
      update_user
     from "MENU"
     <where>

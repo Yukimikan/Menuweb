@@ -20,8 +20,6 @@ public class MenuEntity {
   private String singleMenuFlg;
   private int eatInPrice;
   private int takeoutPrice;
-  private int tax;
-  private int total;
   private String updateUser;
   // private Date update_date // SQLで発行
 

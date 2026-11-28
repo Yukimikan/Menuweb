@@ -12,8 +12,6 @@ CREATE TABLE IF NOT EXISTS public."MENU"
     singlemenu_flg text COLLATE pg_catalog."default",
     eat_in_price integer,
     takeout_price integer,
-    tax integer,
-    total integer,
     update_user text COLLATE pg_catalog."default",
     update_date timestamp without time zone
 )

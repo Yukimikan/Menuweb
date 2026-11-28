@@ -35,15 +35,13 @@ public class MenuRegistServiceImpl implements MenuRegistService {
     String userName = form.getUserName();
     MenuEntity menuEntity = new MenuEntity(
           GlobalConst.NUM_CSV新規登録, // 新規登録
-          0,
+          GlobalConst.NUM_CSV新規登録,
           form.getRestaurantName(),
           form.getMenuName(),
           form.getCategory(),
           form.getSingleMenuFlg(),
           Integer.parseInt(form.getEatInPrice()),
           Integer.parseInt(form.getTakeoutPrice()),
-          0,
-          0,
           userName);
 
     try {
