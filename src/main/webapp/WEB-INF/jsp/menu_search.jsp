@@ -50,11 +50,14 @@
 				<div class="row">
 					<div class="label">単品フラグ：</div>
 					<div class="input">
-						<select name="singlemenu_flg" value="${form.singleMenuFlg}">
-							<option value="">-</option>
-							<option value="0">セット</option>
-							<option value="1">単品</option>
-						</select>
+						<select name="singlemenu_flg">
+						    <option value=""
+						        ${empty form.singleMenuFlg ? 'selected' : ''}>-</option>
+						    <option value="0"
+						        ${form.singleMenuFlg == '0' ? 'selected' : ''}>セット</option>
+						    <option value="1"
+						        ${form.singleMenuFlg == '1' ? 'selected' : ''}>単品</option>
+     					</select>
 					</div>
 				</div>
 				<div class="row">

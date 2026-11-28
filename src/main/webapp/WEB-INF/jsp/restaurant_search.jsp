@@ -53,7 +53,7 @@
 				<div class="row">
 					<div class="label">種類：</div>
 					<div class="input">
-						<select name="type" value="${form.type}">
+						<select name="type">
 							<option value="">-</option>
 							<option value="定食屋">定食屋</option>
 							<option value="ファストフード">ファストフード</option>
