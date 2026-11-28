@@ -6,6 +6,8 @@
 		<a href="./index.html">TOP</a>
 		<a href="/Menuweb/menu_search">メニュー検索</a>
 	    <a href="/Menuweb/menu_regist">メニュー登録</a>
+		<a href="/Menuweb/restaurant_search">店舗検索</a>
+	    <a href="/Menuweb/restaurant_regist">店舗登録</a>
 	    <a href="/Menuweb/login">ログイン</a>
 		<span>ユーザ名：</span>
 		    <c:if test="${not empty sessionScope.userName}">
