@@ -13,6 +13,12 @@ package common;
  */
 public enum ConditionPrice {
 
+   BLANK {
+   @Override
+      public boolean match(int price, int total) {
+      return price >= total;
+    }
+   },
    以上 {
     @Override
       public boolean match(int price, int total) {
@@ -46,6 +52,7 @@ public enum ConditionPrice {
    */
   public static ConditionPrice fromCode(String code) {
     return switch (code) {
+      case "" -> BLANK;
       case "1" -> 以上;
       case "2" -> 以下;
       case "3" -> 等しい;

@@ -65,10 +65,16 @@
 					<div class="input">
 						<input type="text" name="eat_in_price" value="${form.eatInPrice}">円
 						<select name="eat_in_condition">
-							<option value="1">以上</option>
-							<option value="2">以下</option>
-							<option value="3">ピッタリ</option>
-							<option value="4">未満</option>
+						    <option value=""
+						        ${empty form.eatInCondition ? 'selected' : ''}>-</option>
+							<option value="1"
+							    ${form.eatInCondition == '1' ? 'selected' : ''}>以上</option>
+							<option value="2"
+							    ${form.eatInCondition == '2' ? 'selected' : ''}>以下</option>
+							<option value="3"
+							    ${form.eatInCondition == '3' ? 'selected' : ''}>ピッタリ</option>
+							<option value="4"
+							    ${form.eatInCondition == '4' ? 'selected' : ''}>未満</option>
 						</select>
 					</div>
 				</div>
@@ -77,10 +83,16 @@
 					<div class="input">
 						<input type="text" name="takeout_price" value="${form.takeoutPrice}">円
 						<select name="takeout_condition">
-							<option value="1">以上</option>
-							<option value="2">以下</option>
-							<option value="3">ピッタリ</option>
-							<option value="4">未満</option>
+						    <option value=""
+						        ${empty form.takeoutCondition ? 'selected' : ''}>-</option>
+							<option value="1"
+							    ${form.takeoutCondition == '1' ? 'selected' : ''}>以上</option>
+							<option value="2"
+							    ${form.takeoutCondition == '2' ? 'selected' : ''}>以下</option>
+							<option value="3"
+							    ${form.takeoutCondition == '3' ? 'selected' : ''}>ピッタリ</option>
+							<option value="4"
+							    ${form.takeoutCondition == '4' ? 'selected' : ''}>未満</option>
 						</select>
 					</div>
 				</div>
